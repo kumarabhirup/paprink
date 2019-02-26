@@ -20,8 +20,7 @@ export default class Header extends Component {
                   </nav>
                   <div className="search_container ml-auto">
                     <div className="weather">
-                      <div className="temperature">+10°</div>
-                      <img className="weather_icon" src="/static/prebuilt/images/cloud.png" alt="Weather Today" />
+                      <div className="temperature">Writing is 🤟</div>
                     </div>
 
                     <form action="#">
