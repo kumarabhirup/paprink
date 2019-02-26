@@ -15,7 +15,7 @@ export default class Header extends Component {
                   <div className="logo"><img src="/static/white-theme-trans.png" alt={meta.name} /></div>
                   <nav className="main_nav">
                     <ul>
-                      { mainMenu.map(item => <li><a href={item.link}>{item.text}</a></li>) }
+                      { mainMenu.map((item, index) => <li key={index}><a href={item.link}>{item.text}</a></li>) }
                     </ul>
                   </nav>
                   <div className="search_container ml-auto">
@@ -50,7 +50,7 @@ export default class Header extends Component {
           </div>
           <nav className="menu_nav">
             <ul className="menu_mm">
-              { mainMenu.map(item => <li className="menu_mm"><a href={item.link}>{item.text}</a></li>) }
+              { mainMenu.map((item, index) => <li className="menu_mm" key={index}><a href={item.link}>{item.text}</a></li>) }
             </ul>
           </nav>
         </div>
