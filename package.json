@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next -p 3006",
     "build": "next build",
-    "start": "next start -p 3006",
+    "start": "next start",
     "deploy": "npm run build && now --dotenv .env"
   },
   "dependencies": {
+    "@now/next": "0.0.84",
     "@zeit/next-css": "^1.0.1",
     "apollo-boost": "^0.1.27",
     "css-loader": "^2.1.0",
