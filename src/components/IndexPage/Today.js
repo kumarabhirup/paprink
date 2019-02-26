@@ -8,7 +8,7 @@ export default class Today extends Component {
     return (
       <div className="blog_section">
         <div className="section_panel d-flex flex-row align-items-center justify-content-start">
-          <div className="section_title">Today</div>
+          <div className="section_title">Today 📆</div>
           <div className="section_panel_more">
             <ul>
               <li>Sort
@@ -44,7 +44,7 @@ export default class Today extends Component {
 
           </div>
 
-          <div id="load_more" className="load_more_button text-center trans_200" style={{marginTop: "30px"}}>See More</div>
+          <div id="load_more" className="load_more_button text-center trans_200" style={{marginTop: "50px"}}>See More</div>
 
         </div>
       </div>
