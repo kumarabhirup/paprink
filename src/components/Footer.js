@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { meta } from '../api/meta';
+import { meta } from '../api/meta'
+import social from '../api/social'
 
 export default class Footer extends Component {
   render() {
@@ -11,17 +12,10 @@ export default class Footer extends Component {
               <div className="footer_content">
                 <div className="footer_logo"><img src="/static/white-theme-trans.png" alt={meta.name} /></div>
                 <div className="footer_social">
-                  <ul>
-                    <li className="footer_social_facebook"><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
-                    <li className="footer_social_twitter"><a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
-                    <li className="footer_social_pinterest"><a href="#"><i className="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                    <li className="footer_social_vimeo"><a href="#"><i className="fa fa-vimeo" aria-hidden="true"></i></a></li>
-                    <li className="footer_social_instagram"><a href="#"><i className="fa fa-instagram" aria-hidden="true"></i></a></li>
-                    <li className="footer_social_google"><a href="#"><i className="fa fa-google" aria-hidden="true"></i></a></li>
-                  </ul>
+                  <ul>{ social.map((icon, index) => <li key={index} className={`footer_social_${icon.name}`}><a href={icon.link} target="_blank"><i className={`fa fa-${icon.name}`} aria-hidden="true"></i></a></li>) }</ul>
                 </div>
-                <div className="copyright">
-                  Copyright &copy; {new Date().getFullYear()} All rights reserved | This template is made with <i className="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                <div className="copyright" style={{color: "rgba(255, 255, 255, .2)"}}>
+                  Copyright &copy; {new Date().getFullYear()} All rights reserved | <span style={{color: "rgba(255, 255, 255, .4)"}}>Made with <i className="fa fa-heart" aria-hidden="true"></i> in India 🇮🇳</span>
                 </div>
                 </div>
             </div>
