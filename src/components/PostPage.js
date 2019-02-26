@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 import PageContent from './PageContent'
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar'
+import Card from './Card'
+import { today } from '../api/posts'
 
 export default class PostPage extends Component {
   render() {
@@ -65,7 +67,9 @@ export default class PostPage extends Component {
 						<div className="similar_posts">
 							<div className="grid clearfix">
 
-								<div className="card card_small_with_image grid-item">
+								{ today.map((post, index) => index < 3 && <Card type="small_image" post={post} key={index} />) }
+
+								{/* <div className="card card_small_with_image grid-item">
 									<img className="card-img-top" src="/static/prebuilt/images/post_25.jpg" alt="https://unsplash.com/@jakobowens1" />
 									<div className="card-body">
 										<div className="card-title card-title-small"><a href="post.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a></div>
@@ -87,7 +91,7 @@ export default class PostPage extends Component {
 										<div className="card-title card-title-small"><a href="post.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a></div>
 										<small className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></small>
 									</div>
-								</div>
+								</div> */}
 
 							</div>
 
