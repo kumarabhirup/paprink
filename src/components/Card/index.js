@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
 
+import UpvoteButton from '../Card/UpvoteButton'
+
 export default class Card extends Component {
+
+  state = {
+    upvote: false
+  }
+
+  upvote = async () => {
+    let upvote = !this.state.upvote
+    await this.setState({ upvote })
+  }
+
   render() {
     const { post } = this.props
     return (
@@ -14,8 +26,10 @@ export default class Card extends Component {
           { this.props.type === 'largest' && <p className="card-text">{post.description}</p> }
           { this.props.type === 'large_image' && <p className="card-text">{post.description}</p> }
           { this.props.type != 'mini' && this.props.type != 'mini_background' && <small className="post_meta"><a href="#">{post.author}</a><span>{post.date_published}</span></small> }
+          { this.props.type != 'mini' && this.props.type != 'mini_background' && <UpvoteButton onClick={this.upvote} upvote={this.state.upvote} /> }
         </div>
       </div>
     )
   }
+
 }

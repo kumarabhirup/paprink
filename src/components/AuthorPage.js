@@ -4,7 +4,7 @@ import Head from 'next/head'
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
 import { today } from '../api/posts'
-import Card from './Card'
+import Card from './Card/'
 
 export default class CategoryPage extends Component {
   render() {
