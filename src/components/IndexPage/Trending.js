@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { today } from '../../api/posts'
-import Card from '../Card'
+import Card from '../Card/'
 
 export default class Trending extends Component {
   render() {

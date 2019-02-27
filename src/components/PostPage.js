@@ -2,10 +2,21 @@ import React, { Component } from 'react'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
-import Card from './Card'
+import Card from './Card/'
 import { today } from '../api/posts'
+import UpvoteButton from './Card/UpvoteButton';
 
 export default class PostPage extends Component {
+
+  state = {
+    upvote: false
+  }
+
+  upvote = async () => {
+    let upvote = !this.state.upvote
+    await this.setState({ upvote })
+  }
+
   render() {
     return (
       <PageContent>
@@ -28,7 +39,8 @@ export default class PostPage extends Component {
 							</div>
 						</div>
 
-						<div className="post_body">
+						<UpvoteButton onClick={this.upvote} upvote={this.state.upvote} fontSize={15} type="post" />
+						<div className="post_body" style={{marginTop: "20px"}}>
 							<p className="post_p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus eget purus id felis dignissim convallis. Suspendisse et augue dui. Morbi gravida sed justo vel venenatis. Ut tempor pretium maximus. Donec libero diam, faucibus vitae lectus nec, accumsan gravida dui. Nam interdum mi eget lacus aliquet, sit amet ultricies magna pharetra. In ut odio a ligula egestas pretium et quis sapien. Etiam faucibus magna eu porta vulputate. Aliquam euismod rhoncus malesuada. Nunc rutrum hendrerit semper.</p>
 							<figure>
 								<img src="/static/prebuilt/images/post_image.jpg" alt="" />
@@ -50,6 +62,7 @@ export default class PostPage extends Component {
 								</ul>
 							</div>
 						</div>
+						<UpvoteButton onClick={this.upvote} upvote={this.state.upvote} fontSize={15} type="post" />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
 							<div className="author_image"><div><img src="/static/prebuilt/images/author.jpg" alt="" /></div></div>
@@ -68,30 +81,6 @@ export default class PostPage extends Component {
 							<div className="grid clearfix">
 
 								{ today.map((post, index) => index < 3 && <Card type="small_image" post={post} key={index} />) }
-
-								{/* <div className="card card_small_with_image grid-item">
-									<img className="card-img-top" src="/static/prebuilt/images/post_25.jpg" alt="https://unsplash.com/@jakobowens1" />
-									<div className="card-body">
-										<div className="card-title card-title-small"><a href="post.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a></div>
-										<small className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></small>
-									</div>
-								</div>
-
-								<div className="card card_small_with_image grid-item">
-									<img className="card-img-top" src="/static/prebuilt/images/post_2.jpg" alt="https://unsplash.com/@jakobowens1" />
-									<div className="card-body">
-										<div className="card-title card-title-small"><a href="post.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a></div>
-										<small className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></small>
-									</div>
-								</div>
-
-								<div className="card card_small_with_image grid-item">
-									<img className="card-img-top" src="/static/prebuilt/images/post_26.jpg" alt="https://unsplash.com/@jakobowens1" />
-									<div className="card-body">
-										<div className="card-title card-title-small"><a href="post.html">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</a></div>
-										<small className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></small>
-									</div>
-								</div> */}
 
 							</div>
 
