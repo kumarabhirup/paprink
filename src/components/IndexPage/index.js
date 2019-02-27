@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PageContent from '../PageContent'
-import Sidebar from '../Sidebar'
+import Sidebar from '../Sidebar/'
 import Today from './Today'
 import Trending from './Trending'
 import Latest from './Latest'
