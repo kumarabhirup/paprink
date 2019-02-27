@@ -38,12 +38,13 @@ class MyDocument extends Document {
           <script src="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
           <script src="/static/prebuilt/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.js"></script>
           <script src="/static/prebuilt/plugins/easing/easing.js"></script>
-          <script src="/static/prebuilt/plugins/masonry/masonry.js"></script>
-          <script src="/static/prebuilt/plugins/masonry/images_loaded.js"></script>
+          <script src="/static/prebuilt/plugins/masonry/masonry.js" async defer></script>
+          <script src="/static/prebuilt/plugins/masonry/images_loaded.js" async defer></script>
           <script src="/static/prebuilt/plugins/parallax-js-master/parallax.min.js"></script>
 
-          <script src="/static/prebuilt/js/custom.js"></script>
-          <script src="/static/prebuilt/js/post.js"></script>
+          <script src="/static/prebuilt/js/custom.js" async defer></script>
+          <script src="/static/prebuilt/js/post.js" async defer></script>
+          <script src="/static/author-card/author-card.js" async defer></script>
 
         </body>
         
