@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
+import chunk from 'lodash.chunk'
+
 import OwlCarousel from './OwlCarousel'
 import { sidebar } from '../../api/posts'
 
 export default class Sidebar extends Component {
 
-  sortPostsData = () => {
-    let data = [sidebar.filter((post, index) => index < 4), sidebar.filter((post, index) => index > 3 && index < 8), sidebar.filter((post, index) => index > 7 && index < 12)]
-    // sidebar.reduce(())
-    console.log(data)
-    return data
-  }
+  sortPostsData = () => (chunk(sidebar, 4))
 
   render() {
     return (
