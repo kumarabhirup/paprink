@@ -4,7 +4,6 @@ import PageContent from './PageContent'
 import Sidebar from './Sidebar'
 import { today } from '../api/posts'
 import Card from './Card'
-import { getRandomInt } from '../lib/getRandomInt'
 
 export default class CategoryPage extends Component {
   render() {
@@ -24,7 +23,6 @@ export default class CategoryPage extends Component {
 								<div className="grid clearfix">
 
 									{ today.map((post, index) => {
-										const types = ['small_image', 'small_background', 'mini']
 										return <Card type={'small_image'} post={post} key={index} />
 									}) }
 

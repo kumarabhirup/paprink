@@ -57,6 +57,16 @@ class Meta extends React.Component {
           </>
         )}
 
+        {this.props.router.asPath === '/author' && (
+          <>
+            <link rel="stylesheet" href="/static/author-card/author-card.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/category.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/category_responsive.css" />
+          </>
+        )}
+
         <title>{ meta.title }</title>
 
       </Head>
