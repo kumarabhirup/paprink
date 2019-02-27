@@ -66,3 +66,89 @@ export const today = [
     thumbnail: `/static/prebuilt/images/post_8.jpg`
   }
 ]
+
+export const sidebar = [
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_1.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_2.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_3.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_4.jpg`
+  },
+    {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_1.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_2.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_3.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_4.jpg`
+  },  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_1.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_2.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_3.jpg`
+  },
+  {
+    title: `How Did van Gogh’s Turbulent Mind Depict`,
+    author: `Katy Liu`,
+    date_published: `Sep 29`,
+    link: `${meta.domain}/post`,
+    thumbnail: `/static/prebuilt/images/top_4.jpg`
+  }
+]
