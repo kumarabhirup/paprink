@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Head from 'next/head'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
@@ -10,7 +9,6 @@ export default class CategoryPage extends Component {
   render() {
     return (
 			<>
-			<Head></Head>
       <PageContent>
 
         {/* Page Content */}
