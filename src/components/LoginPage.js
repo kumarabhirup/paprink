@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
+import FacebookAuth from 'react-facebook-auth'
+
+const FacebookButton = ({ onClick }) => (
+  <a href="#" className="btn-face m-b-20" onClick={onClick}>
+    <i className="fa fa-facebook-official"></i>
+    Facebook
+  </a>
+)
 
 export default class LoginPage extends Component {
+
+  authenticateFacebook = response => {
+    console.log(response)
+  }
+
   render() {
     return (
       <div className="limiter">
@@ -11,10 +24,12 @@ export default class LoginPage extends Component {
               <span className="login100-form-title p-b-53">
                 Sign In to PaprInk
               </span>
-              <a href="#" className="btn-face m-b-20">
-                <i className="fa fa-facebook-official"></i>
-                Facebook
-              </a>
+              <FacebookAuth
+                appId={process.env.FB_LOGIN_APP_ID}
+                autoLoad
+                callback={this.authenticateFacebook}
+                component={FacebookButton}
+              />
               <a href="#" className="btn-google m-b-20">
                 <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
                 Google
@@ -25,4 +40,5 @@ export default class LoginPage extends Component {
       </div>
     )
   }
+
 }
