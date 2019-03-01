@@ -67,6 +67,19 @@ class Meta extends React.Component {
           </>
         )}
 
+        {this.props.router.asPath.includes('/login') && (
+        <>
+          <link rel="stylesheet" type="text/css" href="/static/auth/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/vendor/animate/animate.css" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/vendor/css-hamburgers/hamburgers.min.css" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/vendor/animsition/css/animsition.min.css" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/vendor/select2/select2.min.css" />      
+          <link rel="stylesheet" type="text/css" href="/static/auth/vendor/daterangepicker/daterangepicker.css" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/css/util.css" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/css/main.css" />
+        </>
+        )}
+
         <title>{ meta.title }</title>
 
       </Head>
