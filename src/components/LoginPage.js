@@ -27,6 +27,7 @@ export default class LoginPage extends Component {
               <FacebookAuth
                 appId={process.env.FB_LOGIN_APP_ID}
                 autoLoad
+                fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
                 callback={this.authenticateFacebook}
                 component={FacebookButton}
               />
