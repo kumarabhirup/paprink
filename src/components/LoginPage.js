@@ -1,6 +1,46 @@
 import React, { Component } from 'react'
 import FacebookAuth from 'react-facebook-auth'
 import GoogleLogin from 'react-google-login'
+import gql from 'graphql-tag'
+
+import { client } from '../lib/withData'
+
+const SIGNIN_MUTATION = gql`
+  mutation SIGNIN_MUTATION(
+    $socialId: String!
+    $fname: String!
+    $lname: String!
+    $name: String!
+    $phone: String
+    $email: String!
+    $gender: String
+    $birthday: String
+    $bio: String
+    $profilePicture: String!
+    $signUpMethod: String!
+    $accessToken: String!
+  ) {
+    signIn(
+      signUpMethod: $signUpMethod
+      profilePicture: $profilePicture
+      socialId: $socialId
+      fname: $fname
+      lname: $lname
+      name: $name
+      phone: $phone
+      email: $email
+      gender: $gender
+      birthday: $birthday
+      bio: $bio
+      accessToken: $accessToken
+    ){
+      id
+      name
+      fname
+      email
+    }
+  }
+`
 
 const FacebookButton = ({ onClick }) => (
   <a href="#" className="btn-face m-b-20" onClick={onClick}>
@@ -11,8 +51,23 @@ const FacebookButton = ({ onClick }) => (
 
 export default class LoginPage extends Component {
 
-  authenticateFacebook = response => {
+  authenticateFacebook = async response => {
     console.log(response)
+    await client.mutate({
+      mutation: SIGNIN_MUTATION,
+      variables: { 
+        signUpMethod: "facebook",
+        profilePicture: response.picture.data.url,
+        socialId: response.userID,
+        fname: response.first_name,
+        lname: response.last_name,
+        name: response.name,
+        gender: response.gender,
+        birthday: response.birthday,
+        email: response.email,
+        accessToken: response.accessToken
+      }
+    })
   }
 
   authenticateGoogle = response => {
