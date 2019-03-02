@@ -44,7 +44,9 @@ export default class LoginPage extends Component {
                     Google
                   </a>
                 )}
+                scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read"}
                 isSignedIn={false}
+                fetchBasicProfile={false}
                 onSuccess={this.authenticateGoogle}
                 onFailure={this.authenticateGoogle}
               />
