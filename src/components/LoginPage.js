@@ -4,6 +4,7 @@ import GoogleLogin from 'react-google-login'
 import gql from 'graphql-tag'
 
 import { client } from '../lib/withData'
+import { meta } from '../api/meta'
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION(
@@ -70,8 +71,21 @@ export default class LoginPage extends Component {
     })
   }
 
-  authenticateGoogle = response => {
+  authenticateGoogle = async response => {
     console.log(response)
+    await client.mutate({
+      mutation: SIGNIN_MUTATION,
+      variables: { 
+        signUpMethod: "google",
+        profilePicture: response.profileObj.imageUrl,
+        socialId: response.profileObj.googleId,
+        fname: response.profileObj.givenName,
+        lname: response.profileObj.givenName,
+        name: response.profileObj.name,
+        email: response.profileObj.email,
+        accessToken: response.accessToken
+      }
+    })
   }
 
   render() {
@@ -82,7 +96,7 @@ export default class LoginPage extends Component {
           <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
             <form className="login100-form validate-form flex-sb flex-w">
               <span className="login100-form-title p-b-53">
-                Sign In to PaprInk
+                Sign In to { meta.name }
               </span>
               <FacebookAuth
                 appId={process.env.FB_LOGIN_APP_ID}

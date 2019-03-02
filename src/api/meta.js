@@ -3,6 +3,7 @@ import React from 'react'
 export const meta = {
   name: 'PaprInk',
   title: 'PaprInk',
+  social: 'wepaprink',
   website: 'https://PaprInk.com',
   meta_description: "PaprInk",
   meta_ogTitle: "PaprInk",
