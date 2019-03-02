@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import FacebookAuth from 'react-facebook-auth'
 import GoogleLogin from 'react-google-login'
+import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { client } from '../lib/withData'
 import { meta } from '../api/meta'
 
 const SIGNIN_MUTATION = gql`
@@ -38,58 +38,55 @@ const SIGNIN_MUTATION = gql`
       id
       name
       fname
+      lname
       email
     }
   }
 `
 
-const FacebookButton = ({ onClick }) => (
+const FacebookButton = (loading, { onClick }) => (
   <a href="#" className="btn-face m-b-20" onClick={onClick}>
     <i className="fa fa-facebook-official"></i>
-    Facebook
+    {loading ? 'Signing in...' : 'Facebook'}
   </a>
 )
 
 export default class LoginPage extends Component {
 
-  authenticateFacebook = async response => {
-    console.log(response)
-    await client.mutate({
-      mutation: SIGNIN_MUTATION,
-      variables: { 
-        signUpMethod: "facebook",
-        profilePicture: response.picture.data.url,
-        socialId: response.userID,
-        fname: response.first_name,
-        lname: response.last_name,
-        name: response.name,
-        gender: response.gender,
-        birthday: response.birthday,
-        email: response.email,
-        accessToken: response.accessToken
-      }
+  state = {}
+
+  authenticateFacebook = async (response, mutation) => {
+    await this.setState({
+      signUpMethod: "facebook",
+      profilePicture: response.picture.data.url,
+      socialId: response.userID,
+      fname: response.first_name,
+      lname: response.last_name,
+      name: response.name,
+      gender: response.gender,
+      birthday: response.birthday,
+      email: response.email,
+      accessToken: response.accessToken
     })
+    const signIn = await mutation()
   }
 
   authenticationFailed = async response => {
     return null
   }
 
-  authenticateGoogle = async response => {
-    console.log(response)
-    await client.mutate({
-      mutation: SIGNIN_MUTATION,
-      variables: { 
-        signUpMethod: "google",
-        profilePicture: response.profileObj.imageUrl,
-        socialId: response.profileObj.googleId,
-        fname: response.profileObj.givenName,
-        lname: response.profileObj.givenName,
-        name: response.profileObj.name,
-        email: response.profileObj.email,
-        accessToken: response.accessToken
-      }
+  authenticateGoogle = async (response, mutation) => {
+    await this.setState({
+      signUpMethod: "google",
+      profilePicture: response.profileObj.imageUrl,
+      socialId: response.profileObj.googleId,
+      fname: response.profileObj.givenName,
+      lname: response.profileObj.givenName,
+      name: response.profileObj.name,
+      email: response.profileObj.email,
+      accessToken: response.accessToken
     })
+    const signIn = await mutation()
   }
 
   render() {
@@ -102,28 +99,57 @@ export default class LoginPage extends Component {
               <span className="login100-form-title p-b-53">
                 Sign In to { meta.name }
               </span>
-              <FacebookAuth
-                appId={process.env.FB_LOGIN_APP_ID}
-                autoLoad
-                fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
-                callback={this.authenticateFacebook}
-                onFailure={this.authenticationFailed}
-                component={FacebookButton}
-              />
-              <GoogleLogin
-                clientId={process.env.GOOGLE_LOGIN_APP_ID}
-                render={renderProps => (
-                  <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick}>
-                    <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
-                    Google
-                  </a>
+              <Mutation mutation={SIGNIN_MUTATION} variables={{
+                signUpMethod: this.state.signUpMethod,
+                profilePicture: this.state.profilePicture,
+                socialId: this.state.socialId,
+                fname: this.state.fname,
+                lname: this.state.lname,
+                name: this.state.name,
+                gender: this.state.gender,
+                birthday: this.state.birthday,
+                email: this.state.email,
+                accessToken: this.state.accessToken
+              }}>
+                {(signIn, { error, loading, called }) => (
+                  <FacebookAuth
+                    appId={process.env.FB_LOGIN_APP_ID}
+                    autoLoad
+                    fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
+                    callback={response => this.authenticateFacebook(response, signIn)}
+                    onFailure={this.authenticationFailed}
+                    component={renderProps => FacebookButton(loading, renderProps)}
+                  />
                 )}
-                scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read"}
-                isSignedIn={false}
-                fetchBasicProfile={false}
-                onSuccess={this.authenticateGoogle}
-                onFailure={this.authenticationFailed}
-              />
+              </Mutation>
+
+              <Mutation mutation={SIGNIN_MUTATION} variables={{
+                signUpMethod: this.state.signUpMethod,
+                profilePicture: this.state.profilePicture,
+                socialId: this.state.socialId,
+                fname: this.state.fname,
+                lname: this.state.lname,
+                name: this.state.name,
+                email: this.state.email,
+                accessToken: this.state.accessToken
+              }}>
+                {(signIn, { error, loading, called }) => (
+                  <GoogleLogin
+                    clientId={process.env.GOOGLE_LOGIN_APP_ID}
+                    render={renderProps => (
+                      <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick}>
+                        <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
+                        {loading ? 'Signing in...' : 'Google'}
+                      </a>
+                    )}
+                    scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read"}
+                    isSignedIn={false}
+                    fetchBasicProfile={false}
+                    onSuccess={response => this.authenticateGoogle(response, signIn)}
+                    onFailure={this.authenticationFailed}
+                  />
+                )}
+              </Mutation>
             </form>
           </div>
         </div>
