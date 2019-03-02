@@ -71,6 +71,10 @@ export default class LoginPage extends Component {
     })
   }
 
+  authenticationFailed = async response => {
+    return null
+  }
+
   authenticateGoogle = async response => {
     console.log(response)
     await client.mutate({
@@ -103,6 +107,7 @@ export default class LoginPage extends Component {
                 autoLoad
                 fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
                 callback={this.authenticateFacebook}
+                onFailure={this.authenticationFailed}
                 component={FacebookButton}
               />
               <GoogleLogin
@@ -117,7 +122,7 @@ export default class LoginPage extends Component {
                 isSignedIn={false}
                 fetchBasicProfile={false}
                 onSuccess={this.authenticateGoogle}
-                onFailure={this.authenticateGoogle}
+                onFailure={this.authenticationFailed}
               />
             </form>
           </div>
