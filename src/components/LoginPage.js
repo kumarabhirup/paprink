@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import FacebookAuth from 'react-facebook-auth'
+import GoogleLogin from 'react-google-login'
 
 const FacebookButton = ({ onClick }) => (
   <a href="#" className="btn-face m-b-20" onClick={onClick}>
@@ -11,6 +12,10 @@ const FacebookButton = ({ onClick }) => (
 export default class LoginPage extends Component {
 
   authenticateFacebook = response => {
+    console.log(response)
+  }
+
+  authenticateGoogle = response => {
     console.log(response)
   }
 
@@ -31,10 +36,18 @@ export default class LoginPage extends Component {
                 callback={this.authenticateFacebook}
                 component={FacebookButton}
               />
-              <a href="#" className="btn-google m-b-20">
-                <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
-                Google
-              </a>
+              <GoogleLogin
+                clientId={process.env.GOOGLE_LOGIN_APP_ID}
+                render={renderProps => (
+                  <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick}>
+                    <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
+                    Google
+                  </a>
+                )}
+                isSignedIn={false}
+                onSuccess={this.authenticateGoogle}
+                onFailure={this.authenticateGoogle}
+              />
             </form>
           </div>
         </div>
