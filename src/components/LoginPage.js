@@ -22,18 +22,18 @@ const SIGNIN_MUTATION = gql`
     $accessToken: String!
   ) {
     signIn(
-      signUpMethod: $signUpMethod
-      profilePicture: $profilePicture
-      socialId: $socialId
-      fname: $fname
-      lname: $lname
-      name: $name
-      phone: $phone
-      email: $email
-      gender: $gender
-      birthday: $birthday
-      bio: $bio
-      accessToken: $accessToken
+        signUpMethod: $signUpMethod
+        profilePicture: $profilePicture
+        socialId: $socialId
+        fname: $fname
+        lname: $lname
+        name: $name
+        phone: $phone
+        email: $email
+        gender: $gender
+        birthday: $birthday
+        bio: $bio
+        accessToken: $accessToken
     ){
       id
       name
@@ -56,6 +56,7 @@ export default class LoginPage extends Component {
   state = {}
 
   authenticateFacebook = async (response, mutation) => {
+
     await this.setState({
       signUpMethod: "facebook",
       profilePicture: response.picture.data.url,
@@ -68,7 +69,25 @@ export default class LoginPage extends Component {
       email: response.email,
       accessToken: response.accessToken
     })
+
     const signIn = await mutation()
+
+    // Empty state
+    await this.setState({
+      signUpMethod: null,
+      profilePicture: null,
+      socialId: null,
+      fname: null,
+      lname: null,
+      name: null,
+      phone: null,
+      email: null,
+      gender: null,
+      birthday: null,
+      bio: null,
+      accessToken: null
+    })
+
   }
 
   authenticationFailed = async response => {
@@ -76,6 +95,7 @@ export default class LoginPage extends Component {
   }
 
   authenticateGoogle = async (response, mutation) => {
+
     await this.setState({
       signUpMethod: "google",
       profilePicture: response.profileObj.imageUrl,
@@ -86,7 +106,25 @@ export default class LoginPage extends Component {
       email: response.profileObj.email,
       accessToken: response.accessToken
     })
+
     const signIn = await mutation()
+
+    // Empty state
+    await this.setState({
+      signUpMethod: null,
+      profilePicture: null,
+      socialId: null,
+      fname: null,
+      lname: null,
+      name: null,
+      phone: null,
+      email: null,
+      gender: null,
+      birthday: null,
+      bio: null,
+      accessToken: null
+    })
+
   }
 
   render() {
