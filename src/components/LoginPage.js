@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import FacebookAuth from 'react-facebook-auth'
 import GoogleLogin from 'react-google-login'
-import { Mutation } from 'react-apollo'
+import { Mutation, ApolloConsumer } from 'react-apollo'
 import gql from 'graphql-tag'
+import Router from 'next/router'
 
 import { meta } from '../api/meta'
-import { CURRENT_USER_QUERY } from './User'
+import User, { CURRENT_USER_QUERY } from './User'
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION(
@@ -56,7 +57,7 @@ export default class LoginPage extends Component {
 
   state = {}
 
-  authenticateFacebook = async (response, mutation) => {
+  authenticateFacebook = async (response, mutation, client) => {
 
     // console.log(response)
 
@@ -75,6 +76,10 @@ export default class LoginPage extends Component {
 
     const signIn = await mutation()
 
+    const me = await client.query({
+      query: CURRENT_USER_QUERY
+    })
+
     // Empty state
     await this.setState({
       signUpMethod: null,
@@ -90,6 +95,8 @@ export default class LoginPage extends Component {
       bio: null,
       accessToken: null
     })
+
+    Router.push('/')
 
   }
 
@@ -134,69 +141,76 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div className="limiter">
-        {/* <div className="container-login100" style={{backgroundImage: "url('/static/auth/images/bg-01.jpg')"}}> */}
-        <div className="container-login100" style={{backgroundImage: "url('http://fc06.deviantart.com/fs19/i/2007/303/8/2/Oblivion___Wallpaper_by_AKAcorn.jpg')"}}>
-          <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-            <form className="login100-form validate-form flex-sb flex-w">
-              <span className="login100-form-title p-b-53">
-                Sign In to { meta.name }
-              </span>
-              <Mutation refetchQueries={[{query: CURRENT_USER_QUERY}]} mutation={SIGNIN_MUTATION} variables={{
-                signUpMethod: this.state.signUpMethod,
-                profilePicture: this.state.profilePicture,
-                socialId: this.state.socialId,
-                fname: this.state.fname,
-                lname: this.state.lname,
-                name: this.state.name,
-                gender: this.state.gender,
-                birthday: this.state.birthday,
-                email: this.state.email,
-                accessToken: this.state.accessToken
-              }}>
-                {(signIn, { error, loading, called }) => (
-                  <FacebookAuth
-                    appId={process.env.FB_LOGIN_APP_ID}
-                    autoLoad
-                    fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
-                    callback={response => this.authenticateFacebook(response, signIn)}
-                    onFailure={this.authenticationFailed}
-                    component={renderProps => FacebookButton(loading, renderProps)}
-                  />
-                )}
-              </Mutation>
+      <ApolloConsumer>
+        {client => (
+            <div className="limiter">
+              {/* <div className="container-login100" style={{backgroundImage: "url('/static/auth/images/bg-01.jpg')"}}> */}
+              <div className="container-login100" style={{ backgroundImage: "url('http://fc06.deviantart.com/fs19/i/2007/303/8/2/Oblivion___Wallpaper_by_AKAcorn.jpg')" }}>
+                <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                  <form className="login100-form validate-form flex-sb flex-w">
+                    <span className="login100-form-title p-b-53">
+                      Sign In to {meta.name}
+                    </span>
+                    <Mutation refetchQueries={[{ query: CURRENT_USER_QUERY }]} mutation={SIGNIN_MUTATION} variables={{
+                      signUpMethod: this.state.signUpMethod,
+                      profilePicture: this.state.profilePicture,
+                      socialId: this.state.socialId,
+                      fname: this.state.fname,
+                      lname: this.state.lname,
+                      name: this.state.name,
+                      gender: this.state.gender,
+                      birthday: this.state.birthday,
+                      email: this.state.email,
+                      accessToken: this.state.accessToken
+                    }}>
+                      {(signIn, { error, loading, called }) => (
+                        <FacebookAuth
+                          appId={process.env.FB_LOGIN_APP_ID}
+                          autoLoad
+                          disabled={loading}
+                          fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
+                          callback={response => this.authenticateFacebook(response, signIn, client)}
+                          onFailure={this.authenticationFailed}
+                          component={renderProps => FacebookButton(loading, renderProps)}
+                        />
+                      )}
+                    </Mutation>
 
-              <Mutation mutation={SIGNIN_MUTATION} variables={{
-                signUpMethod: this.state.signUpMethod,
-                profilePicture: this.state.profilePicture,
-                socialId: this.state.socialId,
-                fname: this.state.fname,
-                lname: this.state.lname,
-                name: this.state.name,
-                email: this.state.email,
-                accessToken: this.state.accessToken
-              }}>
-                {(signIn, { error, loading, called }) => (
-                  <GoogleLogin
-                    clientId={process.env.GOOGLE_LOGIN_APP_ID}
-                    render={renderProps => (
-                      <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick}>
-                        <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
-                        {loading ? 'Signing in...' : 'Google'}
-                      </a>
-                    )}
-                    scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/admin.directory.user.readonly"}
-                    isSignedIn={false}
-                    fetchBasicProfile={false}
-                    onSuccess={response => this.authenticateGoogle(response, signIn)}
-                    onFailure={this.authenticationFailed}
-                  />
-                )}
-              </Mutation>
-            </form>
-          </div>
-        </div>
-      </div>
+                    <Mutation refetchQueries={[{ query: CURRENT_USER_QUERY }]} mutation={SIGNIN_MUTATION} variables={{
+                      signUpMethod: this.state.signUpMethod,
+                      profilePicture: this.state.profilePicture,
+                      socialId: this.state.socialId,
+                      fname: this.state.fname,
+                      lname: this.state.lname,
+                      name: this.state.name,
+                      email: this.state.email,
+                      accessToken: this.state.accessToken
+                    }}>
+                      {(signIn, { error, loading, called }) => (
+                        <GoogleLogin
+                          clientId={process.env.GOOGLE_LOGIN_APP_ID}
+                          render={renderProps => (
+                            <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick}>
+                              <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
+                              {loading ? 'Signing in...' : 'Google'}
+                            </a>
+                          )}
+                          disabled={loading}
+                          scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/admin.directory.user.readonly"}
+                          isSignedIn={false}
+                          fetchBasicProfile={false}
+                          onSuccess={response => this.authenticateGoogle(response, signIn)}
+                          onFailure={this.authenticationFailed}
+                        />
+                      )}
+                    </Mutation>
+                  </form>
+                </div>
+              </div>
+            </div>
+          )
+        }
+      </ApolloConsumer>
     )
   }
 
