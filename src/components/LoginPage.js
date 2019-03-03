@@ -5,6 +5,7 @@ import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import { meta } from '../api/meta'
+import { CURRENT_USER_QUERY } from './User'
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION(
@@ -57,6 +58,8 @@ export default class LoginPage extends Component {
 
   authenticateFacebook = async (response, mutation) => {
 
+    // console.log(response)
+
     await this.setState({
       signUpMethod: "facebook",
       profilePicture: response.picture.data.url,
@@ -95,6 +98,8 @@ export default class LoginPage extends Component {
   }
 
   authenticateGoogle = async (response, mutation) => {
+
+    // console.log(response)
 
     await this.setState({
       signUpMethod: "google",
@@ -137,7 +142,7 @@ export default class LoginPage extends Component {
               <span className="login100-form-title p-b-53">
                 Sign In to { meta.name }
               </span>
-              <Mutation mutation={SIGNIN_MUTATION} variables={{
+              <Mutation refetchQueries={[{query: CURRENT_USER_QUERY}]} mutation={SIGNIN_MUTATION} variables={{
                 signUpMethod: this.state.signUpMethod,
                 profilePicture: this.state.profilePicture,
                 socialId: this.state.socialId,
@@ -180,7 +185,7 @@ export default class LoginPage extends Component {
                         {loading ? 'Signing in...' : 'Google'}
                       </a>
                     )}
-                    scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read"}
+                    scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/admin.directory.user.readonly"}
                     isSignedIn={false}
                     fetchBasicProfile={false}
                     onSuccess={response => this.authenticateGoogle(response, signIn)}
