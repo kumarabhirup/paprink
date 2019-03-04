@@ -16,7 +16,13 @@ class Header extends Component {
                   <div className="logo"><img src="/static/white-theme-trans.png" alt={meta.name} /></div>
                   <nav className="main_nav">
                     <ul>
-                      { mainMenu.map((item, index) => <li key={index}><a href={`${item.link}?intent=${this.props.router.asPath}`}>{item.text}</a></li>) }
+                      { mainMenu.map((item, index) => {
+                        if(item.sku === 'signin'){
+                          return <li key={index}><a href={`${item.link}?intent=${this.props.router.asPath}`}>{item.text}</a></li>
+                        } else {
+                          return <li key={index}><a href={`${item.link}`}>{item.text}</a></li>
+                        }
+                      }) }
                     </ul>
                   </nav>
                   <div className="search_container ml-auto">

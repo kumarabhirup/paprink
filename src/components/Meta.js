@@ -34,21 +34,21 @@ class Meta extends React.Component {
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/animate.css" />
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css" />
         
-        {this.props.router.asPath === '/' && (
+        {this.props.router.pathname === '/' && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/main_styles.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/responsive.css" />
           </>
         )}
 
-        {this.props.router.asPath === '/post' && (
+        {this.props.router.asPath.startsWith('/post') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
           </>
         )}
 
-        {this.props.router.asPath === '/category' && (
+        {this.props.router.asPath.startsWith('/category') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
@@ -57,7 +57,7 @@ class Meta extends React.Component {
           </>
         )}
 
-        {this.props.router.asPath === '/author' && (
+        {this.props.router.asPath.startsWith('/author') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
@@ -67,7 +67,7 @@ class Meta extends React.Component {
           </>
         )}
 
-        {this.props.router.asPath.includes('/login') && (
+        {this.props.router.asPath.startsWith('/login') && (
         <>
           <link rel="stylesheet" type="text/css" href="/static/auth/fonts/Linearicons-Free-v1.0.0/icon-font.min.css" />
           <link rel="stylesheet" type="text/css" href="/static/auth/vendor/animate/animate.css" />
