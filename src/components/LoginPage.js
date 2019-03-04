@@ -150,7 +150,7 @@ class LoginPage extends Component {
       <User>
         {({data: {me}}) => {
           if(me) {
-            console.log(me)
+            // console.log(me)
             this.redirectTo()
           }
           return(
