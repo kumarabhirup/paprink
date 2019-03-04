@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
+import Router, { withRouter } from 'next/router'
 
 import { meta } from '../api/meta'
 import { mainMenu } from '../api/menu'
 
-export default class Header extends Component {
+class Header extends Component {
   render() {
     return (
       <>
@@ -15,7 +16,7 @@ export default class Header extends Component {
                   <div className="logo"><img src="/static/white-theme-trans.png" alt={meta.name} /></div>
                   <nav className="main_nav">
                     <ul>
-                      { mainMenu.map((item, index) => <li key={index}><a href={item.link}>{item.text}</a></li>) }
+                      { mainMenu.map((item, index) => <li key={index}><a href={`${item.link}?intent=${this.props.router.asPath}`}>{item.text}</a></li>) }
                     </ul>
                   </nav>
                   <div className="search_container ml-auto">
@@ -57,3 +58,5 @@ export default class Header extends Component {
     )
   }
 }
+
+export default withRouter(Header)
