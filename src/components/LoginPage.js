@@ -136,6 +136,8 @@ export default class LoginPage extends Component {
       accessToken: null
     })
 
+    window.location.replace(`/`)
+
   }
 
   render() {
