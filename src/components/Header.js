@@ -56,7 +56,13 @@ class Header extends Component {
           </div>
           <nav className="menu_nav">
             <ul className="menu_mm">
-              { mainMenu.map((item, index) => <li className="menu_mm" key={index}><a href={item.link}>{item.text}</a></li>) }
+              { mainMenu.map((item, index) => {
+                if(item.sku === 'signin'){
+                  return <li className="menu_mm" key={index}><a href={`${item.link}?intent=${this.props.router.asPath}`}>{item.text}</a></li>
+                } else {
+                  return <li className="menu_mm" key={index}><a href={item.link}>{item.text}</a></li>
+                }
+              }) }
             </ul>
           </nav>
         </div>
