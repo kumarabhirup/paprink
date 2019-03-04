@@ -101,7 +101,7 @@ export default class LoginPage extends Component {
     return null
   }
 
-  authenticateGoogle = async (response, mutation) => {
+  authenticateGoogle = async (response, mutation, client) => {
 
     // console.log(response)
 
@@ -198,7 +198,7 @@ export default class LoginPage extends Component {
                           scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/admin.directory.user.readonly"}
                           isSignedIn={false}
                           fetchBasicProfile={false}
-                          onSuccess={response => this.authenticateGoogle(response, signIn)}
+                          onSuccess={response => this.authenticateGoogle(response, signIn, client)}
                           onFailure={this.authenticationFailed}
                         />
                       )}
