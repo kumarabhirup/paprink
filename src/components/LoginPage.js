@@ -3,6 +3,7 @@ import FacebookAuth from 'react-facebook-auth'
 import GoogleLogin from 'react-google-login'
 import { Mutation, ApolloConsumer } from 'react-apollo'
 import gql from 'graphql-tag'
+import Router from 'next/router'
 
 import { meta } from '../api/meta'
 import User, { CURRENT_USER_QUERY, getMe } from './User'
@@ -93,7 +94,7 @@ export default class LoginPage extends Component {
       accessToken: null
     })
 
-    window.location.replace(`/`) // Router does not work the expected way, so... this!
+    window.location.replace(Router.query.intent || '/') // Router does not work the expected way, so... this!
 
   }
 
@@ -136,7 +137,7 @@ export default class LoginPage extends Component {
       accessToken: null
     })
 
-    window.location.replace(`/`)
+    window.location.replace(Router.query.intent || '/')
 
   }
 

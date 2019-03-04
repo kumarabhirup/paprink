@@ -17,7 +17,7 @@ export const mainMenu = [
     newTab: false
   },
   {
-    text: `Signup`,
+    text: `SignIn`,
     link: `${meta.domain}/login`,
     newTab: false
   }

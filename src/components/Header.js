@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { meta } from '../api/meta'
-import { mainMenu } from '../api/menu';
+import { mainMenu } from '../api/menu'
 
 export default class Header extends Component {
   render() {
