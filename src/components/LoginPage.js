@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 import Router, { withRouter } from 'next/router'
 
 import { meta } from '../api/meta'
-import User, { CURRENT_USER_QUERY, getMe } from './User'
+import User, { CURRENT_USER_QUERY, getMe, getCurrentUser } from './User'
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION(
@@ -56,6 +56,13 @@ const FacebookButton = (loading, { onClick }) => (
 class LoginPage extends Component {
 
   state = {}
+
+  async UNSAFE_componentWillMount() {
+    const me = await getCurrentUser()
+    if(me){
+      this.props.router.replace(this.props.router.query.intent || '/')
+    }
+  }
 
   authenticateFacebook = async (response, mutation, client) => {
 
@@ -149,10 +156,10 @@ class LoginPage extends Component {
     return (
       <User>
         {({data: {me}}) => {
-          if(me) {
-            // console.log(me)
-            this.redirectTo()
-          }
+          // if(me) {
+          //   // console.log(me)
+          //   this.redirectTo()
+          // }
           return(
             <ApolloConsumer>
               {client => (
