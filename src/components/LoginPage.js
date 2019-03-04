@@ -3,10 +3,9 @@ import FacebookAuth from 'react-facebook-auth'
 import GoogleLogin from 'react-google-login'
 import { Mutation, ApolloConsumer } from 'react-apollo'
 import gql from 'graphql-tag'
-import Router from 'next/router'
 
 import { meta } from '../api/meta'
-import User, { CURRENT_USER_QUERY } from './User'
+import User, { CURRENT_USER_QUERY, getMe } from './User'
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION(
@@ -76,9 +75,7 @@ export default class LoginPage extends Component {
 
     const signIn = await mutation()
 
-    const me = await client.query({
-      query: CURRENT_USER_QUERY
-    })
+    const me = await getMe(client)
 
     // Empty state
     await this.setState({
@@ -96,7 +93,7 @@ export default class LoginPage extends Component {
       accessToken: null
     })
 
-    Router.push('/')
+    window.location.replace(`/`) // Router does not work the expected way, so... this!
 
   }
 
@@ -120,6 +117,8 @@ export default class LoginPage extends Component {
     })
 
     const signIn = await mutation()
+
+    const me = await getMe(client)
 
     // Empty state
     await this.setState({

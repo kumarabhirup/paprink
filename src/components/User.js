@@ -2,7 +2,7 @@ import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 
-const CURRENT_USER_QUERY = gql`
+export const CURRENT_USER_QUERY = gql`
   query {
     me {
       id
@@ -16,12 +16,18 @@ const CURRENT_USER_QUERY = gql`
       profilePicture
     }
   }
-`;
+`
+
+export const getMe = async client => {
+  const me = await client.query({
+    query: CURRENT_USER_QUERY
+  })
+  return me
+}
 
 const User = props => (
   <Query {...props} query={CURRENT_USER_QUERY}>
     {payload => {
-      console.log(payload)
       return props.children(payload)
     }}
   </Query>
@@ -32,4 +38,3 @@ User.propTypes = {
 }
 
 export default User
-export { CURRENT_USER_QUERY }
