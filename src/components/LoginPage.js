@@ -57,12 +57,12 @@ class LoginPage extends Component {
 
   state = {}
 
-  async UNSAFE_componentWillMount() {
-    const me = await getCurrentUser()
-    if(me){
-      this.props.router.replace(this.props.router.query.intent || '/')
-    }
-  }
+  // async UNSAFE_componentWillMount() {
+  //   const me = await getCurrentUser()
+  //   if(me){
+  //     this.props.router.replace(this.props.router.query.intent || '/')
+  //   }
+  // }
 
   authenticateFacebook = async (response, mutation, client) => {
 
