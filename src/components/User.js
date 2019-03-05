@@ -21,9 +21,10 @@ export const CURRENT_USER_QUERY = gql`
 `
 
 export const getCurrentUser = async () => {
-  return await client.query({
+  const me = await client.query({
     query: CURRENT_USER_QUERY
   })
+  return me
 }
 
 export const getMe = async client => {

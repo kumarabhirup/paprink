@@ -1,8 +1,29 @@
 import React, { Component } from 'react'
 import Head from 'next/head'
-import LoginPage from '../src/components/LoginPage'
+import Router, { withRouter } from 'next/router'
 
-export default class loginPage extends Component {
+import LoginPage from '../src/components/LoginPage'
+import User, { CURRENT_USER_QUERY, getMe, getCurrentUser } from '../src/components/User'
+import { meta } from '../src/api/meta'
+
+class loginPage extends Component {
+
+  static async getInitialProps({ res, req }) {
+    if (res) {
+      Router.replace(Router.query.intent || '/')
+    } else {
+      Router.push('http://example.com')
+    }
+    return {}
+  }
+
+  async UNSAFE_componentWillMount() {
+    // console.log(this.props.me)
+    // if(this.props.me.data){
+    //   this.props.router.replace(this.props.router.query.intent || '/')
+    // }
+  }
+
   render() {
     return (
       <>
@@ -30,4 +51,7 @@ export default class loginPage extends Component {
       </>
     )
   }
+
 }
+
+export default withRouter(loginPage)
