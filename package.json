@@ -3,11 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development nodemon -w server devServer.js",
-    "build:next": "NODE_ENV=production next build",
-    "build:server": "NODE_ENV=production babel -s -D -d .server server",
-    "build": "npm run build:next && npm run build:server",
-    "start": "NODE_ENV=production node .server",
+    "dev": "node index.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node index.js",
     "deploy": "npm run build && now --dotenv .env"
   },
   "dependencies": {
@@ -46,8 +44,6 @@
     "waait": "^1.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.3.4",
-    "@babel/preset-env": "^7.3.4",
     "nodemon": "^1.18.10"
   },
   "resolutions": {
