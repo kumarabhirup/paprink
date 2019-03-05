@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "node index.js",
+    "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node index.js",
+    "start": "NODE_ENV=production node server.js",
     "deploy": "npm run build && now --dotenv .env"
   },
   "dependencies": {
