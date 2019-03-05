@@ -3,14 +3,18 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "NODE_ENV=development nodemon -w server devServer.js",
+    "build:next": "NODE_ENV=production next build",
+    "build:server": "NODE_ENV=production babel -s -D -d .server server",
+    "build": "npm run build:next && npm run build:server",
+    "start": "NODE_ENV=production node .server",
     "deploy": "npm run build && now --dotenv .env"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "apollo-boost": "^0.1.27",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-register": "^6.26.0",
     "css-loader": "^2.1.0",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
@@ -41,7 +45,11 @@
     "terser": "^3.14.1",
     "waait": "^1.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "nodemon": "^1.18.10"
+  },
   "resolutions": {
     "terser": "3.14.1"
   }
