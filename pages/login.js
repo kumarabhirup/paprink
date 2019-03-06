@@ -9,19 +9,8 @@ import { meta } from '../src/api/meta'
 class loginPage extends Component {
 
   static async getInitialProps({ res, req }) {
-    if (res) {
-      Router.replace(Router.query.intent || '/')
-    } else {
-      Router.push('http://example.com')
-    }
-    return {}
-  }
-
-  async UNSAFE_componentWillMount() {
-    // console.log(this.props.me)
-    // if(this.props.me.data){
-    //   this.props.router.replace(this.props.router.query.intent || '/')
-    // }
+    const me = await getCurrentUser()
+    console.log(me)
   }
 
   render() {
