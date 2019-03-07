@@ -57,13 +57,6 @@ class LoginPage extends Component {
 
   state = {}
 
-  // async UNSAFE_componentWillMount() {
-  //   const me = await getCurrentUser()
-  //   if(me){
-  //     this.props.router.replace(this.props.router.query.intent || '/')
-  //   }
-  // }
-
   authenticateFacebook = async (response, mutation, client) => {
 
     // console.log(response)
@@ -155,11 +148,7 @@ class LoginPage extends Component {
   render() {
     return (
       <User>
-        {({data: {me}}) => {
-          // if(me) {
-          //   // console.log(me)
-          //   this.redirectTo()
-          // }
+        {({data: {me}, loading, error}) => {
           return(
             <ApolloConsumer>
               {client => (
@@ -168,6 +157,19 @@ class LoginPage extends Component {
                     <div className="container-login100" style={{ backgroundImage: "url('http://fc06.deviantart.com/fs19/i/2007/303/8/2/Oblivion___Wallpaper_by_AKAcorn.jpg')" }}>
                       <div className="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
                         <form className="login100-form validate-form flex-sb flex-w">
+                        { loading && (
+                          <span className="login100-form-title p-b-53">
+                            Loading...
+                          </span>
+                        ) }
+                        { me ? (
+                          <span className="login100-form-title p-b-53">
+                            <h2>You are { me.name }.</h2>
+                            <hr />
+                            <p>You are already signed in. <span onClick={() => this.props.router.back()} style={{color: '#0047ab', fontWeight: 'bolder', cursor: 'pointer'}}>Click here to go back... 🙂</span></p>
+                          </span>
+                        ) : !loading ? (
+                          <>
                           <span className="login100-form-title p-b-53">
                             Sign In to {meta.name}
                           </span>
@@ -224,6 +226,9 @@ class LoginPage extends Component {
                               />
                             )}
                           </Mutation>
+                          </>
+                        ) : null }
+                        {/* { !loading &&  } */}
                         </form>
                       </div>
                     </div>

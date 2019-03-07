@@ -3,15 +3,8 @@ import Head from 'next/head'
 import Router, { withRouter } from 'next/router'
 
 import LoginPage from '../src/components/LoginPage'
-import User, { CURRENT_USER_QUERY, getMe, getCurrentUser } from '../src/components/User'
-import { meta } from '../src/api/meta'
 
 class loginPage extends Component {
-
-  static async getInitialProps({ res, req }) {
-    const me = await getCurrentUser()
-    console.log(me)
-  }
 
   render() {
     return (
