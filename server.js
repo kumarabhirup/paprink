@@ -10,8 +10,8 @@ app.prepare()
 
   const server = express()
 
-  server.get('/signin', (req, res) => {
-    const actualPage = '/login'
+  server.get('/login', (req, res) => {
+    const actualPage = '/signin'
     app.render(req, res, actualPage)
   })
 

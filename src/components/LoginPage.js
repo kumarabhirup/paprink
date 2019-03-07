@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 import Router, { withRouter } from 'next/router'
 
 import { meta } from '../api/meta'
-import User, { CURRENT_USER_QUERY, getMe, getCurrentUser } from './User'
+import User, { CURRENT_USER_QUERY, getMe } from './User'
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION(
@@ -228,7 +228,6 @@ class LoginPage extends Component {
                           </Mutation>
                           </>
                         ) : null }
-                        {/* { !loading &&  } */}
                         </form>
                       </div>
                     </div>
