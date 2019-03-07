@@ -27,7 +27,7 @@ class Header extends Component {
                               return <li key={index}><a href={`${item.link}`}>{item.text}</a></li>
                             }
                           }) }
-                          { me ? <li><Signout /></li> : <li><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Sign In</a></li> }
+                          { me ? <li><Signout /></li> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', zoom: '80%'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {`Sign In`.toUpperCase()}</a></li> }
                         </ul>
                       </nav>
                       <div className="search_container ml-auto">
