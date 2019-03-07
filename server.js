@@ -10,6 +10,11 @@ app.prepare()
 
   const server = express()
 
+  server.get('/signin', (req, res) => {
+    const actualPage = '/login'
+    app.render(req, res, actualPage)
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })

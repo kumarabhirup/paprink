@@ -67,12 +67,12 @@ class Meta extends React.Component {
           </>
         )}
 
-        {this.props.router.asPath.startsWith('/login') && (
+        {this.props.router.asPath.startsWith('/login') || this.props.router.asPath.startsWith('/signin') ? (
           <>
             <link rel="stylesheet" type="text/css" href="/static/auth/css/util.css" />
             <link rel="stylesheet" type="text/css" href="/static/auth/css/main.css" />
           </>
-        )}
+        ) : null}
 
         <title>{ meta.title }</title>
 
