@@ -4,6 +4,7 @@ import Router, { withRouter } from 'next/router'
 import { meta } from '../api/meta'
 import { mainMenu } from '../api/menu'
 import User from './User'
+import Signout from './Signout';
 
 class Header extends Component {
   render() {
@@ -26,7 +27,7 @@ class Header extends Component {
                               return <li key={index}><a href={`${item.link}`}>{item.text}</a></li>
                             }
                           }) }
-                          { me ? <li><a href={`${meta.domain}/signout?intent=${this.props.router.asPath}`}>Sign Out</a></li> : <li><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Sign In</a></li> }
+                          { me ? <li><Signout /></li> : <li><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Sign In</a></li> }
                         </ul>
                       </nav>
                       <div className="search_container ml-auto">
@@ -67,7 +68,7 @@ class Header extends Component {
                       return <li className="menu_mm" key={index}><a href={item.link}>{item.text}</a></li>
                     }
                   }) }
-                  { me ? <li className="menu_mm"><a href={`${meta.domain}/signout?intent=${this.props.router.asPath}`}>Sign Out</a></li> : <li className="menu_mm"><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Sign In</a></li> }
+                  { me ? <li className="menu_mm"><Signout /></li> : <li className="menu_mm"><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Sign In</a></li> }
                 </ul>
               </nav>
             </div>
