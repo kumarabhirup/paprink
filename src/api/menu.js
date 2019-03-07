@@ -32,7 +32,6 @@ async function signInLogic() {
       link: `${meta.domain}/login`,
       newTab: false
     })
-    console.log(mainMenu)
   } else {
     await mainMenu.push({
       text: `Sign Out`,
@@ -40,7 +39,6 @@ async function signInLogic() {
       link: `${meta.domain}/signout`,
       newTab: false
     })
-    console.log(mainMenu)
   }
 } signInLogic()
 
