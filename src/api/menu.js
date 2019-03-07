@@ -1,6 +1,9 @@
 import { meta } from "./meta"
+import { getCurrentUser } from "../components/User"
 
-export const mainMenu = [
+const me = async () => {return await getCurrentUser().then(value => (value))}
+
+var mainMenu = [
   {
     text: `Home`,
     sku: `home`,
@@ -18,11 +21,27 @@ export const mainMenu = [
     sku: `write`,
     link: `${meta.domain}/write`,
     newTab: false
-  },
-  {
-    text: `SignIn`,
-    sku: `signin`,
-    link: `${meta.domain}/login`,
-    newTab: false
   }
 ]
+
+async function signInLogic() {
+  if(await me().then(value => (value.data.me)) === null){
+    await mainMenu.push({
+      text: `Sign In`,
+      sku: `signin`,
+      link: `${meta.domain}/login`,
+      newTab: false
+    })
+    console.log(mainMenu)
+  } else {
+    await mainMenu.push({
+      text: `Sign Out`,
+      sku: `signout`,
+      link: `${meta.domain}/signout`,
+      newTab: false
+    })
+    console.log(mainMenu)
+  }
+} signInLogic()
+
+export { mainMenu }
