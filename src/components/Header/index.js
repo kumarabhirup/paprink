@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Router, { withRouter } from 'next/router'
 
-import { meta } from '../api/meta'
-import { mainMenu } from '../api/menu'
-import User from './User'
-import Signout from './Signout';
+import { meta } from '../../api/meta'
+import { mainMenu } from '../../api/menu'
+import User from '../User'
+import Signout from '../Signout'
 
 class Header extends Component {
   render() {
