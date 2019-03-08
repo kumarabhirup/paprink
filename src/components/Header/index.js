@@ -5,6 +5,7 @@ import { meta } from '../../api/meta'
 import { mainMenu } from '../../api/menu'
 import User from '../User'
 import Signout from '../Signout'
+import ProfileButton from './profileButton'
 
 class Header extends Component {
   render() {
@@ -27,7 +28,7 @@ class Header extends Component {
                               return <li key={index}><a href={`${item.link}`}>{item.text}</a></li>
                             }
                           }) }
-                          { me ? <li><Signout /></li> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', zoom: '80%'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {`Sign In`.toUpperCase()}</a></li> }
+                          { me ? <ProfileButton me={me} /> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', zoom: '80%'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {`Sign In`.toUpperCase()}</a></li> }
                         </ul>
                       </nav>
                       <div className="search_container ml-auto">
