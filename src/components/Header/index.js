@@ -4,7 +4,6 @@ import Router, { withRouter } from 'next/router'
 import { meta } from '../../api/meta'
 import { mainMenu } from '../../api/menu'
 import User from '../User'
-import Signout from '../Signout'
 import ProfileButton from './profileButton'
 
 class Header extends Component {
