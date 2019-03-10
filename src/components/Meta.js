@@ -34,21 +34,21 @@ class Meta extends React.Component {
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/animate.css" />
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css" />
         
-        {this.props.router.asPath === '/' && (
+        {this.props.router.pathname === '/' && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/main_styles.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/responsive.css" />
           </>
         )}
 
-        {this.props.router.asPath === '/post' && (
+        {this.props.router.asPath.startsWith('/post') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
           </>
         )}
 
-        {this.props.router.asPath === '/category' && (
+        {this.props.router.asPath.startsWith('/category') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
@@ -57,7 +57,7 @@ class Meta extends React.Component {
           </>
         )}
 
-        {this.props.router.asPath === '/author' && (
+        {this.props.router.asPath.startsWith('/author') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
@@ -66,6 +66,13 @@ class Meta extends React.Component {
             <link rel="stylesheet" type="text/css" href="/static/author-card/author-card.css" />
           </>
         )}
+
+        {this.props.router.asPath.startsWith('/login') || this.props.router.asPath.startsWith('/signin') ? (
+          <>
+            <link rel="stylesheet" type="text/css" href="/static/auth/css/util.css" />
+            <link rel="stylesheet" type="text/css" href="/static/auth/css/main.css" />
+          </>
+        ) : null}
 
         <title>{ meta.title }</title>
 
