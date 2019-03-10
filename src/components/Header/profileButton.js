@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Dropdown } from 'react-bootstrap'
 
-import Signout from '../Signout'
+import Signout from './Signout'
 
 export default class ProfileButton extends Component {
 
