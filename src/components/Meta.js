@@ -74,6 +74,13 @@ class Meta extends React.Component {
           </>
         ) : null}
 
+        {this.props.router.asPath.startsWith('/editor') ? (
+          <>
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
+          </>
+        ) : null}
+
         <title>{ meta.title }</title>
 
       </Head>

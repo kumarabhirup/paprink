@@ -10,6 +10,12 @@ export default class Title extends Component {
             <div className="post_category trans_200"><a href="#" className="trans_200">sport</a></div>
             {/* <div className="post_title">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</div> */}
             <div className="post_title">EVERYTHING ABOUT SPORTS</div>
+            { this.props.noSidebar && (
+              <div className="post_author d-flex flex-row align-items-center justify-content-center">
+                <div className="author_image"><div><img src="static/prebuilt/images/author.jpg" alt="" /></div></div>
+                <div className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></div>
+              </div>
+            ) }
           </div>
         </div>
       </>
