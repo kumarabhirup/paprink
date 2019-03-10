@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { withRouter } from 'next/router'
 
-export default class Title extends Component {
+import { meta } from '../api/meta'
+
+class Title extends Component {
   render() {
     return (
       <>
@@ -13,7 +16,7 @@ export default class Title extends Component {
             { this.props.noSidebar && (
               <div className="post_author d-flex flex-row align-items-center justify-content-center">
                 <div className="author_image"><div><img src="static/prebuilt/images/author.jpg" alt="" /></div></div>
-                <div className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></div>
+                <div className="post_meta"><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>SIGN IN to see yourself here!</a></div>
               </div>
             ) }
           </div>
@@ -22,3 +25,5 @@ export default class Title extends Component {
     )
   }
 }
+
+export default withRouter(Title)

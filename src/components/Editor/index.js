@@ -1,10 +1,31 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 
 import PageContent from '../PageContent'
 import { today } from '../../api/posts'
 import Card from '../Card/'
 
+const TitleInputBox = styled.input`
+  width: 100%;
+  border: none;
+  padding: 30px;
+  font-size: 28px;
+  border-radius: 20px;
+  &:focus {
+    outline: none;
+  }
+`
+
 export default class EditorPage extends Component {
+
+  state = {
+    title: 'Write an awesome title!'
+  }
+
+  onTitleChange = event => {
+    this.setState({ title: event.target.value })
+  }
+
   render() {
     return (
       <PageContent noSidebar>
@@ -14,7 +35,7 @@ export default class EditorPage extends Component {
 				<div className="col-lg-10 offset-lg-1">
 					<div className="post_content">
 
-            <input type="text" placeholder="Write that awesome title!" />
+            <TitleInputBox type="text" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} />
 
 						<div className="post_body" style={{marginTop: "20px"}}>
 							<p className="post_p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus eget purus id felis dignissim convallis. Suspendisse et augue dui. Morbi gravida sed justo vel venenatis. Ut tempor pretium maximus. Donec libero diam, faucibus vitae lectus nec, accumsan gravida dui. Nam interdum mi eget lacus aliquet, sit amet ultricies magna pharetra. In ut odio a ligula egestas pretium et quis sapien. Etiam faucibus magna eu porta vulputate. Aliquam euismod rhoncus malesuada. Nunc rutrum hendrerit semper.</p>
@@ -52,4 +73,5 @@ export default class EditorPage extends Component {
       </PageContent>
     )
   }
+
 }
