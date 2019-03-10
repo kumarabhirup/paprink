@@ -43,6 +43,8 @@ class Header extends Component {
                         
                       </div>
                       <div className="hamburger ml-auto menu_mm">
+                        { me ? <ProfileButton me={me} /> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', listStyle: 'none', display: 'inline-block'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {`Sign In`.toUpperCase()}</a></li> }
+                        &nbsp;&nbsp;&nbsp;&nbsp;
                         <i className="fa fa-bars trans_200 menu_mm" aria-hidden="true"></i>
                       </div>
                     </div>
@@ -69,7 +71,6 @@ class Header extends Component {
                       return <li className="menu_mm" key={index}><a href={item.link}>{item.text}</a></li>
                     }
                   }) }
-                  { me ? <li className="menu_mm"><Signout /></li> : <li className="menu_mm"><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Sign In</a></li> }
                 </ul>
               </nav>
             </div>
