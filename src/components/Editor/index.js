@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import PageContent from '../PageContent'
 import { today } from '../../api/posts'
 import Card from '../Card/'
+import CategorySelector from './CategorySelector'
 
 const TitleInputBox = styled.input`
   width: 100%;
@@ -19,7 +20,8 @@ const TitleInputBox = styled.input`
 export default class EditorPage extends Component {
 
   state = {
-    title: 'Write an awesome title!'
+    title: 'Write an awesome title!',
+		categories: ['Your Category']
   }
 
   onTitleChange = async event => {
@@ -60,6 +62,8 @@ export default class EditorPage extends Component {
 								</ul>
 							</div>
 						</div>
+
+						<CategorySelector />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
 							HEY
