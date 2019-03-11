@@ -39,7 +39,9 @@ class CategorySelector extends Component {
     }
  
     handleAddition(tag) {
-        this.setState(state => ({ tags: [...state.tags, tag] }))
+        if (this.state.tags.length < 3) {
+            this.setState(state => ({ tags: [...state.tags, tag] }))
+        }
     }
  
     handleDrag(tag, currPos, newPos) {
