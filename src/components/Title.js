@@ -4,6 +4,7 @@ import { withRouter } from 'next/router'
 import { meta } from '../api/meta'
 
 class Title extends Component {
+
   render() {
     return (
       <>
@@ -12,7 +13,7 @@ class Title extends Component {
           <div className="home_content">
             <div className="post_category trans_200"><a href="#" className="trans_200">sport</a></div>
             {/* <div className="post_title">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</div> */}
-            <div className="post_title">EVERYTHING ABOUT SPORTS</div>
+            <div className="post_title">{ this.props.title || 'Write an Awesome title!' }</div>
             { this.props.noSidebar && (
               <div className="post_author d-flex flex-row align-items-center justify-content-center">
                 <div className="author_image"><div><img src="static/prebuilt/images/author.jpg" alt="" /></div></div>
@@ -24,6 +25,7 @@ class Title extends Component {
       </>
     )
   }
+
 }
 
 export default withRouter(Title)

@@ -22,8 +22,9 @@ export default class EditorPage extends Component {
     title: 'Write an awesome title!'
   }
 
-  onTitleChange = event => {
-    this.setState({ title: event.target.value })
+  onTitleChange = async event => {
+    await this.setState({ title: event.target.value })
+		this.props.titleState(this.state.title)
   }
 
   render() {
@@ -35,7 +36,7 @@ export default class EditorPage extends Component {
 				<div className="col-lg-10 offset-lg-1">
 					<div className="post_content">
 
-            <TitleInputBox type="text" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} />
+            <TitleInputBox type="text" placeholder="Write an awesome title!" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} />
 
 						<div className="post_body" style={{marginTop: "20px"}}>
 							<p className="post_p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus eget purus id felis dignissim convallis. Suspendisse et augue dui. Morbi gravida sed justo vel venenatis. Ut tempor pretium maximus. Donec libero diam, faucibus vitae lectus nec, accumsan gravida dui. Nam interdum mi eget lacus aliquet, sit amet ultricies magna pharetra. In ut odio a ligula egestas pretium et quis sapien. Etiam faucibus magna eu porta vulputate. Aliquam euismod rhoncus malesuada. Nunc rutrum hendrerit semper.</p>
