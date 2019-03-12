@@ -66,7 +66,7 @@ export default class EditorPage extends Component {
 						<CategorySelector />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
-							HEY
+							Thanks for spending you time here. ❤️ from PaprInk Team!
 						</div>
 
           </div>
