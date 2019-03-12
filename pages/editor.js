@@ -16,8 +16,8 @@ export default class editorPage extends Component {
     return (
       <>
         <Header />
-        <Title noSidebar title={this.state.title} />
-        <EditorPage titleState={async title => await this.setState({ title })} />
+        <Title noSidebar title={this.state.title} tags={this.state.categories} />
+        <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} />
         <Footer />
         <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
       </>

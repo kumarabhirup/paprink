@@ -11,7 +11,13 @@ class Title extends Component {
         <div className="home">
           <div className="home_background parallax-window" data-parallax="scroll" data-image-src="/static/prebuilt/images/post.jpg" data-speed="0.8"></div>
           <div className="home_content">
-            <div className="post_category trans_200"><a href="#" className="trans_200">sport</a></div>
+            <div style={{display: 'inline-block'}}>
+              { this.props.tags && this.props.tags.map(tag => {
+                return (
+                  <div className="post_category trans_200" style={{display: 'inline-block', width: 'auto', padding: '0px 12px'}}><a href="#" className="trans_200" style={{width: 'auto'}}>{tag.text}</a></div>
+                )
+              }) }
+            </div>
             {/* <div className="post_title">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</div> */}
             <div className="post_title">{ this.props.title || 'Write an Awesome title!' }</div>
             { this.props.noSidebar && (

@@ -21,7 +21,7 @@ export default class EditorPage extends Component {
 
   state = {
     title: 'Write an awesome title!',
-		categories: ['Your Category']
+		categories: null
   }
 
   onTitleChange = async event => {
@@ -63,7 +63,10 @@ export default class EditorPage extends Component {
 							</div>
 						</div>
 
-						<CategorySelector />
+						<CategorySelector categoryState={async categories => {
+							await this.setState({ categories })
+							this.props.categoryState(this.state.categories)
+						}} />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
 							Thanks for spending you time here. ❤️ from PaprInk Team!

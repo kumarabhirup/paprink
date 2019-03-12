@@ -35,6 +35,8 @@ class CategorySelector extends Component {
          tags: tags.filter((tag, index) => index !== i),
         })
 
+        await this.props.categoryState(this.state.tags)
+
     }
  
     async handleAddition(tag) {
@@ -49,6 +51,8 @@ class CategorySelector extends Component {
         } else {
             await this.setState({ error: '💢 Please use only 3 tags 💢' })
         }
+
+        await this.props.categoryState(this.state.tags)
 
     }
  
