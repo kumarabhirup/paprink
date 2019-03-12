@@ -17,7 +17,8 @@ class CategorySelector extends Component {
             tags: [
             //   { id: "", text: "" }
             ],
-            suggestions: [...categorySuggessions]
+            suggestions: [...categorySuggessions],
+            error: null
         }
         this.handleDelete = this.handleDelete.bind(this)
         this.handleAddition = this.handleAddition.bind(this)
@@ -26,7 +27,7 @@ class CategorySelector extends Component {
  
     async handleDelete(i) {
 
-        const { tags } = this.state;
+        const { tags } = this.state
         if(tags.length <= 3) {
           await this.setState({ error: null })
         }
@@ -38,10 +39,13 @@ class CategorySelector extends Component {
  
     async handleAddition(tag) {
 
-        if (this.state.tags.includes(tag)) { // This if statement seems to not work.
-            await this.setState({ error: '💢 Category already in use 💢' })
-        } else if (this.state.tags.length <= 2) { // This technically should be comparing to 3 but dont know why 2 just works!
+        const { tags, suggestions } = this.state
+
+        if (!suggestions.includes(tag)) { // This if statement seems to not work.
+            await this.setState({ error: '💢 Please use suggested category 💢' })
+        } else if (tags.length <= 2) { // This technically should be comparing to 3 but dont know why 2 just works!
             await this.setState(state => ({ tags: [...state.tags, tag] }))
+            await this.setState({ error: null })
         } else {
             await this.setState({ error: '💢 Please use only 3 tags 💢' })
         }
@@ -78,9 +82,9 @@ class CategorySelector extends Component {
                     handleDrag={this.handleDrag}
                     delimiters={delimiters}
                     maxLength={24}
-                    minQueryLength={2}
+                    minQueryLength={1}
                     allowDragDrop={false}
-                    placeholder={this.state.error || "Categories (max 3)"}
+                    placeholder={this.state.error || "Add at least 1 Category (max 3)"}
                     allowDeleteFromEmptyInput={false}
                 />
             </div>
