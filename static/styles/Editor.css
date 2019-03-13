@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300,400,500,700|Work+Sans:300,400,500,600,700,800,900');
+
 .RichEditor-root {
   background: #fff;
   /* border: 1px solid #ddd; */
@@ -5,13 +7,16 @@
   font-size: 14px;
   padding: 15px;
   border-radius: 20px;
+  padding: 20px;
 }
 
 .RichEditor-editor {
   border-top: 1px solid #ddd;
   cursor: text;
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 10px;
+  color: #000;
+  font-family: 'Work Sans', sans-serif;
 }
 
 .RichEditor-editor .public-DraftEditorPlaceholder-root,
