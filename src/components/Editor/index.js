@@ -5,6 +5,7 @@ import { Button as BootstrapButton } from 'react-bootstrap'
 import PageContent from '../PageContent'
 import CategorySelector from './CategorySelector'
 import Editor from './Editor'
+import ImageUploader from './ImageUploader'
 
 const TitleInputBox = styled.input`
   width: 100%;
@@ -40,6 +41,8 @@ export default class EditorPage extends Component {
 
             <TitleInputBox type="text" placeholder="Write an awesome title!" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
 
+            <hr style={{opacity: 0.3}} />
+
 						{/* <div className="post_body" style={{marginTop: "20px"}}> */}
 
 							<div className="post_tags" style={{margin: '30px auto'}}>
@@ -56,6 +59,8 @@ export default class EditorPage extends Component {
 							await this.setState({ categories })
 							this.props.categoryState(this.state.categories)
 						}} />
+
+						<ImageUploader />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end">
 							<BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}}>📝 SAVE AS DRAFT</BootstrapButton>

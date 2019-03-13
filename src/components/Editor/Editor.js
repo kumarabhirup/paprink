@@ -87,7 +87,7 @@ export default class PaprinkEditor extends Component {
               handleKeyCommand={this.handleKeyCommand}
               onChange={this.onChange}
               onTab={this.onTab}
-              placeholder="Tell a story..."
+              placeholder="Tell a story... ✍️"
               ref="editor"
               spellCheck={true}
             /> 

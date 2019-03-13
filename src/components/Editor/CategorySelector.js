@@ -77,7 +77,7 @@ class CategorySelector extends Component {
               <link rel="stylesheet" type="text/css" href="/static/styles/CategorySelector.css" />
             </Head>
             <div className="white-box-avision">
-                <h3 style={{marginLeft: "3px"}}>Category</h3>
+                <h3 style={{marginLeft: "3px"}}>🏗️ Category</h3>
                 <ReactTags 
                     tags={tags}
                     suggestions={suggestions}

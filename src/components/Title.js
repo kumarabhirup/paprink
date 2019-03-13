@@ -19,7 +19,8 @@ class Title extends Component {
               }) }
             </div>
             {/* <div className="post_title">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</div> */}
-            <div className="post_title">{ this.props.title || 'Write an Awesome title!' }</div>
+            <div className="post_title" style={{fontSize: '35px'}}>{ this.props.title || 'Write an Awesome title!' }</div>
+            <br />
             { this.props.noSidebar && (
               <div className="post_author d-flex flex-row align-items-center justify-content-center">
                 <div className="author_image"><div><img src="static/prebuilt/images/author.jpg" alt="" /></div></div>
