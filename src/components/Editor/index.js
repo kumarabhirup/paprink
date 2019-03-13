@@ -41,9 +41,7 @@ export default class EditorPage extends Component {
 
             <TitleInputBox type="text" placeholder="Write an awesome title!" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} />
 
-						<div className="post_body" style={{marginTop: "20px"}}>
-
-							<Editor />
+						{/* <div className="post_body" style={{marginTop: "20px"}}> */}
 
 							<div className="post_tags" style={{marginTop: '30px'}}>
 								<ul>
@@ -51,7 +49,9 @@ export default class EditorPage extends Component {
 								</ul>
 							</div>
 
-						</div>
+							<Editor />
+
+						{/* </div> */}
 
 						<CategorySelector categoryState={async categories => {
 							await this.setState({ categories })
