@@ -5,6 +5,7 @@ import PageContent from '../PageContent'
 import { today } from '../../api/posts'
 import Card from '../Card/'
 import CategorySelector from './CategorySelector'
+import Editor from './Editor'
 
 const TitleInputBox = styled.input`
   width: 100%;
@@ -41,6 +42,8 @@ export default class EditorPage extends Component {
             <TitleInputBox type="text" placeholder="Write an awesome title!" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} />
 
 						<div className="post_body" style={{marginTop: "20px"}}>
+
+							<Editor />
 
 							<div className="post_tags" style={{marginTop: '30px'}}>
 								<ul>
