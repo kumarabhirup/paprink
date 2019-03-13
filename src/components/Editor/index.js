@@ -43,7 +43,7 @@ export default class EditorPage extends Component {
 
 						{/* <div className="post_body" style={{marginTop: "20px"}}> */}
 
-							<div className="post_tags" style={{marginTop: '30px'}}>
+							<div className="post_tags" style={{margin: '30px auto'}}>
 								<ul>
 									{ this.state.categories.map(category => <li className="post_tag"><a href="#">{category.text}</a></li>) }
 								</ul>

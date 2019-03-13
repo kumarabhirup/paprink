@@ -6,7 +6,10 @@ export default class PaprinkEditor extends Component {
  
   constructor(props) {
     super(props)
-    this.state = {editorState: EditorState.createEmpty()}
+    this.state = {
+      editorState: EditorState.createEmpty(),
+      editor: null
+    }
     this.onChange = (editorState) => this.setState({editorState})
     this.focus = () => this.refs.editor.focus();
     this.onChange = editorState => this.setState({ editorState });
@@ -15,6 +18,10 @@ export default class PaprinkEditor extends Component {
     this.onTab = e => this._onTab(e);
     this.toggleBlockType = type => this._toggleBlockType(type);
     this.toggleInlineStyle = style => this._toggleInlineStyle(style);
+  }
+
+  componentDidMount() {
+    this.setState({ editor: Editor })
   }
 
   _handleKeyCommand(command) {
@@ -43,7 +50,8 @@ export default class PaprinkEditor extends Component {
   }
 
   render() {
-    const { editorState } = this.state;
+    const { editorState } = this.state
+    const ClientEditor = this.state.editor
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
@@ -71,17 +79,19 @@ export default class PaprinkEditor extends Component {
           onToggle={this.toggleInlineStyle}
         />
         <div className={className} onClick={this.focus}>
-          <Editor
-            blockStyleFn={getBlockStyle}
-            customStyleMap={styleMap}
-            editorState={editorState}
-            handleKeyCommand={this.handleKeyCommand}
-            onChange={this.onChange}
-            onTab={this.onTab}
-            placeholder="Tell a story..."
-            ref="editor"
-            spellCheck={true}
-          />
+          { this.state.editor ?
+            <ClientEditor
+              blockStyleFn={getBlockStyle}
+              customStyleMap={styleMap}
+              editorState={editorState}
+              handleKeyCommand={this.handleKeyCommand}
+              onChange={this.onChange}
+              onTab={this.onTab}
+              placeholder="Tell a story..."
+              ref="editor"
+              spellCheck={true}
+            /> 
+          : null }
         </div>
       </div>
 
