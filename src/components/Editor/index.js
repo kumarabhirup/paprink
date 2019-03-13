@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Button as BootstrapButton } from 'react-bootstrap'
 
 import PageContent from '../PageContent'
-import { today } from '../../api/posts'
-import Card from '../Card/'
 import CategorySelector from './CategorySelector'
 import Editor from './Editor'
 
@@ -12,7 +11,7 @@ const TitleInputBox = styled.input`
   border: none;
   padding: 30px;
   font-size: 28px;
-  border-radius: 20px;
+  border-radius: 6px;
   &:focus {
     outline: none;
   }
@@ -39,7 +38,7 @@ export default class EditorPage extends Component {
 				<div className="col-lg-10 offset-lg-1">
 					<div className="post_content">
 
-            <TitleInputBox type="text" placeholder="Write an awesome title!" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} />
+            <TitleInputBox type="text" placeholder="Write an awesome title!" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
 
 						{/* <div className="post_body" style={{marginTop: "20px"}}> */}
 
@@ -58,7 +57,12 @@ export default class EditorPage extends Component {
 							this.props.categoryState(this.state.categories)
 						}} />
 						
-						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
+						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end">
+							<BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}}>📝 SAVE AS DRAFT</BootstrapButton>
+							<BootstrapButton variant="success" style={{cursor: 'pointer'}}>🎉 PUBLISH</BootstrapButton>
+						</div>
+
+						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-center">
 							Thanks for spending you time here. ❤️ from PaprInk Team!
 						</div>
 
