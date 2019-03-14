@@ -43,6 +43,18 @@
   padding: 10px 20px;
 }
 
+.RichEditor-editor .RichEditor-center {
+  text-align: center;
+}
+
+.RichEditor-editor .RichEditor-left {
+  text-align: center;
+}
+
+.RichEditor-editor .RichEditor-right {
+  text-align: right;
+}
+
 .RichEditor-editor .public-DraftStyleDefault-pre {
   background-color: rgba(0, 0, 0, 0.05);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;

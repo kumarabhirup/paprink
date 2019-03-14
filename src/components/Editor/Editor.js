@@ -115,6 +115,12 @@ function getBlockStyle(block) {
   switch (block.getType()) {
     case "blockquote":
       return "RichEditor-blockquote";
+    case "center":
+      return "RichEditor-center";
+    case "left":
+      return "RichEditor-left";
+    case "right":
+      return "RichEditor-right";
     default:
       return null;
   }
@@ -144,14 +150,17 @@ class StyleButton extends React.Component {
 }
 
 const BLOCK_TYPES = [
-  { label: "H1", style: "header-one" },
-  { label: "H2", style: "header-two" },
-  { label: "H3", style: "header-three" },
-  { label: "H4", style: "header-four" },
-  { label: "H5", style: "header-five" },
-  { label: "❝", style: "blockquote" },
-  { label: "{ }", style: "code-block" },
-  { label: "List", style: "ordered-list-item" }
+  { label: (<i class="fa fa-header" aria-hidden="true">1</i>), style: "header-one" },
+  { label: (<i class="fa fa-header" aria-hidden="true">2</i>), style: "header-two" },
+  { label: (<i class="fa fa-header" aria-hidden="true">3</i>), style: "header-three" },
+  { label: (<i class="fa fa-header" aria-hidden="true">4</i>), style: "header-four" },
+  { label: (<i class="fa fa-header" aria-hidden="true">5</i>), style: "header-five" },
+  { label: (<i class="fa fa-align-left" aria-hidden="true"></i>), style: "left" },
+  { label: (<i class="fa fa-align-center" aria-hidden="true"></i>), style: "center" },
+  { label: (<i class="fa fa-align-right" aria-hidden="true"></i>), style: "right" },
+  { label: (<i class="fa fa-quote-left" aria-hidden="true"></i>), style: "blockquote" },
+  { label: (<i class="fa fa-code" aria-hidden="true"></i>), style: "code-block" },
+  { label: (<i class="fa fa-list-ol" aria-hidden="true"></i>), style: "ordered-list-item" },
   // { label: "UL", style: "unordered-list-item" },
 ];
 
@@ -179,10 +188,10 @@ const BlockStyleControls = props => {
 };
 
 var INLINE_STYLES = [
-  { label: "Bold", style: "BOLD" },
-  { label: "Italic", style: "ITALIC" },
-  { label: "Underline", style: "UNDERLINE" },
-  { label: "Monospace", style: "CODE" }
+  { label: (<i class="fa fa-bold" aria-hidden="true"></i>), style: "BOLD" },
+  { label: (<i class="fa fa-italic" aria-hidden="true"></i>), style: "ITALIC" },
+  { label: (<i class="fa fa-underline" aria-hidden="true"></i>), style: "UNDERLINE" },
+  { label: (<i class="fa fa-i-cursor" aria-hidden="true"></i>), style: "CODE" }
 ];
 
 const InlineStyleControls = props => {
