@@ -4,7 +4,10 @@ import dynamic from 'next/dynamic'
 
 import 'froala-editor/js/froala_editor.pkgd.min.js'
 
-// That's where the magic happens 
+/**
+ * FIX for `window is not defined` error
+ * See: https://github.com/froala/react-froala-wysiwyg/issues/89 
+ */
 const FroalaEditorInput = dynamic(import('react-froala-wysiwyg'), {
   ssr: false
 })

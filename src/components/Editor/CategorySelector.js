@@ -74,7 +74,7 @@ class CategorySelector extends Component {
         return (
             <>
             <Head>
-              <link rel="stylesheet" type="text/css" href="/static/styles/CategorySelector.css" />
+              <link rel="stylesheet" type="text/css" href="/static/Editor/styles/CategorySelector.css" />
             </Head>
             <div className="white-box-avision">
                 <h3 style={{marginLeft: "3px"}}>🏗️ Category</h3>
