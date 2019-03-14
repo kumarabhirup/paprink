@@ -16,7 +16,10 @@ export default class PaprinkEditor extends Component {
   render() {
     return (
       <>
-        <FroalaEditorInput tag='textarea'/>
+        <FroalaEditorInput tag='textarea' config={{
+          placeholderText: 'So, why waiting? Write your story! ✍️',
+          charCounterCount: false
+        }} />
       </>
     )
   }
