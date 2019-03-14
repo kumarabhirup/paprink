@@ -77,6 +77,9 @@ class Meta extends React.Component {
         {this.props.router.asPath.startsWith('/editor') ? (
           <>
             <link rel="stylesheet" type="text/css" href="/static/styles/Editor.css" />
+            <link rel="stylesheet" href="//cdn.quilljs.com/1.2.6/quill.snow.css" />
+            <link rel="stylesheet" href="node_modules/react-quill/dist/quill.bubble.css" />
+            <link rel="stylesheet" href="node_modules/react-quill/dist/quill.core.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
           </>

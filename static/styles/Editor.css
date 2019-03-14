@@ -80,3 +80,23 @@
 .RichEditor-activeButton {
   color: #5890ff;
 }
+
+.ql-snow.ql-toolbar {
+  display: block;
+  background: #ffffff;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+  text-align: center;
+}
+
+.ql-bubble .ql-editor {
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+}
+
+.ql-editor {
+  min-height: 18em;
+  background: white;
+  color: black !important;
+  font-size: 17px;
+}
