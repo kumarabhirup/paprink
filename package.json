@@ -41,6 +41,7 @@
     "react-dom": "^16.8.4",
     "react-facebook-auth": "^1.4.0",
     "react-facebook-login": "^4.1.1",
+    "react-froala-wysiwyg": "^2.9.3",
     "react-ga": "^2.5.7",
     "react-google-login": "^5.0.2",
     "react-google-recaptcha": "^1.0.5",

@@ -76,7 +76,9 @@ class Meta extends React.Component {
 
         {this.props.router.asPath.startsWith('/editor') ? (
           <>
-            <link rel="stylesheet" type="text/css" href="/static/styles/Editor.css" />
+            <link rel="stylesheet" type="text/css" href="/static/Editor/styles/Editor.css" />
+            <link rel="stylesheet" type="text/css" href="/static/Editor/styles/froala_style.min.css" />
+            <link rel="stylesheet" type="text/css" href="/static/Editor/styles/froala_editor.pkgd.min.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
           </>
