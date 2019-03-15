@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import { stateToHTML } from 'draft-js-export-html'
+import ReactDOM from 'react-dom'
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -13,6 +13,9 @@ export default class PaprinkEditor extends Component {
 
   shouldComponentUpdate() {
     console.log(JSON.stringify(this.state.editor))
+    // var draftDom = ReactDOM.findDOMNode(this.refs.editor)
+    // var html = draftDom.querySelector("div[data-contents]").innerHTML
+    // console.log(html)
     return true
   }
 
@@ -24,8 +27,10 @@ export default class PaprinkEditor extends Component {
         content={this.defaultContent}
         body_placeholder={'Write your next masterpiece ✍️'}
         onChange={async editor => { 
-          await this.setState({ editor: editor.emitSerializedOutput() }) 
+          await this.setState({ editor: editor }) 
         }}
+        readOnly={true}
+        ref="editor"
       />
     )
   }
