@@ -20,6 +20,7 @@
     "dotenv": "^6.2.0",
     "draft-js": "^0.10.5",
     "draft-js-export-html": "^1.3.3",
+    "draft-js-exporter": "0.0.5",
     "es6-shim": "^0.35.5",
     "express": "^4.16.4",
     "extract-text-webpack-plugin": "^3.0.2",
