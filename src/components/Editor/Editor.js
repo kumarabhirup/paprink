@@ -41,7 +41,7 @@ export default class PaprinkEditor extends Component {
                           },
                           blockToHTML: block => {
                             if (block.type === 'image') {
-                              return <img src={block.data.url} alt={block.text} />
+                              return <center><img src={block.data.url} alt={block.text} width="80%" /></center>
                             }
                           }
                         })(this.state.editor)
