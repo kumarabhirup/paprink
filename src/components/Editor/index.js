@@ -43,9 +43,9 @@ export default class EditorPage extends Component {
 
             <hr style={{opacity: 0.3}} />
 
-						{/* <div className="post_body" style={{marginTop: "20px"}}> */}
+						<div className="post_body" style={{marginTop: "20px", color: "#000000"}}>
 
-							<div className="post_tags" style={{margin: '30px auto'}}>
+							<div className="post_tags" style={{margin: '10px auto'}}>
 								<ul>
 									{ this.state.categories.map(category => <li className="post_tag"><a href="#">{category.text}</a></li>) }
 								</ul>
@@ -53,7 +53,7 @@ export default class EditorPage extends Component {
 
 							<Editor />
 
-						{/* </div> */}
+						</div>
 
 						<CategorySelector categoryState={async categories => {
 							await this.setState({ categories })
