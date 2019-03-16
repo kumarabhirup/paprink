@@ -50,7 +50,7 @@ export default class PaprinkEditor extends Component {
         read_only={0}
         ref="editor"
       />
-      { this.displayHtml() }
+      {/* { this.displayHtml() } */}
       </>
     )
   }
