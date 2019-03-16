@@ -31,8 +31,10 @@ export default class PaprinkEditor extends Component {
         content={this.defaultContent}
         body_placeholder={'Write your next masterpiece ✍️'}
         onChange={async editor => { 
-          await this.setState({ editor: editor.state.editorState._immutable.currentContent })
-          await this.setState({
+          // All these editor states should be saved to the database for future use
+          await this.setState({ editorCurrentContent: editor.state.editorState._immutable.currentContent }) // this is what we use to convert into html
+          await this.setState({ editorSerializedOutput: editor.emitSerializedOutput() }) // object that looks like this.defaultContent
+          await this.setState({ // TODO: This needs a heavy edit.
             editorHtml: stateToHTML({
                           styleToHTML: style => {
                             if (style.startsWith('CUSTOM_COLOR_')) {
@@ -44,13 +46,12 @@ export default class PaprinkEditor extends Component {
                               return <center><img src={block.data.url} alt={block.text} width="80%" /></center>
                             }
                           }
-                        })(this.state.editor)
+                        })(this.state.editorCurrentContent)
           })
         }}
         read_only={0}
         ref="editor"
       />
-      {/* { this.displayHtml() } */}
       </>
     )
   }
