@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
-import { stateToHTML } from 'draft-js-export-html'
+import { convertToHTML as stateToHTML } from 'draft-convert'
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -23,10 +23,30 @@ export default class PaprinkEditor extends Component {
         content={this.defaultContent}
         body_placeholder={'Write your next masterpiece ✍️'}
         onChange={async editor => { 
+          // await this.setState({ editor: editor.emitSerializedOutput() })
+          // await this.setState({ editor: editor })
           await this.setState({ editor: editor.state.editorState._immutable.currentContent })
-          console.log(stateToHTML(this.state.editor))
+          // console.log(this.state.editor)
+          console.log(stateToHTML({
+            styleToHTML: (style) => {
+              if (style.startsWith('CUSTOM_COLOR_')) {
+                return <span style={{color: style.substr(style.length - 7)}} />;
+              }
+            },
+            blockToHTML: (block) => {
+              if (block.type === 'image') {
+                return <img />;
+              }
+            },
+            // entityToHTML: (entity, originalText) => {
+            //   if (entity.type === 'LINK') {
+            //     return <a href={entity.data.url}>{originalText}</a>;
+            //   }
+            //   return originalText;
+            // }
+          })(this.state.editor))
         }}
-        readOnly={true}
+        read_only={0}
         ref="editor"
       />
     )
