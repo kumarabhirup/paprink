@@ -71,7 +71,7 @@ export default class EditorPage extends Component {
 						</div>
 
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-center">
-							Thanks for spending you time here. ❤️ from PaprInk Team!
+							Thanks for spending your time here. ❤️ from PaprInk Team!
 						</div>
 
           </div>
