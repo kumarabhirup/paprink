@@ -9,7 +9,7 @@ class Title extends Component {
     return (
       <>
         <div className="home">
-          <div className="home_background parallax-window" data-parallax="scroll" data-image-src="/static/prebuilt/images/post.jpg" data-speed="0.8"></div>
+          <div className="home_background parallax-window" data-parallax="scroll" data-image-src={this.props.thumbnail || "/static/prebuilt/images/post.jpg"} data-speed="0.8"></div>
           <div className="home_content">
             <div style={{display: 'inline-block'}}>
               { this.props.tags && this.props.tags.map(tag => {

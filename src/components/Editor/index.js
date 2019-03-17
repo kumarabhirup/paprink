@@ -60,7 +60,10 @@ export default class EditorPage extends Component {
 							this.props.categoryState(this.state.categories)
 						}} />
 
-						<ImageUploader />
+						<ImageUploader imageState={async images => {
+              await this.setState({ images })
+							this.props.imageState(this.state.images)
+            }} />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end">
 							<BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}}>📝 SAVE AS DRAFT</BootstrapButton>

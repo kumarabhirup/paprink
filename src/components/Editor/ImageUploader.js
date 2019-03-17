@@ -14,28 +14,35 @@ export default class ImageUploader extends Component {
     data.append('file', files[0])
     data.append('upload_preset', 'paprink')
 
-    await this.setState({ uploading: true })
-
-    const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_USERNAME}/image/upload`, {
-                  method: 'POST',
-                  body: data
-                })
-                .then(res => (res.json()))
-                .catch(err => (false))
-
-    if (res) {
-      await this.setState({
-        image: res.secure_url,
-        smallImage: res.eager[0].secure_url,
-        blackOverlayImage: res.eager[1].secure_url,
-        uploading: 'done'
-      })
-      this.props.imageState(this.state)
+    if(!files[0]) {
+      await this.setState({ uploading: null })
     } else {
-      await this.setState({
-        uploading: 'error'
-      })
+
+      await this.setState({ uploading: true })
+
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_USERNAME}/image/upload`, {
+                    method: 'POST',
+                    body: data
+                  })
+                  .then(res => (res.json()))
+                  .catch(err => (false))
+
+      if (res) {
+        await this.setState({
+          image: res.secure_url,
+          smallImage: res.eager[0].secure_url,
+          blackOverlayImage: res.eager[1].secure_url,
+          uploading: 'done'
+        })
+      } else {
+        await this.setState({
+          uploading: 'error'
+        })
+      }
+
     }
+    
+    await this.props.imageState(this.state)
 
   }
 
