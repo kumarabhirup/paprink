@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import Router, { withRouter } from 'next/router'
 import { Button as BootstrapButton } from 'react-bootstrap'
 
 import PageContent from '../PageContent'
@@ -18,13 +19,13 @@ const TitleInputBox = styled.input`
   }
 `
 
-export default class EditorPage extends Component {
+class EditorPage extends Component {
 
   state = {
     title: 'Write an awesome title!',
+    editorContent: {},
 		categories: [],
     images: {},
-    editorContent: {},
     error: false
   }
 
@@ -36,6 +37,8 @@ export default class EditorPage extends Component {
   publish = async () => {
     if (this.state.title.length === 0 || this.state.categories.length === 0 || this.state.images.length === 0 || this.state.editorContent.blocks.length === 1) {
       await this.setState({ error: true })
+    } else {
+      
     }
   }
 
@@ -96,3 +99,5 @@ export default class EditorPage extends Component {
   }
 
 }
+
+export default withRouter(EditorPage)
