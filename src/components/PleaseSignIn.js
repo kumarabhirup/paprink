@@ -8,7 +8,7 @@ const PleaseSignIn = props => (
     {({data: {me}, loading, error}) => {
       loading && <p>Loading...</p>
       if (me) {
-        return props.children
+        return props.children(me)
       } else if(!loading) {
         props.router.replace(`/signin?intent=${props.router.asPath}`)
       } return <p>Loading...</p>

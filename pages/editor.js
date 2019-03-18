@@ -17,11 +17,15 @@ export default class editorPage extends Component {
   render() {
     return (
       <PleaseSignIn>
-        <Header />
-        <Title noSidebar title={this.state.title} tags={this.state.categories} thumbnail={this.state.images.uploading === 'done' && this.state.images.blackOverlayImage} />
-        <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} />
-        <Footer />
-        <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
+        { me => (
+          <>
+          <Header />
+          <Title noSidebar title={this.state.title} tags={this.state.categories} thumbnail={this.state.images.uploading === 'done' && this.state.images.blackOverlayImage} currentUser={me} />
+          <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} />
+          <Footer />
+          <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
+          </>
+        ) }
       </PleaseSignIn>
     )
   }
