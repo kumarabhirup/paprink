@@ -24,8 +24,12 @@ export default class ImageUploader extends Component {
     data.append('file', files[0])
     data.append('upload_preset', 'paprink')
 
+    // console.log(files[0]["type"])
+
     if(!files[0]) {
       await this.setState({ uploading: null, image: null, blackOverlayImage: null, smallImage: null })
+    } else if(files[0]["type"] != "image/jpeg" && files[0].type != "image/png" && files[0].type != "image/gif") {
+      await this.setState({ uploading: 'error', image: null, blackOverlayImage: null, smallImage: null })
     } else {
 
       await this.setState({ uploading: true })
