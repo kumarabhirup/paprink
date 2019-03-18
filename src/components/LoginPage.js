@@ -171,7 +171,7 @@ class LoginPage extends Component {
                         ) : !loading ? (
                           <>
                           <span className="login100-form-title p-b-53">
-                            Sign In to {meta.name}
+                            Signin to continue 👇
                           </span>
                           <Mutation refetchQueries={[{ query: CURRENT_USER_QUERY }]} mutation={SIGNIN_MUTATION} variables={{
                             signUpMethod: this.state.signUpMethod,
