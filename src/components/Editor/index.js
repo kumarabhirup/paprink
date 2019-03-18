@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Router, { withRouter } from 'next/router'
 import { Button as BootstrapButton } from 'react-bootstrap'
+import isEmpty from 'lodash.isempty'
 
 import PageContent from '../PageContent'
 import CategorySelector from './CategorySelector'
@@ -35,7 +36,8 @@ class EditorPage extends Component {
   }
 
   publish = async () => {
-    if (this.state.title.length === 0 || this.state.categories.length === 0 || this.state.images.length === 0 || this.state.editorContent.blocks.length === 1) {
+    await this.setState({ error: false })
+    if (this.state.title.length === 0 || this.state.categories.length === 0 || isEmpty(this.state.images) || this.state.images.image === null || this.state.editorContent.blocks.length === 1) {
       await this.setState({ error: true })
     } else {
       
