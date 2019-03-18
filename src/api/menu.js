@@ -1,5 +1,4 @@
 import { meta } from "./meta"
-import { getCurrentUser } from "../components/User"
 
 var mainMenu = [
   {

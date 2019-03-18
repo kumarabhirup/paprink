@@ -22,12 +22,21 @@ export default class EditorPage extends Component {
 
   state = {
     title: 'Write an awesome title!',
-		categories: []
+		categories: [],
+    images: {},
+    editorContent: {},
+    error: false
   }
 
   onTitleChange = async event => {
     await this.setState({ title: event.target.value })
 		this.props.titleState(this.state.title)
+  }
+
+  publish = async () => {
+    if (this.state.title.length === 0 || this.state.categories.length === 0 || this.state.images.length === 0 || this.state.editorContent.blocks.length === 1) {
+      await this.setState({ error: true })
+    }
   }
 
   render() {
@@ -51,7 +60,7 @@ export default class EditorPage extends Component {
 								</ul>
 							</div>
 
-							<Editor />
+							<Editor editorState={async editorContent => await this.setState({ editorContent })} />
 
 						</div>
 
@@ -66,8 +75,10 @@ export default class EditorPage extends Component {
             }} />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end">
+              { this.state.error && <p style={{color: "red", fontWeight: "bold"}}>You have to fill all those blanks!</p> }
+              &nbsp; &nbsp; &nbsp;
 							<BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}}>📝 SAVE AS DRAFT</BootstrapButton>
-							<BootstrapButton variant="success" style={{cursor: 'pointer'}}>🎉 PUBLISH</BootstrapButton>
+							<BootstrapButton variant="success" style={{cursor: 'pointer'}} onClick={this.publish}>🎉 PUBLISH</BootstrapButton>
 						</div>
 
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-center">
