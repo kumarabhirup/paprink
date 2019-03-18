@@ -12,9 +12,9 @@ class Title extends Component {
           <div className="home_background parallax-window" data-parallax="scroll" data-image-src={this.props.thumbnail || "/static/prebuilt/images/post.jpg"} data-speed="0.8"></div>
           <div className="home_content">
             <div style={{display: 'inline-block'}}>
-              { this.props.tags && this.props.tags.map(tag => {
+              { this.props.tags && this.props.tags.map((tag, index) => {
                 return (
-                  <div className="post_category trans_200" style={{display: 'inline-block', width: 'auto', padding: '0px 12px'}}><a href="#" className="trans_200" style={{width: 'auto'}}>{tag.text}</a></div>
+                  <div key={index} className="post_category trans_200" style={{display: 'inline-block', width: 'auto', padding: '0px 12px'}}><a href="#" className="trans_200" style={{width: 'auto'}}>{tag.text}</a></div>
                 )
               }) }
             </div>
