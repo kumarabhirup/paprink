@@ -15,6 +15,12 @@ app.prepare()
     app.render(req, res, actualPage)
   })
 
+  server.get('/editor/:postId', (req, res) => {
+    const actualPage = '/editor'
+    const queryParams = { postId: req.params.postId }
+    app.render(req, res, actualPage, queryParams)
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })
