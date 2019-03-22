@@ -22,7 +22,7 @@ const TitleInputBox = styled.input`
 `
 
 const SAVE_POST_MUTATION = gql`
-  mutation savePost(
+  mutation SAVE_POST_MUTATION(
     $title: String!
     $editorSerializedOutput: Json!
     $editorCurrentContent: Json!
