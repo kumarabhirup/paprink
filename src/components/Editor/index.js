@@ -59,12 +59,12 @@ const SAVE_POST_MUTATION = gql`
 class EditorPage extends Component {
 
   state = {
-    title: 'Write an awesome title!',
+    title: this.props.new ? 'Write an awesome title!' : this.props.postData.title,
     // editorContent: {},
 		categories: [],
-    images: {},
+    images: this.props.new ? {} : this.props.postData.thumbnail,
     error: false,
-    published: false
+    published: this.props.new ? false : true
   }
 
   onTitleChange = async event => {
@@ -111,7 +111,7 @@ class EditorPage extends Component {
             <div className="col-lg-10 offset-lg-1">
               <div className="post_content">
 
-                <TitleInputBox type="text" placeholder="Write an awesome title!" value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
+                <TitleInputBox type="text" placeholder={!this.props.new ? "Write an awesome title!" : this.props.postData.title} value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
 
                 <hr style={{opacity: 0.3}} />
 
@@ -132,7 +132,7 @@ class EditorPage extends Component {
                   this.props.categoryState(this.state.categories)
                 }} />
 
-                <ImageUploader imageState={async images => {
+                <ImageUploader image={this.state.images.image} imageState={async images => {
                   await this.setState({ images })
                   this.props.imageState(this.state.images)
                 }} />

@@ -44,6 +44,8 @@ class editorPage extends Component {
       <Query query={CAN_UPDATE_POST_QUERY} variables={{ id: this.props.router.query.postId }}>
         { payload => {
 
+          console.log(payload)
+
           if(payload.loading) {
             <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>Loading...</div>
           }

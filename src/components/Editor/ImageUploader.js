@@ -11,8 +11,8 @@ signal.addEventListener("abort", () => {
 export default class ImageUploader extends Component {
 
   state = {
-    image: null,
-    uploading: null
+    image: this.props.image ? this.props.image : null,
+    uploading: this.props.image ? 'done' : null
   }
 
   inputRef = React.createRef()
@@ -100,7 +100,7 @@ export default class ImageUploader extends Component {
           &nbsp;&nbsp;&nbsp;
           <input type="file" placeholder="Upload the article thumbnail." id="thumbnailUpload" name="thumbnailUpload" style={{width: '100%'}} required onChange={this.thumbnailUpload} ref={this.inputRef} />
           &nbsp;&nbsp;&nbsp;
-          {this.state.uploading === true ? <a>UPLOADING...</a> : this.state.uploading === 'error' ? <a style={{color: 'red'}}>Some error occured.</a> : this.state.uploading === 'done' ? <img width="300px" src={this.state.smallImage} alt="Image uploaded" /> : null}
+          {this.state.uploading === true ? <a>UPLOADING...</a> : this.state.uploading === 'error' ? <a style={{color: 'red'}}>Some error occured.</a> : this.state.uploading === 'done' ? <img width="300px" src={this.props.image ? this.state.image : this.state.smallImage} alt="Image uploaded" /> : null}
         </div>
       </div>
     )
