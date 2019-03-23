@@ -16,6 +16,7 @@ class CategorySelector extends Component {
         this.state = {
             tags: [
             //   { id: "", text: "" }
+                ...this.props.categories
             ],
             suggestions: [...categorySuggessions],
             error: null

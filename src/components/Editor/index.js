@@ -5,10 +5,12 @@ import { ApolloConsumer } from 'react-apollo'
 import { Button as BootstrapButton } from 'react-bootstrap'
 import isEmpty from 'lodash.isempty'
 import gql from 'graphql-tag'
+
 import PageContent from '../PageContent'
 import CategorySelector from './CategorySelector'
 import Editor from './Editor'
 import ImageUploader from './ImageUploader'
+import { categorySuggessions } from '../../api/mini'
 
 const TitleInputBox = styled.input`
   width: 100%;
@@ -61,7 +63,7 @@ class EditorPage extends Component {
   state = {
     title: this.props.new ? 'Write an awesome title!' : this.props.postData.title,
     // editorContent: {},
-		categories: [],
+		categories: this.props.new ? [] : this.categorySorter(this.props.postData.categories),
     images: this.props.new ? {} : this.props.postData.thumbnail,
     error: false,
     published: this.props.new ? false : true
@@ -99,6 +101,14 @@ class EditorPage extends Component {
     }
   }
 
+  categorySorter(categories) {
+    const categoryArray = categories.map(category => ( category.toLowerCase() ))
+    const categoryState = categorySuggessions.filter(({id}) => {
+      return categoryArray.includes(id)
+    })
+    return categoryState
+  }
+
   render() {
     return (
       <PageContent noSidebar>
@@ -123,14 +133,16 @@ class EditorPage extends Component {
                     </ul>
                   </div>
 
-                  <Editor editorState={async editorContent => await this.setState({ editorSerializedOutput: editorContent.editorSerializedOutput, editorCurrentContent: editorContent.editorCurrentContent, editorHtml: editorContent.editorHtml })} />
+                  <Editor editorState={async editorContent => await this.setState({ editorSerializedOutput: editorContent.editorSerializedOutput, editorCurrentContent: editorContent.editorCurrentContent, editorHtml: editorContent.editorHtml })} editorContent={this.props.editorContent} />
 
                 </div>
 
                 <CategorySelector categoryState={async categories => {
                   await this.setState({ categories })
                   this.props.categoryState(this.state.categories)
-                }} />
+                }}
+                categories={this.state.categories}
+                />
 
                 <ImageUploader image={this.state.images.image} imageState={async images => {
                   await this.setState({ images })

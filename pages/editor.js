@@ -20,7 +20,7 @@ const CAN_UPDATE_POST_QUERY = gql`
 class editorPage extends Component {
 
   state = { 
-    title: this.canUpdatePost ? this.canUpdatePost.title :null,
+    title: null,
     images: {}
   }
 
@@ -34,8 +34,6 @@ class editorPage extends Component {
   handleCanUpdatePost = async data => {
 
     const { title, thumbnail, author } = data
-    
-    console.log('handleCanUpdatePost')
 
     /**
      * Did this to get out of infinite render situation!
@@ -64,8 +62,6 @@ class editorPage extends Component {
       <Query query={CAN_UPDATE_POST_QUERY} variables={{ id: this.props.router.query.postId }}>
         { payload => {
 
-          console.log('payload')
-
           if(payload.loading) {
             <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>Loading...</div>
           }
@@ -86,15 +82,16 @@ class editorPage extends Component {
             )
           } else if (payload.data && payload.data.canUpdatePost) {
 
-            once(() => this.handleCanUpdatePost(payload.data.canUpdatePost))
-            
+            // this.handleCanUpdatePost(payload.data.canUpdatePost)
+            const { title, thumbnail, editorSerializedOutput } = payload.data.canUpdatePost
+
             return (
               <PleaseSignIn>
                 { me => (
                   <>
                   <Header />
-                  <Title noSidebar title={this.state.title} tags={this.state.categories} thumbnail={this.state.images.uploading === 'done' && this.state.images.blackOverlayImage} currentUser={me} postData={payload.data.canUpdatePost} />
-                  <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} postData={payload.data.canUpdatePost} />
+                  <Title noSidebar title={title} tags={this.state.categories} thumbnail={thumbnail.blackOverlayImage} currentUser={me} postData={payload.data.canUpdatePost} />
+                  <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} editorContent={editorSerializedOutput} postData={payload.data.canUpdatePost} />
                   <Footer />
                   <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
                   </>
