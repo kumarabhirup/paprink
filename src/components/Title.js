@@ -23,8 +23,8 @@ class Title extends Component {
             <br />
             { this.props.noSidebar && (
               <div className="post_author d-flex flex-row align-items-center justify-content-center">
-                <div className="author_image"><div><img src={this.props.currentUser.profilePicture} alt={this.props.currentUser.name} /></div></div>
-                <div className="post_meta"><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Written by <strong>{ this.props.currentUser.name }</strong></a></div>
+                <div className="author_image"><div><img src={!this.props.new ? this.props.postData.author.profilePicture : this.props.currentUser.profilePicture} alt={!this.props.new ? this.props.postData.author.name : this.props.currentUser.name} /></div></div>
+                <div className="post_meta"><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`}>Written by <strong>{ !this.props.new ? this.props.postData.author.name : this.props.currentUser.name }</strong></a></div>
               </div>
             ) }
           </div>

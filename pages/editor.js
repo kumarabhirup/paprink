@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { withRouter } from 'next/router'
 import { ApolloConsumer, Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import once from 'lodash.once'
  
 import Header from '../src/components/Header/'
 import Title from '../src/components/Title'
@@ -12,23 +13,14 @@ import PleaseSignIn from '../src/components/PleaseSignIn'
 
 const CAN_UPDATE_POST_QUERY = gql`
   query CAN_UPDATE_POST_QUERY($id: ID!){
-    canUpdatePost(id: $id){
-      title
-      thumbnail
-      editorSerializedOutput
-      editorCurrentContent
-      authorId
-      updatedAt
-      createdAt
-      categories
-    }
+    canUpdatePost(id: $id)
   }
 `
 
 class editorPage extends Component {
 
   state = { 
-    title: null,
+    title: this.canUpdatePost ? this.canUpdatePost.title :null,
     images: {}
   }
 
@@ -39,12 +31,40 @@ class editorPage extends Component {
     return false
   }
 
+  handleCanUpdatePost = async data => {
+
+    const { title, thumbnail, author } = data
+    
+    console.log('handleCanUpdatePost')
+
+    /**
+     * Did this to get out of infinite render situation!
+     * @see https://stackoverflow.com/questions/55311187/how-to-avoid-using-setstate-in-render-method/55311268#55311268
+     */
+    await this.setState(state => {
+      if(title !== state.title) {
+        return {title} 
+      }
+    })
+    await this.setState(state => {
+      if(thumbnail !== state.images) {
+        return {images: thumbnail} 
+      }
+    })
+    await this.setState(state => {
+      if(author !== state.author) {
+        return {author} 
+      }
+    })
+
+  }
+
   render() {
     return (
       <Query query={CAN_UPDATE_POST_QUERY} variables={{ id: this.props.router.query.postId }}>
         { payload => {
 
-          console.log(payload)
+          console.log('payload')
 
           if(payload.loading) {
             <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>Loading...</div>
@@ -65,6 +85,9 @@ class editorPage extends Component {
               </PleaseSignIn>
             )
           } else if (payload.data && payload.data.canUpdatePost) {
+
+            once(() => this.handleCanUpdatePost(payload.data.canUpdatePost))
+            
             return (
               <PleaseSignIn>
                 { me => (
@@ -78,6 +101,7 @@ class editorPage extends Component {
                 ) }
               </PleaseSignIn>
             )
+            
           } else {
             return (
               <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>You and your mind seems to be lost. 🐡</div>
