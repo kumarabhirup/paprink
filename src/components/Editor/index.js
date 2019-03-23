@@ -74,6 +74,29 @@ class EditorPage extends Component {
 		this.props.titleState(this.state.title)
   }
 
+  draft = async client => {
+    await this.setState({ error: false })
+    await this.setState({ drafted: 'loading' })
+    var draftPost = await client.mutate({
+      mutation: SAVE_POST_MUTATION,
+      variables: {
+        title: this.state.title,
+        thumbnail: this.state.images,
+        editorHtml: this.state.editorHtml,
+        editorSerializedOutput: this.state.editorSerializedOutput,
+        editorCurrentContent: this.state.editorCurrentContent,
+        categories: this.state.categories.map(object => (object.id.toUpperCase())),
+        status: 'DRAFTED'
+      }
+    })
+    if (draftPost.data.savePost){
+      await this.setState({ drafted: true })
+      // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+    } else {
+      await this.setState({ drafted: 'error' })
+    }
+  }
+
   publish = async client => {
     await this.setState({ error: false })
     if (this.state.title.length === 0 || this.state.categories.length === 0 || isEmpty(this.state.images) || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
@@ -94,7 +117,7 @@ class EditorPage extends Component {
       })
       if (savePost.data.savePost){
         await this.setState({ published: true })
-        this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+        // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
       } else {
         await this.setState({ published: 'error' })
       }
@@ -152,7 +175,7 @@ class EditorPage extends Component {
                 <div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end">
                   { this.state.error && <p style={{color: "red", fontWeight: "bold"}}>You have to fill all those blanks!</p> }
                   &nbsp; &nbsp; &nbsp;
-                  <BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}}>{this.state.published ? '📝 SAVE CHANGES' :'📝 SAVE AS DRAFT'}</BootstrapButton>
+                  <BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}}>{this.state.published ? '📝 SAVE CHANGES' : '📝 SAVE AS DRAFT'}</BootstrapButton>
                   {!this.state.published && <BootstrapButton variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>}
                 </div>
 
