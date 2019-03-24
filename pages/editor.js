@@ -25,7 +25,7 @@ class editorPage extends Component {
   }
 
   isNew = () => {
-    if (this.props.router.query.postId === 'new' || this.props.router.query.postId === undefined) {
+    if (this.props.router.query.postId === 'new') {
       return true
     }
     return false

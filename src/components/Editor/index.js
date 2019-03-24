@@ -66,7 +66,7 @@ class EditorPage extends Component {
 		categories: this.props.new ? [] : this.categorySorter(this.props.postData.categories),
     images: this.props.new ? {} : this.props.postData.thumbnail,
     error: false,
-    published: this.props.new ? false : true
+    published: this.props.new ? false : this.props.postData.status !== "PUBLISHED" ? false : true
   }
 
   onTitleChange = async event => {
@@ -75,26 +75,42 @@ class EditorPage extends Component {
   }
 
   draft = async client => {
-    await this.setState({ error: false })
-    await this.setState({ drafted: 'loading' })
-    var draftPost = await client.mutate({
-      mutation: SAVE_POST_MUTATION,
-      variables: {
-        title: this.state.title,
-        thumbnail: this.state.images,
-        editorHtml: this.state.editorHtml,
-        editorSerializedOutput: this.state.editorSerializedOutput,
-        editorCurrentContent: this.state.editorCurrentContent,
-        categories: this.state.categories.map(object => (object.id.toUpperCase())),
-        status: 'DRAFTED'
-      }
-    })
-    if (draftPost.data.savePost){
-      await this.setState({ drafted: true })
-      // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+
+    if(this.state.published === true) {
+      return
     } else {
-      await this.setState({ drafted: 'error' })
+
+      if(this.props.new) {
+
+        await this.setState({ error: false })
+        await this.setState({ drafted: 'loading' })
+        var draftPost = await client.mutate({
+          mutation: SAVE_POST_MUTATION,
+          variables: {
+            title: this.state.title,
+            thumbnail: this.state.images,
+            editorHtml: this.state.editorHtml,
+            editorSerializedOutput: this.state.editorSerializedOutput,
+            editorCurrentContent: this.state.editorCurrentContent,
+            categories: this.state.categories.map(object => (object.id.toUpperCase())),
+            status: 'DRAFT'
+          }
+        })
+        if (draftPost.data.savePost){
+          await this.setState({ drafted: true })
+          this.props.router.replace(`/editor?postId=${draftPost.data.savePost.id}`, `/editor/${draftPost.data.savePost.id}`)
+        } else {
+          await this.setState({ drafted: 'error' })
+        }
+
+      } else {
+
+        console.log('NOW YOU CANNOT DRAFT.')
+
+      }
+
     }
+
   }
 
   publish = async client => {
@@ -175,7 +191,7 @@ class EditorPage extends Component {
                 <div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end">
                   { this.state.error && <p style={{color: "red", fontWeight: "bold"}}>You have to fill all those blanks!</p> }
                   &nbsp; &nbsp; &nbsp;
-                  <BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}}>{this.state.published ? '📝 SAVE CHANGES' : '📝 SAVE AS DRAFT'}</BootstrapButton>
+                  <BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}} onClick={() => this.draft(client)}>{this.state.drafted ? '📝 SAVE CHANGES' : '📝 SAVE AS DRAFT'}</BootstrapButton>
                   {!this.state.published && <BootstrapButton variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>}
                 </div>
 
