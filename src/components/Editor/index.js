@@ -5,6 +5,7 @@ import { ApolloConsumer } from 'react-apollo'
 import { Button as BootstrapButton } from 'react-bootstrap'
 import isEmpty from 'lodash.isempty'
 import gql from 'graphql-tag'
+import randomHex from 'random-hex-color'
 
 import PageContent from '../PageContent'
 import CategorySelector from './CategorySelector'
@@ -58,11 +59,47 @@ const SAVE_POST_MUTATION = gql`
   }
 `
 
+const UPDATE_POST_MUTATION = gql`
+  mutation UPDATE_POST_MUTATION(
+    $id: ID!
+    $title: String!
+    $editorSerializedOutput: Json!
+    $editorCurrentContent: Json!
+    $editorHtml: String!
+    $categories: [Category]!
+    $thumbnail: Json!
+    $status: PostStatus!
+  ) {
+    updatePost(
+      id: $id
+      title: $title
+      editorSerializedOutput: $editorSerializedOutput
+      editorCurrentContent: $editorCurrentContent
+      editorHtml: $editorHtml
+      categories: $categories
+      thumbnail: $thumbnail
+      status: $status
+    ) {
+      id
+      author {
+        id
+        email
+        name
+        fname
+        lname
+      }
+      title
+      thumbnail
+      categories
+      status
+    }
+  }
+`
+
 class EditorPage extends Component {
 
   state = {
     title: this.props.new ? 'Write an awesome title!' : this.props.postData.title,
-    // editorContent: {},
 		categories: this.props.new ? [] : this.categorySorter(this.props.postData.categories),
     images: this.props.new ? {} : this.props.postData.thumbnail,
     error: false,
@@ -105,7 +142,27 @@ class EditorPage extends Component {
 
       } else {
 
-        console.log('NOW YOU CANNOT DRAFT.')
+        await this.setState({ error: false })
+        await this.setState({ drafted: 'loading' })
+        var draftPost = await client.mutate({
+          mutation: UPDATE_POST_MUTATION,
+          variables: {
+            id: this.props.router.query.postId,
+            title: this.state.title,
+            thumbnail: this.state.images,
+            editorHtml: this.state.editorHtml,
+            editorSerializedOutput: this.state.editorSerializedOutput,
+            editorCurrentContent: this.state.editorCurrentContent,
+            categories: this.state.categories.map(object => (object.id.toUpperCase())),
+            status: 'DRAFT'
+          }
+        })
+        if (draftPost.data.updatePost){
+          await this.setState({ drafted: true, draftUpdated: true })
+          window.location.reload(`/editor/${draftPost.data.updatePost.id}`)
+        } else {
+          await this.setState({ drafted: 'error' })
+        }
 
       }
 
@@ -114,30 +171,64 @@ class EditorPage extends Component {
   }
 
   publish = async client => {
-    await this.setState({ error: false })
-    if (this.state.title.length === 0 || this.state.categories.length === 0 || isEmpty(this.state.images) || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
-      await this.setState({ error: true })
-    } else {
-      await this.setState({ published: 'loading' })
-      var savePost = await client.mutate({
-        mutation: SAVE_POST_MUTATION,
-        variables: {
-          title: this.state.title,
-          thumbnail: this.state.images,
-          editorHtml: this.state.editorHtml,
-          editorSerializedOutput: this.state.editorSerializedOutput,
-          editorCurrentContent: this.state.editorCurrentContent,
-          categories: this.state.categories.map(object => (object.id.toUpperCase())),
-          status: 'PUBLISHED'
-        }
-      })
-      if (savePost.data.savePost){
-        await this.setState({ published: true })
-        // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+
+    if(this.props.new) {
+
+      await this.setState({ error: false })
+      if (this.state.title.length === 0 || this.state.categories.length === 0 || isEmpty(this.state.images) || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
+        await this.setState({ error: true })
       } else {
-        await this.setState({ published: 'error' })
+        await this.setState({ published: 'loading' })
+        var savePost = await client.mutate({
+          mutation: SAVE_POST_MUTATION,
+          variables: {
+            title: this.state.title,
+            thumbnail: this.state.images,
+            editorHtml: this.state.editorHtml,
+            editorSerializedOutput: this.state.editorSerializedOutput,
+            editorCurrentContent: this.state.editorCurrentContent,
+            categories: this.state.categories.map(object => (object.id.toUpperCase())),
+            status: 'PUBLISHED'
+          }
+        })
+        if (savePost.data.savePost){
+          await this.setState({ published: true })
+          // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+        } else {
+          await this.setState({ published: 'error' })
+        }
       }
+
+    } else {
+
+      await this.setState({ error: false })
+      if (this.state.title.length === 0 || this.state.categories.length === 0 || isEmpty(this.state.images) || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
+        await this.setState({ error: true })
+      } else {
+        await this.setState({ published: 'loading' })
+        var updatePost = await client.mutate({
+          mutation: UPDATE_POST_MUTATION,
+          variables: {
+            id: this.props.router.query.postId,
+            title: this.state.title,
+            thumbnail: this.state.images,
+            editorHtml: this.state.editorHtml,
+            editorSerializedOutput: this.state.editorSerializedOutput,
+            editorCurrentContent: this.state.editorCurrentContent,
+            categories: this.state.categories.map(object => (object.id.toUpperCase())),
+            status: 'PUBLISHED'
+          }
+        })
+        if (updatePost.data.updatePost){
+          await this.setState({ published: true })
+          // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+        } else {
+          await this.setState({ published: 'error' })
+        }
+      }
+
     }
+
   }
 
   categorySorter(categories) {
@@ -190,6 +281,7 @@ class EditorPage extends Component {
                 
                 <div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end">
                   { this.state.error && <p style={{color: "red", fontWeight: "bold"}}>You have to fill all those blanks!</p> }
+                  { this.state.draftUpdated && <p style={{color: randomHex(), fontWeight: "bold"}}>Draft updated successfully!</p> }
                   &nbsp; &nbsp; &nbsp;
                   <BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}} onClick={() => this.draft(client)}>{this.state.drafted ? '📝 SAVE CHANGES' : '📝 SAVE AS DRAFT'}</BootstrapButton>
                   {!this.state.published && <BootstrapButton variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>}
