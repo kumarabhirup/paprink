@@ -1,10 +1,28 @@
 import React, { Component } from 'react'
+import { format, parseISO } from 'date-fns'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
 import Card from './Card/'
 import { today } from '../api/posts'
-import UpvoteButton from './Card/UpvoteButton';
+import UpvoteButton from './Card/UpvoteButton'
+
+const PostMetaAndShare = ({ postData }) => (
+	// <div className="post_panel post_panel_top d-flex flex-row align-items-center justify-content-start">
+	<>	
+		<div className="author_image"><div><img src={postData.author.profilePicture} alt={postData.author.name} /></div></div>
+		<div className="post_meta"><a href="#">{ postData.author.name }</a><span>{ format(parseISO(postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span></div> {/*Sep 29, 2017 at 9:48 am*/}
+		<div className="post_share ml-sm-auto">
+			<span>share</span>
+			<ul className="post_share_list">
+				<li className="post_share_item"><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
+				<li className="post_share_item"><a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<li className="post_share_item"><a href="#"><i className="fa fa-google" aria-hidden="true"></i></a></li>
+			</ul>
+		</div>
+	</>
+	// </div>
+)
 
 export default class PostPage extends Component {
 
@@ -18,6 +36,7 @@ export default class PostPage extends Component {
   }
 
   render() {
+		const { postData } = this.props
     return (
       <PageContent>
 
@@ -27,16 +46,7 @@ export default class PostPage extends Component {
 					<div className="post_content">
 
 						<div className="post_panel post_panel_top d-flex flex-row align-items-center justify-content-start">
-							<div className="author_image"><div><img src="/static/prebuilt/images/author.jpg" alt="" /></div></div>
-							<div className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></div>
-							<div className="post_share ml-sm-auto">
-								<span>share</span>
-								<ul className="post_share_list">
-									<li className="post_share_item"><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li className="post_share_item"><a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li className="post_share_item"><a href="#"><i className="fa fa-google" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
+							<PostMetaAndShare postData={this.props.postData} />
 						</div>
 
 						<UpvoteButton onClick={this.upvote} upvote={this.state.upvote} fontSize={15} type="post" />
@@ -65,16 +75,7 @@ export default class PostPage extends Component {
 						<UpvoteButton onClick={this.upvote} upvote={this.state.upvote} fontSize={15} type="post" />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
-							<div className="author_image"><div><img src="/static/prebuilt/images/author.jpg" alt="" /></div></div>
-							<div className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></div>
-							<div className="post_share ml-sm-auto">
-								<span>share</span>
-								<ul className="post_share_list">
-									<li className="post_share_item"><a href="#"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li className="post_share_item"><a href="#"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li className="post_share_item"><a href="#"><i className="fa fa-google" aria-hidden="true"></i></a></li>
-								</ul>
-							</div>
+							<PostMetaAndShare postData={this.props.postData} />
 						</div>
 
 						<div className="similar_posts">

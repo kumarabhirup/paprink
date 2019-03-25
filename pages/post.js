@@ -36,7 +36,7 @@ class postPage extends Component {
                   </Head>
                   <Header />
                   <Title title={title} tags={categories} thumbnail={thumbnail.blackOverlayImage} />
-                  <PostPage postData={ payload.data.getPost } />
+                  <PostPage postData={payload.data.getPost} />
                   <Footer />
                 </>
               )
