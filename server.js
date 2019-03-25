@@ -21,9 +21,9 @@ app.prepare()
     app.render(req, res, actualPage, queryParams)
   })
 
-  server.get('/p/:authorUsername/:slug', (req, res) => {
+  server.get('/p/:slug', (req, res) => {
     const actualPage = '/post'
-    const queryParams = { authorUsername: req.params.authorUsername, slug: req.params.slug }
+    const queryParams = { slug: req.params.slug }
     app.render(req, res, actualPage, queryParams)
   })
 
