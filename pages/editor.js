@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import Head from 'next/head'
 import { withRouter } from 'next/router'
-import { ApolloConsumer, Query } from 'react-apollo'
+import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import once from 'lodash.once'
  
 import Header from '../src/components/Header/'
 import Title from '../src/components/Title'
