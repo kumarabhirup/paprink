@@ -16,7 +16,7 @@ var mainMenu = [
   {
     text: `Write a Post`,
     sku: `write`,
-    link: `${meta.domain}/editor`,
+    link: `${meta.domain}/editor/new`,
     newTab: false
   }
 ]

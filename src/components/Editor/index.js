@@ -193,7 +193,7 @@ class EditorPage extends Component {
         })
         if (savePost.data.savePost){
           await this.setState({ published: true })
-          // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+          // TODO: Redirect to the Created Post
         } else {
           await this.setState({ published: 'error' })
         }
@@ -221,7 +221,7 @@ class EditorPage extends Component {
         })
         if (updatePost.data.updatePost){
           await this.setState({ published: true })
-          // this.props.router.push('/editor?postId=10', '/editor/10', { shallow: true })
+          // TODO: Redirect to the Created Post
         } else {
           await this.setState({ published: 'error' })
         }
