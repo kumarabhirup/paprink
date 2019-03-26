@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import { format, parseISO } from 'date-fns'
+import { Parser as HtmlToReactParser } from 'html-to-react'
+import dynamic from 'next/dynamic'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
 import Card from './Card/'
 import { today } from '../api/posts'
 import UpvoteButton from './Card/UpvoteButton'
+import categorySorter from '../lib/categorySorter'
+
+const Dante = dynamic(import('Dante2'), {
+  ssr: false
+})
 
 const PostMetaAndShare = ({ postData }) => (
-	// <div className="post_panel post_panel_top d-flex flex-row align-items-center justify-content-start">
 	<>	
 		<div className="author_image"><div><img src={postData.author.profilePicture} alt={postData.author.name} /></div></div>
 		<div className="post_meta"><a href="#">{ postData.author.name }</a><span>{ format(parseISO(postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span></div> {/*Sep 29, 2017 at 9:48 am*/}
@@ -21,8 +27,16 @@ const PostMetaAndShare = ({ postData }) => (
 			</ul>
 		</div>
 	</>
-	// </div>
 )
+
+const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState }) => (
+	<>
+		{ postData.status === "PUBLISHED" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" /> }
+		{ postData.status === "DRAFT" && <p style={{textAlign: "center", marginTop: "15px"}}>THIS POST IS A DRAFT</p> }
+	</>
+)
+
+var htmlToReactParser = new HtmlToReactParser()
 
 export default class PostPage extends Component {
 
@@ -46,36 +60,23 @@ export default class PostPage extends Component {
 					<div className="post_content">
 
 						<div className="post_panel post_panel_top d-flex flex-row align-items-center justify-content-start">
-							<PostMetaAndShare postData={this.props.postData} />
+							<PostMetaAndShare postData={postData} />
 						</div>
 
-						<UpvoteButton onClick={this.upvote} upvote={this.state.upvote} fontSize={15} type="post" />
+						<UpvoteButtonOrDraft upvote={this.upvote} upvoteState={this.state.upvote} postData={postData} />
 						<div className="post_body" style={{marginTop: "20px"}}>
-							<p className="post_p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce enim nulla, mollis eu metus in, sagittis fringilla tortor. Phasellus eget purus id felis dignissim convallis. Suspendisse et augue dui. Morbi gravida sed justo vel venenatis. Ut tempor pretium maximus. Donec libero diam, faucibus vitae lectus nec, accumsan gravida dui. Nam interdum mi eget lacus aliquet, sit amet ultricies magna pharetra. In ut odio a ligula egestas pretium et quis sapien. Etiam faucibus magna eu porta vulputate. Aliquam euismod rhoncus malesuada. Nunc rutrum hendrerit semper.</p>
-							<figure>
-								<img src="/static/prebuilt/images/post_image.jpg" alt="" />
-								<figcaption>Lorem Ipsum Dolor Sit Amet</figcaption>
-							</figure>
-							<p className="post_p">Maecenas vitae sem varius, imperdiet nisi a, tristique nisi. Sed scelerisque suscipit leo cursus accumsan. Donec vel turpis quam. Mauris non nisl nec nunc gravida ullamcorper id vestibulum magna. Donec non velit finibus, laoreet arcu nec, facilisis augue. Aliquam sed purus id erat accumsan congue. Mauris semper ullamcorper nibh non pellentesque. Aenean euismod purus sit amet quam vehicula ornare.</p>
-							<div className="post_quote">
-								<p className="post_p">Aliquam auctor lacus a dapibus pulvinar. Morbi in elit erat. Quisque et augue nec tortor blandit hendrerit eget sit amet sapien. Curabitur at tincidunt metus, quis porta ex. Duis lacinia metus vel eros cursus pretium eget.</p>
-								<div className="post_quote_source">Robert Morgan</div>
-							</div>
-							<p className="post_p">Donec orci dolor, pretium in luctus id, consequat vitae nibh. Quisque hendrerit, lorem sit amet mollis malesuada, urna orci volutpat ex, sed scelerisque nunc velit et massa. Sed maximus id erat vel feugiat. Phasellus bibendum nisi non urna bibendum elementum. Aenean tincidunt nibh vitae ex facilisis ultrices. Integer ornare efficitur ultrices. Integer neque lectus, venenatis at pulvinar quis, aliquet id neque. Mauris ultrices consequat velit, sed dignissim elit posuere in. Cras vitae dictum dui.</p>
-
+							{/* { htmlToReactParser.parse(postData.editorHtml) } */}
+							<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-35px"}} />
 							<div className="post_tags">
 								<ul>
-									<li className="post_tag"><a href="#">Liberty</a></li>
-									<li className="post_tag"><a href="#">Manual</a></li>
-									<li className="post_tag"><a href="#">Interpretation</a></li>
-									<li className="post_tag"><a href="#">Recommendation</a></li>
+									{ categorySorter(postData.categories).map(({ id, text }) => <li key={id} className="post_tag"><a href="#">{text}</a></li>) }
 								</ul>
 							</div>
 						</div>
-						<UpvoteButton onClick={this.upvote} upvote={this.state.upvote} fontSize={15} type="post" />
+						<UpvoteButtonOrDraft upvote={this.upvote} upvoteState={this.state.upvote} postData={postData} />
 						
 						<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
-							<PostMetaAndShare postData={this.props.postData} />
+							<PostMetaAndShare postData={postData} />
 						</div>
 
 						<div className="similar_posts">
