@@ -41,6 +41,13 @@ class Meta extends React.Component {
           </>
         )}
 
+        {this.props.router.asPath.startsWith('/p/') && (
+          <>
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
+          </>
+        )}
+
         {this.props.router.asPath.startsWith('/post') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
@@ -71,6 +78,14 @@ class Meta extends React.Component {
           <>
             <link rel="stylesheet" type="text/css" href="/static/auth/css/util.css" />
             <link rel="stylesheet" type="text/css" href="/static/auth/css/main.css" />
+          </>
+        ) : null}
+
+        {this.props.router.asPath.startsWith('/editor') ? (
+          <>
+            <link rel="stylesheet" type="text/css" href="/static/styles/Editor.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
           </>
         ) : null}
 

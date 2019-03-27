@@ -5,7 +5,7 @@ export default class PageContent extends Component {
     return (
       <div className="page_content">
         <div className="container">
-          <div className="row row-lg-eq-height">
+          <div className={`row ${!this.props.noSidebar ? `row-lg-eq-height` : null}`}>
             { this.props.children }
           </div>
         </div>
