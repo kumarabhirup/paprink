@@ -19,6 +19,7 @@
     "babel-register": "^6.26.0",
     "bootstrap": "^4.3.1",
     "css-loader": "^2.1.1",
+    "date-fns": "^2.0.0-alpha.27",
     "dotenv": "^6.2.0",
     "draft-convert": "^2.1.4",
     "draft-js": "^0.10.5",

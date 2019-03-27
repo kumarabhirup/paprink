@@ -11,7 +11,8 @@ import PageContent from '../PageContent'
 import CategorySelector from './CategorySelector'
 import Editor from './Editor'
 import ImageUploader from './ImageUploader'
-import { categorySuggessions } from '../../api/mini'
+import categorySorter from '../../lib/categorySorter'
+
 
 const TitleInputBox = styled.input`
   width: 100%;
@@ -55,6 +56,7 @@ const SAVE_POST_MUTATION = gql`
       thumbnail
       categories
       status
+      slug
     }
   }
 `
@@ -92,6 +94,7 @@ const UPDATE_POST_MUTATION = gql`
       thumbnail
       categories
       status
+      slug
     }
   }
 `
@@ -100,7 +103,7 @@ class EditorPage extends Component {
 
   state = {
     title: this.props.new ? 'Write an awesome title!' : this.props.postData.title,
-		categories: this.props.new ? [] : this.categorySorter(this.props.postData.categories),
+		categories: this.props.new ? [] : categorySorter(this.props.postData.categories),
     images: this.props.new ? {} : this.props.postData.thumbnail,
     error: false,
     published: this.props.new ? false : this.props.postData.status !== "PUBLISHED" ? false : true,
@@ -194,7 +197,7 @@ class EditorPage extends Component {
         })
         if (savePost.data.savePost){
           await this.setState({ published: true, draft: false })
-          // TODO: Redirect to the Created Post
+          this.props.router.replace(`/p/${savePost.data.savePost.slug}-${savePost.data.savePost.id}`)
         } else {
           await this.setState({ published: 'error' })
         }
@@ -222,7 +225,7 @@ class EditorPage extends Component {
         })
         if (updatePost.data.updatePost){
           await this.setState({ published: true, draft: false })
-          // TODO: Redirect to the Created Post
+          this.props.router.replace(`/p/${updatePost.data.updatePost.slug}-${updatePost.data.updatePost.id}`)
         } else {
           await this.setState({ published: 'error' })
         }
@@ -230,14 +233,6 @@ class EditorPage extends Component {
 
     }
 
-  }
-
-  categorySorter(categories) {
-    const categoryArray = categories.map(category => ( category.toLowerCase() ))
-    const categoryState = categorySuggessions.filter(({id}) => {
-      return categoryArray.includes(id)
-    })
-    return categoryState
   }
 
   render() {

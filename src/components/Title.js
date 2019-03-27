@@ -2,18 +2,9 @@ import React, { Component } from 'react'
 import { withRouter } from 'next/router'
 
 import { meta } from '../api/meta'
-import { categorySuggessions } from '../api/mini'
-import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
+import categorySorter from '../lib/categorySorter'
 
 class Title extends Component {
-
-  categorySorter(categories) {
-    const categoryArray = categories.map(category => ( category.toLowerCase() ))
-    const categoryState = categorySuggessions.filter(({id}) => {
-      return categoryArray.includes(id)
-    })
-    return categoryState
-  }
 
   render() {
     return (
@@ -27,7 +18,7 @@ class Title extends Component {
                   <div key={index} className="post_category trans_200" style={{display: 'inline-block', width: 'auto', padding: '0px 12px'}}><a href="#" className="trans_200" style={{width: 'auto'}}>{tag.text}</a></div>
                 )
               }) }
-              { !this.props.new && this.props.postData && this.categorySorter(this.props.postData.categories).map((tag, index) => (
+              { !this.props.new && this.props.postData && categorySorter(this.props.postData.categories).map((tag, index) => (
                 <div key={index} className="post_category trans_200" style={{display: 'inline-block', width: 'auto', padding: '0px 12px'}}><a href="#" className="trans_200" style={{width: 'auto'}}>{tag.text}</a></div>
               )) }
             </div>
