@@ -56,6 +56,7 @@ const SAVE_POST_MUTATION = gql`
       thumbnail
       categories
       status
+      slug
     }
   }
 `
@@ -93,6 +94,7 @@ const UPDATE_POST_MUTATION = gql`
       thumbnail
       categories
       status
+      slug
     }
   }
 `
