@@ -66,7 +66,7 @@ export default class PostPage extends Component {
 						<UpvoteButtonOrDraft upvote={this.upvote} upvoteState={this.state.upvote} postData={postData} />
 						<div className="post_body" style={{marginTop: "20px"}}>
 							{/* { htmlToReactParser.parse(postData.editorHtml) } */}
-							<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-35px"}} />
+							<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} />
 							<div className="post_tags">
 								<ul>
 									{ categorySorter(postData.categories).map(({ id, text }) => <li key={id} className="post_tag"><a href="#">{text}</a></li>) }
