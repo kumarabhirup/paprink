@@ -64,6 +64,15 @@ class Meta extends React.Component {
           </>
         )}
 
+        {this.props.router.asPath.startsWith('/categories') && (
+          <>
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/category.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/category_responsive.css" />
+          </>
+        )}
+
         {this.props.router.asPath.startsWith('/author') && (
           <>
             <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />

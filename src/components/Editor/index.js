@@ -31,7 +31,7 @@ const SAVE_POST_MUTATION = gql`
     $editorSerializedOutput: Json!
     $editorCurrentContent: Json!
     $editorHtml: String!
-    $categories: [Category]!
+    $categories: Json!
     $thumbnail: Json!
     $status: PostStatus!
   ) {
@@ -54,7 +54,11 @@ const SAVE_POST_MUTATION = gql`
       }
       title
       thumbnail
-      categories
+      categories {
+        id
+        text
+        category
+      }
       status
       slug
     }
@@ -68,7 +72,7 @@ const UPDATE_POST_MUTATION = gql`
     $editorSerializedOutput: Json!
     $editorCurrentContent: Json!
     $editorHtml: String!
-    $categories: [Category]!
+    $categories: Json!
     $thumbnail: Json!
     $status: PostStatus!
   ) {
@@ -92,7 +96,11 @@ const UPDATE_POST_MUTATION = gql`
       }
       title
       thumbnail
-      categories
+      categories {
+        id
+        text
+        category
+      }
       status
       slug
     }
