@@ -82,7 +82,7 @@ export default class PostPage extends Component {
 						<div className="similar_posts">
 							<div className="grid clearfix">
 
-								{ today.map((post, index) => index < 3 && <Card type="small_image" post={post} key={index} />) }
+								{/* { today.map((post, index) => index < 3 && <Card type="small_image" post={post} key={index} />) } */}
 
 							</div>
 
