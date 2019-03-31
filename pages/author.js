@@ -11,7 +11,8 @@ export default class authorPage extends Component {
       <>
         <Header />
         <Title />
-        <AuthorPage />
+        {/* <AuthorPage /> */}
+        <h2 style={{padding: "70px 50px"}}>Page Under Construction....</h2>
         <Footer />
       </>
     )
