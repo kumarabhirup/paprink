@@ -27,9 +27,9 @@ export default class ImageUploader extends Component {
     // console.log(files[0]["type"])
 
     if(!files[0]) {
-      await this.setState({ uploading: null, image: null, blackOverlayImage: null, smallImage: null })
+      await this.setState({ uploading: null, image: null, blackOverlayImage: null, smallImage: null, smallCardImage: null })
     } else if(files[0]["type"] != "image/jpeg" && files[0].type != "image/png" && files[0].type != "image/gif") {
-      await this.setState({ uploading: 'error', image: null, blackOverlayImage: null, smallImage: null })
+      await this.setState({ uploading: 'error', image: null, blackOverlayImage: null, smallImage: null, smallCardImage: null })
     } else {
 
       await this.setState({ uploading: true })
@@ -55,6 +55,7 @@ export default class ImageUploader extends Component {
           uploading: false,
           image: null,
           smallImage: null,
+          smallCardImage: null,
           blackOverlayImage: null
         })
       } else if (res) {
@@ -62,6 +63,7 @@ export default class ImageUploader extends Component {
           image: res.secure_url,
           smallImage: res.eager[0].secure_url,
           blackOverlayImage: res.eager[1].secure_url,
+          smallCardImage: res.eager[2].secure_url,
           uploading: 'done'
         })
       } else {
@@ -69,6 +71,7 @@ export default class ImageUploader extends Component {
           uploading: 'error',
           image: null,
           smallImage: null,
+          smallCardImage: null,
           blackOverlayImage: null
         })
       }
@@ -86,6 +89,7 @@ export default class ImageUploader extends Component {
       uploading: null,
       image: null,
       smallImage: null,
+      smallCardImage: null,
       blackOverlayImage: null
     })
     return

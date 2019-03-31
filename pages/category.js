@@ -50,8 +50,6 @@ class categoryPage extends Component {
 
 					if (data && data.postsCategoryConnection) {
 
-            // console.log(data.postsCategoryConnection)
-
 						const catagoryObject = categorySorter([{category: this.props.router.query.category}])
 						return (
               <>
@@ -68,10 +66,6 @@ class categoryPage extends Component {
                     },
                     updateQuery: (prev, { fetchMoreResult }) => {
 
-                      console.log(prev)
-                      console.log('/7382r%83454#%$S@%Y$&%#/')
-                      console.log(fetchMoreResult)
-
                       if (!fetchMoreResult) return prev
 
                       var updatedQuery = {
@@ -84,8 +78,6 @@ class categoryPage extends Component {
                           ]
                         }
                       }
-
-                      console.log(updatedQuery)
 
                       return updatedQuery
 

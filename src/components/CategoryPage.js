@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Grid } from 'styled-css-grid'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
@@ -19,13 +20,16 @@ export default class CategoryPage extends Component {
 							<div className="section_panel d-flex flex-row align-items-center justify-content-start">
 								<div className="section_title">{ this.props.category }</div>
 							</div>
-							<div className="section_content">
-								<div className="grid clearfix">
-
-									{ this.props.posts.map(post => {
+							<div className="section_content" style={{width: "100%"}}>
+								<div style={{maxWidth: "900px", width: "100%"}}>
+								<Grid
+									columns="repeat(auto-fill, 260px)"
+									gap="20px"
+                >
+									{ this.props.posts.length > 0 ? this.props.posts.map(post => {
 										return <Card type={'small_image'} post={post} key={post.id} />
-									}) }
-
+									}) : <p>No posts available.</p> }
+								</Grid>
 								</div>
 							</div>
 						</div>
