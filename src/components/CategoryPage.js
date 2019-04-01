@@ -3,7 +3,6 @@ import { Grid } from 'styled-css-grid'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
-import { today } from '../api/posts'
 import Card from './Card/'
 
 export default class CategoryPage extends Component {

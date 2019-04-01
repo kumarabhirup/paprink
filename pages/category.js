@@ -40,7 +40,7 @@ class categoryPage extends Component {
   render() {
     return (
       <Query query={CATEGORY_QUERY} variables={{
-				categorySlug: this.props.router.query.category.toUpperCase()
+				categorySlug: this.props.router.query.category && this.props.router.query.category.toUpperCase()
 			}}>
 				{ ({ data, loading, error, fetchMore }) => {
 

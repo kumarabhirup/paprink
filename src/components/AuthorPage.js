@@ -5,7 +5,7 @@ import Sidebar from './Sidebar'
 import { today } from '../api/posts'
 import Card from './Card/'
 
-export default class CategoryPage extends Component {
+export default class AuthorPage extends Component {
   render() {
     return (
 			<>
@@ -17,17 +17,17 @@ export default class CategoryPage extends Component {
 					<div className="main_content">
 
 						<div className="col-md-6" style={{position: "relative", margin: "20px auto", color: "#ffffff"}}>
-							<div className="material-card Pink">
+							<div className="material-card Pink" style={{width: "350px"}}>
 								<h2>
-										<span><b>Christopher Walken</b></span>
+										<span><b>{ this.props.authorData.name }</b></span>
 										<strong>
 												<i className="fa fa-fw fa-star"></i>
-												The Deer Hunter
+												{ this.props.authorData.username }
 										</strong>
 								</h2>
 								<div className="mc-content">
 										<div className="img-container">
-												<img className="img-responsive" src="http://u.lorenzoferrara.net/marlenesco/material-card/thumb-christopher-walken.jpg" style={{display: "block", maxWidth: "100%", height: "100%"}} />
+												<img className="img-responsive" src={this.props.authorData.profilePicture} style={{display: "block", maxWidth: "100%", height: "100%"}} />
 										</div>
 										<div className="mc-description" style={{color: "black", marginTop: "-10px"}}>
 												He has appeared in more than 100 films and television shows, including The Deer Hunter, Annie Hall, The Prophecy trilogy, The Dogs of War ...
@@ -50,21 +50,23 @@ export default class CategoryPage extends Component {
 
 						<div className="category">
 							<div className="section_panel d-flex flex-row align-items-center justify-content-start">
-								<div className="section_title">Sports</div>
+								<div className="section_title">{ this.props.authorData.name }</div>
 							</div>
 							<div className="section_content">
 								<div className="grid clearfix">
-									{ today.map((post, index) => {
-										return <Card type={'small_image'} post={post} key={index} />
-									}) }
+									{ this.props.posts.length > 0 ? this.props.posts.map(post => {
+										return <Card type={'small_image'} post={post} key={post.id} />
+									}) : <p>No posts available.</p> }
 								</div>
 							</div>
 						</div>
 
 					</div>
-					<div className="load_more">
-						<div id="load_more" className="load_more_button text-center trans_200">Load More</div>
-					</div>
+					{ this.props.pageInfo.hasNextPage && (
+						<div className="load_more">
+							<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.onLoadMore}>Load More</div>
+						</div>
+					) }
 				</div>
 
         {/* End of Page Content */}
