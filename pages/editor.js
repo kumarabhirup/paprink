@@ -9,6 +9,7 @@ import Title from '../src/components/Title'
 import Footer from '../src/components/Footer'
 import EditorPage from '../src/components/Editor'
 import PleaseSignIn from '../src/components/PleaseSignIn'
+import { Loading, QueryFailed } from '../src/components/QueryStatus'
 
 const CAN_UPDATE_POST_QUERY = gql`
   query CAN_UPDATE_POST_QUERY($id: ID!){
@@ -62,7 +63,7 @@ class editorPage extends Component {
         { payload => {
 
           if(payload.loading) {
-            <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>Loading...</div>
+            <Loading />
           }
 
           if(this.isNew()){
@@ -100,7 +101,7 @@ class editorPage extends Component {
             
           } else {
             return (
-              <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>You and your mind seems to be lost. 🐡</div>
+              <QueryFailed />
             )
           }
 

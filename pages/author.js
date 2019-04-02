@@ -7,6 +7,7 @@ import Header from '../src/components/Header/'
 import Title from '../src/components/Title'
 import Footer from '../src/components/Footer'
 import AuthorPage from '../src/components/AuthorPage'
+import { Loading, QueryFailed } from '../src/components/QueryStatus'
 
 const POST_AUTHOR_QUERY = gql`
 	query POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
@@ -52,9 +53,7 @@ const AUTHOR_QUERY = gql`
 
 class authorPage extends Component {
 
-  state = {
-    
-  }
+  state = {}
 
   async getAuthor(client) {
     const author = await client.query({
@@ -77,12 +76,11 @@ class authorPage extends Component {
               { ({ data, loading, error, fetchMore }) => {
 
                 if (loading && !data) {
-                  return <p>Loading...</p>
+                  return <Loading />
                 }
 
                 if(data && data.postsAuthorConnection){
                   const authorData = data.postsAuthorConnection.edges[0] ? data.postsAuthorConnection.edges[0].node.author : null
-                  console.log(authorData)
                   if (authorData !== null) {
                     return (
                       <>
@@ -122,11 +120,11 @@ class authorPage extends Component {
                       </>
                     )
                   } else {
-                    return <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>You and your mind seems to be lost. 🐡</div>
+                    return <QueryFailed />
                   }
                 } else {
                   return (
-                    <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>You and your mind seems to be lost. 🐡</div>
+                    <QueryFailed />
                   )
                 }
 
