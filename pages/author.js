@@ -81,43 +81,49 @@ class authorPage extends Component {
                 }
 
                 if(data && data.postsAuthorConnection){
-                  return (
-                    <>
-                      <Header />
-                      <Title title={`${author.name}'s Articles`} />
-                      <AuthorPage
-                        authorData={author}
-                        posts={data.postsAuthorConnection.edges.map(x => (x.node) )} 
-                        pageInfo={data.postsAuthorConnection.pageInfo} 
-                        onLoadMore={() => {
-                          fetchMore({
-                            variables: {
-                              after: data.postsAuthorConnection.pageInfo.endCursor
-                            },
-                            updateQuery: (prev, { fetchMoreResult }) => {
+                  const authorData = data.postsAuthorConnection.edges[0] ? data.postsAuthorConnection.edges[0].node.author : null
+                  console.log(authorData)
+                  if (authorData !== null) {
+                    return (
+                      <>
+                        <Header />
+                        <Title title={`${authorData.name}'s Articles`} />
+                        <AuthorPage
+                          authorData={authorData}
+                          posts={data.postsAuthorConnection.edges.map(x => (x.node) )} 
+                          pageInfo={data.postsAuthorConnection.pageInfo} 
+                          onLoadMore={() => {
+                            fetchMore({
+                              variables: {
+                                after: data.postsAuthorConnection.pageInfo.endCursor
+                              },
+                              updateQuery: (prev, { fetchMoreResult }) => {
 
-                              if (!fetchMoreResult) return prev
+                                if (!fetchMoreResult) return prev
 
-                              var updatedQuery = {
-                                postsAuthorConnection: {
-                                  __typename: "PostConnection",
-                                  pageInfo: fetchMoreResult.postsAuthorConnection.pageInfo,
-                                  edges: [
-                                    ...prev.postsAuthorConnection.edges,
-                                    ...fetchMoreResult.postsAuthorConnection.edges
-                                  ]
+                                var updatedQuery = {
+                                  postsAuthorConnection: {
+                                    __typename: "PostConnection",
+                                    pageInfo: fetchMoreResult.postsAuthorConnection.pageInfo,
+                                    edges: [
+                                      ...prev.postsAuthorConnection.edges,
+                                      ...fetchMoreResult.postsAuthorConnection.edges
+                                    ]
+                                  }
                                 }
+
+                                return updatedQuery
+
                               }
-
-                              return updatedQuery
-
-                            }
-                          })
-                        }}
-                      />
-                      <Footer />
-                    </>
-                  )
+                            })
+                          }}
+                        />
+                        <Footer />
+                      </>
+                    )
+                  } else {
+                    return <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>You and your mind seems to be lost. 🐡</div>
+                  }
                 } else {
                   return (
                     <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>You and your mind seems to be lost. 🐡</div>
