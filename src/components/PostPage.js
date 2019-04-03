@@ -17,7 +17,7 @@ const Dante = dynamic(import('Dante2'), {
 const PostMetaAndShare = ({ postData }) => (
 	<>	
 		<div className="author_image"><div><img src={postData.author.profilePicture} alt={postData.author.name} /></div></div>
-		<div className="post_meta"><a href="#">{ postData.author.name }</a><span>{ format(parseISO(postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span></div> {/*Sep 29, 2017 at 9:48 am*/}
+		<div className="post_meta"><a href="#">{ postData.author.name }</a><span>{ format(parseISO(postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span><span><a href={`/editor/${postData.id}`}>✏️ EDIT POST</a></span></div> {/*Sep 29, 2017 at 9:48 am*/}
 		<div className="post_share ml-sm-auto">
 			<span>share</span>
 			<ul className="post_share_list">
@@ -69,7 +69,7 @@ export default class PostPage extends Component {
 							<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} />
 							<div className="post_tags">
 								<ul>
-									{ categorySorter(postData.categories).map(({ id, text }) => <li key={id} className="post_tag"><a href="#">{text}</a></li>) }
+									{ categorySorter(postData.categories).map(({ id, text }) => <li key={id} className="post_tag"><a href={`/categories/${id}`}>{text}</a></li>) }
 								</ul>
 							</div>
 						</div>
@@ -82,7 +82,7 @@ export default class PostPage extends Component {
 						<div className="similar_posts">
 							<div className="grid clearfix">
 
-								{ today.map((post, index) => index < 3 && <Card type="small_image" post={post} key={index} />) }
+								{/* { today.map((post, index) => index < 3 && <Card type="small_image" post={post} key={index} />) } */}
 
 							</div>
 

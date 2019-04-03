@@ -27,6 +27,18 @@ app.prepare()
     app.render(req, res, actualPage, queryParams)
   })
 
+  server.get('/categories/:category', (req, res) => {
+    const actualPage = '/category'
+    const queryParams = { category: req.params.category }
+    app.render(req, res, actualPage, queryParams)
+  })
+
+  server.get('/author/:authorUsername', (req, res) => {
+    const actualPage = '/author'
+    const queryParams = { authorUsername: req.params.authorUsername }
+    app.render(req, res, actualPage, queryParams)
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })
