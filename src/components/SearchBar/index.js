@@ -116,8 +116,6 @@ class SearchBar extends Component {
       )
     }
 
-    console.log(this.state.posts)
-
     return (
       <Downshift onChange={this.routeToPost} itemToString={post =>  (post === null ? '' : post.title)}>
         { ({ getRootProps, getInputProps, getItemProps, getLabelProps, isOpen, inputValue, highlightedIndex }) => (
