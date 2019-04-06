@@ -5,6 +5,7 @@ import { meta } from '../../api/meta'
 import { mainMenu } from '../../api/menu'
 import User from '../User'
 import ProfileButton from './profileButton'
+import SearchBar from '../SearchBar'
 
 class Header extends Component {
   render() {
@@ -35,10 +36,7 @@ class Header extends Component {
                           <div className="temperature">Writing is 🤟</div>
                         </div>
 
-                        <form action="#">
-                          <input type="search" className="header_search_input" required="required" placeholder="Type to Search..." />
-                          <img className="header_search_icon" src="/static/prebuilt/images/search.png" alt="Instant Search" />
-                        </form>
+                        <SearchBar />
                         
                       </div>
                       <div className="hamburger ml-auto menu_mm">
@@ -55,12 +53,11 @@ class Header extends Component {
             <div className="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
               <div className="menu_close_container"><div className="menu_close"><div></div><div></div></div></div>
               <div className="logo menu_mm"><img src="/static/black-theme-trans.png" alt={meta.name} /></div>
+              
               <div className="search">
-                <form action="#">
-                  <input type="search" className="header_search_input menu_mm" required="required" placeholder="Type to Search..." />
-                  <img className="header_search_icon menu_mm" src="static/prebuilt/images/search_2.png" alt="" />
-                </form>
+                <SearchBar mobile />
               </div>
+
               <nav className="menu_nav">
                 <ul className="menu_mm">
                   { mainMenu.map((item, index) => {
