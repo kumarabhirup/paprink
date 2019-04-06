@@ -8,10 +8,33 @@ import Header from '../src/components/Header/'
 import Title from '../src/components/Title'
 import PostPage from '../src/components/PostPage'
 import Footer from '../src/components/Footer'
+import { Loading, QueryFailed } from '../src/components/QueryStatus'
 
 const GET_POST_QUERY = gql`
   query GET_POST_QUERY($slugParam: String!){
-    getPost(slugParam: $slugParam)
+    getPost(slugParam: $slugParam) {
+      id
+      title
+      editorHtml
+      editorCurrentContent
+      editorSerializedOutput
+      author {
+        id
+        name
+        lname
+        fname
+        username
+        profilePicture
+      }
+      thumbnail
+      categories {
+        id
+        text
+        category
+      }
+      createdAt
+      updatedAt
+    }
   }
 `
 
@@ -22,7 +45,7 @@ class postPage extends Component {
         { payload => {
 
             if(payload.loading) {
-              return <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>Loading...</div>
+              return <Loading />
             }
 
             if (payload.data && payload.data.getPost) {
@@ -43,7 +66,7 @@ class postPage extends Component {
 
             } else {
               return (
-                <div style={{width: '98%', textAlign: 'center', maxWidth: '1000px', margin: '50px auto'}}>You and your mind seems to be lost. 🐡</div>
+                <QueryFailed />
               )
             }
 

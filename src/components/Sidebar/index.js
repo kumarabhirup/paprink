@@ -14,7 +14,7 @@ export default class Sidebar extends Component {
         <div className="sidebar">
           <div className="sidebar_background"></div>
 
-          <OwlCarousel title="Evergreen 🖼️" data={this.sortPostsData()} />
+          {/* <OwlCarousel title="Evergreen 🖼️" data={this.sortPostsData()} /> */}
 
           <div className="sidebar_section">
             <div className="advertising">

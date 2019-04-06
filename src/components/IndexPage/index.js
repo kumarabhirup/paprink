@@ -13,9 +13,12 @@ export default class IndexPage extends Component {
         { /* PAGE CONTENT */ }
         <div className="col-lg-9">
 					<div className="main_content">
-						<Today />
-						<Trending />
-						<Latest />
+						{/* 
+              <Today />
+              <Trending />
+              <Latest /> 
+            */}
+            <h2 style={{marginTop: "40px"}}>Page Under Construction...</h2>
 					</div>
 				</div>
         { /* END OF PAGE CONTENT */ }
