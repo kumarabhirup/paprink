@@ -23,25 +23,28 @@ const SEARCH_POSTS_QUERY = gql`
 const Dropdown = styled.div`
   position: absolute;
   width: 100%;
-  z-index: 0;
-  border: 2px solid lightgrey;
+  height: ${props => props.posts.length < 5 ? 'auto' : '300px'};
+  overflow: scroll;
   background: white;
   border-top: none;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  ${props => (props.mobile ? 'box-shadow: 0px 0px 5px rgba(0,0,0,.3); border-radius: 6px;' : null)};
   /* padding: 10px; */
 `
 
 const DropDownItem = styled.div`
-  border-bottom: 1px solid lightgrey;
-  background: white;
+  border-bottom: 1px solid gainsboro;
+  background: ${props => props.highlighted ? 'gainsboro' : 'white'};
   padding: 1rem;
   transition: all 0.2s;
-  ${props => (props.highlighted ? 'padding-left: 2rem;' : null)};
+  font-weight: bold;
+  /* ${props => (props.highlighted ? 'padding-left: 2rem;' : null)}; */
+  ${props => props.highlighted ? 'color: black;' : null}
   display: flex;
   align-items: center;
   cursor: pointer;
-  border-left: 6.5px solid ${props => (props.highlighted ? 'lightgrey' : 'white')};
+  /* border-left: ${props => props.mobile ? '6.5px' : '3px'} solid ${props => (props.highlighted ? 'gainsboro' : 'white')}; */
   img {
     margin-right: 10px;
   }
@@ -109,10 +112,48 @@ class SearchBar extends Component {
 
     if (this.props.mobile) {
       return (
-        <form action="#">
-          <input type="search" className="header_search_input menu_mm" required="required" placeholder="Type to Search..." />
-          <img className="header_search_icon menu_mm" src="static/prebuilt/images/search_2.png" alt="" />
-        </form>
+        <Downshift onChange={this.routeToPost} itemToString={post => (post === null ? '' : post.title)}>
+          {({ getRootProps, getInputProps, getItemProps, getLabelProps, isOpen, inputValue, highlightedIndex }) => (
+            <form action="#">
+              <input
+                { ...getInputProps({
+
+                  type: "search",
+                  placeholder: "Type to Search...",
+                  required: "required",
+                  id: "search",
+                  className: `header_search_input menu_mm ${this.state.loading && 'loading'}`,
+                  onChange: event => {
+                    event.persist()
+                    this.onInputChange(event, client)
+                  }
+
+                }) }
+              />
+              { isOpen ? (
+                <Dropdown mobile posts={this.state.posts}>
+                  { this.state.posts.map((post, index) => (
+                    <DropDownItem
+                      {...getItemProps({ item: post })}
+                      key={post.id}
+                      highlighted={index === highlightedIndex}
+                    >
+                      <img width="50" src={post.thumbnail.smallCardImage} alt={post.title} />
+                      {post.title}
+                    </DropDownItem>
+                  )) }
+                  {this.state.notFound && !this.state.loading && (
+                    <DropDownItem>
+                      <img width="20" src="https://media4.giphy.com/avatars/cabuu/uVaoNVXPobqj.gif" alt="Search Query failed!" />
+                      NOTHING FOUND :/
+                    </DropDownItem>
+                  )}
+                </Dropdown>
+              ) : null }
+              <img className="header_search_icon menu_mm" src="static/prebuilt/images/search.png" alt="" />
+            </form>
+          )}
+        </Downshift>
       )
     }
 
@@ -137,7 +178,7 @@ class SearchBar extends Component {
               }) }
             />
             { isOpen ? (
-              <Dropdown>
+              <Dropdown posts={this.state.posts}>
                 { this.state.posts.map((post, index) => (
                   <DropDownItem
                     {...getItemProps({ item: post })}
