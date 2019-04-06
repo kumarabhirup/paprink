@@ -12,7 +12,29 @@ import { Loading, QueryFailed } from '../src/components/QueryStatus'
 
 const GET_POST_QUERY = gql`
   query GET_POST_QUERY($slugParam: String!){
-    getPost(slugParam: $slugParam)
+    getPost(slugParam: $slugParam) {
+      id
+      title
+      editorHtml
+      editorCurrentContent
+      editorSerializedOutput
+      author {
+        id
+        name
+        lname
+        fname
+        username
+        profilePicture
+      }
+      thumbnail
+      categories {
+        id
+        text
+        category
+      }
+      createdAt
+      updatedAt
+    }
   }
 `
 

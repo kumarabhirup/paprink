@@ -16,8 +16,8 @@ const Dante = dynamic(import('Dante2'), {
 
 const PostMetaAndShare = ({ postData }) => (
 	<>	
-		<div className="author_image"><div><img src={postData.author.profilePicture} alt={postData.author.name} /></div></div>
-		<div className="post_meta"><a href="#">{ postData.author.name }</a><span>{ format(parseISO(postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span><span><a href={`/editor/${postData.id}`}>✏️ EDIT POST</a></span></div> {/*Sep 29, 2017 at 9:48 am*/}
+		<div className="author_image"><div><a href={`/author/${postData.author.username}`}><img src={postData.author.profilePicture} alt={postData.author.name} /></a></div></div>
+		<div className="post_meta"><a href={`/author/${postData.author.username}`}>{ postData.author.name }</a><span>{ format(parseISO(postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span><span><a href={`/editor/${postData.id}`}>✏️ EDIT POST</a></span></div> {/*Sep 29, 2017 at 9:48 am*/}
 		<div className="post_share ml-sm-auto">
 			<span>share</span>
 			<ul className="post_share_list">
