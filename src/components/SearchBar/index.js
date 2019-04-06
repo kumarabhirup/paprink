@@ -13,6 +13,7 @@ const SEARCH_POSTS_QUERY = gql`
       slug
       title
       author {
+        id
         name
       }
       thumbnail
@@ -109,6 +110,8 @@ class SearchBar extends Component {
   }
 
   conditionalRenderByDevice(client) {
+
+    resetIdCounter()
 
     if (this.props.mobile) {
       return (
