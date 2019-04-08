@@ -29,6 +29,9 @@ const CATEGORY_QUERY = gql`
 						lname
 						fname
 					}
+          upvotes {
+            id
+          }
 					createdAt
           updatedAt
 				}

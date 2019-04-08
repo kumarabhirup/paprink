@@ -5,7 +5,7 @@ export default class UpvoteButton extends Component {
   render() {
     return (
       <>
-      <div className="upvoteButton" onClick={this.props.onClick} style={{background: this.props.upvote ? '#ff033e' : this.props.type === 'post' ? '#ffffff' : '#d3d3d3', color: this.props.upvote ? 'white' : 'black', fontSize: this.props.fontSize, display: this.props.type === "post" && "block", textAlign: this.props.type === "post" && "center"}}>UPVOTE{this.props.upvote ? 'D 👍' : ' 🔥'} <i>398</i></div>
+      <div className="upvoteButton" onClick={this.props.onClick} style={{background: this.props.upvote ? '#ff033e' : this.props.type === 'post' ? '#ffffff' : '#d3d3d3', color: this.props.upvote ? 'white' : 'black', fontSize: this.props.fontSize, display: this.props.type === "post" && "block", textAlign: this.props.type === "post" && "center"}}>UPVOTE{this.props.upvote ? 'D 👍' : ' 🔥'} <i>{ this.props.data.length }</i></div>
       <style jsx>{`
         div.upvoteButton {
           display: inline-block;

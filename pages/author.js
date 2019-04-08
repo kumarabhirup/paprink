@@ -30,6 +30,9 @@ const POST_AUTHOR_QUERY = gql`
             profilePicture
             username
 					}
+          upvotes {
+            id
+          }
 					createdAt
           updatedAt
 				}
