@@ -56,7 +56,7 @@ export default class AuthorPage extends Component {
 									gap="20px"
                 >
 									{ this.props.posts.length > 0 ? this.props.posts.map(post => {
-										return <Card type={'small_image'} post={post} key={post.id} />
+										return <Card type={'small_image'} post={post} key={post.id} author />
 									}) : <p>No posts available.</p> }
 								</Grid>
 								</div>

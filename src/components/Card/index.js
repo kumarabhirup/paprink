@@ -1,18 +1,58 @@
 import React, { Component } from 'react'
 import { format, parseISO } from 'date-fns'
 import { ApolloConsumer } from 'react-apollo'
+import { withRouter } from 'next/router'
+import gql from 'graphql-tag'
 
 import UpvoteButton from '../Card/UpvoteButton'
+import { CATEGORY_QUERY } from '../../../pages/category'
+import { POST_AUTHOR_QUERY } from '../../../pages/author'
 
-export default class Card extends Component {
+const UPVOTE_MUTATION = gql`
+  mutation UPVOTE_MUTATION($postId: ID!) {
+    upvote(postId: $postId) {
+      id
+    }
+  }
+`
+
+/**
+ * Card is to be used at many places.
+ * Namely, Category Archive.
+ * Author Archive
+ * Home Page
+ * Similar Posts
+ */
+class Card extends Component {
 
   state = {
     upvote: false
   }
 
   upvote = async client => {
-    let upvote = !this.state.upvote
-    await this.setState({ upvote })
+
+    // let upvote = !this.state.upvote
+    // await this.setState({ upvote })
+
+    const queryToRefetch = () => {
+      if (this.props.category) return { query: CATEGORY_QUERY, variables: { categorySlug: this.props.router.query.category.toUpperCase() } }
+      if (this.props.author) return { query: POST_AUTHOR_QUERY, variables: { authorUsername: this.props.router.query.authorUsername.toLowerCase() } }
+      else return {}
+    }
+
+    const upvote = await client.mutate({
+      mutation: UPVOTE_MUTATION,
+      variables: {
+        postId: this.props.post.id
+      },
+      refetchQueries: [
+        queryToRefetch()
+      ]
+    })
+
+    console.log(upvote)
+    await this.setState({ upvote: true })
+
   }
 
   render() {
@@ -39,3 +79,5 @@ export default class Card extends Component {
   }
 
 }
+
+export default withRouter(Card)

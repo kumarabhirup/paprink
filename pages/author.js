@@ -9,7 +9,7 @@ import Footer from '../src/components/Footer'
 import AuthorPage from '../src/components/AuthorPage'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
 
-const POST_AUTHOR_QUERY = gql`
+export const POST_AUTHOR_QUERY = gql`
 	query POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
 		postsAuthorConnection(authorUsername: $authorUsername orderBy: $orderBy after: $after) {
 			pageInfo {

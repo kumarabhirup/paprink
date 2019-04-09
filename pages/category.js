@@ -10,7 +10,7 @@ import CategoryPage from '../src/components/CategoryPage'
 import categorySorter from '../src/lib/categorySorter'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
 
-const CATEGORY_QUERY = gql`
+export const CATEGORY_QUERY = gql`
 	query CATEGORY_QUERY($categorySlug: String! $orderBy: PostOrderByInput $after: String){
 		postsCategoryConnection(categorySlug: $categorySlug orderBy: $orderBy after: $after) {
 			pageInfo {
