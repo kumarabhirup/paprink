@@ -25,8 +25,10 @@ const UPVOTE_MUTATION = gql`
  */
 class Card extends Component {
 
+  userId = this.props.user && this.props.user.id
+
   state = {
-    upvote: this.props.post.upvotes.some(upvote => upvote.user.id === this.props.user.id)
+    upvote: this.props.post.upvotes.some(upvote => upvote.user.id === this.userId)
   }
 
   upvote = async client => {

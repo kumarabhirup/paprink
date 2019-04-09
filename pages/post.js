@@ -9,6 +9,7 @@ import Title from '../src/components/Title'
 import PostPage from '../src/components/PostPage'
 import Footer from '../src/components/Footer'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
+import User from '../src/components/User';
 
 const GET_POST_QUERY = gql`
   query GET_POST_QUERY($slugParam: String!){
@@ -32,6 +33,12 @@ const GET_POST_QUERY = gql`
         text
         category
       }
+      upvotes {
+        id
+        user {
+          id
+        }
+      }
       createdAt
       updatedAt
     }
@@ -41,38 +48,42 @@ const GET_POST_QUERY = gql`
 class postPage extends Component {
   render() {
     return (
-      <Query query={GET_POST_QUERY} variables={{ slugParam: this.props.router.query.slug }}>
-        { payload => {
+      <User>
+        { userPayload => (
+          <Query query={GET_POST_QUERY} variables={{ slugParam: this.props.router.query.slug }}>
+            { payload => {
 
-            if(payload.loading) {
-              return <Loading />
+                if(payload.loading) {
+                  return <Loading />
+                }
+
+                if (payload.data && payload.data.getPost) {
+
+                  const { title, thumbnail, categories } = payload.data.getPost
+
+                  return (
+                    <>
+                      <Head>
+                        <script src="/static/prebuilt/js/post.js"></script>
+                      </Head>
+                      <Header />
+                      <Title title={title} tags={categories} thumbnail={thumbnail.blackOverlayImage} />
+                      <PostPage postData={payload.data.getPost} user={userPayload.data && userPayload.data.me} />
+                      <Footer />
+                    </>
+                  )
+
+                } else {
+                  return (
+                    <QueryFailed />
+                  )
+                }
+
+              }
             }
-
-            if (payload.data && payload.data.getPost) {
-
-              const { title, thumbnail, categories } = payload.data.getPost
-
-              return (
-                <>
-                  <Head>
-                    <script src="/static/prebuilt/js/post.js"></script>
-                  </Head>
-                  <Header />
-                  <Title title={title} tags={categories} thumbnail={thumbnail.blackOverlayImage} />
-                  <PostPage postData={payload.data.getPost} />
-                  <Footer />
-                </>
-              )
-
-            } else {
-              return (
-                <QueryFailed />
-              )
-            }
-
-          }
-        }
-      </Query>
+          </Query>
+        ) }
+      </User>
     )
   }
 }

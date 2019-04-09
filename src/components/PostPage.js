@@ -40,8 +40,10 @@ var htmlToReactParser = new HtmlToReactParser()
 
 export default class PostPage extends Component {
 
+	userId = this.props.user && this.props.user.id
+
   state = {
-    upvote: false
+    upvote: this.props.postData.upvotes.some(upvote => upvote.user && upvote.user.id === this.userId)
   }
 
   upvote = async () => {
