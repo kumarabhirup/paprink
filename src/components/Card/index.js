@@ -26,13 +26,10 @@ const UPVOTE_MUTATION = gql`
 class Card extends Component {
 
   state = {
-    upvote: false
+    upvote: this.props.post.upvotes.some(upvote => upvote.user.id === this.props.user.id)
   }
 
   upvote = async client => {
-
-    // let upvote = !this.state.upvote
-    // await this.setState({ upvote })
 
     const queryToRefetch = () => {
       if (this.props.category) return { query: CATEGORY_QUERY, variables: { categorySlug: this.props.router.query.category.toUpperCase() } }
@@ -50,8 +47,7 @@ class Card extends Component {
       ]
     })
 
-    console.log(upvote)
-    await this.setState({ upvote: true })
+    await this.setState({ upvote: !this.state.upvote })
 
   }
 

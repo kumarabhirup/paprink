@@ -8,6 +8,7 @@ import Title from '../src/components/Title'
 import Footer from '../src/components/Footer'
 import AuthorPage from '../src/components/AuthorPage'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
+import User from '../src/components/User';
 
 export const POST_AUTHOR_QUERY = gql`
 	query POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
@@ -32,6 +33,9 @@ export const POST_AUTHOR_QUERY = gql`
 					}
           upvotes {
             id
+            user {
+              id
+            }
           }
 					createdAt
           updatedAt
@@ -73,66 +77,71 @@ class authorPage extends Component {
         { client => {
           // this.getAuthor(client)
           return (
-            <Query query={POST_AUTHOR_QUERY} variables={{
-              authorUsername: this.props.router.query.authorUsername && this.props.router.query.authorUsername.toLowerCase()
-            }}>
-              { ({ data, loading, error, fetchMore }) => {
+            <User>
+              { payload => (
+                <Query query={POST_AUTHOR_QUERY} variables={{
+                  authorUsername: this.props.router.query.authorUsername && this.props.router.query.authorUsername.toLowerCase()
+                }}>
+                  { ({ data, loading, error, fetchMore }) => {
 
-                if (loading && !data) {
-                  return <Loading />
-                }
+                    if (loading && !data) {
+                      return <Loading />
+                    }
 
-                if(data && data.postsAuthorConnection){
-                  const authorData = data.postsAuthorConnection.edges[0] ? data.postsAuthorConnection.edges[0].node.author : null
-                  if (authorData !== null) {
-                    return (
-                      <>
-                        <Header />
-                        <Title title={`${authorData.name}'s Articles`} />
-                        <AuthorPage
-                          authorData={authorData}
-                          posts={data.postsAuthorConnection.edges.map(x => (x.node) )} 
-                          pageInfo={data.postsAuthorConnection.pageInfo} 
-                          onLoadMore={() => {
-                            fetchMore({
-                              variables: {
-                                after: data.postsAuthorConnection.pageInfo.endCursor
-                              },
-                              updateQuery: (prev, { fetchMoreResult }) => {
+                    if(data && data.postsAuthorConnection){
+                      const authorData = data.postsAuthorConnection.edges[0] ? data.postsAuthorConnection.edges[0].node.author : null
+                      if (authorData !== null) {
+                        return (
+                          <>
+                            <Header />
+                            <Title title={`${authorData.name}'s Articles`} />
+                            <AuthorPage
+                              authorData={authorData}
+                              user={payload.data && payload.data.me}
+                              posts={data.postsAuthorConnection.edges.map(x => (x.node) )} 
+                              pageInfo={data.postsAuthorConnection.pageInfo} 
+                              onLoadMore={() => {
+                                fetchMore({
+                                  variables: {
+                                    after: data.postsAuthorConnection.pageInfo.endCursor
+                                  },
+                                  updateQuery: (prev, { fetchMoreResult }) => {
 
-                                if (!fetchMoreResult) return prev
+                                    if (!fetchMoreResult) return prev
 
-                                var updatedQuery = {
-                                  postsAuthorConnection: {
-                                    __typename: "PostConnection",
-                                    pageInfo: fetchMoreResult.postsAuthorConnection.pageInfo,
-                                    edges: [
-                                      ...prev.postsAuthorConnection.edges,
-                                      ...fetchMoreResult.postsAuthorConnection.edges
-                                    ]
+                                    var updatedQuery = {
+                                      postsAuthorConnection: {
+                                        __typename: "PostConnection",
+                                        pageInfo: fetchMoreResult.postsAuthorConnection.pageInfo,
+                                        edges: [
+                                          ...prev.postsAuthorConnection.edges,
+                                          ...fetchMoreResult.postsAuthorConnection.edges
+                                        ]
+                                      }
+                                    }
+
+                                    return updatedQuery
+
                                   }
-                                }
+                                })
+                              }}
+                            />
+                            <Footer />
+                          </>
+                        )
+                      } else {
+                        return <QueryFailed />
+                      }
+                    } else {
+                      return (
+                        <QueryFailed />
+                      )
+                    }
 
-                                return updatedQuery
-
-                              }
-                            })
-                          }}
-                        />
-                        <Footer />
-                      </>
-                    )
-                  } else {
-                    return <QueryFailed />
-                  }
-                } else {
-                  return (
-                    <QueryFailed />
-                  )
-                }
-
-              } }
-            </Query>
+                  } }
+                </Query>
+              ) }
+            </User>
           )
         } }
       </ApolloConsumer>
