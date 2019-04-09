@@ -8,7 +8,7 @@ import UpvoteButton from '../Card/UpvoteButton'
 import { CATEGORY_QUERY } from '../../../pages/category'
 import { POST_AUTHOR_QUERY } from '../../../pages/author'
 
-const UPVOTE_MUTATION = gql`
+export const UPVOTE_MUTATION = gql`
   mutation UPVOTE_MUTATION($postId: ID!) {
     upvote(postId: $postId) {
       id

@@ -11,7 +11,7 @@ import Footer from '../src/components/Footer'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
 import User from '../src/components/User';
 
-const GET_POST_QUERY = gql`
+export const GET_POST_QUERY = gql`
   query GET_POST_QUERY($slugParam: String!){
     getPost(slugParam: $slugParam) {
       id
@@ -19,6 +19,7 @@ const GET_POST_QUERY = gql`
       editorHtml
       editorCurrentContent
       editorSerializedOutput
+      status
       author {
         id
         name
