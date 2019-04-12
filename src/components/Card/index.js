@@ -7,6 +7,7 @@ import gql from 'graphql-tag'
 import UpvoteButton from '../Card/UpvoteButton'
 import { CATEGORY_QUERY } from '../../../pages/category'
 import { POST_AUTHOR_QUERY } from '../../../pages/author'
+import { getOperationName } from 'apollo-link'
 
 export const UPVOTE_MUTATION = gql`
   mutation UPVOTE_MUTATION($postId: ID!) {
@@ -34,8 +35,8 @@ class Card extends Component {
   upvote = async client => {
 
     const queryToRefetch = () => {
-      if (this.props.category) return { query: CATEGORY_QUERY, variables: { categorySlug: this.props.router.query.category.toUpperCase() } }
-      if (this.props.author) return { query: POST_AUTHOR_QUERY, variables: { authorUsername: this.props.router.query.authorUsername.toLowerCase() } }
+      if (this.props.category) return getOperationName(CATEGORY_QUERY) // { query: CATEGORY_QUERY, variables: { categorySlug: this.props.router.query.category.toUpperCase() } }
+      if (this.props.author) return getOperationName(POST_AUTHOR_QUERY) // { query: POST_AUTHOR_QUERY, variables: { authorUsername: this.props.router.query.authorUsername.toLowerCase() } }
       else return {}
     }
 
