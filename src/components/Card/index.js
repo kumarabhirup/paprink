@@ -68,7 +68,7 @@ class Card extends Component {
               <div className={`card-title ${ this.props.type === 'mini_background' && 'card-title-small'} ${ this.props.type === 'similar_image' && 'card-title-small'} ${ this.props.type === 'small_background' || this.props.type === 'small_image' || this.props.type === 'mini' && 'card-title-small'}`}><a href={`/p/${post.slug}-${post.id}`}>{post.title}</a></div>
               { this.props.type === 'largest' && <p className="card-text">{post.description}</p> }
               { this.props.type === 'large_image' && <p className="card-text">{post.description}</p> }
-              { this.props.type != 'mini' && this.props.type != 'mini_background' && <small className="post_meta"><a href="#">{post.author.name}</a><span>{ format(parseISO(post.createdAt), 'MMMM d, YYYY', { awareOfUnicodeTokens: true }) }</span></small> }
+              { this.props.type != 'mini' && this.props.type != 'mini_background' && <small className="post_meta"><a href={`/author/${post.author.username}`}>{post.author.name}</a><span>{ format(parseISO(post.createdAt), 'MMMM d, YYYY', { awareOfUnicodeTokens: true }) }</span></small> }
               { this.props.type != 'mini' && this.props.type != 'mini_background' && <UpvoteButton onClick={() => this.upvote(client)} upvote={this.state.upvote} data={post.upvotes} /> }
             </div>
           </div>

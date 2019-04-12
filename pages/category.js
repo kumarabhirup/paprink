@@ -29,6 +29,7 @@ export const CATEGORY_QUERY = gql`
 						name
 						lname
 						fname
+            username
 					}
           upvotes {
             id
