@@ -9,6 +9,7 @@ import { CATEGORY_QUERY } from '../../../pages/category'
 import { POST_AUTHOR_QUERY } from '../../../pages/author'
 import { getOperationName } from 'apollo-link'
 import { TODAY_QUERY } from '../IndexPage/Today';
+import { YESTERDAY_QUERY } from '../IndexPage/Yesterday'
 
 export const UPVOTE_MUTATION = gql`
   mutation UPVOTE_MUTATION($postId: ID!) {
@@ -39,6 +40,7 @@ class Card extends Component {
       if (this.props.category) return getOperationName(CATEGORY_QUERY) // { query: CATEGORY_QUERY, variables: { categorySlug: this.props.router.query.category.toUpperCase() } }
       if (this.props.author) return getOperationName(POST_AUTHOR_QUERY) // { query: POST_AUTHOR_QUERY, variables: { authorUsername: this.props.router.query.authorUsername.toLowerCase() } }
       if (this.props.getToday) return getOperationName(TODAY_QUERY)
+      if (this.props.getYesterday) return getOperationName(YESTERDAY_QUERY)
       else return {}
     }
 
