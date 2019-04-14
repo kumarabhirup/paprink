@@ -61,28 +61,13 @@ export default class Yesterday extends Component {
                 <div className="section_content" style={{width: "100%"}}>
                   <div style={{maxWidth: "900px", width: "100%"}}>
                     {posts.length > 0 && <Grid
-                      columns="repeat(auto-fill, 260px)"
+                      columns="repeat(auto-fit, minmax(260px, 1fr))"
                       gap="20px"
+                      style={{width: "100%", margin: "0px auto"}}
                     >
                       { posts.map((post, index) => {
 
-                        // if(index < 2) {
-                        //   return <Card type="large_background" post={post} key={post.id} getYesterday />
-                        // }
-
-                        // if(index === 2){
-                        //   return <Card type="small_background" post={post} key={index} getYesterday />
-                        // }
-
-                        // if(index > 2 && index < 5){
-                        //   return <Card type="small_image" post={post} key={index} getYesterday />
-                        // }
-
-                        // if(index > 4 && index < 7){
-                        //   return <Card type="mini" post={post} key={index} getYesterday />
-                        // }
-
-                        return <Card type="small_image" post={post} key={index} getYesterday />
+                        return <Card type="small_image" post={post} key={index} user={this.props.user} getYesterday />
 
                       }) }
                     </Grid>}

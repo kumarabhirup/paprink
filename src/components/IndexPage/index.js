@@ -5,28 +5,32 @@ import Today from './Today'
 import Trending from './Trending'
 import Latest from './Latest'
 import Yesterday from './Yesterday';
+import User from '../User';
 
 export default class IndexPage extends Component {
   render() {
     return (
       <PageContent>
-
-        { /* PAGE CONTENT */ }
-        <div className="col-lg-9">
-					<div className="main_content" style={{paddingBottom: "40px"}}>
-						
-              <Today />
-              <Yesterday />
-              {/* <Trending />
-              <Latest />  */}
-           
-            {/* <h2 style={{marginTop: "40px"}}>Page Under Construction...</h2> */}
-					</div>
-				</div>
-        { /* END OF PAGE CONTENT */ }
-
-        <Sidebar />
-
+        <User>
+          { payload => (
+            <>
+            { /* PAGE CONTENT */ }
+            <div className="col-lg-9">
+              <div className="main_content" style={{paddingBottom: "40px"}}>
+                
+                  <Today user={payload.data && payload.data.me} />
+                  <Yesterday user={payload.data && payload.data.me} />
+                  {/* <Trending />
+                  <Latest />  */}
+              
+                {/* <h2 style={{marginTop: "40px"}}>Page Under Construction...</h2> */}
+              </div>
+            </div>
+            { /* END OF PAGE CONTENT */ }
+            <Sidebar />
+            </>
+          ) }
+        </User>
       </PageContent>
     )
   }

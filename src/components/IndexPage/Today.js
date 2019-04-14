@@ -71,28 +71,13 @@ export default class Today extends Component {
                 <div className="section_content" style={{width: "100%"}}>
                   <div style={{maxWidth: "900px", width: "100%"}}>
                     {posts.length > 0 && <Grid
-                      columns="repeat(auto-fill, 300px)"
+                      columns="repeat(auto-fit, minmax(260px, 1fr))"
                       gap="20px"
+                      style={{width: "100%", margin: "0px auto"}}
                     >
                       { posts.map((post, index) => {
 
-                        // if(index < 2) {
-                        //   return <Card type="small_background" post={post} key={post.id} getToday />
-                        // }
-
-                        // if(index === 2){
-                        //   return <Card type="small_background" post={post} key={index} getToday />
-                        // }
-
-                        // if(index > 2 && index < 5){
-                        //   return <Card type="small_image" post={post} key={index} getToday />
-                        // }
-
-                        // if(index > 4 && index < 7){
-                        //   return <Card type="mini" post={post} key={index} getToday />
-                        // }
-
-                        return <Card type="small_image" post={post} key={index} getToday />
+                        return <Card type="small_image" post={post} key={index} user={this.props.user} getToday />
 
                       }) }
                     </Grid>}
