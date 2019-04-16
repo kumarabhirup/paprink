@@ -41,9 +41,14 @@ export const TODAY_QUERY = gql`
 `
 
 export default class Today extends Component {
+
+  state = {
+    sortMethod: 'upvotesNumber_DESC'
+  }
+
   render() {
     return (
-      <Query query={TODAY_QUERY}>
+      <Query query={TODAY_QUERY} variables={{orderBy: this.state.sortMethod}}>
         { ({ data, error, fetchMore, loading }) => {
 
           if (loading && !data) {
@@ -59,10 +64,10 @@ export default class Today extends Component {
                   <div className="section_title">Today 📆</div>
                   <div className="section_panel_more">
                     <ul>
-                      <li>Sort
+                      <li>{ this.state.sortMethod === 'upvotesNumber_DESC' ? 'Fame' : this.state.sortMethod === 'createdAt_DESC' ? 'TIME' : 'Sort' }
                         <ul>
-                          <li><a href="category.html">by Popularity</a></li>
-                          <li><a href="category.html">by Newest</a></li>
+                          <li style={{cursor: 'pointer'}}><a onClick={() => this.setState({ sortMethod: 'upvotesNumber_DESC' })} href="JavaScript:Void(0)">by Fame</a></li>
+                          <li style={{cursor: 'pointer'}}><a onClick={() => this.setState({ sortMethod: 'createdAt_DESC' })} href="JavaScript:Void(0)">by Recent/Time</a></li>
                         </ul>
                       </li>
                     </ul>
@@ -128,4 +133,5 @@ export default class Today extends Component {
       </Query>
     )
   }
+
 }
