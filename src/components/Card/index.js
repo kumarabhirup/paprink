@@ -11,6 +11,7 @@ import { getOperationName } from 'apollo-link'
 import { TODAY_QUERY } from '../IndexPage/Today'
 import { YESTERDAY_QUERY } from '../IndexPage/Yesterday'
 import { WEEKLY_QUERY } from '../IndexPage/Trending'
+import { LATEST_QUERY } from '../IndexPage/Latest'
 
 export const UPVOTE_MUTATION = gql`
   mutation UPVOTE_MUTATION($postId: ID!) {
@@ -43,6 +44,7 @@ class Card extends Component {
       if (this.props.getToday) return getOperationName(TODAY_QUERY)
       if (this.props.getYesterday) return getOperationName(YESTERDAY_QUERY)
       if (this.props.getWeekly) return getOperationName(WEEKLY_QUERY)
+      if (this.props.getLatest) return getOperationName(LATEST_QUERY)
       else return {}
     }
 

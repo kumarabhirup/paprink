@@ -21,9 +21,8 @@ export default class IndexPage extends Component {
                   <Today user={payload.data && payload.data.me} />
                   <Yesterday user={payload.data && payload.data.me} />
                   <Trending user={payload.data && payload.data.me} />
-                  {/* <Latest /> */}
+                  <Latest user={payload.data && payload.data.me} />
               
-                {/* <h2 style={{marginTop: "40px"}}>Page Under Construction...</h2> */}
               </div>
             </div>
             { /* END OF PAGE CONTENT */ }

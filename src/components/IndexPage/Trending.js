@@ -69,7 +69,7 @@ export default class Trending extends Component {
                       >
                         { posts.map((post, index) => {
 
-                          return <Card type="small_image" post={post} key={index} user={this.props.user} getYesterday />
+                          return <Card type="small_image" post={post} key={index} user={this.props.user} getWeekly />
 
                         }) }
                       </Grid> }
