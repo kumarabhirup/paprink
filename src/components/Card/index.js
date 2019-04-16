@@ -8,8 +8,9 @@ import UpvoteButton from '../Card/UpvoteButton'
 import { CATEGORY_QUERY } from '../../../pages/category'
 import { POST_AUTHOR_QUERY } from '../../../pages/author'
 import { getOperationName } from 'apollo-link'
-import { TODAY_QUERY } from '../IndexPage/Today';
+import { TODAY_QUERY } from '../IndexPage/Today'
 import { YESTERDAY_QUERY } from '../IndexPage/Yesterday'
+import { WEEKLY_QUERY } from '../IndexPage/Trending'
 
 export const UPVOTE_MUTATION = gql`
   mutation UPVOTE_MUTATION($postId: ID!) {
@@ -41,6 +42,7 @@ class Card extends Component {
       if (this.props.author) return getOperationName(POST_AUTHOR_QUERY) // { query: POST_AUTHOR_QUERY, variables: { authorUsername: this.props.router.query.authorUsername.toLowerCase() } }
       if (this.props.getToday) return getOperationName(TODAY_QUERY)
       if (this.props.getYesterday) return getOperationName(YESTERDAY_QUERY)
+      if (this.props.getWeekly) return getOperationName(WEEKLY_QUERY)
       else return {}
     }
 

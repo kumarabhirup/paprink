@@ -1,39 +1,95 @@
 import React, { Component } from 'react'
-import { today } from '../../api/posts'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
+import { Grid } from 'styled-css-grid'
+
 import Card from '../Card/'
+import { Loading, QueryFailed } from '../QueryStatus'
+
+export const WEEKLY_QUERY = gql`
+	query WEEKLY_QUERY($orderBy: PostOrderByInput $after: String){
+		getWeekly(orderBy: $orderBy after: $after) {
+			pageInfo {
+				hasNextPage
+				endCursor
+			}
+			edges {
+				node {
+					id
+					title
+					thumbnail
+          slug
+					author {
+						id
+						name
+						lname
+						fname
+            username
+					}
+          upvotes {
+            id
+            user {
+              id
+            }
+          }
+					createdAt
+          updatedAt
+				}
+			}
+		}
+	}
+`
 
 export default class Trending extends Component {
   render() {
     return (
-      <div className="blog_section">
-        <div className="section_panel d-flex flex-row align-items-center justify-content-start">
-          <div className="section_title">Trending this week 🔥</div>
-        </div>
-        <div className="section_content">
-          <div className="grid clearfix">
+      <Query query={WEEKLY_QUERY}>
+        {({ data, error, fetchMore, loading }) => {
 
-            { today.map((post, index) => {
-              if(index === 0) {
-                return <Card type="large_background" post={post} key={index} />
-              }
-              
-              if(index === 1) {
-                return <Card type="large_image" post={post} key={index} />
-              }
+          if (loading && !data) {
+            return <Loading />
+          }
 
-              if(index === 2) {
-                return <Card type="small_image" post={post} key={index} />
-              }
+          if (data && data.getWeekly) {
+            const posts = data.getWeekly.edges.map(x => (x.node) )
+            const pageInfo =  data.getWeekly.pageInfo
+            return (
+              <>
+                <div className="blog_section">
+                  <div className="section_panel d-flex flex-row align-items-center justify-content-start">
+                    <div className="section_title">Trending this week 🔥</div>
+                  </div>
+                  <div className="section_content" style={{ width: "100%" }}>
+                    <div style={{ maxWidth: "900px", width: "100%" }}>
 
-              if(index > 2 && index < 4) {
-                return <Card type="mini" post={post} key={index} />
-              }
-            }) }
+                      { posts.length > 0 && <Grid
+                        columns="repeat(auto-fit, minmax(260px, 1fr))"
+                        gap="20px"
+                        style={{width: "100%", margin: "0px auto"}}
+                      >
+                        { posts.map((post, index) => {
 
-          </div>
-          
-        </div>
-      </div>
+                          return <Card type="small_image" post={post} key={index} user={this.props.user} getYesterday />
+
+                        }) }
+                      </Grid> }
+
+                      { posts.length === 0 && <p>No posts published yesterday!</p> }
+
+                    </div>
+                  </div>
+                </div>
+              </>
+            )
+          } else {
+            return (
+              <QueryFailed />
+            )
+          }
+
+        }
+        }
+      </Query>
     )
   }
 }
