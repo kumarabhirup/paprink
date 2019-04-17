@@ -9,7 +9,7 @@ import Footer from '../src/components/Footer'
 import CategoryPage from '../src/components/CategoryPage'
 import categorySorter from '../src/lib/categorySorter'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
-import User from '../src/components/User';
+import User from '../src/components/User'
 
 export const CATEGORY_QUERY = gql`
 	query CATEGORY_QUERY($categorySlug: String! $orderBy: PostOrderByInput $after: String){
