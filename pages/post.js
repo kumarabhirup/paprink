@@ -42,6 +42,7 @@ export const GET_POST_QUERY = gql`
       }
       createdAt
       updatedAt
+      publishedAt
     }
   }
 `

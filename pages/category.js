@@ -39,6 +39,7 @@ export const CATEGORY_QUERY = gql`
           }
 					createdAt
           updatedAt
+          publishedAt
 				}
 			}
 		}

@@ -34,6 +34,7 @@ export const TODAY_QUERY = gql`
           }
 					createdAt
           updatedAt
+          publishedAt
 				}
 			}
 		}

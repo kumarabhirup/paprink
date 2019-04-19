@@ -39,6 +39,7 @@ export const POST_AUTHOR_QUERY = gql`
           }
 					createdAt
           updatedAt
+          publishedAt
 				}
 			}
 		}
