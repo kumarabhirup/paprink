@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 
 import categorySorter from '../lib/categorySorter'
 import { Loading, QueryFailed } from './QueryStatus'
+import UpvoteButton from './Card/UpvoteButton';
 
 export const FEATURED_QUERY = gql`
 	query FEATURED_QUERY {
@@ -35,8 +36,8 @@ export const FEATURED_QUERY = gql`
 	}
 `
 
-function indexRoller(index) {
-  if (index === 3) return 0
+function indexRoller(index, numberOfPosts) {
+  if (index === numberOfPosts - 1) return 0
   else return index + 1
 }
 
@@ -57,6 +58,11 @@ export default class HomeSlider extends Component {
                 <div className="home_slider_container">
                   <div className="owl-carousel owl-theme home_slider">
 
+                    { data.getFeatured.length === 0 && (
+                      <div className="owl-item">
+                        <div className="home_slider_background" style={{ backgroundColor: "black", backgroundImage: `url(https://wallpapercave.com/wp/wp2414722.jpg)` }}></div>
+                      </div>
+                    ) }
 
                     { data.getFeatured.map((post, index) => 
                       (<div className="owl-item">
@@ -92,30 +98,30 @@ export default class HomeSlider extends Component {
                             <div className="row d-flex flex-row align-items-end">
                               <div className="col-lg-3 col-md-6 similar_post_col">
                                 <div className="similar_post trans_200">
-                                  <a href="#">How Did van Gogh’s Turbulent Mind Depict One of the Most</a>
+                                  <a href="#">WRITE AT PAPRINK ✍️</a>
                                 </div>
                               </div>
                               <div className="col-lg-3 col-md-6 similar_post_col">
                                 <div className="similar_post trans_200">
-                                  <a href="#">How Did van Gogh’s Turbulent Mind Depict One of the Most</a>
+                                  <a href="#">EARN AS PUBLISHERS 💰</a>
                                 </div>
                               </div>
                               <div className="col-lg-3 col-md-6 similar_post_col">
                                 <div className="similar_post trans_200">
-                                  <a href="#">How Did van Gogh’s Turbulent Mind Depict One of the Most</a>
+                                  <a href="#">ADVERTISE 💡</a>
                                 </div>
                               </div>
                             </div>
                           </div>
-                          <div className="home_slider_next_container">
-                            <div className="home_slider_next" style={{ backgroundImage: `url(${data.getFeatured[indexRoller(index)].thumbnail.image})` }}>
+                          {data.getFeatured.length !== 1 && <div className="home_slider_next_container">
+                            <div className="home_slider_next" style={{ backgroundImage: `url(${data.getFeatured[indexRoller(index, data.getFeatured.length)].thumbnail.image})` }}>
                               <div className="home_slider_next_background trans_400"></div>
                               <div className="home_slider_next_content trans_400">
                                 <div className="home_slider_next_title">next</div>
-                                <div className="home_slider_next_link">{data.getFeatured[indexRoller(index)].title}</div>
+                                <div className="home_slider_next_link">{data.getFeatured[indexRoller(index, data.getFeatured.length)].title}</div>
                               </div>
                             </div>
-                          </div>
+                          </div>}
                         </div>
                       </div>
                     )) }
