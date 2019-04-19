@@ -52,7 +52,6 @@ export default class HomeSlider extends Component {
           }
 
           if (data && data.getFeatured) {
-            console.log(data.getFeatured)
             return (
               <div className="home">
                 <div className="home_slider_container">
@@ -126,7 +125,6 @@ export default class HomeSlider extends Component {
                       </div>
                     )) }
 
-                    
                   </div>
                   <div className="custom_nav_container home_slider_nav_container">
                     <div className="custom_prev custom_prev_home_slider">
