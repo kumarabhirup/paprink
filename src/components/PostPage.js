@@ -10,7 +10,6 @@ import Sidebar from './Sidebar'
 import UpvoteButton from './Card/UpvoteButton'
 import categorySorter from '../lib/categorySorter'
 import { UPVOTE_MUTATION } from './Card'
-import { GET_POST_QUERY } from '../../pages/post'
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -31,9 +30,9 @@ const PostMetaAndShare = ({ postData }) => (
 	</>
 )
 
-const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState }) => (
+const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState, upvotesNumber }) => (
 	<>
-		{ postData.status === "PUBLISHED" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" data={postData.upvotes} /> }
+		{ postData.status === "PUBLISHED" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" upvotesNumber={upvotesNumber} /> }
 		{ postData.status === "DRAFT" && <p style={{textAlign: "center", marginTop: "15px"}}>THIS POST IS A DRAFT</p> }
 	</>
 )
@@ -45,7 +44,8 @@ class PostPage extends Component {
 	userId = this.props.user && this.props.user.id
 
   state = {
-    upvote: this.props.postData.upvotes.some(upvote => upvote.user && upvote.user.id === this.userId)
+    upvote: this.props.postData.upvotes.some(upvote => upvote.user && upvote.user.id === this.userId),
+		upvotesNumber: this.props.postData.upvotes.length
   }
 
   upvote = async client => {
@@ -54,13 +54,11 @@ class PostPage extends Component {
       mutation: UPVOTE_MUTATION,
       variables: {
         postId: this.props.postData.id
-      },
-      refetchQueries: [
-        { query: GET_POST_QUERY, variables: { slugParam: this.props.router.query.slug } }
-      ]
+      }
     })
 
     await this.setState({ upvote: !this.state.upvote })
+    await this.setState({ upvotesNumber: this.state.upvote ? this.state.upvotesNumber + 1 : this.state.upvotesNumber - 1 })
 
   }
 
@@ -80,7 +78,7 @@ class PostPage extends Component {
 									<PostMetaAndShare postData={postData} />
 								</div>
 
-								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} />
+								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} />
 								<div className="post_body" style={{marginTop: "20px"}}>
 									{/* { htmlToReactParser.parse(postData.editorHtml) } */}
 									<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} />
@@ -90,7 +88,7 @@ class PostPage extends Component {
 										</ul>
 									</div>
 								</div>
-								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} />
+								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} />
 								
 								<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
 									<PostMetaAndShare postData={postData} />
