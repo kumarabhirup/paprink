@@ -49,6 +49,8 @@ class Card extends Component {
       else return {}
     }
 
+    await this.setState({ disabled: true })
+
     const upvote = await client.mutate({
       mutation: UPVOTE_MUTATION,
       variables: {
@@ -58,6 +60,7 @@ class Card extends Component {
 
     await this.setState({ upvote: !this.state.upvote })
     await this.setState({ upvotesNumber: this.state.upvote ? this.state.upvotesNumber + 1 : this.state.upvotesNumber - 1 })
+    await this.setState({ disabled: false })
 
   }
 
@@ -76,7 +79,7 @@ class Card extends Component {
               {/* { this.props.type === 'largest' && <p className="card-text">FUCK U</p> } */}
               { this.props.type === 'large_image' && <p className="card-text">{post.description}</p> }
               { this.props.type != 'mini' && this.props.type != 'mini_background' && <small className="post_meta"><a href={`/author/${post.author.username}`}>{post.author.name}</a><span>{ format(parseISO(post.publishedAt || post.createdAt), 'MMMM d, YYYY', { awareOfUnicodeTokens: true }) }</span></small> }
-              { this.props.type != 'mini' && this.props.type != 'mini_background' && <UpvoteButton onClick={() => this.upvote(client)} upvote={this.state.upvote} upvotesNumber={this.state.upvotesNumber} /> }
+              { this.props.type != 'mini' && this.props.type != 'mini_background' && <UpvoteButton onClick={() => this.upvote(client)} upvote={this.state.upvote} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} /> }
             </div>
           </div>
         ) }

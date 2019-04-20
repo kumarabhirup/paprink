@@ -30,9 +30,9 @@ const PostMetaAndShare = ({ postData }) => (
 	</>
 )
 
-const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState, upvotesNumber }) => (
+const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState, upvotesNumber, disabled }) => (
 	<>
-		{ postData.status === "PUBLISHED" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" upvotesNumber={upvotesNumber} /> }
+		{ postData.status === "PUBLISHED" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" disabled={disabled} upvotesNumber={upvotesNumber} /> }
 		{ postData.status === "DRAFT" && <p style={{textAlign: "center", marginTop: "15px"}}>THIS POST IS A DRAFT</p> }
 	</>
 )
@@ -49,7 +49,9 @@ class PostPage extends Component {
   }
 
   upvote = async client => {
-    
+		
+		await this.setState({ disabled: true })
+
 		const upvote = await client.mutate({
       mutation: UPVOTE_MUTATION,
       variables: {
@@ -59,6 +61,7 @@ class PostPage extends Component {
 
     await this.setState({ upvote: !this.state.upvote })
     await this.setState({ upvotesNumber: this.state.upvote ? this.state.upvotesNumber + 1 : this.state.upvotesNumber - 1 })
+		await this.setState({ disabled: false })
 
   }
 
@@ -78,7 +81,7 @@ class PostPage extends Component {
 									<PostMetaAndShare postData={postData} />
 								</div>
 
-								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} />
+								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
 								<div className="post_body" style={{marginTop: "20px"}}>
 									{/* { htmlToReactParser.parse(postData.editorHtml) } */}
 									<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} />
