@@ -63,16 +63,6 @@ export default class Today extends Component {
               <div className="blog_section">
                 <div className="section_panel d-flex flex-row align-items-center justify-content-start">
                   <div className="section_title">Today 📆</div>
-                  <div className="section_panel_more">
-                    <ul>
-                      <li>{ this.state.sortMethod === 'upvotesNumber_DESC' ? 'Fame' : this.state.sortMethod === 'createdAt_DESC' ? 'TIME' : 'Sort' }
-                        <ul>
-                          <li style={{cursor: 'pointer'}}><a onClick={() => this.setState({ sortMethod: 'upvotesNumber_DESC' })} href="JavaScript:Void(0)">by Fame</a></li>
-                          <li style={{cursor: 'pointer'}}><a onClick={() => this.setState({ sortMethod: 'createdAt_DESC' })} href="JavaScript:Void(0)">by Recent/Time</a></li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
                 <div className="section_content" style={{width: "100%"}}>
                   <div style={{maxWidth: "900px", width: "100%"}}>
