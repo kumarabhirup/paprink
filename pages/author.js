@@ -37,6 +37,7 @@ export const POST_AUTHOR_QUERY = gql`
               id
             }
           }
+          upvotesNumber
 					createdAt
           updatedAt
           publishedAt
