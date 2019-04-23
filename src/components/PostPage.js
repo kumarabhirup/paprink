@@ -15,10 +15,14 @@ const Dante = dynamic(import('Dante2'), {
   ssr: false
 })
 
-const PostMetaAndShare = ({ postData }) => (
-	<>	
+const PostMetaAndShare = ({ postData, userId }) => (
+	<>
 		<div className="author_image"><div><a href={`/author/${postData.author.username}`}><img src={postData.author.profilePicture} alt={postData.author.name} /></a></div></div>
-		<div className="post_meta"><a href={`/author/${postData.author.username}`}>{ postData.author.name }</a><span>{ format(parseISO(postData.publishedAt || postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span><span><a href={`/editor/${postData.id}`}>✏️ EDIT POST</a></span></div> {/*Sep 29, 2017 at 9:48 am*/}
+		<div className="post_meta">
+			<a href={`/author/${postData.author.username}`}>{ postData.author.name }</a>
+			<span>{ format(parseISO(postData.publishedAt || postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span>
+			{postData.author.id === userId && <span><a href={`/editor/${postData.id}`}>✏️ EDIT POST</a></span>}
+		</div> {/*Sep 29, 2017 at 9:48 am*/}		
 		<div className="post_share ml-sm-auto">
 			<span>share</span>
 			<ul className="post_share_list">
@@ -80,7 +84,7 @@ class PostPage extends Component {
 							<div className="post_content">
 
 								<div className="post_panel post_panel_top d-flex flex-row align-items-center justify-content-start">
-									<PostMetaAndShare postData={postData} />
+									<PostMetaAndShare postData={postData} userId={this.userId} />
 								</div>
 
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
@@ -96,7 +100,7 @@ class PostPage extends Component {
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} />
 								
 								<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
-									<PostMetaAndShare postData={postData} />
+									<PostMetaAndShare postData={postData} userId={this.userId} />
 								</div>
 
 								<div className="similar_posts">
