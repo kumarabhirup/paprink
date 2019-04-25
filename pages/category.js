@@ -37,6 +37,7 @@ export const CATEGORY_QUERY = gql`
               id
             }
           }
+          upvotesNumber
 					createdAt
           updatedAt
           publishedAt

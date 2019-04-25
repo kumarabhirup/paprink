@@ -33,7 +33,8 @@ class Card extends Component {
   userId = this.props.user && this.props.user.id
 
   state = {
-    upvote: this.props.post.upvotes.some(upvote => upvote.user.id === this.userId)
+    upvote: this.props.post.upvotes.some(upvote => upvote.user.id === this.userId),
+    upvotesNumber: this.props.post.upvotes.length
   }
 
   upvote = async client => {
@@ -48,17 +49,20 @@ class Card extends Component {
       else return {}
     }
 
-    const upvote = await client.mutate({
+    await this.setState({ disabled: true })
+
+    await client.mutate({
       mutation: UPVOTE_MUTATION,
       variables: {
         postId: this.props.post.id
-      },
-      refetchQueries: [
-        queryToRefetch()
-      ]
+      }
+    }).then(async () => {
+      await this.setState({ upvote: !this.state.upvote })
+      await this.setState({ upvotesNumber: this.state.upvote ? this.state.upvotesNumber + 1 : this.state.upvotesNumber - 1 })
+      await this.setState({ disabled: false })
+    }).catch(() => {
+      this.props.router.replace(`/signin?intent=${this.props.router.asPath}`)
     })
-
-    await this.setState({ upvote: !this.state.upvote })
 
   }
 
@@ -77,7 +81,7 @@ class Card extends Component {
               {/* { this.props.type === 'largest' && <p className="card-text">FUCK U</p> } */}
               { this.props.type === 'large_image' && <p className="card-text">{post.description}</p> }
               { this.props.type != 'mini' && this.props.type != 'mini_background' && <small className="post_meta"><a href={`/author/${post.author.username}`}>{post.author.name}</a><span>{ format(parseISO(post.publishedAt || post.createdAt), 'MMMM d, YYYY', { awareOfUnicodeTokens: true }) }</span></small> }
-              { this.props.type != 'mini' && this.props.type != 'mini_background' && <UpvoteButton onClick={() => this.upvote(client)} upvote={this.state.upvote} data={post.upvotes} /> }
+              { this.props.type != 'mini' && this.props.type != 'mini_background' && <UpvoteButton onClick={() => this.upvote(client)} upvote={this.state.upvote} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} /> }
             </div>
           </div>
         ) }
