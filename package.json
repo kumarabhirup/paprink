@@ -21,6 +21,7 @@
     "bootstrap": "^4.3.1",
     "css-loader": "^2.1.1",
     "date-fns": "^2.0.0-alpha.27",
+    "disqus-react": "^1.0.5",
     "dotenv": "^6.2.0",
     "downshift": "^3.2.7",
     "draft-convert": "^2.1.4",

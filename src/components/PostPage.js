@@ -4,6 +4,7 @@ import { Parser as HtmlToReactParser } from 'html-to-react'
 import dynamic from 'next/dynamic'
 import { ApolloConsumer } from 'react-apollo'
 import { withRouter } from 'next/router'
+import { DiscussionEmbed, CommentCount } from 'disqus-react'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
@@ -72,7 +73,16 @@ class PostPage extends Component {
   }
 
   render() {
+
 		const { postData } = this.props
+
+		const disqusShortname = 'paprink'
+		const disqusConfig = {
+				url: `http://paprink.com/p/${this.props.postData.slug}-${this.props.postData.id}`,
+				identifier: this.props.postData.id,
+				title: this.props.postData.title,
+		}
+
     return (
 			<ApolloConsumer>
 				{ client => (
@@ -111,79 +121,14 @@ class PostPage extends Component {
 									</div>
 
 									<div className="post_comment">
-										<div className="post_comment_title">Post Comment</div>
-										<div className="row">
-											<div className="col-xl-8">
-												<div className="post_comment_form_container">
-													<form action="#">
-														<input type="text" className="comment_input comment_input_name" placeholder="Your Name" required="required" />
-														<input type="email" className="comment_input comment_input_email" placeholder="Your Email" required="required" />
-														<textarea className="comment_text" placeholder="Your Comment" required="required"></textarea>
-														<button type="submit" className="comment_button">Post Comment</button>
-													</form>
-												</div>
-											</div>
-										</div>
+										<DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
 									</div>
 
 									<div className="comments">
-										<div className="comments_title">Comments <span>(12)</span></div>
-										<div className="row">
-											<div className="col-xl-8">
-												<div className="comments_container">
-													<ul className="comment_list">
-														<li className="comment">
-															<div className="comment_body">
-																<div className="comment_panel d-flex flex-row align-items-center justify-content-start">
-																	<div className="comment_author_image"><div><img src="/static/prebuilt/images/comment_author_1.jpg" alt="" /></div></div>
-																	<small className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></small>
-																	<button type="button" className="reply_button ml-auto">Reply</button>
-																</div>
-																<div className="comment_content">
-																	<p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened.</p>
-																</div>
-															</div>
-
-															<ul className="comment_list">
-																<li className="comment">
-																	<div className="comment_body">
-																		<div className="comment_panel d-flex flex-row align-items-center justify-content-start">
-																			<div className="comment_author_image"><div><img src="/static/prebuilt/images/comment_author_2.jpg" alt="" /></div></div>
-																			<small className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></small>
-																			<button type="button" className="reply_button ml-auto">Reply</button>
-																		</div>
-																		<div className="comment_content">
-																			<p>Nulla facilisi. Aenean porttitor quis tortor id tempus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Vivamus molestie varius tincidunt. Vestibulum congue sed libero ac sodales.</p>
-																		</div>
-																	</div>
-
-																	<ul className="comment_list">
-																		
-																	</ul>
-																</li>
-															</ul>
-														</li>
-														<li className="comment">
-															<div className="comment_body">
-																<div className="comment_panel d-flex flex-row align-items-center justify-content-start">
-																	<div className="comment_author_image"><div><img src="/static/prebuilt/images/comment_author_1.jpg" alt="" /></div></div>
-																	<small className="post_meta"><a href="#">Katy Liu</a><span>Sep 29, 2017 at 9:48 am</span></small>
-																	<button type="button" className="reply_button ml-auto">Reply</button>
-																</div>
-																<div className="comment_content">
-																	<p>Pick the yellow peach that looks like a sunset with its red, orange, and pink coat skin, peel it off with your teeth. Sink them into unripened.</p>
-																</div>
-															</div>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>	
+										
 									</div>
+
 								</div>
-							</div>
-							<div className="load_more">
-								<div id="load_more" className="load_more_button text-center trans_200">Load More</div>
 							</div>
 						</div>
 
