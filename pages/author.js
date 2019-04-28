@@ -96,7 +96,7 @@ class authorPage extends Component {
                         return (
                           <>
                             <Header />
-                            <Title title={`${authorData.name}'s Articles`} />
+                            <Title title={`${authorData.name}'s Articles`} author={authorData} />
                             <AuthorPage
                               authorData={authorData}
                               user={payload.data && payload.data.me}

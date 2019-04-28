@@ -13,6 +13,7 @@ export const CURRENT_USER_QUERY = gql`
       email
       previledge
       gender
+      username
       birthday
       profilePicture
       signUpMethod

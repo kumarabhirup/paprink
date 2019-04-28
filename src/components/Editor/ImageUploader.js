@@ -97,8 +97,8 @@ export default class ImageUploader extends Component {
 
   render() {
     return (
-      <div className="white-box-avision">
-        <h3>🖼️ Relevant Thumbnail</h3>
+      <div className="white-box-avision" style={this.props.style}>
+        <h3>{this.props.title || "🖼️ Relevant Thumbnail"}</h3>
         <div className="bottom_panel d-flex flex-row align-items-center justify-content-start" style={{padding: '15px 0px'}}>
           {this.state.uploading === true ? (<><a onClick={this.stopThumbnailUpload} style={{cursor: 'pointer'}}>❌</a> &nbsp; &nbsp; <img width="30px" src="https://loading.io/spinners/rolling/lg.curve-bars-loading-indicator.gif" /></>) : this.state.uploading === 'error' ? <a>💩</a> : this.state.uploading === 'done' ? <a>✅</a> : null}
           &nbsp;&nbsp;&nbsp;

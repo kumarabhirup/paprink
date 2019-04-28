@@ -90,6 +90,14 @@ class Meta extends React.Component {
           </>
         ) : null}
 
+        {this.props.router.asPath.startsWith('/settings') ? (
+          <>
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
+            <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
+            <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css" />
+          </>
+        ) : null}
+
         {this.props.router.asPath.startsWith('/editor') ? (
           <>
             <link rel="stylesheet" type="text/css" href="/static/styles/Editor.css" />

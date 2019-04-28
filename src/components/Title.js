@@ -23,7 +23,8 @@ class Title extends Component {
               )) }
             </div>
             {/* <div className="post_title">How Did van Gogh’s Turbulent Mind Depict One of the Most Complex Concepts in Physics?</div> */}
-            <div className="post_title" style={{fontSize: '35px'}}>{ this.props.title || 'Write an Awesome title!' }</div>
+            <div className="post_title" style={{fontSize: '35px'}}>{this.props.author && <img src={this.props.author.profilePicture} width={50} style={{borderRadius: "100%", marginRight: "20px"}} />}{ this.props.title || 'Write an Awesome title!' }</div>
+            {this.props.author && <p style={{color: "#fff", fontWeight: "bold"}}>@{this.props.author.username}</p>}
             <br />
             { this.props.noSidebar && (
               <div className="post_author d-flex flex-row align-items-center justify-content-center">

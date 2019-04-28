@@ -17,6 +17,7 @@ export default class ProfileButton extends Component {
 
         <Dropdown.Menu>
           <Dropdown.Item>Profile</Dropdown.Item>
+          <Dropdown.Item href="/settings">Settings</Dropdown.Item>
           <Dropdown.Item>
             <Signout />
           </Dropdown.Item>
