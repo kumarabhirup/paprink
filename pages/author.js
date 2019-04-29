@@ -30,6 +30,7 @@ export const POST_AUTHOR_QUERY = gql`
 						fname
             profilePicture
             username
+            bio
 					}
           upvotes {
             id
@@ -56,6 +57,7 @@ const AUTHOR_QUERY = gql`
       fname
       profilePicture
       username
+      bio
     }
   }
 `

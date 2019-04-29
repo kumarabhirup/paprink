@@ -21,7 +21,7 @@ export default class AuthorPage extends Component {
 								<h2>
 										<span><b>{ this.props.authorData.name }</b></span>
 										<strong>
-												<i className="fa fa-fw fa-star"></i>
+												<i className="fa fa-fw fa-at"></i>
 												{ this.props.authorData.username }
 										</strong>
 								</h2>
@@ -30,21 +30,12 @@ export default class AuthorPage extends Component {
 												<img className="img-responsive" src={this.props.authorData.profilePicture} style={{display: "block", maxWidth: "100%", height: "100%"}} />
 										</div>
 										<div className="mc-description" style={{color: "black", marginTop: "-10px"}}>
-												He has appeared in more than 100 films and television shows, including The Deer Hunter, Annie Hall, The Prophecy trilogy, The Dogs of War ...
+												{ this.props.authorData.bio || "He hasn't yet written anything about him! 😅" }
 										</div>
 								</div>
 								<a className="mc-btn-action">
 										<i className="fa fa-bars"></i>
 								</a>
-								<div className="mc-footer">
-										<h4>
-												Social
-										</h4>
-										<a className="fa fa-fw fa-facebook" style={{borderRadius: "100%"}}></a>
-										<a className="fa fa-fw fa-twitter" style={{borderRadius: "100%"}}></a>
-										<a className="fa fa-fw fa-linkedin" style={{borderRadius: "100%"}}></a>
-										<a className="fa fa-fw fa-google-plus" style={{borderRadius: "100%"}}></a>
-								</div>
 							</div>
 						</div>
 

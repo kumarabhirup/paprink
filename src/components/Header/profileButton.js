@@ -16,7 +16,7 @@ export default class ProfileButton extends Component {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Dropdown.Item>Profile</Dropdown.Item>
+          <Dropdown.Item href={`/author/${me.username}`}>Profile</Dropdown.Item>
           <Dropdown.Item href="/settings">Settings</Dropdown.Item>
           <Dropdown.Item>
             <Signout />
