@@ -278,7 +278,7 @@ class EditorPage extends Component {
                 categories={this.state.categories}
                 />
 
-                <ImageUploader image={this.state.images.image} imageState={async images => {
+                <ImageUploader image={this.state.images.image} uploadPreset="paprink" imageState={async images => {
                   await this.setState({ images })
                   this.props.imageState(this.state.images)
                 }} />
