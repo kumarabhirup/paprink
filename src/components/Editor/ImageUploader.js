@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AbortController from 'abort-controller'
+import { resetCaches } from 'graphql-tag';
 
 const controller = new AbortController()
 const signal = controller.signal
@@ -17,19 +18,37 @@ export default class ImageUploader extends Component {
 
   inputRef = React.createRef()
 
+  usePreset = async res => {
+    if (this.props.uploadPreset === 'paprink') {
+      await this.setState({
+        image: res.secure_url,
+        smallImage: res.eager[0].secure_url,
+        blackOverlayImage: res.eager[1].secure_url,
+        smallCardImage: res.eager[2].secure_url,
+        uploading: 'done'
+      })
+    } else if (this.props.uploadPreset === 'paprinkProfilePicture') {
+      await this.setState({
+        image: res.secure_url,
+        faceCroppedImage: res.eager[0].secure_url,
+        uploading: 'done'
+      })
+    }
+  }
+
   thumbnailUpload = async e => {
 
     const files = e.target.files
     const data = new FormData()
     data.append('file', files[0])
-    data.append('upload_preset', 'paprink')
+    data.append('upload_preset', this.props.uploadPreset)
 
     // console.log(files[0]["type"])
 
     if(!files[0]) {
-      await this.setState({ uploading: null, image: null, blackOverlayImage: null, smallImage: null, smallCardImage: null })
+      await this.setState({ uploading: null, image: null, blackOverlayImage: null, smallImage: null, smallCardImage: null, faceCroppedImage: null })
     } else if(files[0]["type"] != "image/jpeg" && files[0].type != "image/png" && files[0].type != "image/gif") {
-      await this.setState({ uploading: 'error', image: null, blackOverlayImage: null, smallImage: null, smallCardImage: null })
+      await this.setState({ uploading: 'error', image: null, blackOverlayImage: null, smallImage: null, smallCardImage: null, faceCroppedImage: null })
     } else {
 
       await this.setState({ uploading: true })
@@ -56,23 +75,19 @@ export default class ImageUploader extends Component {
           image: null,
           smallImage: null,
           smallCardImage: null,
-          blackOverlayImage: null
+          blackOverlayImage: null,
+          faceCroppedImage: null
         })
       } else if (res) {
-        await this.setState({
-          image: res.secure_url,
-          smallImage: res.eager[0].secure_url,
-          blackOverlayImage: res.eager[1].secure_url,
-          smallCardImage: res.eager[2].secure_url,
-          uploading: 'done'
-        })
+        this.usePreset(res)
       } else {
         await this.setState({
           uploading: 'error',
           image: null,
           smallImage: null,
           smallCardImage: null,
-          blackOverlayImage: null
+          blackOverlayImage: null,
+          faceCroppedImage: null
         })
       }
 
@@ -90,7 +105,8 @@ export default class ImageUploader extends Component {
       image: null,
       smallImage: null,
       smallCardImage: null,
-      blackOverlayImage: null
+      blackOverlayImage: null, 
+      faceCroppedImage: null
     })
     return
   }

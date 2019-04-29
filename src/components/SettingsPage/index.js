@@ -2,8 +2,12 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import Router, { withRouter } from 'next/router'
 import { ApolloConsumer } from 'react-apollo'
-import { Button as BootstrapButton } from 'react-bootstrap'
 import { Form } from 'semantic-ui-react'
+import DayPickerInput from 'react-day-picker/DayPickerInput'
+import MomentLocaleUtils, {
+  formatDate,
+  parseDate,
+} from 'react-day-picker/moment'
 import isEmpty from 'lodash.isempty'
 import gql from 'graphql-tag'
 import randomHex from 'random-hex-color'
@@ -31,7 +35,15 @@ const options = [
 
 class SettingsPage extends Component {
 
-  state = {}
+  state = {
+    name: this.props.user.name,
+    username: this.props.user.username,
+    bio: this.props.user.bio,
+    email: this.props.user.email,
+    phone: this.props.user.phone,
+    birthday: this.props.user.birthday,
+    profilePicture: this.props.user.profilePicture
+  }
 
   handleChange = (e, { value }) => this.setState({ value })
 
@@ -54,9 +66,9 @@ class SettingsPage extends Component {
 
                   <Form style={{marginTop: "20px"}}>
                     <Form.Group widths='equal'>
-                      <Form.Input fluid label='Full Name' placeholder='Name' defaultValue={this.props.user.name} />
-                      <Form.Input fluid label='Username' placeholder='Username' defaultValue={this.props.user.username} />
-                      <Form.Input fluid label='Email' placeholder='Email' disabled defaultValue={this.props.user.email} />
+                      <Form.Input fluid label='Full Name' placeholder='Name' value={this.state.name} onChange={this.handleChange} />
+                      <Form.Input fluid label='Username' placeholder='Username' value={this.state.username} onChange={this.handleChange} />
+                      <Form.Input fluid label='Email' placeholder='Email' disabled value={this.state.email} onChange={this.handleChange} />
                     </Form.Group>
                     <Form.Group inline>
                       <label>Gender</label>
@@ -85,14 +97,21 @@ class SettingsPage extends Component {
                         onChange={this.handleChange}
                       />
                     </Form.Group>
-                    <Form.TextArea label='Bio' placeholder='Tell us more about you... (People read this!)' defaultValue={this.props.user.bio} />
+                    <Form.TextArea label='Bio' placeholder='Tell us more about you... (People read this!)' value={this.state.bio} onChange={this.handleChange} />
                     <Form.Group widths='equal'>
-                      <Form.Input fluid label='📞 Phone' placeholder='Phone number' defaultValue={this.props.user.phone} />
-                      <Form.Input fluid label='Birthdate' placeholder='Birthdate' defaultValue={this.props.user.birthday} />
+                      <Form.Input fluid label='📞 Phone' placeholder='Phone number' value={this.state.phone} onChange={this.handleChange} />
+                      <DayPickerInput 
+                        component={props => (
+                          <Form.Input label='Birthdate' onChange={this.handleChange} {...props} />
+                        )} 
+                        formatDate={formatDate}
+                        parseDate={parseDate}
+                        placeholder={`${formatDate(new Date())}`}
+                      />
                     </Form.Group>
                     <hr />
-                    <ImageUploader title="🖼️ Avatar" style={{marginTop: "40px"}} imageState={async images => {
-                      await this.setState({ images })
+                    <ImageUploader title="🖼️ Avatar" style={{marginTop: "40px"}} uploadPreset="paprinkProfilePicture" image={this.state.profilePicture} imageState={async images => {
+                      await this.setState({ profilePicture: images.faceCroppedImage })
                     }} />
                     <hr />
                     <Form.Button>Save</Form.Button>
