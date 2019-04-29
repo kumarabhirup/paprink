@@ -28,11 +28,6 @@ const TitleInputBox = styled.input`
   }
 `
 
-const options = [
-  { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' },
-]
-
 class SettingsPage extends Component {
 
   state = {
@@ -41,14 +36,24 @@ class SettingsPage extends Component {
     bio: this.props.user.bio,
     email: this.props.user.email,
     phone: this.props.user.phone,
+    gender: this.props.user.gender || 'lgbt',
     birthday: this.props.user.birthday,
     profilePicture: this.props.user.profilePicture
   }
 
-  handleChange = (e, { value }) => this.setState({ value })
+  handleChange = (e, { value }) => this.setState({ [e.target.name]: value })
+  genderChange = (e, { value }) => this.setState({ gender: value })
+
+  // From http://react-day-picker.js.org/examples/input-advanced/
+  handleDayChange = (birthday, modifiers, dayPickerInput) => {
+    const input = dayPickerInput.getInput();
+    this.setState({
+      birthday: formatDate(birthday)
+    });
+  }
 
   render() {
-    const { value } = this.state
+    const { gender } = this.state
     return (
       <PageContent noSidebar>
 
@@ -66,40 +71,40 @@ class SettingsPage extends Component {
 
                   <Form style={{marginTop: "20px"}}>
                     <Form.Group widths='equal'>
-                      <Form.Input fluid label='Full Name' placeholder='Name' value={this.state.name} onChange={this.handleChange} />
-                      <Form.Input fluid label='Username' placeholder='Username' value={this.state.username} onChange={this.handleChange} />
-                      <Form.Input fluid label='Email' placeholder='Email' disabled value={this.state.email} onChange={this.handleChange} />
+                      <Form.Input fluid label='Full Name' name="name" placeholder='Name' value={this.state.name} onChange={this.handleChange} required />
+                      <Form.Input fluid label='Username' name="username" placeholder='Username' value={this.state.username} onChange={this.handleChange} required />
+                      <Form.Input fluid label='Email' name="email" placeholder='Email' disabled value={this.state.email} onChange={this.handleChange} required />
                     </Form.Group>
                     <Form.Group inline>
-                      <label>Gender</label>
+                      <label>Gender *</label>
                       <Form.Radio
                         label='Male'
                         value='male'
-                        checked={value === 'male'}
-                        onChange={this.handleChange}
+                        checked={gender === 'male'}
+                        onChange={this.genderChange}
                       />
                       <Form.Radio
                         label='Female'
                         value='female'
-                        checked={value === 'female'}
-                        onChange={this.handleChange}
+                        checked={gender === 'female'}
+                        onChange={this.genderChange}
                       />
                       <Form.Radio
                         label='LGBT+'
                         value='lgbt'
-                        checked={value === 'lgbt'}
-                        onChange={this.handleChange}
+                        checked={gender === 'lgbt'}
+                        onChange={this.genderChange}
                       />
                       <Form.Radio
                         label='Prefer not to disclose'
                         value='none'
-                        checked={value === 'none'}
-                        onChange={this.handleChange}
+                        checked={gender === 'none'}
+                        onChange={this.genderChange}
                       />
                     </Form.Group>
-                    <Form.TextArea label='Bio' placeholder='Tell us more about you... (People read this!)' value={this.state.bio} onChange={this.handleChange} />
+                    <Form.TextArea label='Bio' placeholder='Tell us more about you... (People read this!)' name="bio" value={this.state.bio} onChange={this.handleChange} />
                     <Form.Group widths='equal'>
-                      <Form.Input fluid label='📞 Phone' placeholder='Phone number' value={this.state.phone} onChange={this.handleChange} />
+                      <Form.Input fluid label='📞 Phone' placeholder='Phone number (with ISD)' name="phone" maxLength={15} value={this.state.phone} onChange={this.handleChange} />
                       <DayPickerInput 
                         component={props => (
                           <Form.Input label='Birthdate' onChange={this.handleChange} {...props} />
@@ -107,10 +112,12 @@ class SettingsPage extends Component {
                         formatDate={formatDate}
                         parseDate={parseDate}
                         placeholder={`${formatDate(new Date())}`}
+                        onDayChange={this.handleDayChange}
+                        value={this.state.birthday}
                       />
                     </Form.Group>
                     <hr />
-                    <ImageUploader title="🖼️ Avatar" style={{marginTop: "40px"}} uploadPreset="paprinkProfilePicture" image={this.state.profilePicture} imageState={async images => {
+                    <ImageUploader title="🖼️ Avatar *" style={{marginTop: "40px"}} uploadPreset="paprinkProfilePicture" image={this.state.profilePicture} imageState={async images => {
                       await this.setState({ profilePicture: images.faceCroppedImage })
                     }} />
                     <hr />
