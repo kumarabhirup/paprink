@@ -11,6 +11,8 @@ export const CURRENT_USER_QUERY = gql`
       fname
       lname
       email
+      phone
+      bio
       previledge
       gender
       username

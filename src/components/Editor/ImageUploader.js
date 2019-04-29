@@ -118,7 +118,7 @@ export default class ImageUploader extends Component {
         <div className="bottom_panel d-flex flex-row align-items-center justify-content-start" style={{padding: '15px 0px'}}>
           {this.state.uploading === true ? (<><a onClick={this.stopThumbnailUpload} style={{cursor: 'pointer'}}>❌</a> &nbsp; &nbsp; <img width="30px" src="https://loading.io/spinners/rolling/lg.curve-bars-loading-indicator.gif" /></>) : this.state.uploading === 'error' ? <a>💩</a> : this.state.uploading === 'done' ? <a>✅</a> : null}
           &nbsp;&nbsp;&nbsp;
-          <input type="file" placeholder="Upload the article thumbnail." id="thumbnailUpload" name="thumbnailUpload" style={{width: '100%'}} required onChange={this.thumbnailUpload} ref={this.inputRef} />
+          <input type="file" placeholder="Upload the article thumbnail." id="thumbnailUpload" name="thumbnailUpload" style={{width: '100%'}} onChange={this.thumbnailUpload} ref={this.inputRef} />
           &nbsp;&nbsp;&nbsp;
           {this.state.uploading === true ? <a>UPLOADING...</a> : this.state.uploading === 'error' ? <a style={{color: 'red'}}>Some error occured.</a> : this.state.uploading === 'done' ? <img width="300px" src={this.props.image ? this.state.image : this.state.smallImage} alt="Image uploaded" /> : null}
         </div>
