@@ -107,7 +107,7 @@ class SettingsPage extends Component {
                       <Form.Input fluid label='📞 Phone' placeholder='Phone number (with ISD)' name="phone" maxLength={15} value={this.state.phone} onChange={this.handleChange} />
                       <DayPickerInput 
                         component={props => (
-                          <Form.Input label='Birthdate' onChange={this.handleChange} {...props} />
+                          <Form.Input label='Birthdate' onChange={this.handleChange} {...props} disabled />
                         )} 
                         formatDate={formatDate}
                         parseDate={parseDate}
