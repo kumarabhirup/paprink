@@ -18,7 +18,7 @@ class Header extends Component {
                 <div className="row">
                   <div className="col">
                     <div className="header_content d-flex flex-row align-items-center justify-content-start">
-                      <div className="logo"><img src="/static/white-theme-trans.png" alt={meta.name} /></div>
+                      <div className="logo"><a href="/"><img src="/static/white-theme-trans.png" alt={meta.name} /></a></div>
                       <nav className="main_nav">
                         <ul>
                           { mainMenu.map((item, index) => {
@@ -52,7 +52,7 @@ class Header extends Component {
 
             <div className="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
               <div className="menu_close_container"><div className="menu_close"><div></div><div></div></div></div>
-              <div className="logo menu_mm"><img src="/static/black-theme-trans.png" alt={meta.name} /></div>
+              <div className="logo menu_mm"><a href="/"><img src="/static/black-theme-trans.png" alt={meta.name} /></a></div>
               
               <div className="search">
                 <SearchBar mobile />

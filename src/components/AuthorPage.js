@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import { Grid } from 'styled-css-grid'
+import Head from 'next/head'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
 import Card from './Card/'
+import { meta } from '../api/meta'
 
 export default class AuthorPage extends Component {
   render() {
     return (
 			<>
       <PageContent>
+
+				<Head>
+					<title>{ `${this.props.authorData.name} (@${this.props.authorData.username}) - ${meta.title}` }</title>
+				</Head>
 
         {/* Page Content */}
 
