@@ -30,7 +30,7 @@ export default class AuthorPage extends Component {
 												<img className="img-responsive" src={this.props.authorData.profilePicture} style={{display: "block", maxWidth: "100%", height: "100%"}} />
 										</div>
 										<div className="mc-description" style={{color: "black", marginTop: "-10px"}}>
-												{ this.props.authorData.bio || "He hasn't yet written anything about him! 😅" }
+												{ this.props.authorData.bio || "He hasn't yet written anything about himself! 😅" }
 										</div>
 								</div>
 								<a className="mc-btn-action">
