@@ -10,6 +10,7 @@ import Footer from '../src/components/Footer'
 import EditorPage from '../src/components/Editor'
 import PleaseSignIn from '../src/components/PleaseSignIn'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
+import { meta } from '../src/api/meta'
 
 const CAN_UPDATE_POST_QUERY = gql`
   query CAN_UPDATE_POST_QUERY($id: ID!){
@@ -59,6 +60,8 @@ class editorPage extends Component {
 
   render() {
     return (
+      <>
+      <Head><title>Compose new post - {meta.title}</title></Head>
       <Query query={CAN_UPDATE_POST_QUERY} variables={{ id: this.props.router.query.postId }}>
         { payload => {
 
@@ -89,6 +92,7 @@ class editorPage extends Component {
               <PleaseSignIn>
                 { me => (
                   <>
+                  <Head><title>Update Post - {meta.title}</title></Head>
                   <Header />
                   <Title noSidebar title={title} tags={this.state.categories} thumbnail={thumbnail.blackOverlayImage} currentUser={me} postData={payload.data.canUpdatePost} />
                   <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} editorContent={editorSerializedOutput} postData={payload.data.canUpdatePost} />
@@ -107,6 +111,7 @@ class editorPage extends Component {
 
         } }
       </Query>
+      </>
     )
   }
 

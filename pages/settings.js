@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Head from 'next/head'
 import { withRouter } from 'next/router'
-import { Query } from 'react-apollo'
-import gql from 'graphql-tag'
  
 import Header from '../src/components/Header/'
 import Title from '../src/components/Title'
@@ -10,6 +8,7 @@ import Footer from '../src/components/Footer'
 import SettingsPage from '../src/components/SettingsPage'
 import PleaseSignIn from '../src/components/PleaseSignIn'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
+import { meta } from '../src/api/meta'
 
 class settingsPage extends Component {
 
@@ -19,6 +18,8 @@ class settingsPage extends Component {
 
   render() {
     return (
+      <>
+      <Head><title>User settings - {meta.title}</title></Head>
       <PleaseSignIn>
         { me => (
           <>
@@ -30,6 +31,7 @@ class settingsPage extends Component {
           </>
         ) }
       </PleaseSignIn>
+      </>
     )
   }
 

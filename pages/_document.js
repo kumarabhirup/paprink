@@ -41,7 +41,6 @@ class MyDocument extends Document {
           <script src="/static/prebuilt/plugins/easing/easing.js"></script>
           <script src="/static/prebuilt/plugins/masonry/masonry.js"></script>
           <script src="/static/prebuilt/plugins/masonry/images_loaded.js"></script>
-          <script src="/static/author-card/author-card.js"></script>
           <script src="/static/prebuilt/plugins/parallax-js-master/parallax.min.js"></script>
 
           <script src="/static/prebuilt/js/custom.js"></script>

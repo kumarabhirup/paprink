@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import { Grid } from 'styled-css-grid'
+import Head from 'next/head'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
 import Card from './Card/'
+import { meta } from '../api/meta'
 
 export default class CategoryPage extends Component {
   render() {
     return (
 			<PageContent>
+
+				<Head>
+					<title>{ `Posts about '${this.props.category}' @ ${meta.title}` }</title>
+				</Head>
 
 				{/* Page Content */}
 

@@ -4,13 +4,15 @@ import { Parser as HtmlToReactParser } from 'html-to-react'
 import dynamic from 'next/dynamic'
 import { ApolloConsumer } from 'react-apollo'
 import { withRouter } from 'next/router'
-import { DiscussionEmbed, CommentCount } from 'disqus-react'
+import Head from 'next/head'
+import { DiscussionEmbed } from 'disqus-react'
 
 import PageContent from './PageContent'
 import Sidebar from './Sidebar'
 import UpvoteButton from './Card/UpvoteButton'
 import categorySorter from '../lib/categorySorter'
 import { UPVOTE_MUTATION } from './Card'
+import { meta } from '../api/meta'
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -87,6 +89,10 @@ class PostPage extends Component {
 			<ApolloConsumer>
 				{ client => (
 					<PageContent>
+
+						<Head>
+							<title>{ `${postData.title} - ${meta.title}` }</title>
+						</Head>
 
 						{/* Post Content */}
 
