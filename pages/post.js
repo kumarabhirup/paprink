@@ -65,9 +65,9 @@ class postPage extends Component {
 
                   return (
                     <>
-                      <Head>
+                      {/* <Head>
                         <script src="/static/prebuilt/js/post.js"></script>
-                      </Head>
+                      </Head> */}
                       <Header />
                       <Title title={title} tags={categories} thumbnail={thumbnail.blackOverlayImage} />
                       <PostPage postData={payload.data.getPost} user={userPayload.data && userPayload.data.me} />

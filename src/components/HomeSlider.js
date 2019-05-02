@@ -64,7 +64,7 @@ export default class HomeSlider extends Component {
                     ) }
 
                     { data.getFeatured.map((post, index) => 
-                      (<div className="owl-item">
+                      (<div className="owl-item" key={post.id}>
                         <div className="home_slider_background" style={{ backgroundColor: "black", backgroundImage: `url(${post.thumbnail.blackOverlayImage})` }}></div>
                         <div className="home_slider_content_container">
                           <div className="container">

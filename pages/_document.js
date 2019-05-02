@@ -19,7 +19,6 @@ class MyDocument extends Document {
 
         <Head>
           {this.props.styleTags}
-          <link rel="stylesheet" href="/_next/static/style.css" />
         </Head>
 
         <body>

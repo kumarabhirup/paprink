@@ -27,7 +27,7 @@ class settingsPage extends Component {
           <Title title={me.name} thumbnail={`https://cdn.wallpapersafari.com/99/58/Tn4uob.jpg`} author={me} />
           <SettingsPage user={me} />
           <Footer />
-          <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
+          {/* <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head> */}
           </>
         ) }
       </PleaseSignIn>

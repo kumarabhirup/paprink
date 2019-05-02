@@ -153,7 +153,7 @@ class SearchBar extends Component {
                   )}
                 </Dropdown>
               ) : null }
-              <img className="header_search_icon menu_mm" src="static/prebuilt/images/search.png" alt="" />
+              <img className="header_search_icon menu_mm" src="/static/prebuilt/images/search.png" alt="" />
             </form>
           )}
         </Downshift>

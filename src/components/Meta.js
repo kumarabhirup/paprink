@@ -25,7 +25,7 @@ class Meta extends React.Component {
         <meta name="robots" content="index, follow" />
 
         <link rel="shortcut icon" href="/static/favicon.ico" />
-        <link rel="manifest" href="/static/prebuilt/manifest.json" />
+        {/* <link rel="manifest" href="/static/prebuilt/manifest.json" /> */}
 
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
         <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
