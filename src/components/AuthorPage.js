@@ -29,7 +29,7 @@ export default class AuthorPage extends Component {
 								<div style={{maxWidth: "900px", width: "100%"}}>
 								
 									<Tabs defaultActiveKey="published" id="uncontrolled-tab-example">
-										<Tab eventKey="published" title={`${this.props.publishedPostsCount} Published`}>
+										<Tab eventKey="published" title={`Posts Published`}>
 											<Grid
 												columns="repeat(auto-fill, 260px)"
 												gap="20px"
@@ -45,7 +45,7 @@ export default class AuthorPage extends Component {
 											) }
 										</Tab>
 
-										<Tab eventKey="upvoted" title={`${this.props.upvotedPostsCount} Upvoted`}>
+										<Tab eventKey="upvoted" title={`Posts Upvoted`}>
 											<Grid
 												columns="repeat(auto-fill, 260px)"
 												gap="20px"

@@ -17,9 +17,6 @@ export const POST_AUTHOR_QUERY = gql`
 				hasNextPage
 				endCursor
 			}
-      aggregate {
-        count
-      }
 			edges {
 				node {
 					id
@@ -58,9 +55,6 @@ export const UPVOTED_POST_AUTHOR_QUERY = gql`
 				hasNextPage
 				endCursor
 			}
-      aggregate {
-        count
-      }
 			edges {
 				node {
 					id
@@ -141,7 +135,6 @@ class authorPage extends Component {
                                 authorData={authorMeta.data.getAuthor}
                                 user={userPayload.data && userPayload.data.me}
 
-                                publishedPostsCount={data.postsAuthorConnection.aggregate.count}
                                 publishedPosts={data.postsAuthorConnection.edges.map(x => (x.node))}
                                 publishedPageInfo={data.postsAuthorConnection.pageInfo}
                                 publishedOnLoadMore={() => {
@@ -170,11 +163,10 @@ class authorPage extends Component {
                                   })
                                 }}
 
-                                upvotedPostsCount={upvotedPostsPayload.data.upvotedPostsAuthorConnection.aggregate.count}
                                 upvotedPosts={upvotedPostsPayload.data.upvotedPostsAuthorConnection.edges.map(x => (x.node))}
                                 upvotedPageInfo={upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo}
                                 upvotedOnLoadMore={() => {
-                                  fetchMore({
+                                  upvotedPostsPayload.fetchMore({
                                     variables: {
                                       after: upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo.endCursor
                                     },
