@@ -25,13 +25,13 @@ export default class Footer extends Component {
                 <div className="subscribe_content">
                   <div className="subscribe_title">Subscribe</div>
                   <form action="#">
-                    <input type="email" className="sub_input" placeholder="Your Email" required="required" />
-                    <button className="sub_button">
+                    <input type="email" className="sub_input" placeholder="Entries closed." required="required" disabled />
+                    {/* <button className="sub_button">
                       <svg version="1.1" id="link_arrow_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                         width="19px" height="13px" viewBox="0 0 19 13" enableBackground="new 0 0 19 13" xmlSpace="preserve">
                         <polygon fill="#FFFFFF" points="12.475,0 11.061,0 17.081,6.021 0,6.021 0,7.021 17.038,7.021 11.06,13 12.474,13 18.974,6.5 "/>
                       </svg>
-                    </button>
+                    </button> */}
                   </form>
                 </div>
               </div>

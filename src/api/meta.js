@@ -10,6 +10,6 @@ export const meta = {
   tagline: (<></>),
   image: ``,
   favicon: `/static/favicon.ico`,
-  email: ``,
+  email: `info@iqubex.com`,
   domain: process.env.NODE_ENV === "production" ? process.env.PROD_DOMAIN : process.env.DEV_DOMAIN
 }
