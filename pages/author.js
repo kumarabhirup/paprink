@@ -125,7 +125,6 @@ class authorPage extends Component {
                         }
 
                         if (data && data.postsAuthorConnection && authorMeta.data && authorMeta.data.getAuthor) {
-                          const authorData = data.postsAuthorConnection.edges[0] ? data.postsAuthorConnection.edges[0].node.author : null
                           return (
                             <>
                               <Header />
