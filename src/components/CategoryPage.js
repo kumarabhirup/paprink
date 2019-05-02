@@ -28,8 +28,9 @@ export default class CategoryPage extends Component {
 							<div className="section_content" style={{width: "100%"}}>
 								<div style={{maxWidth: "900px", width: "100%"}}>
 								<Grid
-									columns="repeat(auto-fill, 260px)"
+									columns="repeat(auto-fit, minmax(260px, 1fr))"
 									gap="20px"
+									style={{width: "100%", margin: "0px auto"}}
                 >
 									{ this.props.posts.length > 0 ? this.props.posts.map(post => {
 										return <Card type={'small_image'} post={post} key={post.id} user={this.props.user} category />

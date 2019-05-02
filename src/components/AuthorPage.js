@@ -42,8 +42,9 @@ export default class AuthorPage extends Component {
 									<Tabs defaultActiveKey="published" id="uncontrolled-tab-example">
 										<Tab eventKey="published" title={`Posts Published`}>
 											<Grid
-												columns="repeat(auto-fill, 260px)"
+												columns="repeat(auto-fit, minmax(260px, 1fr))"
 												gap="20px"
+												style={{width: "100%", margin: "0px auto"}}
 											>
 												{ this.props.publishedPosts.length > 0 ? this.props.publishedPosts.map(post => {
 													return <Card type={'small_image'} post={post} key={post.id} author user={this.props.user} />
@@ -58,8 +59,9 @@ export default class AuthorPage extends Component {
 
 										<Tab eventKey="upvoted" title={`Posts Upvoted`}>
 											<Grid
-												columns="repeat(auto-fill, 260px)"
+												columns="repeat(auto-fit, minmax(260px, 1fr))"
 												gap="20px"
+												style={{width: "100%", margin: "0px auto"}}
 											>
 												{ this.props.upvotedPosts.length > 0 ? this.props.upvotedPosts.map(post => {
 													return <Card type={'small_image'} post={post} key={post.id} author user={this.props.user} />
