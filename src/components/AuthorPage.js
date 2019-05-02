@@ -23,8 +23,19 @@ export default class AuthorPage extends Component {
 				<div className="col-lg-10 offset-lg-1">
 					<div className="main_content" style={{paddingBottom: "40px"}}>
 
+						<div className="blog-card" style={{width: "100%"}}>
+							<div className="meta">
+								<div className="photo" style={{backgroundImage: `url(${this.props.authorData.profilePicture})`}}></div>
+							</div>
+							<div className="description">
+								<h1>{ this.props.authorData.name }</h1>
+								<h2 style={{textTransform: "initial"}}>@{ this.props.authorData.username }</h2>
+								<p>{ this.props.authorData.bio || "This profile hasn't written any bio yet 😅" }</p>
+							</div>
+						</div>
+
 						{/* Created Posts */}
-						<div className="category">
+						<div className="category" style={{marginTop: "0px"}}>
 							<div className="section_content" style={{width: "100%"}}>
 								<div style={{maxWidth: "900px", width: "100%"}}>
 								
