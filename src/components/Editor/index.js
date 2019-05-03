@@ -261,7 +261,7 @@ class EditorPage extends Component {
       variables: { id: this.props.router.query.postId }
     }).then(async ({ data }) => {
       await this.setState({ deleted: true })
-      this.props.router.replace(`/author/${data.author.username}`)
+      this.props.router.replace(`/author/${data.deletePost.author.username}`)
     }).catch(async err => {
       await this.setState({ deleted: 'error' })
     })
