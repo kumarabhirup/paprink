@@ -70,6 +70,7 @@ export const UPVOTED_POST_AUTHOR_QUERY = gql`
             profilePicture
             username
             bio
+            previledge
 					}
           upvotes {
             id
