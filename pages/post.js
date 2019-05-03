@@ -16,7 +16,6 @@ export const GET_POST_QUERY = gql`
     getPost(slugParam: $slugParam) {
       id
       title
-      editorHtml
       editorCurrentContent
       editorSerializedOutput
       status

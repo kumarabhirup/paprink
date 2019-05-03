@@ -34,21 +34,7 @@ export default class PaprinkEditor extends Component {
           // All these editor states should be saved to the database for future use
           await this.setState({ editorCurrentContent: editor.state.editorState._immutable.currentContent }) // this is what we use to convert into html
           await this.setState({ editorSerializedOutput: editor.emitSerializedOutput() }) // object that looks like this.defaultContent
-          await this.setState({ // TODO: This needs a heavy edit.
-            editorHtml: stateToHTML({
-                          styleToHTML: style => {
-                            if (style.startsWith('CUSTOM_COLOR_')) {
-                              return <span style={{color: style.substr(style.length - 7)}} />
-                            }
-                          },
-                          blockToHTML: block => {
-                            if (block.type === 'image') {
-                              return <center><img src={block.data.url} alt={block.text} width="80%" /></center>
-                            }
-                          }
-                        })(this.state.editorCurrentContent)
-          })
-          await this.props.editorState({editorSerializedOutput: this.state.editorSerializedOutput, editorCurrentContent: this.state.editorCurrentContent, editorHtml: this.state.editorHtml})
+          await this.props.editorState({editorSerializedOutput: this.state.editorSerializedOutput, editorCurrentContent: this.state.editorCurrentContent})
         }}
         read_only={0}
         ref="editor"
