@@ -30,7 +30,7 @@ const SAVE_POST_MUTATION = gql`
     $title: String!
     $editorSerializedOutput: Json!
     $editorCurrentContent: Json!
-    $editorHtml: String!
+    # $editorHtml: String!
     $categories: Json!
     $thumbnail: Json!
     $status: PostStatus!
@@ -39,7 +39,7 @@ const SAVE_POST_MUTATION = gql`
       title: $title
       editorSerializedOutput: $editorSerializedOutput
       editorCurrentContent: $editorCurrentContent
-      editorHtml: $editorHtml
+      # editorHtml: $editorHtml
       categories: $categories
       thumbnail: $thumbnail
       status: $status
@@ -71,7 +71,7 @@ const UPDATE_POST_MUTATION = gql`
     $title: String!
     $editorSerializedOutput: Json!
     $editorCurrentContent: Json!
-    $editorHtml: String!
+    # $editorHtml: String!
     $categories: Json!
     $thumbnail: Json!
     $status: PostStatus!
@@ -81,7 +81,7 @@ const UPDATE_POST_MUTATION = gql`
       title: $title
       editorSerializedOutput: $editorSerializedOutput
       editorCurrentContent: $editorCurrentContent
-      editorHtml: $editorHtml
+      # editorHtml: $editorHtml
       categories: $categories
       thumbnail: $thumbnail
       status: $status
@@ -138,7 +138,7 @@ class EditorPage extends Component {
           variables: {
             title: this.state.title,
             thumbnail: this.state.images,
-            editorHtml: this.state.editorHtml,
+            // editorHtml: this.state.editorHtml,
             editorSerializedOutput: this.state.editorSerializedOutput,
             editorCurrentContent: this.state.editorCurrentContent,
             categories: this.state.categories.map(object => (object.id.toUpperCase())),
@@ -162,7 +162,7 @@ class EditorPage extends Component {
             id: this.props.router.query.postId,
             title: this.state.title,
             thumbnail: this.state.images,
-            editorHtml: this.state.editorHtml,
+            // editorHtml: this.state.editorHtml,
             editorSerializedOutput: this.state.editorSerializedOutput,
             editorCurrentContent: this.state.editorCurrentContent,
             categories: this.state.categories.map(object => (object.id.toUpperCase())),
@@ -196,7 +196,7 @@ class EditorPage extends Component {
           variables: {
             title: this.state.title,
             thumbnail: this.state.images,
-            editorHtml: this.state.editorHtml,
+            // editorHtml: this.state.editorHtml,
             editorSerializedOutput: this.state.editorSerializedOutput,
             editorCurrentContent: this.state.editorCurrentContent,
             categories: this.state.categories.map(object => (object.id.toUpperCase())),
@@ -224,7 +224,7 @@ class EditorPage extends Component {
             id: this.props.router.query.postId,
             title: this.state.title,
             thumbnail: this.state.images,
-            editorHtml: this.state.editorHtml,
+            // editorHtml: this.state.editorHtml,
             editorSerializedOutput: this.state.editorSerializedOutput,
             editorCurrentContent: this.state.editorCurrentContent,
             categories: this.state.categories.map(object => (object.id.toUpperCase())),
@@ -267,7 +267,7 @@ class EditorPage extends Component {
                     </ul>
                   </div>
 
-                  <Editor editorState={async editorContent => await this.setState({ editorSerializedOutput: editorContent.editorSerializedOutput, editorCurrentContent: editorContent.editorCurrentContent, editorHtml: editorContent.editorHtml })} editorContent={this.props.editorContent} />
+                  <Editor editorState={async editorContent => await this.setState({ editorSerializedOutput: editorContent.editorSerializedOutput, editorCurrentContent: editorContent.editorCurrentContent })} editorContent={this.props.editorContent} />
 
                 </div>
 
