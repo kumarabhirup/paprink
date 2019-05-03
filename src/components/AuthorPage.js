@@ -6,6 +6,7 @@ import { Tab, Tabs } from 'react-bootstrap'
 import PageContent from './PageContent'
 import Card from './Card/'
 import { meta } from '../api/meta'
+import { VerfiedBadge } from '../api/mini'
 
 export default class AuthorPage extends Component {
 
@@ -28,7 +29,7 @@ export default class AuthorPage extends Component {
 								<div className="photo" style={{backgroundImage: `url(${this.props.authorData.profilePicture})`}}></div>
 							</div>
 							<div className="description">
-								<h1>{ this.props.authorData.name }</h1>
+								<h1>{ this.props.authorData.name }{ this.props.authorData.previledge.some(element => element === "VERIFIED") && (<>&nbsp;<VerfiedBadge /></>) }</h1>
 								<h2 style={{textTransform: "initial"}}>@{ this.props.authorData.username }</h2>
 								<p>{ this.props.authorData.bio || "This profile hasn't written any bio yet 😅" }</p>
 							</div>

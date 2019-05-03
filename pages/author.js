@@ -31,6 +31,7 @@ export const POST_AUTHOR_QUERY = gql`
             profilePicture
             username
             bio
+            previledge
 					}
           upvotes {
             id
@@ -93,6 +94,7 @@ const AUTHOR_QUERY = gql`
       name
       lname
       fname
+      previledge
       profilePicture
       username
       bio
