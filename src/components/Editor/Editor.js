@@ -8,6 +8,8 @@ const Dante = dynamic(import('Dante2'), {
   ssr: false
 })
 
+import { ImageBlockConfig } from 'Dante2/package/lib/components/blocks/image'
+
 export default class PaprinkEditor extends Component {
 
   state = {}
@@ -36,6 +38,31 @@ export default class PaprinkEditor extends Component {
           await this.setState({ editorSerializedOutput: editor.emitSerializedOutput() }) // object that looks like this.defaultContent
           await this.props.editorState({editorSerializedOutput: this.state.editorSerializedOutput, editorCurrentContent: this.state.editorCurrentContent})
         }}
+        widgets={[
+          ImageBlockConfig({
+              options: {
+                  upload_handler: async (file, imageBlock) => {
+
+                    const data = new FormData()
+                    data.append('file', file)
+                    data.append('upload_preset', 'paprinkEditor')
+
+                    await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_USERNAME}/image/upload`, {
+                      method: 'POST',
+                      body: data
+                    })
+                    .then(async res => {
+                      const payload = await res.json()
+                      imageBlock.uploadCompleted(payload.secure_url)
+                    })
+                    .catch(err => {
+                      imageBlock.uploadFailed()
+                    })
+
+                  }
+              }
+          })
+        ]}
         read_only={0}
         ref="editor"
       />
