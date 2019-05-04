@@ -246,6 +246,7 @@ class authorPage extends Component {
                                       draftPosts={draftPosts.edges.map(x => (x.node))}
                                       draftPageInfo={draftPosts.pageInfo}
                                       draftOnLoadMore={() => {
+
                                         draftPostsPayload.fetchMore({
                                           variables: {
                                             after: draftPosts.pageInfo.endCursor
@@ -269,6 +270,7 @@ class authorPage extends Component {
 
                                           }
                                         })
+                                        
                                       }}
 
                                     />
