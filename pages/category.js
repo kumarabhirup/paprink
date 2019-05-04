@@ -30,6 +30,7 @@ export const CATEGORY_QUERY = gql`
 						lname
 						fname
             username
+            previledge
 					}
           upvotes {
             id

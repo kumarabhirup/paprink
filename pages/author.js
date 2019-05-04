@@ -13,10 +13,12 @@ import User from '../src/components/User';
 export const POST_AUTHOR_QUERY = gql`
 	query POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
 		postsAuthorConnection(authorUsername: $authorUsername orderBy: $orderBy after: $after) {
-			pageInfo {
+			
+      pageInfo {
 				hasNextPage
 				endCursor
 			}
+
 			edges {
 				node {
 					id
@@ -31,6 +33,7 @@ export const POST_AUTHOR_QUERY = gql`
             profilePicture
             username
             bio
+            previledge
 					}
           upvotes {
             id
@@ -44,6 +47,7 @@ export const POST_AUTHOR_QUERY = gql`
           publishedAt
 				}
 			}
+
 		}
 	}
 `
@@ -51,10 +55,12 @@ export const POST_AUTHOR_QUERY = gql`
 export const UPVOTED_POST_AUTHOR_QUERY = gql`
 	query UPVOTED_POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
 		upvotedPostsAuthorConnection(authorUsername: $authorUsername orderBy: $orderBy after: $after) {
-			pageInfo {
+			
+      pageInfo {
 				hasNextPage
 				endCursor
 			}
+
 			edges {
 				node {
 					id
@@ -69,6 +75,7 @@ export const UPVOTED_POST_AUTHOR_QUERY = gql`
             profilePicture
             username
             bio
+            previledge
 					}
           upvotes {
             id
@@ -82,7 +89,50 @@ export const UPVOTED_POST_AUTHOR_QUERY = gql`
           publishedAt
 				}
 			}
+
 		}
+	}
+`
+
+export const DRAFT_POST_AUTHOR_QUERY = gql`
+	query DRAFT_POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
+		getPostsInDraft(authorUsername: $authorUsername orderBy: $orderBy after: $after) {
+
+      pageInfo {
+				hasNextPage
+				endCursor
+			}
+
+			edges {
+				node {
+					id
+					title
+					thumbnail
+          slug
+					author {
+						id
+						name
+						lname
+						fname
+            profilePicture
+            username
+            bio
+            previledge
+					}
+          upvotes {
+            id
+            user {
+              id
+            }
+          }
+          upvotesNumber
+					createdAt
+          updatedAt
+          publishedAt
+				}
+			}
+
+    }
 	}
 `
 
@@ -93,6 +143,7 @@ const AUTHOR_QUERY = gql`
       name
       lname
       fname
+      previledge
       profilePicture
       username
       bio
@@ -106,18 +157,16 @@ class authorPage extends Component {
 
   render() {
     const { author } = this.state
+    const authorUsername = this.props.router.query.authorUsername && this.props.router.query.authorUsername.toLowerCase()
     return (
-      <Query query={AUTHOR_QUERY} variables={{ authorUsername: this.props.router.query.authorUsername && this.props.router.query.authorUsername.toLowerCase() }}>
+      <Query query={AUTHOR_QUERY} variables={{ authorUsername }}>
         {authorMeta => (
           <User>
             {userPayload => (
-              <Query query={UPVOTED_POST_AUTHOR_QUERY} variables={{ authorUsername: this.props.router.query.authorUsername && this.props.router.query.authorUsername.toLowerCase() }}>
-                { upvotedPostsPayload => {
+              <Query query={UPVOTED_POST_AUTHOR_QUERY} variables={{ authorUsername }}>
+                {upvotedPostsPayload => {
                   return (
-                    
-                    <Query query={POST_AUTHOR_QUERY} variables={{
-                      authorUsername: this.props.router.query.authorUsername && this.props.router.query.authorUsername.toLowerCase()
-                    }}>
+                    <Query query={POST_AUTHOR_QUERY} variables={{ authorUsername }}>
                       {({ data, loading, error, fetchMore }) => {
 
                         if (loading && !data) {
@@ -126,73 +175,110 @@ class authorPage extends Component {
 
                         if (data && data.postsAuthorConnection && authorMeta.data && authorMeta.data.getAuthor) {
                           return (
-                            <>
-                              <Header />
-                              <Title title={`${authorMeta.data.getAuthor.name}'s Profile`} author={authorMeta.data.getAuthor} />
-                              <AuthorPage
+                            <Query query={DRAFT_POST_AUTHOR_QUERY} variables={{ authorUsername }}>
+                              {draftPostsPayload => {
+                                const draftPosts = draftPostsPayload.data && draftPostsPayload.data.getPostsInDraft
+                                return (
+                                  <>
+                                    <Header />
+                                    <Title title={`${authorMeta.data.getAuthor.name}'s Profile`} author={authorMeta.data.getAuthor} />
+                                    <AuthorPage
 
-                                authorData={authorMeta.data.getAuthor}
-                                user={userPayload.data && userPayload.data.me}
+                                      authorData={authorMeta.data.getAuthor}
+                                      user={userPayload.data && userPayload.data.me}
 
-                                publishedPosts={data.postsAuthorConnection.edges.map(x => (x.node))}
-                                publishedPageInfo={data.postsAuthorConnection.pageInfo}
-                                publishedOnLoadMore={() => {
-                                  fetchMore({
-                                    variables: {
-                                      after: data.postsAuthorConnection.pageInfo.endCursor
-                                    },
-                                    updateQuery: (prev, { fetchMoreResult }) => {
+                                      publishedPosts={data.postsAuthorConnection.edges.map(x => (x.node))}
+                                      publishedPageInfo={data.postsAuthorConnection.pageInfo}
+                                      publishedOnLoadMore={() => {
+                                        fetchMore({
+                                          variables: {
+                                            after: data.postsAuthorConnection.pageInfo.endCursor
+                                          },
+                                          updateQuery: (prev, { fetchMoreResult }) => {
 
-                                      if (!fetchMoreResult) return prev
+                                            if (!fetchMoreResult) return prev
 
-                                      var updatedQuery = {
-                                        postsAuthorConnection: {
-                                          __typename: "PostConnection",
-                                          pageInfo: fetchMoreResult.postsAuthorConnection.pageInfo,
-                                          edges: [
-                                            ...prev.postsAuthorConnection.edges,
-                                            ...fetchMoreResult.postsAuthorConnection.edges
-                                          ]
-                                        }
-                                      }
+                                            var updatedQuery = {
+                                              postsAuthorConnection: {
+                                                __typename: "PostConnection",
+                                                pageInfo: fetchMoreResult.postsAuthorConnection.pageInfo,
+                                                edges: [
+                                                  ...prev.postsAuthorConnection.edges,
+                                                  ...fetchMoreResult.postsAuthorConnection.edges
+                                                ]
+                                              }
+                                            }
 
-                                      return updatedQuery
+                                            return updatedQuery
 
-                                    }
-                                  })
-                                }}
+                                          }
+                                        })
+                                      }}
 
-                                upvotedPosts={upvotedPostsPayload.data.upvotedPostsAuthorConnection.edges.map(x => (x.node))}
-                                upvotedPageInfo={upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo}
-                                upvotedOnLoadMore={() => {
-                                  upvotedPostsPayload.fetchMore({
-                                    variables: {
-                                      after: upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo.endCursor
-                                    },
-                                    updateQuery: (prev, { fetchMoreResult }) => {
+                                      upvotedPosts={upvotedPostsPayload.data.upvotedPostsAuthorConnection.edges.map(x => (x.node))}
+                                      upvotedPageInfo={upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo}
+                                      upvotedOnLoadMore={() => {
+                                        upvotedPostsPayload.fetchMore({
+                                          variables: {
+                                            after: upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo.endCursor
+                                          },
+                                          updateQuery: (prev, { fetchMoreResult }) => {
 
-                                      if (!fetchMoreResult) return prev
+                                            if (!fetchMoreResult) return prev
 
-                                      var updatedQuery = {
-                                        upvotedPostsAuthorConnection: {
-                                          __typename: "PostConnection",
-                                          pageInfo: fetchMoreResult.upvotedPostsAuthorConnection.pageInfo,
-                                          edges: [
-                                            ...prev.upvotedPostsAuthorConnection.edges,
-                                            ...fetchMoreResult.upvotedPostsAuthorConnection.edges
-                                          ]
-                                        }
-                                      }
+                                            var updatedQuery = {
+                                              upvotedPostsAuthorConnection: {
+                                                __typename: "PostConnection",
+                                                pageInfo: fetchMoreResult.upvotedPostsAuthorConnection.pageInfo,
+                                                edges: [
+                                                  ...prev.upvotedPostsAuthorConnection.edges,
+                                                  ...fetchMoreResult.upvotedPostsAuthorConnection.edges
+                                                ]
+                                              }
+                                            }
 
-                                      return updatedQuery
+                                            return updatedQuery
 
-                                    }
-                                  })
-                                }}
+                                          }
+                                        })
+                                      }}
 
-                              />
-                              <Footer />
-                            </>
+                                      draftPosts={draftPosts && draftPosts.edges.map(x => (x.node))}
+                                      draftPageInfo={draftPosts && draftPosts.pageInfo}
+                                      draftOnLoadMore={() => {
+
+                                        draftPostsPayload.fetchMore({
+                                          variables: {
+                                            after: draftPosts.pageInfo.endCursor
+                                          },
+                                          updateQuery: (prev, { fetchMoreResult }) => {
+
+                                            if (!fetchMoreResult) return prev
+
+                                            var updatedQuery = {
+                                              getPostsInDraft: {
+                                                __typename: "PostConnection",
+                                                pageInfo: fetchMoreResult.getPostsInDraft.pageInfo,
+                                                edges: [
+                                                  ...prev.getPostsInDraft.edges,
+                                                  ...fetchMoreResult.getPostsInDraft.edges
+                                                ]
+                                              }
+                                            }
+
+                                            return updatedQuery
+
+                                          }
+                                        })
+
+                                      }}
+
+                                    />
+                                    <Footer />
+                                  </>
+                                )
+                              }}
+                            </Query>
                           )
                         } else {
                           return <QueryFailed />
@@ -202,7 +288,7 @@ class authorPage extends Component {
                     </Query>
 
                   )
-                } }
+                }}
               </Query>
             )}
           </User>
