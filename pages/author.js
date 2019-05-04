@@ -243,8 +243,8 @@ class authorPage extends Component {
                                         })
                                       }}
 
-                                      draftPosts={draftPosts.edges.map(x => (x.node))}
-                                      draftPageInfo={draftPosts.pageInfo}
+                                      draftPosts={draftPosts && draftPosts.edges.map(x => (x.node))}
+                                      draftPageInfo={draftPosts && draftPosts.pageInfo}
                                       draftOnLoadMore={() => {
 
                                         draftPostsPayload.fetchMore({
@@ -270,7 +270,7 @@ class authorPage extends Component {
 
                                           }
                                         })
-                                        
+
                                       }}
 
                                     />
