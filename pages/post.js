@@ -26,6 +26,7 @@ export const GET_POST_QUERY = gql`
         fname
         username
         profilePicture
+        previledge
       }
       thumbnail
       categories {

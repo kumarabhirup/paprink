@@ -25,6 +25,7 @@ export const TODAY_QUERY = gql`
 						lname
 						fname
             username
+            previledge
 					}
           upvotes {
             id

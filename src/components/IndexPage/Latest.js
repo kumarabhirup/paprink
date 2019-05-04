@@ -25,6 +25,7 @@ export const LATEST_QUERY = gql`
 						lname
 						fname
             username
+            previledge
 					}
           upvotes {
             id

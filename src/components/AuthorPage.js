@@ -6,6 +6,7 @@ import { Tab, Tabs } from 'react-bootstrap'
 import PageContent from './PageContent'
 import Card from './Card/'
 import { meta } from '../api/meta'
+import { VerfiedBadge } from '../api/mini'
 
 export default class AuthorPage extends Component {
 
@@ -28,7 +29,7 @@ export default class AuthorPage extends Component {
 								<div className="photo" style={{backgroundImage: `url(${this.props.authorData.profilePicture})`}}></div>
 							</div>
 							<div className="description">
-								<h1>{ this.props.authorData.name }</h1>
+								<h1>{ this.props.authorData.name }{ this.props.authorData.previledge.some(element => element === "VERIFIED") && (<>&nbsp;<VerfiedBadge /></>) }</h1>
 								<h2 style={{textTransform: "initial"}}>@{ this.props.authorData.username }</h2>
 								<p>{ this.props.authorData.bio || "This profile hasn't written any bio yet 😅" }</p>
 							</div>
@@ -73,6 +74,27 @@ export default class AuthorPage extends Component {
 												</div>
 											) }
 										</Tab>
+
+										{
+											this.props.draftPosts && (
+												<Tab eventKey="drafted" title={<b>Your Drafts</b>}>
+													<Grid
+														columns="repeat(auto-fit, minmax(260px, 1fr))"
+														gap="20px"
+														style={{width: "100%", margin: "0px auto"}}
+													>
+														{ this.props.draftPosts.length > 0 ? this.props.draftPosts.map(post => {
+															return <Card type={'small_image'} post={post} key={post.id} author user={this.props.user} />
+														}) : <p>No drafts found.</p> }
+													</Grid>
+													{ this.props.draftPageInfo.hasNextPage && (
+														<div className="load_more">
+															<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.draftOnLoadMore}>Load More</div>
+														</div>
+													) }
+												</Tab>
+											)
+										}
 
 									</Tabs>
 

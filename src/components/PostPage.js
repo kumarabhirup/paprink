@@ -13,6 +13,7 @@ import UpvoteButton from './Card/UpvoteButton'
 import categorySorter from '../lib/categorySorter'
 import { UPVOTE_MUTATION } from './Card'
 import { meta } from '../api/meta'
+import { VerfiedBadge } from '../api/mini'
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -22,7 +23,7 @@ const PostMetaAndShare = ({ postData, userId }) => (
 	<>
 		<div className="author_image"><div><a href={`/author/${postData.author.username}`}><img src={postData.author.profilePicture} alt={postData.author.name} /></a></div></div>
 		<div className="post_meta">
-			<a href={`/author/${postData.author.username}`}>{ postData.author.name }</a>
+			<a href={`/author/${postData.author.username}`}>{ postData.author.name }</a>{ postData.author.previledge.some(element => element === "VERIFIED") && (<>&nbsp;<VerfiedBadge /></>) }
 			<span>{ format(parseISO(postData.publishedAt || postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true }) }</span>
 			{postData.author.id === userId && <span><a href={`/editor/${postData.id}`}>✏️ EDIT POST</a></span>}
 		</div> {/*Sep 29, 2017 at 9:48 am*/}		

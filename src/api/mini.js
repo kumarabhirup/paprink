@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const categorySuggessions = [
   { id: "tech", text: "Technology" },
   { id: "fin", text: "Finance" },
@@ -26,3 +28,5 @@ export const categorySuggessions = [
   { id: "news", text: "News" },
   { id: "review", text: "Product Review" }
 ]
+
+export const VerfiedBadge = () => ( <img width={15} title="PaprInk Verified" src="https://www.tryviews.com/wp-content/uploads/2018/12/1495368559287.png" /> )
