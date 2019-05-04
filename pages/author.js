@@ -13,10 +13,12 @@ import User from '../src/components/User';
 export const POST_AUTHOR_QUERY = gql`
 	query POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
 		postsAuthorConnection(authorUsername: $authorUsername orderBy: $orderBy after: $after) {
-			pageInfo {
+			
+      pageInfo {
 				hasNextPage
 				endCursor
 			}
+
 			edges {
 				node {
 					id
@@ -45,6 +47,7 @@ export const POST_AUTHOR_QUERY = gql`
           publishedAt
 				}
 			}
+
 		}
 	}
 `
@@ -52,10 +55,12 @@ export const POST_AUTHOR_QUERY = gql`
 export const UPVOTED_POST_AUTHOR_QUERY = gql`
 	query UPVOTED_POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
 		upvotedPostsAuthorConnection(authorUsername: $authorUsername orderBy: $orderBy after: $after) {
-			pageInfo {
+			
+      pageInfo {
 				hasNextPage
 				endCursor
 			}
+
 			edges {
 				node {
 					id
@@ -84,38 +89,50 @@ export const UPVOTED_POST_AUTHOR_QUERY = gql`
           publishedAt
 				}
 			}
+
 		}
 	}
 `
 
 export const DRAFT_POST_AUTHOR_QUERY = gql`
-	query DRAFT_POST_AUTHOR_QUERY($authorUsername: String!){
-		getPostsInDraft(authorUsername: $authorUsername) {
-			id
-      title
-      thumbnail
-      slug
-      author {
-        id
-        name
-        lname
-        fname
-        profilePicture
-        username
-        bio
-        previledge
-      }
-      upvotes {
-        id
-        user {
-          id
-        }
-      }
-      upvotesNumber
-      createdAt
-      updatedAt
-      publishedAt
-		}
+	query DRAFT_POST_AUTHOR_QUERY($authorUsername: String! $orderBy: PostOrderByInput $after: String){
+		getPostsInDraft(authorUsername: $authorUsername orderBy: $orderBy after: $after) {
+
+      pageInfo {
+				hasNextPage
+				endCursor
+			}
+
+			edges {
+				node {
+					id
+					title
+					thumbnail
+          slug
+					author {
+						id
+						name
+						lname
+						fname
+            profilePicture
+            username
+            bio
+            previledge
+					}
+          upvotes {
+            id
+            user {
+              id
+            }
+          }
+          upvotesNumber
+					createdAt
+          updatedAt
+          publishedAt
+				}
+			}
+
+    }
 	}
 `
 
@@ -226,7 +243,33 @@ class authorPage extends Component {
                                         })
                                       }}
 
-                                      draftPosts={draftPosts}
+                                      draftPosts={draftPosts.edges.map(x => (x.node))}
+                                      draftPageInfo={draftPosts.pageInfo}
+                                      draftOnLoadMore={() => {
+                                        draftPostsPayload.fetchMore({
+                                          variables: {
+                                            after: draftPosts.pageInfo.endCursor
+                                          },
+                                          updateQuery: (prev, { fetchMoreResult }) => {
+
+                                            if (!fetchMoreResult) return prev
+
+                                            var updatedQuery = {
+                                              getPostsInDraft: {
+                                                __typename: "PostConnection",
+                                                pageInfo: fetchMoreResult.getPostsInDraft.pageInfo,
+                                                edges: [
+                                                  ...prev.getPostsInDraft.edges,
+                                                  ...fetchMoreResult.getPostsInDraft.edges
+                                                ]
+                                              }
+                                            }
+
+                                            return updatedQuery
+
+                                          }
+                                        })
+                                      }}
 
                                     />
                                     <Footer />

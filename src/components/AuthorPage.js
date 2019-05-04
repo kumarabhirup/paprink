@@ -87,9 +87,9 @@ export default class AuthorPage extends Component {
 															return <Card type={'small_image'} post={post} key={post.id} author user={this.props.user} />
 														}) : <p>No drafts found.</p> }
 													</Grid>
-													{ this.props.upvotedPageInfo.hasNextPage && (
+													{ this.props.draftPageInfo.hasNextPage && (
 														<div className="load_more">
-															<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.upvotedOnLoadMore}>Load More</div>
+															<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.draftOnLoadMore}>Load More</div>
 														</div>
 													) }
 												</Tab>
