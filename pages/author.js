@@ -146,22 +146,21 @@ class authorPage extends Component {
         {authorMeta => (
           <User>
             {userPayload => (
-              <Query query={DRAFT_POST_AUTHOR_QUERY} variables={{ authorUsername }}>
-                { draftPostsPayload => {
-                  console.log(draftPostsPayload)
+              <Query query={UPVOTED_POST_AUTHOR_QUERY} variables={{ authorUsername }}>
+                {upvotedPostsPayload => {
                   return (
-                    <Query query={UPVOTED_POST_AUTHOR_QUERY} variables={{ authorUsername }}>
-                      { upvotedPostsPayload => {
-                        return (
-                          
-                          <Query query={POST_AUTHOR_QUERY} variables={{ authorUsername }}>
-                            {({ data, loading, error, fetchMore }) => {
+                    <Query query={POST_AUTHOR_QUERY} variables={{ authorUsername }}>
+                      {({ data, loading, error, fetchMore }) => {
 
-                              if (loading && !data) {
-                                return <Loading />
-                              }
+                        if (loading && !data) {
+                          return <Loading />
+                        }
 
-                              if (data && data.postsAuthorConnection && authorMeta.data && authorMeta.data.getAuthor) {
+                        if (data && data.postsAuthorConnection && authorMeta.data && authorMeta.data.getAuthor) {
+                          return (
+                            <Query query={DRAFT_POST_AUTHOR_QUERY} variables={{ authorUsername }}>
+                              {draftPostsPayload => {
+                                const draftPosts = draftPostsPayload.data && draftPostsPayload.data.getPostsInDraft
                                 return (
                                   <>
                                     <Header />
@@ -227,24 +226,24 @@ class authorPage extends Component {
                                         })
                                       }}
 
-                                      draftPosts={draftPostsPayload}
+                                      draftPosts={draftPosts}
 
                                     />
                                     <Footer />
                                   </>
                                 )
-                              } else {
-                                return <QueryFailed />
-                              }
+                              }}
+                            </Query>
+                          )
+                        } else {
+                          return <QueryFailed />
+                        }
 
-                            }}
-                          </Query>
-
-                        )
-                      } }
+                      }}
                     </Query>
+
                   )
-                } }
+                }}
               </Query>
             )}
           </User>

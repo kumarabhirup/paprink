@@ -75,6 +75,27 @@ export default class AuthorPage extends Component {
 											) }
 										</Tab>
 
+										{
+											this.props.draftPosts && (
+												<Tab eventKey="drafted" title={<b>Your Drafts</b>}>
+													<Grid
+														columns="repeat(auto-fit, minmax(260px, 1fr))"
+														gap="20px"
+														style={{width: "100%", margin: "0px auto"}}
+													>
+														{ this.props.draftPosts.length > 0 ? this.props.draftPosts.map(post => {
+															return <Card type={'small_image'} post={post} key={post.id} author user={this.props.user} />
+														}) : <p>No drafts found.</p> }
+													</Grid>
+													{ this.props.upvotedPageInfo.hasNextPage && (
+														<div className="load_more">
+															<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.upvotedOnLoadMore}>Load More</div>
+														</div>
+													) }
+												</Tab>
+											)
+										}
+
 									</Tabs>
 
 								</div>
