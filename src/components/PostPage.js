@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { format, parseISO } from 'date-fns'
-import { Parser as HtmlToReactParser } from 'html-to-react'
 import dynamic from 'next/dynamic'
 import { ApolloConsumer } from 'react-apollo'
 import { withRouter } from 'next/router'
@@ -44,8 +43,6 @@ const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState, upvotesNumber, dis
 		{ postData.status === "DRAFT" && <p style={{textAlign: "center", marginTop: "15px"}}>THIS POST IS A DRAFT</p> }
 	</>
 )
-
-var htmlToReactParser = new HtmlToReactParser()
 
 class PostPage extends Component {
 
@@ -106,13 +103,15 @@ class PostPage extends Component {
 
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
 								<div className="post_body" style={{marginTop: "20px"}}>
-									{/* { htmlToReactParser.parse(postData.editorHtml) } */}
+
 									<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} />
+
 									<div className="post_tags">
 										<ul>
 											{ categorySorter(postData.categories).map(({ id, text }) => <li key={id} className="post_tag"><a href={`/categories/${id}`}>{text}</a></li>) }
 										</ul>
 									</div>
+									
 								</div>
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} />
 								
