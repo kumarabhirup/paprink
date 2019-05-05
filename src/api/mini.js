@@ -26,7 +26,10 @@ export const categorySuggessions = [
   { id: "us", text: "United States" },
   { id: "world", text: "World" },
   { id: "news", text: "News" },
-  { id: "review", text: "Product Review" }
+  { id: "review", text: "Product Review" },
+  { id: "art", text: "Art" },
+  { id: "culture", text: "Culture" },
+  { id: "story", text: "Story" },
 ]
 
 export const VerfiedBadge = () => ( <img width={15} title="PaprInk Verified" src="https://www.tryviews.com/wp-content/uploads/2018/12/1495368559287.png" /> )
