@@ -9,6 +9,9 @@ const Dante = dynamic(import('Dante2'), {
 })
 
 import { ImageBlockConfig } from 'Dante2/package/lib/components/blocks/image'
+import { EmbedBlockConfig } from 'Dante2/package/lib/components/blocks/embed'
+import { VideoBlockConfig } from 'Dante2/package/lib/components/blocks/video'
+import { PlaceholderBlockConfig } from 'Dante2/package/lib/components/blocks/placeholder'
 
 export default class PaprinkEditor extends Component {
 
@@ -61,7 +64,10 @@ export default class PaprinkEditor extends Component {
 
                   }
               }
-          })
+          }),
+          VideoBlockConfig({ options: { placeholder: 'Paste the link of a YouTube or Vimeo video!', endpoint: '//noembed.com/embed?url=', caption: 'optional caption' } }), 
+          EmbedBlockConfig({ options: { placeholder: 'Embed a tweet, or a YouTube video.', endpoint: '//noembed.com/embed?url=' } }),
+          PlaceholderBlockConfig()
         ]}
         read_only={0}
         ref="editor"
