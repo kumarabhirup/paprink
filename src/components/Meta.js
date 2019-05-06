@@ -18,10 +18,6 @@ class Meta extends React.Component {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-
-        <meta name="og:title" property="og:title" content={meta.meta_ogTitle} />
-        <meta name="description" content={meta.meta_description} />
-        <meta name="author" content={meta.name} />
         <meta name="robots" content="index, follow" />
 
         <link rel="shortcut icon" href="/static/favicon.ico" />
