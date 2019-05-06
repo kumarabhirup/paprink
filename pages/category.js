@@ -72,6 +72,7 @@ class categoryPage extends Component {
                   <CategoryPage
                     user={payload.data && payload.data.me}
                     category={catagoryObject[0].text} 
+                    queryCategory={this.props.router.query.category}
                     posts={data.postsCategoryConnection.edges.map(x => (x.node) )} 
                     pageInfo={data.postsCategoryConnection.pageInfo} 
                     onLoadMore={() => {

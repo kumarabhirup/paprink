@@ -13,7 +13,30 @@ export default class CategoryPage extends Component {
 			<PageContent>
 
 				<Head>
+
 					<title>{ `Posts about '${this.props.category}' @ ${meta.title}` }</title>
+
+					<meta name="title" content={ `Posts about ${this.props.category} @ ${meta.title}` } />
+					<meta name="topic" content={ `Posts about ${this.props.category} @ ${meta.title}` } />
+					<meta name="subject" content={ `Posts about ${this.props.category} @ ${meta.title}` } />
+					<meta name="identifier-URL" content={meta.domain} />
+					<meta name="robots" content="index,follow" />
+					<meta name="description" content={ `Read all ${this.props.category} @ ${meta.title}!` } />
+					<meta name="url" content={`${meta.domain}/categories/${this.props.queryCategory}`} />
+					<meta name="rating" content="General" />
+					<meta http-equiv="Cache-Control" content="no-cache" />
+
+					<meta property="og:title" content={ `Posts about ${this.props.category} @ ${meta.title}` } />
+					<meta name="twitter:title" content={ `Posts about ${this.props.category} @ ${meta.title}` } />
+					<meta property="og:type" content="article" />
+					<meta name="twitter:card" content="summary" />
+					<meta property="og:url" content={`${meta.domain}/categories/${this.props.queryCategory}`} />
+					<meta name="twitter:url" content={`${meta.domain}/categories/${this.props.queryCategory}`} />
+					<meta property="og:site_name" content={meta.name} />
+					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+					<meta property="og:description" content={ `Read all ${this.props.category} @ ${meta.title}!` } />
+					<meta name="twitter:description" content={ `Read all ${this.props.category} @ ${meta.title}!` } />
+
 				</Head>
 
 				{/* Page Content */}
