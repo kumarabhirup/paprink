@@ -89,14 +89,34 @@ class PostPage extends Component {
 					<PageContent>
 
 						<Head>
+
 							<title>{ `${postData.title} - ${meta.title}` }</title>
+
+							<meta name="title" content={postData.title} />
+							<meta name="topic" content={postData.title} />
+							<meta name="subject" content={postData.title} />
+							<meta name="identifier-URL" content={meta.domain} />
+							<meta name="robots" content="index,follow" />
+							<meta name="description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
+							<meta name="author" content={`${postData.author.name}, ${postData.author.email}`} />
+							<meta name="url" content={`${meta.domain}/p/${postData.slug}-${postData.id}`} />
+							<meta name="rating" content="General" />
+							<meta name="revised" content={format(parseISO(postData.publishedAt || postData.createdAt), 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true })} />
+							<meta http-equiv="Cache-Control" content="no-cache" />
+
 							<meta property="og:title" content={postData.title} />
+							<meta name="twitter:title" content={postData.title} />
 							<meta property="og:type" content="article" />
+							<meta name="twitter:card" content="summary" />
 							<meta property="og:url" content={`${meta.domain}/p/${postData.slug}-${postData.id}`} />
+							<meta name="twitter:url" content={`${meta.domain}/p/${postData.slug}-${postData.id}`} />
 							<meta property="og:image" content={postData.thumbnail.image} />
+							<meta name="twitter:image" content={postData.thumbnail.image} />
 							<meta property="og:site_name" content={meta.name} />
 							<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
 							<meta property="og:description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
+							<meta name="twitter:description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
+
 						</Head>
 
 						{/* Post Content */}
