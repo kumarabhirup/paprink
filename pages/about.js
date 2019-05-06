@@ -17,7 +17,34 @@ class aboutPage extends Component {
   render() {
     return (
       <>
-      <Head><title>What's {meta.title}?</title></Head>
+        <Head>
+
+          <title>What's {meta.title}?</title>
+
+          <meta name="title" content={`${meta.title} - Where every writer earns.`} />
+					<meta name="topic" content={`${meta.title} - Where every writer earns.`} />
+					<meta name="subject" content={`${meta.title} - Where every writer earns.`} />
+					<meta name="identifier-URL" content={meta.domain} />
+					<meta name="robots" content="index,follow" />
+					<meta name="description" content={`Best of the date, all up to date!`} />
+					<meta name="url" content={`${meta.domain}/about`} />
+					<meta name="rating" content="General" />
+					<meta http-equiv="Cache-Control" content="no-cache" />
+
+					<meta property="og:title" content={`${meta.title} - Where every writer earns.`} />
+					<meta name="twitter:title" content={`${meta.title} - Where every writer earns.`} />
+					<meta property="og:type" content="article" />
+					<meta name="twitter:card" content="summary" />
+					<meta property="og:url" content={`${meta.domain}/about`} />
+					<meta name="twitter:url" content={`${meta.domain}/about`} />
+          <meta property="og:image" content={meta.image} />
+				  <meta name="twitter:image" content={meta.image} />
+					<meta property="og:site_name" content={meta.name} />
+					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+					<meta property="og:description" content={`Best of the date, all up to date!`} />
+					<meta name="twitter:description" content={`Best of the date, all up to date!`} />
+
+        </Head>
         <Header />
         <Title title={`What is ${meta.title}?`} thumbnail={`https://cdn.wallpapersafari.com/99/58/Tn4uob.jpg`} />
         <AboutPage />

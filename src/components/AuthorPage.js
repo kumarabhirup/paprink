@@ -36,8 +36,10 @@ export default class AuthorPage extends Component {
 					<meta name="twitter:card" content="summary" />
 					<meta property="og:url" content={`${meta.domain}/author/${this.props.authorData.username}`} />
 					<meta name="twitter:url" content={`${meta.domain}/author/${this.props.authorData.username}`} />
-					<meta property="og:image" content={this.props.authorData.profilePicture} />
-					<meta name="twitter:image" content={this.props.authorData.profilePicture} />
+					{/* <meta property="og:image" content={this.props.authorData.profilePicture} />
+					<meta name="twitter:image" content={this.props.authorData.profilePicture} /> */}
+					<meta property="og:image" content={meta.image} />
+				  <meta name="twitter:image" content={meta.image} />
 					<meta property="og:site_name" content={meta.name} />
 					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
 					<meta property="og:description" content={`${this.props.authorData.name}'s profile @ ${meta.name}!`} />

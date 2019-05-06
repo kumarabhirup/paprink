@@ -8,7 +8,7 @@ export const meta = {
   meta_description: "PaprInk",
   meta_ogTitle: "PaprInk",
   tagline: (<></>),
-  image: ``,
+  image: "https://i.ibb.co/pQRG5ZT/PaprInk.jpg",
   favicon: `/static/favicon.ico`,
   email: `info@iqubex.com`,
   domain: process.env.NODE_ENV === "production" ? process.env.PROD_DOMAIN : process.env.DEV_DOMAIN

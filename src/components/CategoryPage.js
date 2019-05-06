@@ -32,6 +32,8 @@ export default class CategoryPage extends Component {
 					<meta name="twitter:card" content="summary" />
 					<meta property="og:url" content={`${meta.domain}/categories/${this.props.queryCategory}`} />
 					<meta name="twitter:url" content={`${meta.domain}/categories/${this.props.queryCategory}`} />
+					<meta property="og:image" content={meta.image} />
+				  <meta name="twitter:image" content={meta.image} />
 					<meta property="og:site_name" content={meta.name} />
 					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
 					<meta property="og:description" content={ `Read all ${this.props.category} @ ${meta.title}!` } />
