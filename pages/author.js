@@ -114,6 +114,7 @@ export const DRAFT_POST_AUTHOR_QUERY = gql`
 						name
 						lname
 						fname
+            email
             profilePicture
             username
             bio
@@ -143,6 +144,7 @@ const AUTHOR_QUERY = gql`
       name
       lname
       fname
+      email
       previledge
       profilePicture
       username

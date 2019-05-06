@@ -16,7 +16,33 @@ export default class AuthorPage extends Component {
       <PageContent noSidebar>
 
 				<Head>
+
 					<title>{ `${this.props.authorData.name} (@${this.props.authorData.username}) - ${meta.title}` }</title>
+
+					<meta name="title" content={ `${this.props.authorData.name} (@${this.props.authorData.username})` } />
+					<meta name="topic" content={ `${this.props.authorData.name} (@${this.props.authorData.username})` } />
+					<meta name="subject" content={ `${this.props.authorData.name} (@${this.props.authorData.username})` } />
+					<meta name="identifier-URL" content={meta.domain} />
+					<meta name="robots" content="index,follow" />
+					<meta name="description" content={`${this.props.authorData.name}'s profile @ ${meta.name}!`} />
+					<meta name="author" content={`${this.props.authorData.name}, ${this.props.authorData.email}`} />
+					<meta name="url" content={`${meta.domain}/author/${this.props.authorData.username}`} />
+					<meta name="rating" content="General" />
+					<meta http-equiv="Cache-Control" content="no-cache" />
+
+					<meta property="og:title" content={ `${this.props.authorData.name} (@${this.props.authorData.username})` } />
+					<meta name="twitter:title" content={ `${this.props.authorData.name} (@${this.props.authorData.username})` } />
+					<meta property="og:type" content="article" />
+					<meta name="twitter:card" content="summary" />
+					<meta property="og:url" content={`${meta.domain}/author/${this.props.authorData.username}`} />
+					<meta name="twitter:url" content={`${meta.domain}/author/${this.props.authorData.username}`} />
+					<meta property="og:image" content={this.props.authorData.profilePicture} />
+					<meta name="twitter:image" content={this.props.authorData.profilePicture} />
+					<meta property="og:site_name" content={meta.name} />
+					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+					<meta property="og:description" content={`${this.props.authorData.name}'s profile @ ${meta.name}!`} />
+					<meta name="twitter:description" content={`${this.props.authorData.name}'s profile @ ${meta.name}!`} />
+
 				</Head>
 
         {/* Page Content */}
