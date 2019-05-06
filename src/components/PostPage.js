@@ -30,8 +30,8 @@ const PostMetaAndShare = ({ postData, userId }) => (
 			<span>share</span>
 			<ul className="post_share_list">
 				<li className="post_share_item"><a href={`https://www.facebook.com/sharer/sharer.php?u=${meta.website}/p/${postData.slug}-${postData.id}&t=${postData.title}`} target="_blank" title="Share on Facebook" onClick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"><i className="fa fa-facebook" aria-hidden="true"></i></a></li>
-				<li className="post_share_item"><a href={`https://twitter.com/intent/tweet?text=${postData.title} - Written by @${postData.author.username} on ${meta.name}%0a${meta.domain}/p/${postData.slug}-${postData.id}`} target="_blank"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
-				<li className="post_share_item" style={{cursor: "not-allowed"}}><a href="#" style={{cursor: "not-allowed"}}><i className="fa fa-google" style={{cursor: "not-allowed"}} aria-hidden="true"></i></a></li>
+				<li className="post_share_item"><a href={`https://twitter.com/intent/tweet?text=${postData.title} - Written by @${postData.author.username} on ${meta.name}%0a${meta.domain}/p/${postData.slug}-${postData.id}`} title="Share on Twiiter" target="_blank"><i className="fa fa-twitter" aria-hidden="true"></i></a></li>
+				<li className="post_share_item" style={{cursor: "not-allowed"}}><a href="#" style={{cursor: "not-allowed"}} title="Google+ is to shut down."><i className="fa fa-google" style={{cursor: "not-allowed"}} aria-hidden="true"></i></a></li>
 			</ul>
 		</div>
 	</>
@@ -90,6 +90,13 @@ class PostPage extends Component {
 
 						<Head>
 							<title>{ `${postData.title} - ${meta.title}` }</title>
+							<meta property="og:title" content={postData.title} />
+							<meta property="og:type" content="article" />
+							<meta property="og:url" content={`${meta.domain}/p/${postData.slug}-${postData.id}`} />
+							<meta property="og:image" content={postData.thumbnail.image} />
+							<meta property="og:site_name" content={meta.name} />
+							<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+							<meta property="og:description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
 						</Head>
 
 						{/* Post Content */}
