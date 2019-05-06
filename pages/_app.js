@@ -25,9 +25,7 @@ class Wrapper extends App {
             <Container>
                 <ApolloProvider client={apollo}>
                     <Page>
-                        <div className="super_container">
-                            <Component {...pageProps} />
-                        </div>
+                        <div className="super_container"><Component {...pageProps} /></div>
                     </Page>
                 </ApolloProvider>
             </Container>
