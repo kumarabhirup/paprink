@@ -5,7 +5,7 @@ export const meta = {
   title: 'PaprInk',
   social: 'wepaprink',
   website: 'https://PaprInk.com',
-  meta_description: "PaprInk",
+  meta_description: "PaprInk is made to inspire people to write everyday. In 21st century, everyone needs to develop a habit of writing all what they think in their minds.",
   meta_ogTitle: "PaprInk",
   tagline: (<></>),
   image: "https://i.ibb.co/pQRG5ZT/PaprInk.jpg",

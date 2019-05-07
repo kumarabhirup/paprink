@@ -26,7 +26,7 @@ class aboutPage extends Component {
 					<meta name="subject" content={`${meta.title} - Where every writer earns.`} />
 					<meta name="identifier-URL" content={meta.domain} />
 					<meta name="robots" content="index,follow" />
-					<meta name="description" content={`Best of the date, all up to date!`} />
+					<meta name="description" content={meta.meta_description} />
 					<meta name="url" content={`${meta.domain}/about`} />
 					<meta name="rating" content="General" />
 					<meta http-equiv="Cache-Control" content="no-cache" />
@@ -41,8 +41,8 @@ class aboutPage extends Component {
 				  <meta name="twitter:image" content={meta.image} />
 					<meta property="og:site_name" content={meta.name} />
 					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
-					<meta property="og:description" content={`Best of the date, all up to date!`} />
-					<meta name="twitter:description" content={`Best of the date, all up to date!`} />
+					<meta property="og:description" content={meta.meta_description} />
+					<meta name="twitter:description" content={meta.meta_description} />
 
         </Head>
         <Header />
