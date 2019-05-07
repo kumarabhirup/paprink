@@ -19,7 +19,10 @@ class settingsPage extends Component {
   render() {
     return (
       <>
-      <Head><title>User settings - {meta.title}</title></Head>
+      <Head>
+        <title>User settings - {meta.title}</title>
+        <meta name="robots" content="nofollow, noindex" />
+      </Head>
       <PleaseSignIn>
         { me => (
           <>

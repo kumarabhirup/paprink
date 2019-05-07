@@ -30,6 +30,7 @@ class loginPage extends Component {
             }(document, 'script', 'facebook-jssdk'));
           `}}></script>
           <title>Sign up now @ {meta.title}</title>
+          <meta name="robots" content="nofollow, noindex" />
         </Head>
         <LoginPage />
       </>

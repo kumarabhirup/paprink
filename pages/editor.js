@@ -61,7 +61,10 @@ class editorPage extends Component {
   render() {
     return (
       <>
-      <Head><title>Compose new post - {meta.title}</title></Head>
+      <Head>
+        <title>Compose new post - {meta.title}</title>
+        <meta name="robots" content="nofollow, noindex" />
+      </Head>
       <Query query={CAN_UPDATE_POST_QUERY} variables={{ id: this.props.router.query.postId }}>
         { payload => {
 
