@@ -15,9 +15,9 @@ export default class IndexPage extends Component {
     return (
       <PageContent>
         <Head>
-          <meta name="title" content={`${meta.title} - Where every writer earns.`} />
-					<meta name="topic" content={`${meta.title} - Where every writer earns.`} />
-					<meta name="subject" content={`${meta.title} - Where every writer earns.`} />
+          <meta name="title" content={meta.meta_ogTitle} />
+					<meta name="topic" content={meta.meta_ogTitle} />
+					<meta name="subject" content={meta.meta_ogTitle} />
 					<meta name="identifier-URL" content={meta.domain} />
 					<meta name="robots" content="index,follow" />
 					<meta name="description" content={meta.meta_description} />
@@ -25,8 +25,8 @@ export default class IndexPage extends Component {
 					<meta name="rating" content="General" />
 					<meta http-equiv="Cache-Control" content="no-cache" />
 
-					<meta property="og:title" content={`${meta.title} - Where every writer earns.`} />
-					<meta name="twitter:title" content={`${meta.title} - Where every writer earns.`} />
+					<meta property="og:title" content={meta.meta_ogTitle} />
+					<meta name="twitter:title" content={meta.meta_ogTitle} />
 					<meta property="og:type" content="article" />
 					<meta name="twitter:card" content="summary" />
 					<meta property="og:url" content={`${meta.domain}`} />

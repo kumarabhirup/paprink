@@ -110,7 +110,7 @@ class Meta extends React.Component {
           </>
         ) : null}
 
-        <title>{ `${meta.title} - Where every writer earns.` }</title>
+        <title>{meta.meta_ogTitle}</title>
 
       </Head>
     )
