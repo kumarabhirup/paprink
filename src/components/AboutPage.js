@@ -14,9 +14,9 @@ class AboutPage extends Component {
 
         {/* Post Content */}
             
-          <div classNameName="col-lg-10 offset-lg-1" style={{paddingBottom: "50px"}}>
-            <div classNameName="post_content">
-              <div classNameName="post_body">
+          <div className="col-lg-10 offset-lg-1" style={{paddingBottom: "50px"}}>
+            <div className="post_content">
+              <div className="post_body">
 
                 <p className="post_p">
                   PaprInk is made to inspire people to write everyday. In 21st century, everyone needs to develop a habit of writing all what they think in their minds. To bring the habit in, PaprInk reminds people to pledge to write something everyday. With everlasting number of allowed categories to write about, you are at the right place to get the motivation for writing.
