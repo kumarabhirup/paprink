@@ -11,6 +11,7 @@ class loginPage extends Component {
     return (
       <>
         <Head>
+
           <script dangerouslySetInnerHTML={{__html: `
             window.fbAsyncInit = function() {
               FB.init({
@@ -29,12 +30,15 @@ class loginPage extends Component {
               fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
           `}}></script>
+
           <title>Sign up now @ {meta.title}</title>
           <meta name="robots" content="nofollow, noindex" />
+
           <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
           <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
           <link rel="stylesheet" type="text/css" href="/static/auth/css/util.css" />
           <link rel="stylesheet" type="text/css" href="/static/auth/css/main.css" />
+
         </Head>
         <LoginPage />
       </>
