@@ -31,6 +31,8 @@ class loginPage extends Component {
           `}}></script>
           <title>Sign up now @ {meta.title}</title>
           <meta name="robots" content="nofollow, noindex" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/css/util.css" />
+          <link rel="stylesheet" type="text/css" href="/static/auth/css/main.css" />
         </Head>
         <LoginPage />
       </>

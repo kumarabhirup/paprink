@@ -64,6 +64,15 @@ class editorPage extends Component {
       <Head>
         <title>Compose new post - {meta.title}</title>
         <meta name="robots" content="nofollow, noindex" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
+        <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/animate.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
+        <link rel="stylesheet" type="text/css" href="/static/styles/Editor.css" />
       </Head>
       <Query query={CAN_UPDATE_POST_QUERY} variables={{ id: this.props.router.query.postId }}>
         { payload => {

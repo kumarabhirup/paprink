@@ -44,6 +44,15 @@ class aboutPage extends Component {
 					<meta property="og:description" content={meta.meta_description} />
 					<meta name="twitter:description" content={meta.meta_description} />
 
+					<link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
+          <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+          <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+          <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/animate.css" />
+          <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css" />
+					<link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
+          <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
+
         </Head>
         <Header />
         <Title title={`What is ${meta.title}?`} thumbnail={`https://cdn.wallpapersafari.com/99/58/Tn4uob.jpg`} />
