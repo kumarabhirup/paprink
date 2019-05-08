@@ -20,8 +20,10 @@ class settingsPage extends Component {
     return (
       <>
       <Head>
+
         <title>User settings - {meta.title}</title>
         <meta name="robots" content="nofollow, noindex" />
+
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
         <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
@@ -32,6 +34,16 @@ class settingsPage extends Component {
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/react-day-picker/lib/style.css" />
+
+        <script src="/static/prebuilt/js/jquery-3.2.1.min.js"></script>
+        <script src="/static/prebuilt/styles/bootstrap4/popper.js"></script>
+        <script src="/static/prebuilt/styles/bootstrap4/bootstrap.min.js"></script>
+        <script src="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="/static/prebuilt/plugins/easing/easing.js"></script>
+        <script src="/static/prebuilt/plugins/masonry/masonry.js"></script>
+        <script src="/static/prebuilt/plugins/parallax-js-master/parallax.min.js"></script>
+        <script src="/static/prebuilt/js/post_nosidebar.js"></script>
+
       </Head>
       <PleaseSignIn>
         { me => (

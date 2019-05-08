@@ -54,6 +54,7 @@ class postPage extends Component {
     return (
       <>
       <Head>
+
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
         <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
@@ -62,6 +63,16 @@ class postPage extends Component {
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css" />
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post.css" />
         <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
+
+        <script src="/static/prebuilt/js/jquery-3.2.1.min.js"></script>
+        <script src="/static/prebuilt/styles/bootstrap4/popper.js"></script>
+        <script src="/static/prebuilt/styles/bootstrap4/bootstrap.min.js"></script>
+        <script src="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="/static/prebuilt/plugins/easing/easing.js"></script>
+        <script src="/static/prebuilt/plugins/masonry/masonry.js"></script>
+        <script src="/static/prebuilt/plugins/parallax-js-master/parallax.min.js"></script>
+        <script src="/static/prebuilt/js/post.js"></script>
+
       </Head>
       <User>
         { userPayload => (

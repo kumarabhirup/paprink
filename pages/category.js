@@ -55,6 +55,7 @@ class categoryPage extends Component {
       <>
       <User>
         <Head>
+
           <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
           <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
           <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
@@ -65,6 +66,16 @@ class categoryPage extends Component {
           <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_responsive.css" />
           <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/category.css" />
           <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/category_responsive.css" />
+
+          <script src="/static/prebuilt/js/jquery-3.2.1.min.js"></script>
+          <script src="/static/prebuilt/styles/bootstrap4/popper.js"></script>
+          <script src="/static/prebuilt/styles/bootstrap4/bootstrap.min.js"></script>
+          <script src="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+          <script src="/static/prebuilt/plugins/easing/easing.js"></script>
+          <script src="/static/prebuilt/plugins/masonry/masonry.js"></script>
+          <script src="/static/prebuilt/plugins/parallax-js-master/parallax.min.js"></script>
+          <script src="/static/prebuilt/js/category.js"></script>
+
         </Head>
         { payload => (
           <Query query={CATEGORY_QUERY} variables={{
