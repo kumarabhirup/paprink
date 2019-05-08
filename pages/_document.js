@@ -28,7 +28,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
 
-          <script src="/static/prebuilt/js/jquery-3.2.1.min.js"></script>
+          {/* <script src="/static/prebuilt/js/jquery-3.2.1.min.js"></script>
           <script src="/static/prebuilt/styles/bootstrap4/popper.js"></script>
           <script src="/static/prebuilt/styles/bootstrap4/bootstrap.min.js"></script>
           <script src="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
@@ -38,7 +38,7 @@ class MyDocument extends Document {
           <script src="/static/prebuilt/plugins/parallax-js-master/parallax.min.js"></script>
 
           <script src="/static/prebuilt/js/custom.js"></script>
-          <script src="/static/prebuilt/js/post.js"></script>
+          <script src="/static/prebuilt/js/post.js"></script> */}
 
         </body> 
       </html>
