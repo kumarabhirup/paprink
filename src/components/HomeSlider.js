@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { withRouter } from 'next/router'
+import Head from 'next/head'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import categorySorter from '../lib/categorySorter'
 import { Loading, QueryFailed } from './QueryStatus'
-import UpvoteButton from './Card/UpvoteButton';
+import UpvoteButton from './Card/UpvoteButton'
 
 export const FEATURED_QUERY = gql`
 	query FEATURED_QUERY {

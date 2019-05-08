@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
 import Router, { withRouter } from 'next/router'
-import { ApolloConsumer } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import PageContent from './PageContent'
 

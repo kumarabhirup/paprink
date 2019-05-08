@@ -13,7 +13,7 @@ class Page extends Component {
       <ThemeProvider theme={theme}>
         <>
           <Meta />
-          <div>{this.props.children}</div>
+          {this.props.children}
         </>
       </ThemeProvider>
     )
