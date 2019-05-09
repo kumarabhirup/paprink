@@ -11,6 +11,7 @@ import EditorPage from '../src/components/Editor'
 import PleaseSignIn from '../src/components/PleaseSignIn'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
 import { meta } from '../src/api/meta'
+import MiniTitle from '../src/components/MiniTitle'
 
 const CAN_UPDATE_POST_QUERY = gql`
   query CAN_UPDATE_POST_QUERY($id: ID!){
@@ -62,8 +63,29 @@ class editorPage extends Component {
     return (
       <>
       <Head>
+
         <title>Compose new post - {meta.title}</title>
         <meta name="robots" content="nofollow, noindex" />
+
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
+        <link href="/static/prebuilt/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/OwlCarousel2-2.2.1/animate.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar.css" />
+        <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/post_nosidebar_responsive.css" />
+        <link rel="stylesheet" type="text/css" href="/static/styles/Editor.css" />
+
+        <script src="/static/prebuilt/js/jquery-3.2.1.min.js"></script>
+        <script src="/static/prebuilt/styles/bootstrap4/popper.js"></script>
+        <script src="/static/prebuilt/styles/bootstrap4/bootstrap.min.js"></script>
+        <script src="/static/prebuilt/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+        <script src="/static/prebuilt/plugins/easing/easing.js"></script>
+        <script src="/static/prebuilt/plugins/masonry/masonry.js"></script>
+        <script src="/static/prebuilt/plugins/parallax-js-master/parallax.min.js"></script>
+        <script src="/static/prebuilt/js/post_nosidebar.js"></script>
+
       </Head>
       <Query query={CAN_UPDATE_POST_QUERY} variables={{ id: this.props.router.query.postId }}>
         { payload => {
@@ -78,7 +100,7 @@ class editorPage extends Component {
                 { me => (
                   <>
                   <Header />
-                  <Title noSidebar title={this.state.title} tags={this.state.categories} thumbnail={this.state.images.uploading === 'done' && this.state.images.blackOverlayImage} currentUser={me} new />
+                  <MiniTitle>Compose new post</MiniTitle>
                   <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} new />
                   <Footer />
                   <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
