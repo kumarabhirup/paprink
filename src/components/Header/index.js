@@ -8,6 +8,9 @@ import ProfileButton from './profileButton'
 import SearchBar from '../SearchBar'
 
 class Header extends Component {
+
+  signInText = this.props.router.pathname === "/" ? "PLEDGE NOW" : "SIGN IN"
+
   render() {
     return (
       <User>
@@ -28,7 +31,7 @@ class Header extends Component {
                               return <li key={index}><a href={`${item.link}`}>{item.text}</a></li>
                             }
                           }) }
-                          { me ? <ProfileButton me={me} /> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', zoom: '80%'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {`Sign In`.toUpperCase()}</a></li> }
+                          { me ? <ProfileButton me={me} /> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', zoom: '80%'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {this.signInText}</a></li> } {/* Sign In */}
                         </ul>
                       </nav>
                       <div className="search_container ml-auto">
@@ -40,7 +43,7 @@ class Header extends Component {
                         
                       </div>
                       <div className="hamburger ml-auto menu_mm">
-                        { me ? <ProfileButton me={me} /> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', listStyle: 'none', display: 'inline-block'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {`Sign In`.toUpperCase()}</a></li> }
+                        { me ? <ProfileButton me={me} /> : <li style={{backgroundColor: '#ffffff', color: '#000000', borderRadius: '5px', padding: '5px 10px', listStyle: 'none', display: 'inline-block'}}><a href={`${meta.domain}/signin?intent=${this.props.router.asPath}`} style={{color: '#000000'}}>⚡️🚦 {this.signInText}</a></li> }
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <i className="fa fa-bars trans_200 menu_mm" aria-hidden="true"></i>
                       </div>
@@ -75,6 +78,7 @@ class Header extends Component {
       </User>
     )
   }
+
 }
 
 export default withRouter(Header)

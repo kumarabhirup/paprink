@@ -180,7 +180,7 @@ const COUNT_USERS_QUERY = gql`
 `
 
 const BannerButton = props => (
-  <a class="banner_btn" href={props.link} {...props} >{ props.text }<i class="ti-arrow-right">{ props.i }</i></a>
+  <a className="banner_btn" href={props.link} {...props} >{ props.text }<i className="ti-arrow-right">{ props.i }</i></a>
 )
 
 class Landing extends Component {
@@ -191,18 +191,19 @@ class Landing extends Component {
           <Query query={COUNT_USERS_QUERY}>
             { ({ data: { countUsers } }) => (
               <Section>
-                <div class="banner_inner d-flex align-items-center">
-                  <div class="overlay"></div>
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
-                        <div class="banner_content" style={{marginTop: "-50px"}}>
+                <div className="banner_inner d-flex align-items-center">
+                  <div className="overlay"></div>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
+                        <div className="banner_content" style={{marginTop: "-50px"}}>
                           <a href="https://www.producthunt.com/posts/bulk-mail-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bulk-mail-cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=143885&theme=light" alt="bulk-mail CLI - Do hassle-free email marketing with this powerful tool 🔥 | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
                           <br /><br /><br />
-                          {!me && <h3>Pledge to write<br />everyday!</h3>}
+                          {!me && <h3>Community for <br /> writers to flourish.</h3>}
                           {me && <h3>Nice pledge,<br />{me.name}!</h3>}
-                          <p>Now that you have signed in, it is time to <b>write one post daily</b> if not written. ✍️ <br /> <b>Also apprieciate other writers by upvoting 🔥 their articles!</b> </p>
-                          {me ? <BannerButton link={`/editor/new`} text="WRITE NEW POST" i="🖋️" /> : <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TODAY" i={`${countUsers > 0 ? countUsers : "no one"} did`} /> }
+                          {me && <p>Now that you have signed in, it is time to <b>write one post daily</b> if not written. ✍️ <br /> <b>Also apprieciate other writers by upvoting 🔥 their articles!</b> </p>}
+                          {!me && <p>Research by Laura King shows that writing about achieving future goals and dreams can make people happier and healthier.</p>}
+                          {me ? <BannerButton link={`/editor/new`} text="WRITE NEW POST" i="🖋️" /> : <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TO WRITE" i={`${countUsers > 0 ? countUsers : "no one"} did 🔥`} /> }
                         </div>
                       </div>
                     </div>
