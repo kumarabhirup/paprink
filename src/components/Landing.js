@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { withRouter } from 'next/router'
+
+import User from './User'
 
 const Section = styled.section`
 
@@ -168,27 +171,37 @@ const Section = styled.section`
 
 `
 
-export default class Landing extends Component {
+const BannerButton = props => (
+  <a class="banner_btn" href={props.link} {...props} >{ props.text }<i class="ti-arrow-right">{ props.i }</i></a>
+)
+
+class Landing extends Component {
   render() {
     return (
-      <Section>
-        <div class="banner_inner d-flex align-items-center">
-          <div class="overlay"></div>
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
-                <div class="banner_content" style={{marginTop: "-50px"}}>
-                  <a href="https://www.producthunt.com/posts/bulk-mail-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bulk-mail-cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=143885&theme=light" alt="bulk-mail CLI - Do hassle-free email marketing with this powerful tool 🔥 | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
-                  <br /><br /><br />
-                  <h3>Pledge to write<br />everyday!</h3>
-                  <p>Research by Laura King shows that writing about achieving future goals and dreams can make people happier and healthier.</p>
-                  <a class="banner_btn" href="/signin">PLEDGE TODAY<i class="ti-arrow-right">450 did</i></a>
+      <User>
+        {({data: {me}}) => (
+          <Section>
+            <div class="banner_inner d-flex align-items-center">
+              <div class="overlay"></div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
+                    <div class="banner_content" style={{marginTop: "-50px"}}>
+                      <a href="https://www.producthunt.com/posts/bulk-mail-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bulk-mail-cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=143885&theme=light" alt="bulk-mail CLI - Do hassle-free email marketing with this powerful tool 🔥 | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
+                      <br /><br /><br />
+                      <h3>Pledge to write<br />everyday!</h3>
+                      <p>Research by Laura King shows that writing about achieving future goals and dreams can make people happier and healthier.</p>
+                      {me ? <BannerButton link={`#`} text="ALREADY PLEDGED" i="CONGRATULATIONS 🎉" style={{opacity: 0.6}} /> : <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TODAY" i="700 did" /> }
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </Section>
+          </Section>
+        )}
+      </User>
     )
   }
 }
+
+export default withRouter(Landing)
