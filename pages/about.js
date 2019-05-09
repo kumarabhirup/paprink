@@ -64,7 +64,7 @@ class aboutPage extends Component {
 
         </Head>
         <Header />
-        <Title title={`What is ${meta.title}?`} thumbnail={`https://cdn.wallpapersafari.com/99/58/Tn4uob.jpg`} />
+        <Title title={`What is ${meta.title}?`} thumbnail={`https://i.ibb.co/1bxgbyB/home-banner.jpg`} />
         <AboutPage />
         <Footer />
       </>
