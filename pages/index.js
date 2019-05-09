@@ -5,6 +5,7 @@ import Header from '../src/components/Header/'
 import HomeSlider from '../src/components/HomeSlider'
 import IndexPage from '../src/components/IndexPage/'
 import Footer from '../src/components/Footer'
+import Landing from '../src/components/Landing'
 
 export default class homePage extends Component {
   render() {
@@ -33,7 +34,7 @@ export default class homePage extends Component {
 
         </Head>
         <Header />
-        <HomeSlider />
+        <Landing />
         <IndexPage />
         <Footer />
       </>
