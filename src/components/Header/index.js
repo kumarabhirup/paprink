@@ -9,7 +9,7 @@ import SearchBar from '../SearchBar'
 
 class Header extends Component {
 
-  signInText = this.props.router.pathname === "/" ? "PLEDGE NOW" : "SIGN IN"
+  signInText = "SIGN IN" // this.props.router.pathname === "/" ? "PLEDGE NOW" : "SIGN IN"
 
   render() {
     return (
