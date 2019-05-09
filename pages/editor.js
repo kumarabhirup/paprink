@@ -11,6 +11,7 @@ import EditorPage from '../src/components/Editor'
 import PleaseSignIn from '../src/components/PleaseSignIn'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
 import { meta } from '../src/api/meta'
+import MiniTitle from '../src/components/MiniTitle'
 
 const CAN_UPDATE_POST_QUERY = gql`
   query CAN_UPDATE_POST_QUERY($id: ID!){
@@ -99,7 +100,7 @@ class editorPage extends Component {
                 { me => (
                   <>
                   <Header />
-                  <Title noSidebar title={this.state.title} tags={this.state.categories} thumbnail={this.state.images.uploading === 'done' && this.state.images.blackOverlayImage} currentUser={me} new />
+                  <MiniTitle>Compose new post</MiniTitle>
                   <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} new />
                   <Footer />
                   <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>

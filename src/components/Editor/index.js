@@ -158,7 +158,7 @@ class EditorPage extends Component {
         })
         if (draftPost.data.savePost){
           await this.setState({ drafted: true })
-          this.props.router.replace(`/editor?postId=${draftPost.data.savePost.id}`, `/editor/${draftPost.data.savePost.id}`)
+          this.props.router.replace(`/editor/${draftPost.data.savePost.id}`)
         } else {
           await this.setState({ drafted: 'error' })
         }
