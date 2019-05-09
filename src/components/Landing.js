@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Query } from 'react-apollo'
+import gql from 'graphql-tag'
 import { withRouter } from 'next/router'
 
 import User from './User'
@@ -23,7 +25,7 @@ const Section = styled.section`
     width: 100%;
     min-height: 900px; }
     .banner_inner .overlay {
-      background: url(https://i.ibb.co/BsqZGbB/home-banner.jpg) no-repeat scroll center center;
+      background: url(https://i.ibb.co/1bxgbyB/home-banner.jpg) no-repeat scroll center center;
       position: absolute;
       left: 0;
       right: 0;
@@ -171,6 +173,12 @@ const Section = styled.section`
 
 `
 
+const COUNT_USERS_QUERY = gql`
+  query COUNT_USERS_QUERY {
+    countUsers
+  }
+`
+
 const BannerButton = props => (
   <a class="banner_btn" href={props.link} {...props} >{ props.text }<i class="ti-arrow-right">{ props.i }</i></a>
 )
@@ -180,24 +188,29 @@ class Landing extends Component {
     return (
       <User>
         {({data: {me}}) => (
-          <Section>
-            <div class="banner_inner d-flex align-items-center">
-              <div class="overlay"></div>
-              <div class="container">
-                <div class="row">
-                  <div class="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
-                    <div class="banner_content" style={{marginTop: "-50px"}}>
-                      <a href="https://www.producthunt.com/posts/bulk-mail-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bulk-mail-cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=143885&theme=light" alt="bulk-mail CLI - Do hassle-free email marketing with this powerful tool 🔥 | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
-                      <br /><br /><br />
-                      <h3>Pledge to write<br />everyday!</h3>
-                      <p>Research by Laura King shows that writing about achieving future goals and dreams can make people happier and healthier.</p>
-                      {me ? <BannerButton link={`#`} text="ALREADY PLEDGED" i="CONGRATULATIONS 🎉" style={{opacity: 0.6}} /> : <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TODAY" i="700 did" /> }
+          <Query query={COUNT_USERS_QUERY}>
+            { ({ data: { countUsers } }) => (
+              <Section>
+                <div class="banner_inner d-flex align-items-center">
+                  <div class="overlay"></div>
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
+                        <div class="banner_content" style={{marginTop: "-50px"}}>
+                          <a href="https://www.producthunt.com/posts/bulk-mail-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bulk-mail-cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=143885&theme=light" alt="bulk-mail CLI - Do hassle-free email marketing with this powerful tool 🔥 | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
+                          <br /><br /><br />
+                          {!me && <h3>Pledge to write<br />everyday!</h3>}
+                          {me && <h3>Nice pledge,<br />{me.name}!</h3>}
+                          <p>Now that you have signed in, it is time to <b>write one post daily</b> if not written. ✍️ <br /> <b>Also apprieciate other writers by upvoting 🔥 their articles!</b> </p>
+                          {me ? <BannerButton link={`/editor/new`} text="WRITE NEW POST" i="🖋️" /> : <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TODAY" i={`${countUsers > 0 ? countUsers : "no one"} did`} /> }
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </Section>
+              </Section>
+            ) }
+          </Query>
         )}
       </User>
     )
