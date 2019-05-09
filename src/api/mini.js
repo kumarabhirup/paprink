@@ -32,4 +32,4 @@ export const categorySuggessions = [
   { id: "story", text: "Story" },
 ]
 
-export const VerfiedBadge = () => ( <img width={15} title="PaprInk Verified" src="https://www.tryviews.com/wp-content/uploads/2018/12/1495368559287.png" /> )
+export const VerfiedBadge = props => ( <img width={props.width || 15} style={{marginTop: "-1px"}} title="PaprInk Verified" src="https://www.tryviews.com/wp-content/uploads/2018/12/1495368559287.png" /> )
