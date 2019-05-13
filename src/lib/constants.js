@@ -1,0 +1,1 @@
+export const BACKEND_SERVER = "https://paprink-server.herokuapp.com"
