@@ -12,6 +12,7 @@ module.exports = withSass({
           'jQuery': 'jquery',
       })
     )
+    config.node = {fs: "empty"}
     return config
   }
 })
