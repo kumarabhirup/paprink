@@ -14,6 +14,15 @@ module.exports = withSass({
     return config
   },
   env: {
-    'PROD_DOMAIN': process.env.PROD_DOMAIN
+    'PROD_DOMAIN': process.env.PROD_DOMAIN,
+    'BACKEND_SERVER': process.env.BACKEND_SERVER,
+    'FB_LOGIN_APP_ID': process.env.FB_LOGIN_APP_ID,
+    'GOOGLE_LOGIN_APP_ID': process.env.GOOGLE_LOGIN_APP_ID,
+    'GOOGLE_LOGIN_APP_SECRET': process.env.GOOGLE_LOGIN_APP_SECRET,
+    'FB_LOGIN_APP_VERSION': process.env.FB_LOGIN_APP_VERSION,
+    'DEV_DOMAIN': process.env.DEV_DOMAIN,
+    'ENDPOINT': process.env.ENDPOINT,
+    'GA_TRACKING_ID': process.env.GA_TRACKING_ID,
+    'CLOUDINARY_USERNAME': process.env.CLOUDINARY_USERNAME
   }
 })
