@@ -46,6 +46,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.isempty": "^4.4.0",
     "lodash.once": "^4.1.1",
+    "moment": "^2.24.0",
     "next": "^8.1.0",
     "next-images": "^1.0.4",
     "next-with-apollo": "^3.3.2",
