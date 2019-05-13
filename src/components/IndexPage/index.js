@@ -9,6 +9,7 @@ import Latest from './Latest'
 import Yesterday from './Yesterday'
 import User from '../User'
 import { meta } from '../../api/meta'
+import { FB_LOGIN_APP_ID } from '../../lib/constants'
 
 export default class IndexPage extends Component {
   render() {
@@ -34,7 +35,7 @@ export default class IndexPage extends Component {
           <meta property="og:image" content={meta.image} />
 				  <meta name="twitter:image" content={meta.image} />
 					<meta property="og:site_name" content={meta.name} />
-					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+					<meta property="fb:app_id" content={FB_LOGIN_APP_ID} />
 					<meta property="og:description" content={meta.meta_description} />
 					<meta name="twitter:description" content={meta.meta_description} />
         </Head>

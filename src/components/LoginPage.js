@@ -7,6 +7,7 @@ import Router, { withRouter } from 'next/router'
 
 import { meta } from '../api/meta'
 import User, { CURRENT_USER_QUERY, getMe } from './User'
+import { GOOGLE_LOGIN_APP_ID, FB_LOGIN_APP_ID } from '../lib/constants';
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION(
@@ -189,7 +190,7 @@ class LoginPage extends Component {
                           }}>
                             {(signIn, { error, loading, called }) => (
                               <FacebookAuth
-                                appId={process.env.FB_LOGIN_APP_ID}
+                                appId={FB_LOGIN_APP_ID}
                                 autoLoad
                                 disabled={loading}
                                 fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
@@ -212,7 +213,7 @@ class LoginPage extends Component {
                           }}>
                             {(signIn, { error, loading, called }) => (
                               <GoogleLogin
-                                clientId={process.env.GOOGLE_LOGIN_APP_ID}
+                                clientId={GOOGLE_LOGIN_APP_ID}
                                 render={renderProps => (
                                   <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick}>
                                     <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />

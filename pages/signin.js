@@ -4,6 +4,7 @@ import Router, { withRouter } from 'next/router'
 
 import LoginPage from '../src/components/LoginPage'
 import { meta } from '../src/api/meta'
+import { FB_LOGIN_APP_ID, FB_LOGIN_APP_VERSION } from '../src/lib/constants'
 
 class loginPage extends Component {
 
@@ -15,10 +16,10 @@ class loginPage extends Component {
           <script dangerouslySetInnerHTML={{__html: `
             window.fbAsyncInit = function() {
               FB.init({
-                appId      : '${process.env.FB_LOGIN_APP_ID}',
+                appId      : '${FB_LOGIN_APP_ID}',
                 cookie     : true,
                 xfbml      : true,
-                version    : '${process.env.FB_LOGIN_APP_VERSION}'
+                version    : '${FB_LOGIN_APP_VERSION}'
               });
               FB.AppEvents.logPageView();  
             };

@@ -7,6 +7,7 @@ import PageContent from './PageContent'
 import Card from './Card/'
 import { meta } from '../api/meta'
 import { VerfiedBadge } from '../api/mini'
+import { FB_LOGIN_APP_ID } from '../lib/constants'
 
 export default class AuthorPage extends Component {
 
@@ -41,7 +42,7 @@ export default class AuthorPage extends Component {
 					<meta property="og:image" content={meta.image} />
 				  <meta name="twitter:image" content={meta.image} />
 					<meta property="og:site_name" content={meta.name} />
-					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+					<meta property="fb:app_id" content={FB_LOGIN_APP_ID} />
 					<meta property="og:description" content={`${this.props.authorData.name}'s profile @ ${meta.name}!`} />
 					<meta name="twitter:description" content={`${this.props.authorData.name}'s profile @ ${meta.name}!`} />
 

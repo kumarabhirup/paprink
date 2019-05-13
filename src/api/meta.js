@@ -1,4 +1,5 @@
 import React from 'react'
+import { PROD_DOMAIN, DEV_DOMAIN } from '../lib/constants'
 
 export const meta = {
   name: 'PaprInk',
@@ -11,5 +12,5 @@ export const meta = {
   image: "https://i.ibb.co/pQRG5ZT/PaprInk.jpg",
   favicon: `/static/favicon.ico`,
   email: `info@iqubex.com`,
-  domain: process.env.NODE_ENV === "production" ? process.env.PROD_DOMAIN : process.env.DEV_DOMAIN
+  domain: process.env.NODE_ENV === "production" ? PROD_DOMAIN : DEV_DOMAIN
 }

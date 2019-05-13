@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import AbortController from 'abort-controller'
 import { resetCaches } from 'graphql-tag';
+import { CLOUDINARY_USERNAME } from '../../lib/constants'
 
 const controller = new AbortController()
 const signal = controller.signal
@@ -53,7 +54,7 @@ export default class ImageUploader extends Component {
 
       await this.setState({ uploading: true })
 
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_USERNAME}/image/upload`, {
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_USERNAME}/image/upload`, {
                     method: 'POST',
                     body: data,
                     // signal [If added signal, res is always catched and then a TypeError is thrown.]

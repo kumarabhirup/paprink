@@ -7,6 +7,7 @@ import Title from '../src/components/Title'
 import Footer from '../src/components/Footer'
 import { meta } from '../src/api/meta'
 import AboutPage from '../src/components/AboutPage'
+import { FB_LOGIN_APP_ID } from '../src/lib/constants'
 
 class aboutPage extends Component {
 
@@ -40,7 +41,7 @@ class aboutPage extends Component {
           <meta property="og:image" content={meta.image} />
 				  <meta name="twitter:image" content={meta.image} />
 					<meta property="og:site_name" content={meta.name} />
-					<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+					<meta property="fb:app_id" content={FB_LOGIN_APP_ID} />
 					<meta property="og:description" content={meta.meta_description} />
 					<meta name="twitter:description" content={meta.meta_description} />
 

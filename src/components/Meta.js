@@ -3,11 +3,12 @@ import { withRouter } from 'next/router'
 import ReactGA from 'react-ga'
 
 import { meta } from '../api/meta'
+import { GA_TRACKING_ID } from '../lib/constants';
 
 class Meta extends React.Component {
 
   componentDidMount() {
-    ReactGA.initialize(process.env.GA_TRACKING_ID)
+    ReactGA.initialize(GA_TRACKING_ID)
   }
 
   render() {

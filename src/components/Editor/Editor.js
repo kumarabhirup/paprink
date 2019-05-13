@@ -4,6 +4,7 @@ import { ImageBlockConfig } from 'Dante2/package/lib/components/blocks/image'
 import { EmbedBlockConfig } from 'Dante2/package/lib/components/blocks/embed'
 import { VideoBlockConfig } from 'Dante2/package/lib/components/blocks/video'
 import { PlaceholderBlockConfig } from 'Dante2/package/lib/components/blocks/placeholder'
+import { CLOUDINARY_USERNAME } from '../../lib/constants';
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -41,7 +42,7 @@ export default class PaprinkEditor extends Component {
                     data.append('file', file)
                     data.append('upload_preset', 'paprinkEditor')
 
-                    await fetch(`https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_USERNAME}/image/upload`, {
+                    await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_USERNAME}/image/upload`, {
                       method: 'POST',
                       body: data
                     })

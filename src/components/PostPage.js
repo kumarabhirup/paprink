@@ -13,6 +13,7 @@ import categorySorter from '../lib/categorySorter'
 import { UPVOTE_MUTATION } from './Card'
 import { meta } from '../api/meta'
 import { VerfiedBadge } from '../api/mini'
+import { FB_LOGIN_APP_ID } from '../lib/constants';
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -113,7 +114,7 @@ class PostPage extends Component {
 							<meta property="og:image" content={postData.thumbnail.image} />
 							<meta name="twitter:image" content={postData.thumbnail.image} />
 							<meta property="og:site_name" content={meta.name} />
-							<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
+							<meta property="fb:app_id" content={FB_LOGIN_APP_ID} />
 							<meta property="og:description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
 							<meta name="twitter:description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
 
