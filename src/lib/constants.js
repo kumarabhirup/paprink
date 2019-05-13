@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 export const BACKEND_SERVER = process.env.BACKEND_SERVER
 export const PROD_DOMAIN = process.env.PROD_DOMAIN
 export const FB_LOGIN_APP_ID = process.env.FB_LOGIN_APP_ID
