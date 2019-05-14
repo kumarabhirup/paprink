@@ -53,7 +53,6 @@ class categoryPage extends Component {
   render() {
     return (
       <>
-      <User>
         <Head>
 
           <link rel="stylesheet" type="text/css" href="/static/prebuilt/styles/bootstrap4/bootstrap.min.css" />
@@ -77,69 +76,70 @@ class categoryPage extends Component {
           <script src="/static/prebuilt/js/category.js"></script>
 
         </Head>
-        { payload => (
-          <Query query={CATEGORY_QUERY} variables={{
-            categorySlug: this.props.router.query.category && this.props.router.query.category.toUpperCase()
-          }}>
-            { ({ data, loading, error, fetchMore }) => {
+        <User>
+          {payload => (
+            <Query query={CATEGORY_QUERY} variables={{
+              categorySlug: this.props.router.query.category && this.props.router.query.category.toUpperCase()
+            }}>
+              {({ data, loading, error, fetchMore }) => {
 
-              if (loading && !data) {
-                return <Loading />
-              }
+                if (loading && !data) {
+                  return <Loading />
+                }
 
-              if (data && data.postsCategoryConnection) {
+                if (data && data.postsCategoryConnection) {
 
-                const catagoryObject = categorySorter([{category: this.props.router.query.category}])
-                return (
-                  <>
-                  <Header />
-                  <Title title={catagoryObject[0].text} />
-                  <CategoryPage
-                    user={payload.data && payload.data.me}
-                    category={catagoryObject[0].text} 
-                    queryCategory={this.props.router.query.category}
-                    posts={data.postsCategoryConnection.edges.map(x => (x.node) )} 
-                    pageInfo={data.postsCategoryConnection.pageInfo} 
-                    onLoadMore={() => {
-                      fetchMore({
-                        variables: {
-                          after: data.postsCategoryConnection.pageInfo.endCursor
-                        },
-                        updateQuery: (prev, { fetchMoreResult }) => {
+                  const catagoryObject = categorySorter([{ category: this.props.router.query.category }])
+                  return (
+                    <>
+                      <Header />
+                      <Title title={catagoryObject[0].text} />
+                      <CategoryPage
+                        user={payload.data && payload.data.me}
+                        category={catagoryObject[0].text}
+                        queryCategory={this.props.router.query.category}
+                        posts={data.postsCategoryConnection.edges.map(x => (x.node))}
+                        pageInfo={data.postsCategoryConnection.pageInfo}
+                        onLoadMore={() => {
+                          fetchMore({
+                            variables: {
+                              after: data.postsCategoryConnection.pageInfo.endCursor
+                            },
+                            updateQuery: (prev, { fetchMoreResult }) => {
 
-                          if (!fetchMoreResult) return prev
+                              if (!fetchMoreResult) return prev
 
-                          var updatedQuery = {
-                            postsCategoryConnection: {
-                              __typename: "PostConnection",
-                              pageInfo: fetchMoreResult.postsCategoryConnection.pageInfo,
-                              edges: [
-                                ...prev.postsCategoryConnection.edges,
-                                ...fetchMoreResult.postsCategoryConnection.edges
-                              ]
+                              var updatedQuery = {
+                                postsCategoryConnection: {
+                                  __typename: "PostConnection",
+                                  pageInfo: fetchMoreResult.postsCategoryConnection.pageInfo,
+                                  edges: [
+                                    ...prev.postsCategoryConnection.edges,
+                                    ...fetchMoreResult.postsCategoryConnection.edges
+                                  ]
+                                }
+                              }
+
+                              return updatedQuery
+
                             }
-                          }
+                          })
+                        }}
+                      />
+                      <Footer />
+                    </>
+                  )
 
-                          return updatedQuery
+                } else {
+                  return (
+                    <QueryFailed />
+                  )
+                }
 
-                        }
-                      })
-                    }} 
-                  />
-                  <Footer />
-                  </>
-                )
-
-              } else {
-                return (
-                  <QueryFailed />
-                )
-              }
-
-            } }
-          </Query>
-        ) }
-      </User>
+              }}
+            </Query>
+          )}
+        </User>
       </>
     )
   }
