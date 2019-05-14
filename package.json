@@ -85,8 +85,5 @@
   "resolutions": {
     "terser": "3.14.1",
     "graphql-anywhere": "4.1.0"
-  },
-  "engines": {
-    "node": "11.4.0"
   }
 }
