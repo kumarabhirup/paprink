@@ -7,7 +7,6 @@ import Signout from './Signout'
 export default class ProfileButton extends Component {
 
   toggleStyles = () => {
-    console.log(isMobile())
     if (isMobile()) return {width: "145px", overflow: "hidden"}
     else return {width: "auto"}
   }
