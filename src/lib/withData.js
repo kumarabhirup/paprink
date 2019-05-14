@@ -2,7 +2,7 @@ import withApollo from 'next-with-apollo'
 import ApolloClient from 'apollo-boost'
 
 export const client = new ApolloClient({
-  uri: `${process.env.ENDPOINT}/graphql`,
+  uri: `https://paprink-server.herokuapp.com/graphql`,
   request: operation => {
     operation.setContext({
       fetchOptions: {
@@ -15,7 +15,7 @@ export const client = new ApolloClient({
 function createClient({ headers }) {
 
   return new ApolloClient({
-    uri: `${process.env.ENDPOINT}/graphql`,
+    uri: `https://paprink-server.herokuapp.com/graphql`,
     request: operation => {
       operation.setContext({
         fetchOptions: {
