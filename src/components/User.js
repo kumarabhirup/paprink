@@ -23,13 +23,6 @@ export const CURRENT_USER_QUERY = gql`
   }
 `
 
-export const getCurrentUser = async () => {
-  const me = await client.query({
-    query: CURRENT_USER_QUERY
-  })
-  return me
-}
-
 export const getMe = async client => {
   const me = await client.query({
     query: CURRENT_USER_QUERY
@@ -40,6 +33,7 @@ export const getMe = async client => {
 const User = props => (
   <Query {...props} query={CURRENT_USER_QUERY}>
     {payload => {
+      console.log(payload)
       return props.children(payload)
     }}
   </Query>
