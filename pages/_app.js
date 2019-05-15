@@ -1,7 +1,7 @@
 import App, { Container } from 'next/app'
 import { ApolloProvider } from 'react-apollo'
 
-import withData from '../src/lib/withData'
+import withData from '../src/lib/with-apollo-client'
 import Page from '../src/components/Page'
 
 class Wrapper extends App {
@@ -20,10 +20,10 @@ class Wrapper extends App {
     }
 
     render() {
-        const { Component, apollo, pageProps } = this.props
+        const { Component, apolloClient, pageProps } = this.props
         return (
             <Container>
-                <ApolloProvider client={apollo}>
+                <ApolloProvider client={apolloClient}>
                     <Page>
                         <div className="super_container"><Component {...pageProps} /></div>
                     </Page>
@@ -36,4 +36,3 @@ class Wrapper extends App {
 
 
 export default withData(Wrapper)
-// export default Wrapper
