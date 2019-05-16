@@ -9,7 +9,7 @@ import Title from '../src/components/Title'
 import PostPage from '../src/components/PostPage'
 import Footer from '../src/components/Footer'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
-import User from '../src/components/User';
+import User from '../src/components/User'
 
 export const GET_POST_QUERY = gql`
   query GET_POST_QUERY($slugParam: String!){

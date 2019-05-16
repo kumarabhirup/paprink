@@ -8,7 +8,8 @@ export const client = new ApolloClient({
       fetchOptions: {
         credentials: 'include',
       }
-    })
+    }),
+    headers
   }
 })
 
