@@ -2,11 +2,15 @@ import React from 'react'
 import initApollo from './init-apollo'
 import Head from 'next/head'
 import { getDataFromTree } from 'react-apollo'
+import withApollo from 'next-with-apollo'
 
 export default App => {
   return class Apollo extends React.Component {
+
     static displayName = 'withApollo(App)'
+
     static async getInitialProps (ctx) {
+      
       const { Component, router } = ctx
 
       let appProps = {}
@@ -49,11 +53,12 @@ export default App => {
         ...appProps,
         apolloState
       }
+
     }
 
     constructor (props) {
       super(props)
-      this.apolloClient = initApollo(props.apolloState)
+      this.apolloClient = initApollo(props.apolloState, withApollo(({headers}) => (headers)))
     }
 
     render () {
