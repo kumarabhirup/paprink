@@ -58,9 +58,9 @@ export default App => {
       this.apolloClient = initApollo(props.apolloState)
     }
 
-    async componentDidMount() {
-      await localStorage.getItem('paprinkToken')
-    }
+    // async componentDidMount() {
+    //   await localStorage.getItem('paprinkToken')
+    // }
 
     render () {
       return <App {...this.props} apolloClient={this.apolloClient} />

@@ -1,18 +1,5 @@
 const express = require('express')
-const http = require('http')
 const next = require('next')
-
-function parseCookies (request) {
-    var list = {},
-        rc = request.headers.cookie;
-
-    rc && rc.split(';').forEach(function( cookie ) {
-        var parts = cookie.split('=');
-        list[parts.shift().trim()] = decodeURI(parts.join('='));
-    });
-
-    return list;
-}
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -49,14 +36,12 @@ app.prepare()
   })
 
   server.get('/author/:authorUsername', (req, res) => {
-    const actualPage = '/author'
+    export const actualPage = '/author'
     const queryParams = { authorUsername: req.params.authorUsername }
     app.render(req, res, actualPage, queryParams)
   })
 
   server.get('*', (req, res) => {
-    // To Read a Cookie
-    var cookies = parseCookies(req)
     return handle(req, res)
   })
 

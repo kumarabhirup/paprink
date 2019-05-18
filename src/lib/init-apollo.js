@@ -3,6 +3,8 @@ import fetch from 'isomorphic-unfetch'
 
 let apolloClient = null
 
+var token = localStorage.getItem('paprinkToken')
+
 // Polyfill fetch() on the server (used by apollo-client)
 if (!process.browser) {
   global.fetch = fetch
@@ -33,11 +35,10 @@ function create (initialState) {
           credentials: 'include',
         },
         headers: {
-          // authorization: token ? `Bearer ${token}` : ''
+          authorization: token ? `Bearer ${token}` : ''
           // authorization: `Bearer ffff`
         }
       })
-      // var token = localStorage.getItem('paprinkToken')
     },
     cache: new InMemoryCache().restore(initialState || {})
   })
