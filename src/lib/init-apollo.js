@@ -28,15 +28,16 @@ function create (initialState) {
   return new ApolloClient({
     uri: `${process.env.ENDPOINT}/graphql`, // Server URL (must be absolute)
     request: async operation => {
-      // await localStorage.getItem('paprinkToken')
       operation.setContext({
         fetchOptions: {
           credentials: 'include',
         },
-        // headers: {
-        //   authorization: token ? `Bearer ${token}` : ''
-        // }
+        headers: {
+          // authorization: token ? `Bearer ${token}` : ''
+          // authorization: `Bearer ffff`
+        }
       })
+      // var token = localStorage.getItem('paprinkToken')
     },
     cache: new InMemoryCache().restore(initialState || {})
   })
