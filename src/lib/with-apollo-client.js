@@ -2,7 +2,6 @@ import React from 'react'
 import initApollo from './init-apollo'
 import Head from 'next/head'
 import { getDataFromTree } from 'react-apollo'
-import withApollo from 'next-with-apollo'
 
 export default App => {
   return class Apollo extends React.Component {
@@ -21,6 +20,7 @@ export default App => {
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
       const apollo = initApollo()
+      console.log(apollo)
       if (!process.browser) {
         try {
           // Run all GraphQL queries
