@@ -10,16 +10,46 @@ if (!process.browser) {
   global.fetch = fetch
 }
 
+const testHeaders = setContext((_, { headers }) => {
+  return headers
+})
+
 function create (initialState, { getToken, fetchOptions }) {
+
   const httpLink = createHttpLink({
     uri: `${process.env.ENDPOINT}/graphql`,
-    credentials: 'same-origin',
-    fetchOptions
+    credentials: 'include',
+    fetchOptions,
+    request: operation => {
+      const token = getToken()
+      console.log(token)
+      operation.setContext({
+        fetchOptions: {
+          credentials: 'include',
+        },
+        headers: {
+          ...testHeaders(),
+          authorization: token ? `Bearer ${token}` : ''
+        }
+      })
+    }
   })
 
   const authLink = setContext((_, { headers }) => {
     const token = getToken()
+    console.log(token)
     return {
+      request: operation => {
+        operation.setContext({
+          fetchOptions: {
+            credentials: 'include',
+          },
+          headers: {
+            ...headers,
+            authorization: token ? `Bearer ${token}` : ''
+          }
+        })
+      },
       headers: {
         ...headers,
         authorization: token ? `Bearer ${token}` : ''
@@ -32,8 +62,22 @@ function create (initialState, { getToken, fetchOptions }) {
     connectToDevTools: process.browser,
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
     link: authLink.concat(httpLink),
-    cache: new InMemoryCache().restore(initialState || {})
+    cache: new InMemoryCache().restore(initialState || {}),
+    request: operation => {
+      const token = getToken()
+      localStorage.getItem('paprinkToken')
+      operation.setContext({
+        fetchOptions: {
+          credentials: 'include',
+        },
+        headers: {
+          ...testHeaders(),
+          authorization: token ? `Bearer ${token}` : ''
+        }
+      })
+    }
   })
+
 }
 
 export default function initApollo (initialState, options) {
