@@ -1,6 +1,5 @@
 import ApolloClient, { InMemoryCache, HttpLink } from 'apollo-boost'
 import fetch from 'isomorphic-unfetch'
-import withApollo from 'next-with-apollo'
 
 let apolloClient = null
 
@@ -24,51 +23,36 @@ if (!process.browser) {
 //   })
 // }
 
-function create (initialState, headers) {
+function create (initialState) {
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
-  console.log("headers:" + headers)
   return new ApolloClient({
     uri: `${process.env.ENDPOINT}/graphql`, // Server URL (must be absolute)
-    credentials: 'include', // Additional fetch() options like `credentials` or `headers`,
-    headers,
-    request: operation => {
+    request: async operation => {
+      // await localStorage.getItem('paprinkToken')
       operation.setContext({
         fetchOptions: {
           credentials: 'include',
         },
-        headers
+        // headers: {
+        //   authorization: token ? `Bearer ${token}` : ''
+        // }
       })
     },
     cache: new InMemoryCache().restore(initialState || {})
   })
 }
 
-export default function initApollo (initialState, headers) {
+export default function initApollo (initialState) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!process.browser) {
-    return create(initialState, headers)
+    return create(initialState)
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState, headers)
+    apolloClient = create(initialState)
   }
 
   return apolloClient
 }
-
-// export default withApollo(({ ctx, headers, initialState }) => {
-
-//   if (!process.browser) {
-//     return create(initialState, headers)
-//   }
-
-//   // Reuse client on the client-side
-//   if (!apolloClient) {
-//     apolloClient = create(initialState, headers)
-//   }
-
-//   return apolloClient
-
-// })

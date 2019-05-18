@@ -2,7 +2,6 @@ import React from 'react'
 import initApollo from './init-apollo'
 import Head from 'next/head'
 import { getDataFromTree } from 'react-apollo'
-import withApollo from 'next-with-apollo'
 
 export default App => {
   return class Apollo extends React.Component {
@@ -47,8 +46,6 @@ export default App => {
       // Extract query data from the Apollo store
       const apolloState = apollo.cache.extract()
 
-      console.log(apollo)
-
       return {
         ...appProps,
         apolloState
@@ -58,8 +55,12 @@ export default App => {
 
     constructor (props) {
       super(props)
-      this.apolloClient = initApollo(props.apolloState, withApollo(({headers}) => (headers)))
+      this.apolloClient = initApollo(props.apolloState)
     }
+
+    // async componentDidMount() {
+    //   await localStorage.getItem('paprinkToken')
+    // }
 
     render () {
       return <App {...this.props} apolloClient={this.apolloClient} />
