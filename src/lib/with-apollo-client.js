@@ -1,5 +1,5 @@
 import React from 'react'
-import initApollo from './init-apollo'
+import initApollo, { returnApollo } from './init-apollo'
 import Head from 'next/head'
 import { getDataFromTree } from 'react-apollo'
 
@@ -19,8 +19,8 @@ export default App => {
 
       // Run all GraphQL queries in the component tree
       // and extract the resulting data
-      const apollo = initApollo()
-      console.log(apollo)
+      const apollo = initApollo(App)
+
       if (!process.browser) {
         try {
           // Run all GraphQL queries
@@ -45,9 +45,7 @@ export default App => {
       }
 
       // Extract query data from the Apollo store
-      const apolloState = apollo.cache.extract()
-
-      console.log(apollo)
+      const apolloState = returnApollo().cache.extract()
 
       return {
         ...appProps,
@@ -58,7 +56,7 @@ export default App => {
 
     constructor (props) {
       super(props)
-      this.apolloClient = initApollo(props.apolloState, withApollo(({headers}) => (headers)))
+      this.apolloClient = initApollo(App)
     }
 
     render () {

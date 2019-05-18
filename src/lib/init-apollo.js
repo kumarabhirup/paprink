@@ -43,6 +43,21 @@ function create (initialState, headers) {
 //   return apolloClient
 // }
 
+export function returnApollo (initialState, headers) {
+  // Make sure to create a new client for every server-side request so that data
+  // isn't shared between connections (which would be bad)
+  if (!process.browser) {
+    return create(initialState, headers)
+  }
+
+  // Reuse client on the client-side
+  if (!apolloClient) {
+    apolloClient = create(initialState, headers)
+  }
+
+  return apolloClient
+}
+
 export default withApollo(({ ctx, headers, initialState }) => {
   console.log(initialState)
   if (!process.browser) {
