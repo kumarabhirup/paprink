@@ -6,7 +6,6 @@ import { mainMenu } from '../../api/menu'
 import User from '../User'
 import ProfileButton from './profileButton'
 import SearchBar from '../SearchBar'
-import { getLoginUser } from '../../lib/loginNext'
 
 class Header extends Component {
 
@@ -16,8 +15,7 @@ class Header extends Component {
     return (
       <User>
         {({data: {me}}) => (  
-          <> 
-            {console.log("LOGGED" + this.props.loggedInUser)}
+          <>
             <header className="header">
               <div className="container">
                 <div className="row">
@@ -83,4 +81,4 @@ class Header extends Component {
 
 }
 
-export default getLoginUser(withRouter(Header))
+export default withRouter(Header)
