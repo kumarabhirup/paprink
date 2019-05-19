@@ -1,3 +1,5 @@
+import { CURRENT_USER_QUERY } from "../components/User"
+
 export default apolloClient =>
   apolloClient
     .query({
