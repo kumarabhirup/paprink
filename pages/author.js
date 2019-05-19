@@ -243,8 +243,8 @@ class authorPage extends Component {
                                         })
                                       }}
 
-                                      upvotedPosts={upvotedPostsPayload.data.upvotedPostsAuthorConnection.edges.map(x => (x.node))}
-                                      upvotedPageInfo={upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo}
+                                      upvotedPosts={upvotedPostsPayload.data && upvotedPostsPayload.data.upvotedPostsAuthorConnection.edges.map(x => (x.node))}
+                                      upvotedPageInfo={upvotedPostsPayload.data && upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo}
                                       upvotedOnLoadMore={() => {
                                         upvotedPostsPayload.fetchMore({
                                           variables: {
