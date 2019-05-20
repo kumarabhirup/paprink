@@ -7,7 +7,7 @@ import Head from 'next/head'
 import initApollo from './init-apollo'
 
 function parseCookies (req, options = {}) {
-  console.log(cookie.parse(req ? req.headers.cookie || '' : document.cookie, options))
+  // console.log(cookie.parse(req ? req.headers.cookie || '' : document.cookie, options))
   return cookie.parse(req ? req.headers.cookie || '' : document.cookie, options)
 }
 
@@ -24,11 +24,13 @@ export default App => {
         router,
         ctx: { req, res }
       } = ctx
+
       const apollo = initApollo(
         {},
         {
           getToken: () => parseCookies(req).paprinkToken
-        }
+        },
+        req.headers
       )
 
       ctx.ctx.apolloClient = apollo
@@ -74,7 +76,8 @@ export default App => {
 
       return {
         ...appProps,
-        apolloState
+        apolloState,
+        headers: req.headers
       }
     }
 
@@ -86,7 +89,7 @@ export default App => {
         getToken: () => {
           return parseCookies().paprinkToken
         }
-      })
+      }, props.headers)
     }
 
     render () {

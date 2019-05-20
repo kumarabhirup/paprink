@@ -24,7 +24,7 @@ class Wrapper extends App {
 
     render() {
         const { Component, apolloClient, pageProps, loggedInUser } = this.props
-        console.log(loggedInUser)
+        // console.log(loggedInUser)
         return (
             <Container>
                 <ApolloProvider client={apolloClient}>

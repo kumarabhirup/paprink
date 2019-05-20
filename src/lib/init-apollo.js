@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache } from 'apollo-boost'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
 import { createHttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import fetch from 'isomorphic-unfetch'
@@ -14,29 +14,42 @@ const testHeaders = setContext((_, { headers }) => {
   return headers
 })
 
-function create (initialState, { getToken, fetchOptions }) {
+function create (initialState, { getToken, fetchOptions }, headers) {
 
-  const httpLink = createHttpLink({
-    uri: `${process.env.ENDPOINT}/graphql`,
-    credentials: 'include',
-    fetchOptions
-  })
+  // const httpLink = createHttpLink({
+  //   uri: `${process.env.ENDPOINT}/graphql`,
+  //   credentials: 'include',
+  //   fetchOptions
+  // })
 
-  const authLink = setContext((_, { headers }) => {
-    const token = getToken()
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    }
-  })
+  // const authLink = setContext((_, { headers }) => {
+  //   const token = getToken()
+  //   return {
+  //     headers: {
+  //       ...headers,
+  //       authorization: token ? `Bearer ${token}` : ''
+  //     }
+  //   }
+  // })
 
-  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+  // // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
+  // return new ApolloClient({
+  //   connectToDevTools: process.browser,
+  //   ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
+  //   link: authLink.concat(httpLink),
+  //   cache: new InMemoryCache().restore(initialState || {})
+  // })
+
   return new ApolloClient({
-    connectToDevTools: process.browser,
-    ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
-    link: authLink.concat(httpLink),
+    uri: `${process.env.ENDPOINT}/graphql`,
+    request: operation => {
+      operation.setContext({
+        fetchOptions: {
+          credentials: 'include',
+        },
+        headers
+      })
+    },
     cache: new InMemoryCache().restore(initialState || {})
   })
 

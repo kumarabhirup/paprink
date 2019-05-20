@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import PropTypes from 'prop-types'
 
 export const CURRENT_USER_QUERY = gql`
-  query {
+  query CURRENT_USER_QUERY {
     me {
       id
       name
