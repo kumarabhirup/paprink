@@ -29,8 +29,7 @@ export default App => {
         {},
         {
           getToken: () => parseCookies(req).paprinkToken
-        },
-        req.headers
+        }
       )
 
       ctx.ctx.apolloClient = apollo
@@ -89,7 +88,7 @@ export default App => {
         getToken: () => {
           return parseCookies().paprinkToken
         }
-      }, props.headers)
+      })
     }
 
     render () {

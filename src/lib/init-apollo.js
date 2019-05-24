@@ -10,7 +10,7 @@ if (!process.browser) {
   global.fetch = fetch
 }
 
-function create (initialState, { getToken, fetchOptions }, headers) {
+function create (initialState, { getToken, fetchOptions }) {
 
   const httpLink = createHttpLink({
     uri: `${process.env.ENDPOINT}/graphql`,
@@ -45,7 +45,7 @@ function create (initialState, { getToken, fetchOptions }, headers) {
   //         credentials: 'include',
   //       },
   //       headers: {
-  //         ...headers,
+  //         // ...headers,
   //         authorization: token ? `Bearer ${token}` : ''
   //       }
   //     })
@@ -55,7 +55,7 @@ function create (initialState, { getToken, fetchOptions }, headers) {
 
 }
 
-export default function initApollo (initialState, options, headers) {
+export default function initApollo (initialState, options) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!process.browser) {
@@ -71,12 +71,12 @@ export default function initApollo (initialState, options, headers) {
       {
         ...options,
         fetchOptions
-      }, headers)
+      })
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState, options, headers)
+    apolloClient = create(initialState, options)
   }
 
   return apolloClient
