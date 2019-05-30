@@ -11,20 +11,19 @@ class Wrapper extends App {
     static async getInitialProps({Component, ctx}){
 
         let pageProps = {}
-        const { loggedInUser } = await checkLoggedIn(ctx.apolloClient)
         if(Component.getInitialProps){
             pageProps = await Component.getInitialProps(ctx)
         }
 
         // This exposes query to the user
         pageProps.query = ctx.query
-        return { pageProps, loggedInUser }
+        return { pageProps }
         
     }
 
     render() {
-        const { Component, apolloClient, pageProps, loggedInUser } = this.props
-        console.log(loggedInUser)
+        const { Component, apolloClient, pageProps } = this.props
+ 
         return (
             <Container>
                 <ApolloProvider client={apolloClient}>

@@ -1,7 +1,40 @@
-import { ApolloClient, InMemoryCache } from 'apollo-boost'
-import { createHttpLink } from 'apollo-link-http'
+import { ApolloClient } from 'apollo-client'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
+import { ApolloLink } from 'apollo-link'
+import { onError } from 'apollo-link-error'
 import { setContext } from 'apollo-link-context'
 import fetch from 'isomorphic-unfetch'
+
+// import { WebSocketLink } from 'apollo-link-ws'
+// import { getMainDefinition } from 'apollo-utilities'
+
+const httpLink = new HttpLink({
+  uri: `${process.env.ENDPOINT}/graphql`,
+  credentials: 'include',
+})
+const cache = new InMemoryCache()
+
+let link = null
+
+if (process.browser) {
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors) {
+      graphQLErrors.map(({ message, locations, path }) =>
+        // tslint:disable-next-line:no-console
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+        ),
+      )
+    }
+    if (networkError) {
+      // tslint:disable-next-line:no-console
+      console.log(`[Network error]: ${networkError}`)
+    }
+  })
+
+  link = ApolloLink.from([errorLink, httpLink])
+}
 
 let apolloClient = null
 
@@ -10,73 +43,33 @@ if (!process.browser) {
   global.fetch = fetch
 }
 
-function create (initialState, { getToken, fetchOptions }) {
-
-  const httpLink = createHttpLink({
-    uri: `${process.env.ENDPOINT}/graphql`,
-    credentials: 'include',
-    fetchOptions
-  })
-
+function create(initialState, cookie = null) {
   const authLink = setContext((_, { headers }) => {
-    const token = getToken()
     return {
       headers: {
         ...headers,
-        authorization: token ? `Bearer ${token}` : ''
-      }
+        Cookie: cookie,
+      },
     }
   })
-
-  // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     connectToDevTools: process.browser,
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache().restore(initialState || {})
+    link: process.browser ? link : authLink.concat(httpLink),
+    cache: cache.restore(initialState || {}),
   })
-
-  // return new ApolloClient({
-  //   uri: `${process.env.ENDPOINT}/graphql`,
-  //   request: operation => {
-  //     const token = getToken()
-  //     operation.setContext({
-  //       fetchOptions: {
-  //         credentials: 'include',
-  //       },
-  //       headers: {
-  //         // ...headers,
-  //         authorization: token ? `Bearer ${token}` : ''
-  //       }
-  //     })
-  //   },
-  //   cache: new InMemoryCache().restore(initialState || {})
-  // })
-
 }
 
-export default function initApollo (initialState, options) {
+export default function initApollo(initialState, cookie) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (!process.browser) {
-    let fetchOptions = {}
-    // If you are using a https_proxy, add fetchOptions with 'https-proxy-agent' agent instance
-    // 'https-proxy-agent' is required here because it's a sever-side only module
-    if (process.env.https_proxy) {
-      fetchOptions = {
-        agent: new (require('https-proxy-agent'))(process.env.https_proxy)
-      }
-    }
-    return create(initialState,
-      {
-        ...options,
-        fetchOptions
-      })
+    return create(initialState, cookie)
   }
 
   // Reuse client on the client-side
   if (!apolloClient) {
-    apolloClient = create(initialState, options)
+    apolloClient = create(initialState)
   }
 
   return apolloClient

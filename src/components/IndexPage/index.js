@@ -23,7 +23,7 @@ export default class IndexPage extends Component {
 					<meta name="description" content={meta.meta_description} />
 					<meta name="url" content={`${meta.domain}`} />
 					<meta name="rating" content="General" />
-					<meta http-equiv="Cache-Control" content="no-cache" />
+					<meta httpEquiv="Cache-Control" content="no-cache" />
 
 					<meta property="og:title" content={meta.meta_ogTitle} />
 					<meta name="twitter:title" content={meta.meta_ogTitle} />
