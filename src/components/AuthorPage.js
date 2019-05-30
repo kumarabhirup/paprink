@@ -28,7 +28,7 @@ export default class AuthorPage extends Component {
 					<meta name="author" content={`${this.props.authorData.name}, ${this.props.authorData.email}`} />
 					<meta name="url" content={`${meta.domain}/author/${this.props.authorData.username}`} />
 					<meta name="rating" content="General" />
-					<meta http-equiv="Cache-Control" content="no-cache" />
+					<meta httpEquiv="Cache-Control" content="no-cache" />
 
 					<meta property="og:title" content={ `${this.props.authorData.name} (@${this.props.authorData.username})` } />
 					<meta name="twitter:title" content={ `${this.props.authorData.name} (@${this.props.authorData.username})` } />
