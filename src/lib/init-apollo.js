@@ -10,7 +10,7 @@ import fetch from 'isomorphic-unfetch'
 // import { getMainDefinition } from 'apollo-utilities'
 
 const httpLink = new HttpLink({
-  uri: `${process.env.ENDPOINT}/graphql`,
+  uri: `${process.env.ENDPOINT}/api/graphql`,
   credentials: 'include',
 })
 const cache = new InMemoryCache()
