@@ -4,7 +4,6 @@ import { ApolloProvider } from 'react-apollo'
 
 import withData from '../src/lib/with-apollo-client'
 import Page from '../src/components/Page'
-import checkLoggedIn from '../src/lib/checkLoggedIn'
 
 class Wrapper extends App {
 

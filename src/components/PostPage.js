@@ -57,14 +57,16 @@ class PostPage extends Component {
 		
 		await this.setState({ disabled: true })
 
+		// Show the upvote beforehand (don't use apollo's optimisticResponse)
+		await this.setState({ upvote: !this.state.upvote })
+    await this.setState({ upvotesNumber: this.state.upvote ? this.state.upvotesNumber + 1 : this.state.upvotesNumber - 1 })
+
 		await client.mutate({
       mutation: UPVOTE_MUTATION,
       variables: {
         postId: this.props.postData.id
       }
     }).then(async () => {
-      await this.setState({ upvote: !this.state.upvote })
-      await this.setState({ upvotesNumber: this.state.upvote ? this.state.upvotesNumber + 1 : this.state.upvotesNumber - 1 })
       await this.setState({ disabled: false })
     }).catch(() => {
       this.props.router.replace(`/signin?intent=${this.props.router.asPath}`)
@@ -140,7 +142,7 @@ class PostPage extends Component {
 									</div>
 									
 								</div>
-								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} />
+								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
 								
 								<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
 									<PostMetaAndShare postData={postData} userId={this.userId} />
