@@ -14,7 +14,7 @@ class Header extends Component {
   render() {
     return (
       <User>
-        {({data: {me}}) => (    
+        {({data: {me}}) => (  
           <>
             <header className="header">
               <div className="container">
