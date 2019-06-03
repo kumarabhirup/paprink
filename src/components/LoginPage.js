@@ -175,30 +175,6 @@ class LoginPage extends Component {
                             <hr />
                             <p>{meta.name} welcomes you!</p>
                           </span>
-                          <Mutation refetchQueries={[{ query: CURRENT_USER_QUERY }]} mutation={SIGNIN_MUTATION} variables={{
-                            signUpMethod: this.state.signUpMethod,
-                            profilePicture: this.state.profilePicture,
-                            socialId: this.state.socialId,
-                            fname: this.state.fname,
-                            lname: this.state.lname,
-                            name: this.state.name,
-                            gender: this.state.gender,
-                            birthday: this.state.birthday,
-                            email: this.state.email,
-                            accessToken: this.state.accessToken
-                          }}>
-                            {(signIn, { error, loading, called }) => (
-                              <FacebookAuth
-                                appId={process.env.FB_LOGIN_APP_ID}
-                                autoLoad
-                                disabled={loading}
-                                fields={"name,first_name,middle_name,last_name,short_name,picture,email,birthday,location,gender,link"}
-                                callback={response => this.authenticateFacebook(response, signIn, client)}
-                                onFailure={this.authenticationFailed}
-                                component={renderProps => FacebookButton(loading, renderProps)}
-                              />
-                            )}
-                          </Mutation>
 
                           <Mutation refetchQueries={[{ query: CURRENT_USER_QUERY }]} mutation={SIGNIN_MUTATION} variables={{
                             signUpMethod: this.state.signUpMethod,
@@ -214,13 +190,13 @@ class LoginPage extends Component {
                               <GoogleLogin
                                 clientId={process.env.GOOGLE_LOGIN_APP_ID}
                                 render={renderProps => (
-                                  <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick}>
+                                  <a href="#" className="btn-google m-b-20" onClick={renderProps.onClick} style={{width: '100%'}}>
                                     <img src="/static/auth/images/icons/icon-google.png" alt="GOOGLE" />
-                                    {loading ? 'Signing in...' : 'Google'}
+                                    {loading ? 'Signing in...' : 'Continue with Google'}
                                   </a>
                                 )}
                                 disabled={loading}
-                                scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/admin.directory.user.readonly"}
+                                scope={"profile email openid"}
                                 isSignedIn={false}
                                 fetchBasicProfile={false}
                                 onSuccess={response => this.authenticateGoogle(response, signIn, client)}
