@@ -1,0 +1,6 @@
+{
+  "rules": [
+    { "pathname": "/api/**", "method": ["GET", "POST"], "dest": "https://paprink-backend-dev.now.sh" },
+    { "dest": "https://paprink-frontend-dev.now.sh" }
+  ]
+}
