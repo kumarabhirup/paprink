@@ -196,7 +196,7 @@ class LoginPage extends Component {
                                   </a>
                                 )}
                                 disabled={loading}
-                                scope={"profile email openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/user.birthday.read https://www.googleapis.com/auth/admin.directory.user.readonly"}
+                                scope={"profile email openid"}
                                 isSignedIn={false}
                                 fetchBasicProfile={false}
                                 onSuccess={response => this.authenticateGoogle(response, signIn, client)}
