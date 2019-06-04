@@ -12,6 +12,7 @@ import PleaseSignIn from '../src/components/PleaseSignIn'
 import { Loading, QueryFailed } from '../src/components/QueryStatus'
 import { meta } from '../src/api/meta'
 import MiniTitle from '../src/components/MiniTitle'
+import PageContent from '../src/components/PageContent'
 
 const CAN_UPDATE_POST_QUERY = gql`
   query CAN_UPDATE_POST_QUERY($id: ID!){
@@ -19,7 +20,30 @@ const CAN_UPDATE_POST_QUERY = gql`
   }
 `
 
+export const EditorSucks = props => {
+  return (
+    <PageContent noSidebar>
+      <div style={{padding: '70px 10px'}}>
+        <h1>The editor sucks on Mobile.</h1>
+        <p style={{fontSize: '20px'}}>While we construct the PaprInk Mobile app, <b>you'll have to compose and edit posts using desktop devices.</b></p>
+        <p style={{fontSize: '20px'}}>While you are on mobile, you can <a href="/">read and upvote posts</a> with confidence. See you again 👋</p>
+      </div>
+    </PageContent>
+  )
+}
+
 class editorPage extends Component {
+  componentDidMount() {
+      window.addEventListener("resize", this.resize.bind(this))
+      this.resize()
+  }
+
+  resize() {
+      let isMobile = (window.innerWidth <= 800)
+      if (isMobile !== this.state.isMobile) {
+          this.setState({isMobile})
+      }
+  }
 
   state = { 
     title: null,
@@ -101,7 +125,7 @@ class editorPage extends Component {
                   <>
                   <Header />
                   <MiniTitle>Compose new post</MiniTitle>
-                  <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} new />
+                  {this.state.isMobile ? <EditorSucks /> : <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} new />}
                   <Footer />
                   <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
                   </>
@@ -120,7 +144,7 @@ class editorPage extends Component {
                   <Head><title>Update Post - {meta.title}</title></Head>
                   <Header />
                   <Title noSidebar title={title} tags={this.state.categories} thumbnail={thumbnail.blackOverlayImage} currentUser={me} postData={payload.data.canUpdatePost} />
-                  <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} editorContent={editorSerializedOutput} postData={payload.data.canUpdatePost} />
+                  {this.state.isMobile ? <EditorSucks /> : <EditorPage titleState={async title => await this.setState({ title })} categoryState={async categories => await this.setState({ categories })} imageState={async images => await this.setState({ images })} editorContent={editorSerializedOutput} postData={payload.data.canUpdatePost} />}
                   <Footer />
                   <Head><script src="/static/prebuilt/js/post_nosidebar.js"></script></Head>
                   </>
@@ -139,7 +163,6 @@ class editorPage extends Component {
       </>
     )
   }
-
 }
 
 export default withRouter(editorPage)
