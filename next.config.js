@@ -23,6 +23,8 @@ module.exports = withSass({
     'DEV_DOMAIN': process.env.DEV_DOMAIN,
     'ENDPOINT': process.env.ENDPOINT,
     'GA_TRACKING_ID': process.env.GA_TRACKING_ID,
-    'CLOUDINARY_USERNAME': process.env.CLOUDINARY_USERNAME
+    'CLOUDINARY_USERNAME': process.env.CLOUDINARY_USERNAME,
+    'PUBLIC_VAPID': process.env.PUBLIC_VAPID,
+    'PRIVATE_VAPID': process.env.PRIVATE_VAPID
   }
 })

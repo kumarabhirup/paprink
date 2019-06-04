@@ -1,9 +1,13 @@
 const express = require('express')
+const webpush = require('web-push')
+const bodyParser = require('body-parser')
 const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
+
+webpush.setVapidDetails('mailto:test@test.com', process.env.PUBLIC_VAPID, process.env.PRIVATE_VAPID)
 
 const PORT = process.env.PORT || 3006
 
@@ -11,6 +15,27 @@ app.prepare()
 .then(() => {
 
   const server = express()
+
+  server.use('/serviceWorker.js', express.static(__dirname + '/serviceWorker.js'))
+  
+  server.use(bodyParser.json())
+
+  server.post('/subscribeToReminder', (req, res) => {
+    // Get push subscription object
+    const subscription = req.body
+    
+    // Send 201 status - resource created
+    res.status(201).json({})
+
+    // Create payload
+    const payload = JSON.stringify({
+      title: "Push Test"
+    })
+
+    // Pass object into the send notification function
+    webpush.sendNotification(subscription, payload)
+           .catch(err => console.log(err))
+  })
 
   server.get('/login', (req, res) => {
     const actualPage = '/signin'
