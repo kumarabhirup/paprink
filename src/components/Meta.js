@@ -29,12 +29,7 @@ class Meta extends React.Component {
               appId: "${process.env.ONESIGNAL_ID}"
             });
           });
-<<<<<<< HEAD
-        `}}>
-        </script>
-=======
         `}}></script>
->>>>>>> 540393bcbe52f00a17049d4634e8254ae482d046
 
         <title>{meta.meta_ogTitle}</title>
 
