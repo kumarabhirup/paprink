@@ -5,35 +5,8 @@ import Header from '../src/components/Header/'
 import IndexPage from '../src/components/IndexPage/'
 import Footer from '../src/components/Footer'
 import Landing from '../src/components/Landing'
-import urlBase64ToUint8Array from '../src/lib/base64ToUint8'
 
 export default class homePage extends Component {
-  // Register the service worker, register push, send notification
-  send = async () => {
-    var register = await navigator.serviceWorker.register('/serviceWorker.js', {
-      scope: '/'
-    })
-
-    const subscription =  await register.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(process.env.PUBLIC_VAPID)
-    })
-
-    await fetch('/subscribeToReminder', {
-      method: 'POST',
-      body: JSON.stringify(subscription),
-      headers: {
-        'content-type': 'application/json'
-      }
-    })
-  }
-
-  componentDidMount() {
-    if('serviceWorker' in navigator){
-      this.send().catch(err => console.error(err))
-    }
-  }
-
   render() {
     return (
       <>

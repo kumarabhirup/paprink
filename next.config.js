@@ -25,6 +25,7 @@ module.exports = withSass({
     'GA_TRACKING_ID': process.env.GA_TRACKING_ID,
     'CLOUDINARY_USERNAME': process.env.CLOUDINARY_USERNAME,
     'PUBLIC_VAPID': process.env.PUBLIC_VAPID,
-    'PRIVATE_VAPID': process.env.PRIVATE_VAPID
+    'PRIVATE_VAPID': process.env.PRIVATE_VAPID,
+    'ONESIGNAL_ID': process.env.ONESIGNAL_ID
   }
 })

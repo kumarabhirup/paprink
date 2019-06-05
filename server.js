@@ -1,13 +1,9 @@
 const express = require('express')
-const webpush = require('web-push')
-const bodyParser = require('body-parser')
 const next = require('next')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
-
-webpush.setVapidDetails('mailto:test@test.com', process.env.PUBLIC_VAPID, process.env.PRIVATE_VAPID)
 
 const PORT = process.env.PORT || 3006
 
@@ -16,10 +12,10 @@ app.prepare()
 
   const server = express()
 
-  server.use('/serviceWorker.js', express.static(__dirname + '/serviceWorker.js'))
-  
-  server.use(bodyParser.json())
+  server.use('/OneSignalSDKWorker.js', express.static(__dirname + '/OneSignalSDKWorker.js'))
+  server.use('/OneSignalSDKUpdaterWorker.js', express.static(__dirname + '/OneSignalSDKUpdaterWorker.js'))
 
+  // ! NOT USED ANYMORE
   server.post('/subscribeToReminder', (req, res) => {
     // Get push subscription object
     const subscription = req.body
