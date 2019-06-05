@@ -21,6 +21,16 @@ class Meta extends React.Component {
 
         <link rel="shortcut icon" href="/static/favicon.ico" />
 
+        <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+        <script dangerouslySetInnerHTML={{__html: `
+          var OneSignal = window.OneSignal || [];
+          OneSignal.push(function() {
+            OneSignal.init({
+              appId: "${process.env.ONESIGNAL_ID}"
+            });
+          });
+        `}}></script>
+
         <title>{meta.meta_ogTitle}</title>
 
       </Head>

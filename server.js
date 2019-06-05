@@ -12,6 +12,27 @@ app.prepare()
 
   const server = express()
 
+  server.use('/OneSignalSDKWorker.js', express.static(__dirname + '/OneSignalSDKWorker.js'))
+  server.use('/OneSignalSDKUpdaterWorker.js', express.static(__dirname + '/OneSignalSDKUpdaterWorker.js'))
+
+  // ! NOT USED ANYMORE
+  server.post('/subscribeToReminder', (req, res) => {
+    // Get push subscription object
+    const subscription = req.body
+    
+    // Send 201 status - resource created
+    res.status(201).json({})
+
+    // Create payload
+    const payload = JSON.stringify({
+      title: "Push Test"
+    })
+
+    // Pass object into the send notification function
+    webpush.sendNotification(subscription, payload)
+           .catch(err => console.log(err))
+  })
+
   server.get('/login', (req, res) => {
     const actualPage = '/signin'
     app.render(req, res, actualPage)

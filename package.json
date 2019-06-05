@@ -22,6 +22,7 @@
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.26.0",
     "babel-register": "^6.26.0",
+    "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "cookie": "^0.4.0",
     "css-loader": "^2.1.1",
@@ -83,7 +84,8 @@
     "styled-components": "^4.1.3",
     "styled-css-grid": "^1.2.1",
     "terser": "^3.14.1",
-    "waait": "^1.0.3"
+    "waait": "^1.0.3",
+    "web-push": "^3.3.5"
   },
   "devDependencies": {
     "nodemon": "^1.18.10"
