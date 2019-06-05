@@ -173,9 +173,10 @@ const Section = styled.section`
 
 `
 
-const COUNT_USERS_QUERY = gql`
-  query COUNT_USERS_QUERY {
-    countUsers
+const LANDING_QUERIES = gql`
+  query LANDING_QUERIES {
+    countUsers,
+    hasPostedToday
   }
 `
 
@@ -184,12 +185,59 @@ const BannerButton = props => (
 )
 
 class Landing extends Component {
+  renderLandingSection = ({ me, countUsers, hasPostedToday }) => {
+    const hasPostedTodayVar = hasPostedToday && hasPostedToday.hasPostedToday
+    const lastPost = hasPostedToday && hasPostedToday.lastPost
+
+    const LastPost = () => <i>"<a href={`/p/${lastPost.slug}-${lastPost.id}`} target="_blank" rel="noopener noreferrer">{lastPost.title}</a>"</i>
+
+    if (!me) {
+      return (
+        <>
+          <h3>Community for <br /> writers to flourish.</h3>
+          <p>Research by Laura King shows that writing about achieving future goals and dreams can make people happier and healthier.</p>
+          <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TO WRITE" i={`${countUsers > 0 ? countUsers : "no one"} did 🔥`} />
+        </>
+      )
+    }
+
+    if (me && !lastPost) {
+      return (
+        <>
+          <h3>Welcome 👋<br />{me.name}!</h3>
+          <p>Now that you have signed in, it is time to <b>write one post daily</b>. ✍️ <br /> <b>Also apprieciate other writers by upvoting 🔥 their articles!</b> </p>
+          <BannerButton link={`/editor/new`} text="WRITE UR FIRST POST" i="🖋️" />
+        </>
+      )
+    }
+
+    if (me && !hasPostedTodayVar && lastPost) {
+      return (
+        <>
+          <h3>Hey 👋<br />{me.name}!</h3>
+          <p>Forgot that you ever pledged? The last article you wrote was <LastPost />.<br /><b>Write something today!</b></p>
+          <BannerButton link={`/editor/new`} text="WRITE NEW POST" i="🖋️" />
+        </>
+      )
+    }
+
+    if (me && hasPostedTodayVar && lastPost) {
+      return (
+        <>
+          <h3>Hi 👋<br />{me.name}!</h3>
+          <p>You composed <LastPost /> today.<br /> <b>Any plans for tomorrow?</b></p>
+          <BannerButton link={`/editor/new`} text="DRAFT'EM HERE" i="🖋️" />
+        </>
+      )
+    }
+  }
+
   render() {
     return (
       <User>
         {({data: {me}}) => (
-          <Query query={COUNT_USERS_QUERY}>
-            { ({ data: { countUsers } }) => (
+          <Query query={LANDING_QUERIES}>
+            { ({ data }) => (
               <Section>
                 <div className="banner_inner d-flex align-items-center">
                   <div className="overlay"></div>
@@ -199,11 +247,7 @@ class Landing extends Component {
                         <div className="banner_content" style={{marginTop: "-15px"}}>
                           <a href="https://www.producthunt.com/posts/bulk-mail-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bulk-mail-cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=143885&theme=light" alt="bulk-mail CLI - Do hassle-free email marketing with this powerful tool 🔥 | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
                           <br /><br /><br />
-                          {!me && <h3>Community for <br /> writers to flourish.</h3>}
-                          {me && <h3>Welcome 👋<br />{me.name}!</h3>}
-                          {me && <p>Now that you have signed in, it is time to <b>write one post daily</b> if not written. ✍️ <br /> <b>Also apprieciate other writers by upvoting 🔥 their articles!</b> </p>}
-                          {!me && <p>Research by Laura King shows that writing about achieving future goals and dreams can make people happier and healthier.</p>}
-                          {me ? <BannerButton link={`/editor/new`} text="WRITE NEW POST" i="🖋️" /> : <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TO WRITE" i={`${countUsers > 0 ? countUsers : "no one"} did 🔥`} /> }
+                          { this.renderLandingSection({ me, ...data }) }
                         </div>
                       </div>
                     </div>
