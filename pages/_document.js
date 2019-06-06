@@ -6,11 +6,23 @@ import { ServerStyleSheet } from 'styled-components'
 class MyDocument extends Document {
 
   static getInitialProps({ renderPage }) {
+    const isProduction = process.env.NODE_ENV === 'production'
     const sheet = new ServerStyleSheet()
     const page = renderPage(App => props => sheet.collectStyles(<App {...props} />))
     const styleTags = sheet.getStyleElement()
     const router = withRouter(this)
-    return { ...page, styleTags, router }
+    return { ...page, styleTags, router, isProduction }
+  }
+
+  setGoogleTags() {
+    return {
+      __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${process.env.GA_TRACKING_ID}');
+      `
+    };
   }
 
   render() {
@@ -27,6 +39,17 @@ class MyDocument extends Document {
 
           <Main />
           <NextScript />
+
+           {
+            this.props.isProduction 
+            && 
+            (
+              <>
+                <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GA_TRACKING_ID}`} />
+                <script dangerouslySetInnerHTML={this.setGoogleTags()} />
+              </>
+            )
+           }
 
         </body> 
       </html>
