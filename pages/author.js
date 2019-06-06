@@ -26,6 +26,7 @@ export const POST_AUTHOR_QUERY = gql`
 					title
 					thumbnail
           slug
+          upvotesNumber
 					author {
 						id
 						name
@@ -68,6 +69,7 @@ export const UPVOTED_POST_AUTHOR_QUERY = gql`
 					title
 					thumbnail
           slug
+          upvotesNumber
 					author {
 						id
 						name
@@ -109,6 +111,7 @@ export const DRAFT_POST_AUTHOR_QUERY = gql`
 					id
 					title
 					thumbnail
+          upvotesNumber
           slug
 					author {
 						id

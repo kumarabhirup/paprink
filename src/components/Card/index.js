@@ -37,7 +37,7 @@ class Card extends Component {
 
   state = {
     upvote: this.props.post.upvotes.some(upvote => upvote.user.id === this.userId),
-    upvotesNumber: this.props.post.upvotes.length
+    upvotesNumber: this.props.post.upvotesNumber // this.props.post.upvotes.length
   }
 
   upvote = async client => {

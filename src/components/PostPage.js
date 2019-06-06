@@ -50,7 +50,7 @@ class PostPage extends Component {
 
   state = {
     upvote: this.props.postData.upvotes.some(upvote => upvote.user && upvote.user.id === this.userId),
-		upvotesNumber: this.props.postData.upvotes.length
+		upvotesNumber: this.props.postData.upvotesNumber // this.props.postData.upvotes.length <- real number
   }
 
   upvote = async client => {

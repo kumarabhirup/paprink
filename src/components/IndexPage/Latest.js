@@ -19,6 +19,7 @@ export const LATEST_QUERY = gql`
 					title
 					thumbnail
           slug
+          upvotesNumber
 					author {
 						id
 						name
