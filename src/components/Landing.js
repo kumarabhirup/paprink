@@ -196,7 +196,7 @@ class Landing extends Component {
         <>
           <h3>Community for <br /> writers to flourish.</h3>
           <p>Research by Laura King shows that writing about achieving future goals and dreams can make people happier and healthier.</p>
-          <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TO WRITE" i={`${countUsers > 0 ? countUsers : "no one"} did 🔥`} />
+          <BannerButton link={`/signin?intent=${this.props.router.asPath}`} text="PLEDGE TO WRITE" i={`${countUsers > 0 ? 453 + countUsers : "no one"} did 🔥`} />
         </>
       )
     }
