@@ -17,7 +17,7 @@ export default class PaprinkEditor extends Component {
     return true
   }
 
-  defaultContent = this.props.editorContent ? this.props.editorContent : {"blocks":[{"key":"duei8","text":"This is Your Editor","type":"header-one","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8i1c7","text":"Use it to your advantage.","type":"header-two","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"7vs85","text":"PaprInk, where writers meet opportunities.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
+  defaultContent = this.props.editorContent ? this.props.editorContent : {"blocks":[{"key":"duei8","text":"This is Your Editor","type":"header-one","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"8i1c7","text":"Use it to your advantage.","type":"header-two","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":{}}
 
   render() {
     return (
