@@ -245,7 +245,7 @@ class Landing extends Component {
                     <div className="row">
                       <div className="col-lg-6 offset-lg-6 col-xl-5 offset-xl-7">
                         <div className="banner_content" style={{marginTop: "-15px"}}>
-                          <a href="https://www.producthunt.com/posts/bulk-mail-cli?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-bulk-mail-cli" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=143885&theme=light" alt="bulk-mail CLI - Do hassle-free email marketing with this powerful tool 🔥 | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
+                          <a href="https://www.producthunt.com/posts/paprink?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-paprink" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=157716&theme=light" alt="PaprInk - Pledge to write something everyday and make a good habit! | Product Hunt Embed" style={{width: "250px", height: "54px"}} width="250px" height="54px" /></a>
                           <br /><br /><br />
                           { this.renderLandingSection({ me, ...data }) }
                         </div>

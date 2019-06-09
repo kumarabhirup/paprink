@@ -19,7 +19,7 @@ export default class Sidebar extends Component {
 
           <div className="sidebar_section">
             <h4 style={{fontWeight: "bold"}}>We're on Product Hunt!</h4>
-            <iframe style={{border: "5px solid #fff"}} src="https://cards.producthunt.com/cards/posts/143885?v=1" width="100%" height="405" frameBorder="0" scrolling="no" allowFullScreen />
+            <iframe style={{border: "5px solid #fff"}} src="https://cards.producthunt.com/cards/posts/157716?v=1" width="100%" height="405" frameBorder="0" scrolling="no" allowFullScreen />
           </div>
 
           <div className="sidebar_section">
