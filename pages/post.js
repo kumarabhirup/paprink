@@ -20,6 +20,7 @@ export const GET_POST_QUERY = gql`
       editorSerializedOutput
       status
       slug
+      upvotesNumber
       author {
         id
         name
