@@ -25,6 +25,11 @@ const PostBody = styled.div`
 		font-size: 18px;
 		line-height: 50px;
 	}
+	blockquote {
+		font-size: 20px;
+		border-left: 3px solid grey;
+		padding: 15px;
+	}
 	ul {
 		font-size: 18px;
 		line-height: 40px;
@@ -155,8 +160,7 @@ class PostPage extends Component {
 										!postData.editorHtml
 										? <Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} /> 
 										: (
-											<div dangerouslySetInnerHTML={{__html: postData.editorHtml}}>
-											</div>
+											<div dangerouslySetInnerHTML={{__html: postData.editorHtml}}></div>
 										)
 									}
 
