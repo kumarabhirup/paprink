@@ -62,7 +62,7 @@ const PostMetaAndShare = ({ postData, userId }) => (
 
 const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState, upvotesNumber, disabled }) => (
 	<>
-		{ postData.status === "PUBLISHED" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" disabled={disabled} upvotesNumber={upvotesNumber} /> }
+		{ postData.status === "PUBLISHED" || postData.status === "FAKEPOST" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" disabled={disabled} upvotesNumber={upvotesNumber} /> }
 		{ postData.status === "DRAFT" && <p style={{textAlign: "center", marginTop: "15px"}}>THIS POST IS A DRAFT</p> }
 	</>
 )
