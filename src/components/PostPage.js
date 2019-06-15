@@ -160,7 +160,7 @@ class PostPage extends Component {
 										!postData.editorHtml
 										? <Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} /> 
 										: (
-											<div dangerouslySetInnerHTML={{__html: postData.editorHtml}}></div>
+											<div dangerouslySetInnerHTML={{__html: `<p><b>Image Credits:</b> Thanks to <a href="${postData.thumbnail.credits.unsplashProfile}" target="_blank" rel="noopener noreferrer">(@${postData.thumbnail.credits.username}) ${postData.thumbnail.credits.name}</a>'s UnSplash photo.</p><br />${postData.editorHtml}`}}></div>
 										)
 									}
 
