@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { ApolloConsumer } from 'react-apollo'
 import { withRouter } from 'next/router'
 import Head from 'next/head'
+import styled from 'styled-components'
 import { DiscussionEmbed } from 'disqus-react'
 
 import PageContent from './PageContent'
@@ -17,6 +18,28 @@ import { VerfiedBadge } from '../api/mini'
 const Dante = dynamic(import('Dante2'), {
   ssr: false
 })
+
+const PostBody = styled.div`
+	margin-top: 20px;
+	p {
+		font-size: 18px;
+		line-height: 50px;
+	}
+	blockquote {
+		font-size: 20px;
+		border-left: 3px solid grey;
+		padding: 15px;
+	}
+	ul {
+		font-size: 18px;
+		line-height: 40px;
+		list-style-type: lower-latin;
+		padding-left: 40px;
+	}
+	li {
+		font-weight: 500;
+	}
+`
 
 const PostMetaAndShare = ({ postData, userId }) => (
 	<>
@@ -39,7 +62,7 @@ const PostMetaAndShare = ({ postData, userId }) => (
 
 const UpvoteButtonOrDraft = ({ postData, upvote, upvoteState, upvotesNumber, disabled }) => (
 	<>
-		{ postData.status === "PUBLISHED" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" disabled={disabled} upvotesNumber={upvotesNumber} /> }
+		{ postData.status === "PUBLISHED" || postData.status === "FAKEPOST" && <UpvoteButton onClick={upvote} upvote={upvoteState} fontSize={15} type="post" disabled={disabled} upvotesNumber={upvotesNumber} /> }
 		{ postData.status === "DRAFT" && <p style={{textAlign: "center", marginTop: "15px"}}>THIS POST IS A DRAFT</p> }
 	</>
 )
@@ -131,9 +154,15 @@ class PostPage extends Component {
 								</div>
 
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
-								<div className="post_body" style={{marginTop: "20px"}}>
+								<PostBody className="post_body">
 
-									<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} />
+									{
+										!postData.editorHtml
+										? <Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} /> 
+										: (
+											<div dangerouslySetInnerHTML={{__html: `<p><b>Image Credits:</b> Thanks to <a href="${postData.thumbnail.credits.unsplashProfile}" target="_blank" rel="noopener noreferrer">(@${postData.thumbnail.credits.username}) ${postData.thumbnail.credits.name}</a>'s UnSplash photo.</p><br />${postData.editorHtml}`}}></div>
+										)
+									}
 
 									<div className="post_tags">
 										<ul>
@@ -141,7 +170,7 @@ class PostPage extends Component {
 										</ul>
 									</div>
 									
-								</div>
+								</PostBody>
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
 								
 								<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
