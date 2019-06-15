@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { ApolloConsumer } from 'react-apollo'
 import { withRouter } from 'next/router'
 import Head from 'next/head'
+import styled from 'styled-components'
 import { DiscussionEmbed } from 'disqus-react'
 
 import PageContent from './PageContent'
@@ -17,6 +18,23 @@ import { VerfiedBadge } from '../api/mini'
 const Dante = dynamic(import('Dante2'), {
   ssr: false
 })
+
+const PostBody = styled.div`
+	margin-top: 20px;
+	p {
+		font-size: 18px;
+		line-height: 50px;
+	}
+	ul {
+		font-size: 18px;
+		line-height: 40px;
+		list-style-type: lower-latin;
+		padding-left: 40px;
+	}
+	li {
+		font-weight: 500;
+	}
+`
 
 const PostMetaAndShare = ({ postData, userId }) => (
 	<>
@@ -131,9 +149,16 @@ class PostPage extends Component {
 								</div>
 
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
-								<div className="post_body" style={{marginTop: "20px"}}>
+								<PostBody className="post_body">
 
-									<Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} />
+									{
+										!postData.editorHtml
+										? <Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} /> 
+										: (
+											<div dangerouslySetInnerHTML={{__html: postData.editorHtml}}>
+											</div>
+										)
+									}
 
 									<div className="post_tags">
 										<ul>
@@ -141,7 +166,7 @@ class PostPage extends Component {
 										</ul>
 									</div>
 									
-								</div>
+								</PostBody>
 								<UpvoteButtonOrDraft upvote={() => this.upvote(client)} upvoteState={this.state.upvote} postData={postData} upvotesNumber={this.state.upvotesNumber} disabled={this.state.disabled} />
 								
 								<div className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-start">
