@@ -51,6 +51,10 @@ export const CATEGORY_QUERY = gql`
 `
 
 class categoryPage extends Component {
+  state = {
+    moreLoading: false
+  }
+
   render() {
     return (
       <>
@@ -101,7 +105,10 @@ class categoryPage extends Component {
                         queryCategory={this.props.router.query.category}
                         posts={data.postsCategoryConnection.edges.map(x => (x.node))}
                         pageInfo={data.postsCategoryConnection.pageInfo}
+                        postsLoading={this.state.moreLoading}
                         onLoadMore={() => {
+                          this.setState({ moreLoading: true })
+
                           fetchMore({
                             variables: {
                               after: data.postsCategoryConnection.pageInfo.endCursor
@@ -120,6 +127,8 @@ class categoryPage extends Component {
                                   ]
                                 }
                               }
+
+                              this.setState({ moreLoading: false })
 
                               return updatedQuery
 
