@@ -159,7 +159,11 @@ const AUTHOR_QUERY = gql`
 
 class authorPage extends Component {
 
-  state = {}
+  state = {
+    publishedPostsLoading: false,
+    upvotedPostsLoading: false,
+    draftPostsLoading: false
+  }
 
   render() {
     const { author } = this.state
@@ -220,7 +224,9 @@ class authorPage extends Component {
 
                                       publishedPosts={data.postsAuthorConnection.edges.map(x => (x.node))}
                                       publishedPageInfo={data.postsAuthorConnection.pageInfo}
+                                      publishedPostsLoading={this.state.publishedPostsLoading}
                                       publishedOnLoadMore={() => {
+                                        this.setState({ publishedPostsLoading: true })
                                         fetchMore({
                                           variables: {
                                             after: data.postsAuthorConnection.pageInfo.endCursor
@@ -240,6 +246,8 @@ class authorPage extends Component {
                                               }
                                             }
 
+                                            this.setState({ publishedPostsLoading: false })
+
                                             return updatedQuery
 
                                           }
@@ -248,7 +256,9 @@ class authorPage extends Component {
 
                                       upvotedPosts={upvotedPostsPayload.data && upvotedPostsPayload.data.upvotedPostsAuthorConnection.edges.map(x => (x.node))}
                                       upvotedPageInfo={upvotedPostsPayload.data && upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo}
+                                      upvotedPostsLoading={this.state.upvotedPostsLoading}
                                       upvotedOnLoadMore={() => {
+                                        this.setState({ upvotedPostsLoading: true })
                                         upvotedPostsPayload.fetchMore({
                                           variables: {
                                             after: upvotedPostsPayload.data.upvotedPostsAuthorConnection.pageInfo.endCursor
@@ -268,6 +278,8 @@ class authorPage extends Component {
                                               }
                                             }
 
+                                            this.setState({ upvotedPostsLoading: false })
+
                                             return updatedQuery
 
                                           }
@@ -276,8 +288,9 @@ class authorPage extends Component {
 
                                       draftPosts={draftPosts && draftPosts.edges.map(x => (x.node))}
                                       draftPageInfo={draftPosts && draftPosts.pageInfo}
+                                      draftPostsLoading={this.state.draftPostsLoading}
                                       draftOnLoadMore={() => {
-
+                                        this.setState({ draftPostsLoading: true })
                                         draftPostsPayload.fetchMore({
                                           variables: {
                                             after: draftPosts.pageInfo.endCursor
@@ -296,6 +309,8 @@ class authorPage extends Component {
                                                 ]
                                               }
                                             }
+
+                                            this.setState({ draftPostsLoading: false })
 
                                             return updatedQuery
 

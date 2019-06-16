@@ -81,7 +81,7 @@ export default class AuthorPage extends Component {
 											</Grid>
 											{ this.props.publishedPageInfo.hasNextPage && (
 												<div className="load_more">
-													<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.publishedOnLoadMore}>Load More</div>
+													<button id="load_more" style={{display: 'block'}} disabled={this.props.publishedPostsLoading} className="load_more_button text-center trans_200" onClick={this.props.publishedOnLoadMore}>{this.props.publishedPostsLoading ? 'Loading posts...' : 'See More'}</button>
 												</div>
 											) }
 										</Tab>
@@ -98,7 +98,7 @@ export default class AuthorPage extends Component {
 											</Grid>
 											{ this.props.upvotedPageInfo.hasNextPage && (
 												<div className="load_more">
-													<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.upvotedOnLoadMore}>Load More</div>
+													<button id="load_more" style={{display: 'block'}} disabled={this.props.upvotedPostsLoading} className="load_more_button text-center trans_200" onClick={this.props.upvotedOnLoadMore}>{this.props.upvotedPostsLoading ? 'Loading posts...' : 'See More'}</button>
 												</div>
 											) }
 										</Tab>
@@ -117,7 +117,7 @@ export default class AuthorPage extends Component {
 													</Grid>
 													{ this.props.draftPageInfo.hasNextPage && (
 														<div className="load_more">
-															<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.draftOnLoadMore}>Load More</div>
+															<button id="load_more" style={{display: 'block'}} disabled={this.props.draftPostsLoading} className="load_more_button text-center trans_200" onClick={this.props.draftOnLoadMore}>{this.props.draftPostsLoading ? 'Loading drafts...' : 'See More'}</button>
 														</div>
 													) }
 												</Tab>
