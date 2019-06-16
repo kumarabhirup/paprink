@@ -44,6 +44,10 @@ export const LATEST_QUERY = gql`
 `
 
 export default class Latest extends Component {
+  state = {
+    moreLoading: false
+  }
+
   render() {
     return (
       <Query query={LATEST_QUERY}>
@@ -78,10 +82,14 @@ export default class Latest extends Component {
                   </div>
 
                   { pageInfo.hasNextPage && <div className="load_more">
-                    <div 
+                    <button 
                       id="load_more" 
-                      className="load_more_button text-center trans_200"  
+                      className="load_more_button text-center trans_200" 
+                      disabled={this.state.moreLoading} 
+                      style={{display: 'block'}}
                       onClick = {() => {
+                        this.setState({ moreLoading: true })
+
                         fetchMore({
 
                           variables: {
@@ -103,15 +111,16 @@ export default class Latest extends Component {
                               }
                             }
 
+                            this.setState({ moreLoading: false })
+
                             return updatedQuery
 
                           }
-
                         })
                       }}
                     >
-                      Load More
-                    </div>
+                      {this.state.moreLoading ? 'Loading posts...' : 'See More'}
+                    </button>
                   </div> }
                 </div>
               </div>
