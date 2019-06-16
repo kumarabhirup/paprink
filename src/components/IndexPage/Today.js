@@ -83,9 +83,10 @@ export default class Today extends Component {
                   </div>
 
                   { pageInfo.hasNextPage && (
-                    <div id="load_more" className="load_more_button text-center trans_200" style={{marginTop: "50px"}} onClick={() => {
-                      fetchMore({
+                    <button id="load_more" disabled={this.state.moreLoading} className="load_more_button text-center trans_200" style={{marginTop: "50px", display: "block"}} onClick={() => {
+                      this.setState({ moreLoading: true })
 
+                      fetchMore({
                         variables: {
                           after: data.getToday.pageInfo.endCursor
                         },
@@ -105,12 +106,12 @@ export default class Today extends Component {
                             }
                           }
 
+                          this.setState({ moreLoading: false })
+
                           return updatedQuery
-
                         }
-
                       })
-                    }}>See More</div>
+                    }}>{this.state.moreLoading ? 'Loading posts...' : 'See More'}</button>
                   ) }
 
                 </div>
