@@ -67,7 +67,7 @@ export default class CategoryPage extends Component {
 
 						{ this.props.pageInfo.hasNextPage && (
 							<div className="load_more">
-								<div id="load_more" className="load_more_button text-center trans_200" onClick={this.props.onLoadMore}>Load More</div>
+								<button id="load_more" style={{display: 'block'}} disabled={this.props.postsLoading} className="load_more_button text-center trans_200" onClick={this.props.onLoadMore}>{this.props.postsLoading ? 'Loading posts...' : 'See More'}</button>
 							</div>
 						) }
 
