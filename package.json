@@ -6,6 +6,7 @@
     "dev": "NODE_ENV=development node server.js",
     "build": "next build",
     "start": "NODE_ENV=production node server.js",
+    "test": "NODE_ENV=test jest --watch",
     "deploy:now": "now --dotenv .env.production",
     "heroku-postbuild": "next build"
   },
@@ -88,10 +89,30 @@
     "web-push": "^3.3.5"
   },
   "devDependencies": {
+    "babel-jest": "^24.8.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
+    "jest": "^24.8.0",
+    "jest-transform-graphql": "^2.1.0",
     "nodemon": "^1.18.10"
   },
   "resolutions": {
     "terser": "3.14.1",
     "graphql-anywhere": "4.1.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/.next/",
+      "<rootDir>/node_modules/"
+    ],
+    "transform": {
+      "\\.(gql|graphql)$": "jest-transform-graphql",
+      ".*": "babel-jest",
+      "^.+\\.js?$": "babel-jest"
+    }
   }
 }

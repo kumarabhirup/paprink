@@ -27,6 +27,17 @@ module.exports = withSass({
     'PUBLIC_VAPID': process.env.PUBLIC_VAPID,
     'PRIVATE_VAPID': process.env.PRIVATE_VAPID,
     'ONESIGNAL_ID': process.env.ONESIGNAL_ID,
-    'GA_TRACKING_ID': process.env.GA_TRACKING_ID
+    'GA_TRACKING_ID': process.env.GA_TRACKING_ID,
+    "test": {
+      "presets":[
+        ["es2015", { "modules": false }],
+        "react",
+        "stage-0"
+      ],
+      "plugins": [
+        "transform-es2015-modules-commonjs",
+        "dynamic-import-node"
+      ]
+    }
   }
 })
