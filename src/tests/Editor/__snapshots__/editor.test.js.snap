@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Editor from scratch Renders properly 1`] = `
+"<MockedProvider mocks={{...}} addTypename={true}>
+  <ApolloProvider client={{...}}>
+    <withRouter(EditorPage) new={true}>
+      <EditorPage router={[undefined]} new={true}>
+        <PageContent noSidebar={true}>
+          <div className=\\"page_content\\">
+            <div className=\\"container\\">
+              <div className=\\"row null\\">
+                <ApolloConsumer>
+                  <div className=\\"col-lg-10 offset-lg-1\\">
+                    <div className=\\"post_content\\">
+                      <styled.input type=\\"text\\" placeholder=\\"Write an awesome title!\\" value=\\"Write an awesome title!\\" onChange={[Function: onChange]} maxLength=\\"55\\">
+                        <StyledComponent type=\\"text\\" placeholder=\\"Write an awesome title!\\" value=\\"Write an awesome title!\\" onChange={[Function: onChange]} maxLength=\\"55\\" forwardedComponent={{...}} forwardedRef={{...}}>
+                          <input type=\\"text\\" placeholder=\\"Write an awesome title!\\" value=\\"Write an awesome title!\\" onChange={[Function: onChange]} maxLength=\\"55\\" className=\\"sc-bdVaJa kKiSZs\\" />
+                        </StyledComponent>
+                      </styled.input>
+                      <hr style={{...}} />
+                      <div className=\\"post_body\\" style={{...}}>
+                        <div className=\\"post_tags\\" style={{...}}>
+                          <ul />
+                        </div>
+                        <PaprinkEditor editorState={[Function]} editorContent={[undefined]}>
+                          <LoadableComponent content={{...}} body_placeholder=\\"Write your next masterpiece ✍️\\" onChange={[Function]} widgets={{...}} read_only={0}>
+                            <loading isLoading={true} pastDelay={false} timedOut={false} error={{...}} retry={[Function]} />
+                          </LoadableComponent>
+                        </PaprinkEditor>
+                      </div>
+                      <CategorySelector categoryState={[Function]} categories={{...}}>
+                        <Head>
+                          <SideEffect reduceComponentsToState={[Function: reduceComponents]} handleStateChange={{...}} isAmp={false} />
+                        </Head>
+                        <div className=\\"white-box-avision\\">
+                          <h3 style={{...}}>
+                            🏗️ Category
+                          </h3>
+                          <DragDropContext(ReactTags) tags={{...}} suggestions={{...}} handleDelete={[Function: bound handleDelete]} handleAddition={[Function: bound handleAddition]} handleDrag={[Function: bound handleDrag]} delimiters={{...}} maxLength={24} minQueryLength={1} allowDragDrop={false} placeholder=\\"Add at least 1 Category (max 3)\\" allowDeleteFromEmptyInput={false}>
+                            <ReactTags tags={{...}} suggestions={{...}} handleDelete={[Function: bound handleDelete]} handleAddition={[Function: bound handleAddition]} handleDrag={[Function: bound handleDrag]} delimiters={{...}} maxLength={24} minQueryLength={1} allowDragDrop={false} placeholder=\\"Add at least 1 Category (max 3)\\" allowDeleteFromEmptyInput={false} labelField=\\"text\\" autofocus={true} inline={true} inputFieldPosition=\\"inline\\" allowAdditionFromPaste={true} resetInputOnDelete={true} autocomplete={false} readOnly={false} allowUnique={true}>
+                              <div className=\\"ReactTags__tags react-tags-wrapper\\">
+                                <div className=\\"ReactTags__selected\\">
+                                  <div className=\\"ReactTags__tagInput\\">
+                                    <input className=\\"ReactTags__tagInputField\\" type=\\"text\\" placeholder=\\"Add at least 1 Category (max 3)\\" aria-label=\\"Add at least 1 Category (max 3)\\" onFocus={[Function: bound handleFocus]} onBlur={[Function: bound handleBlur]} onChange={[Function: bound handleChange]} onKeyDown={[Function: bound handleKeyDown]} onPaste={[Function: bound handlePaste]} name={[undefined]} id={[undefined]} maxLength={24} value={[undefined]} />
+                                    <Suggestions query=\\"\\" suggestions={{...}} labelField=\\"text\\" selectedIndex={-1} handleClick={[Function: bound handleSuggestionClick]} handleHover={[Function: bound handleSuggestionHover]} minQueryLength={1} shouldRenderSuggestions={[undefined]} isFocused={false} classNames={{...}} renderSuggestion={[undefined]} />
+                                  </div>
+                                </div>
+                              </div>
+                            </ReactTags>
+                          </DragDropContext(ReactTags)>
+                        </div>
+                      </CategorySelector>
+                      <ImageUploader image={[undefined]} uploadPreset=\\"paprink\\" imageState={[Function]}>
+                        <div className=\\"white-box-avision\\" style={[undefined]}>
+                          <h3>
+                            🖼️ Relevant Thumbnail
+                          </h3>
+                          <div className=\\"bottom_panel d-flex flex-row align-items-center justify-content-start\\" style={{...}}>
+                               
+                            <input type=\\"file\\" placeholder=\\"Upload the article thumbnail.\\" id=\\"thumbnailUpload\\" name=\\"thumbnailUpload\\" style={{...}} onChange={[Function]} />
+                               
+                          </div>
+                        </div>
+                      </ImageUploader>
+                      <div className=\\"post_panel bottom_panel d-flex flex-row align-items-center justify-content-end\\">
+                             
+                        <Button variant=\\"dark\\" style={{...}} onClick={[Function: onClick]} active={false} disabled={false} type=\\"button\\">
+                          <button style={{...}} onClick={[Function: onClick]} disabled={false} type=\\"button\\" className=\\"btn btn-dark\\">
+                            📝 SAVE AS DRAFT
+                          </button>
+                        </Button>
+                        <Button variant=\\"success\\" style={{...}} onClick={[Function: onClick]} active={false} disabled={false} type=\\"button\\">
+                          <button style={{...}} onClick={[Function: onClick]} disabled={false} type=\\"button\\" className=\\"btn btn-success\\">
+                            🎉 PUBLISH
+                          </button>
+                        </Button>
+                      </div>
+                      <div className=\\"post_panel bottom_panel d-flex flex-row align-items-center justify-content-center\\">
+                        Thanks for spending your time here. ❤️ from PaprInk Team!
+                      </div>
+                    </div>
+                  </div>
+                </ApolloConsumer>
+              </div>
+            </div>
+          </div>
+        </PageContent>
+      </EditorPage>
+    </withRouter(EditorPage)>
+  </ApolloProvider>
+</MockedProvider>"
+`;
