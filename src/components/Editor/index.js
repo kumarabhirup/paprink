@@ -36,7 +36,7 @@ const DELETE_POST_MUTATION = gql`
   }
 `
 
-const SAVE_POST_MUTATION = gql`
+export const SAVE_POST_MUTATION = gql`
   mutation SAVE_POST_MUTATION(
     $title: String!
     $editorSerializedOutput: Json!
@@ -194,7 +194,6 @@ class EditorPage extends Component {
   }
 
   publish = async client => {
-
     if(this.props.new) {
 
       await this.setState({ error: false })
@@ -315,7 +314,7 @@ class EditorPage extends Component {
                   &nbsp; &nbsp; &nbsp;
                   {!this.props.new && <BootstrapButton variant="danger" style={{marginRight: "10px", cursor: 'pointer'}} onClick={() => this.delete(client)}>{this.state.deleted ? "DELETED!" : "DELETE POST"}</BootstrapButton>}
                   {!this.state.published && <BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}} onClick={() => this.draft(client)}>{this.state.drafted ? '📝 SAVE CHANGES' : '📝 SAVE AS DRAFT'}</BootstrapButton>}
-                  {<BootstrapButton variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>}
+                  {<BootstrapButton data-test="publishButton" variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>}
                   {/* {this.state.published && <BootstrapButton variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>} */}
                 </div>
 

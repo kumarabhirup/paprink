@@ -763,6 +763,7 @@ exports[`Editor from scratch it Renders properly 1`] = `
     </Button>
     <Button
       active={false}
+      data-test="publishButton"
       disabled={false}
       onClick={[Function]}
       style={
@@ -775,6 +776,7 @@ exports[`Editor from scratch it Renders properly 1`] = `
     >
       <button
         className="btn btn-success"
+        data-test="publishButton"
         disabled={false}
         onClick={[Function]}
         style={
