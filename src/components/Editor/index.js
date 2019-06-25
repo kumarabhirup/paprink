@@ -278,9 +278,9 @@ class EditorPage extends Component {
           {client => (
             
             <div className="col-lg-10 offset-lg-1">
-              <div className="post_content">
+              <div className="post_content" data-test="EditorContent">
 
-                <TitleInputBox type="text" placeholder={this.props.new ? "Write an awesome title!" : this.props.postData.title} value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
+                <TitleInputBox type="text" data-test="TitleInputBox" placeholder={this.props.new ? "Write an awesome title!" : this.props.postData.title} value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
 
                 <hr style={{opacity: 0.3}} />
 
