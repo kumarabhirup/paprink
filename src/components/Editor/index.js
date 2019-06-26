@@ -36,7 +36,7 @@ const DELETE_POST_MUTATION = gql`
   }
 `
 
-const SAVE_POST_MUTATION = gql`
+export const SAVE_POST_MUTATION = gql`
   mutation SAVE_POST_MUTATION(
     $title: String!
     $editorSerializedOutput: Json!
@@ -194,7 +194,6 @@ class EditorPage extends Component {
   }
 
   publish = async client => {
-
     if(this.props.new) {
 
       await this.setState({ error: false })
@@ -225,7 +224,7 @@ class EditorPage extends Component {
     } else {
 
       await this.setState({ error: false })
-      if (this.state.title.length === 0 || this.state.categories.length === 0 || isEmpty(this.state.images) || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
+      if (this.state.title.length === 0 || this.state.categories.length === 0 || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
         await this.setState({ error: true, draft: false })
       } else {
         await this.setState({ published: 'loading' })
@@ -278,9 +277,9 @@ class EditorPage extends Component {
           {client => (
             
             <div className="col-lg-10 offset-lg-1">
-              <div className="post_content">
+              <div className="post_content" data-test="EditorContent">
 
-                <TitleInputBox type="text" placeholder={this.props.new ? "Write an awesome title!" : this.props.postData.title} value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
+                <TitleInputBox type="text" data-test="TitleInputBox" placeholder={this.props.new ? "Write an awesome title!" : this.props.postData.title} value={this.state.title === '' ? null : this.state.title} onChange={event => this.onTitleChange(event)} maxLength="55" />
 
                 <hr style={{opacity: 0.3}} />
 
@@ -315,7 +314,7 @@ class EditorPage extends Component {
                   &nbsp; &nbsp; &nbsp;
                   {!this.props.new && <BootstrapButton variant="danger" style={{marginRight: "10px", cursor: 'pointer'}} onClick={() => this.delete(client)}>{this.state.deleted ? "DELETED!" : "DELETE POST"}</BootstrapButton>}
                   {!this.state.published && <BootstrapButton variant="dark" style={{marginRight: "10px", cursor: 'pointer'}} onClick={() => this.draft(client)}>{this.state.drafted ? '📝 SAVE CHANGES' : '📝 SAVE AS DRAFT'}</BootstrapButton>}
-                  {<BootstrapButton variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>}
+                  {<BootstrapButton data-test="publishButton" variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>}
                   {/* {this.state.published && <BootstrapButton variant={this.state.published === 'error' ? "danger" : this.state.published === true ? "info" : "success"} style={{cursor: 'pointer'}} onClick={() => this.publish(client)}>{this.state.published === true ? '👌 UPDATE' : this.state.published === 'error' ? 'Something went wrong ☹️' : this.state.published === 'loading' ? 'PUBLISHING...' : '🎉 PUBLISH'}</BootstrapButton>} */}
                 </div>
 

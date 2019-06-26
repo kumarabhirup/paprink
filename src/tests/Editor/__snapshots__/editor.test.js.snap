@@ -1,0 +1,799 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Editor from scratch it Renders properly 1`] = `
+<div
+  className="post_content"
+  data-test="EditorContent"
+>
+  <styled.input
+    data-test="TitleInputBox"
+    maxLength="55"
+    onChange={[Function]}
+    placeholder="Write an awesome title!"
+    type="text"
+    value="Write an awesome title!"
+  >
+    <StyledComponent
+      data-test="TitleInputBox"
+      forwardedComponent={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "attrs": Array [],
+          "componentStyle": ComponentStyle {
+            "componentId": "sc-bdVaJa",
+            "isStatic": true,
+            "lastClassName": "kKiSZs",
+            "rules": Array [
+              "
+  width: 100%;
+  border: none;
+  padding: 30px;
+  font-size: 28px;
+  border-radius: 6px;
+  &:focus {
+    outline: none;
+  }
+",
+            ],
+          },
+          "displayName": "styled.input",
+          "foldedComponentIds": Array [],
+          "render": [Function],
+          "styledComponentId": "sc-bdVaJa",
+          "target": "input",
+          "toString": [Function],
+          "warnTooManyClasses": [Function],
+          "withComponent": [Function],
+        }
+      }
+      forwardedRef={null}
+      maxLength="55"
+      onChange={[Function]}
+      placeholder="Write an awesome title!"
+      type="text"
+      value="Write an awesome title!"
+    >
+      <input
+        className="sc-bdVaJa kKiSZs"
+        data-test="TitleInputBox"
+        maxLength="55"
+        onChange={[Function]}
+        placeholder="Write an awesome title!"
+        type="text"
+        value="Write an awesome title!"
+      />
+    </StyledComponent>
+  </styled.input>
+  <hr
+    style={
+      Object {
+        "opacity": 0.3,
+      }
+    }
+  />
+  <div
+    className="post_body"
+    style={
+      Object {
+        "color": "#000000",
+        "marginTop": "20px",
+      }
+    }
+  >
+    <div
+      className="post_tags"
+      style={
+        Object {
+          "margin": "10px auto",
+        }
+      }
+    >
+      <ul />
+    </div>
+    <PaprinkEditor
+      editorState={[Function]}
+    >
+      <Dante
+        body_placeholder="Write your next masterpiece ✍️"
+        content={
+          Object {
+            "blocks": Array [
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "duei8",
+                "text": "This is Your Editor",
+                "type": "header-one",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "8i1c7",
+                "text": "Use it to your advantage.",
+                "type": "header-two",
+              },
+              Object {
+                "data": Object {},
+                "depth": 0,
+                "entityRanges": Array [],
+                "inlineStyleRanges": Array [],
+                "key": "7vs85",
+                "text": "PaprInk, where writers meet opportunities.",
+                "type": "unstyled",
+              },
+            ],
+            "entityMap": Object {},
+          }
+        }
+        onChange={[Function]}
+        read_only={0}
+        widgets={
+          Array [
+            Object {
+              "block": [Function],
+              "breakOnContinuous": true,
+              "editable": true,
+              "handleEnterWithText": [Function],
+              "handleEnterWithoutText": [Function],
+              "icon": [Function],
+              "options": Object {
+                "upload_handler": [Function],
+              },
+              "renderable": true,
+              "selectedFn": [Function],
+              "selected_class": "is-selected is-mediaFocused",
+              "title": "add an image",
+              "type": "image",
+              "widget_options": Object {
+                "displayOnInlineTooltip": true,
+                "insert_block": "image",
+                "insertion": "upload",
+              },
+              "wrapper_class": "graf graf--figure",
+            },
+            Object {
+              "block": [Function],
+              "breakOnContinuous": true,
+              "editable": true,
+              "handleEnterWithText": [Function],
+              "handleEnterWithoutText": [Function],
+              "icon": [Function],
+              "options": Object {
+                "caption": "optional caption",
+                "endpoint": "//noembed.com/embed?url=",
+                "placeholder": "Paste the link of a YouTube or Vimeo video!",
+              },
+              "renderable": true,
+              "selected_class": " is-selected is-mediaFocused",
+              "title": "insert video",
+              "type": "video",
+              "widget_options": Object {
+                "displayOnInlineTooltip": true,
+                "insert_block": "video",
+                "insertion": "placeholder",
+              },
+              "wrapper_class": "graf--figure graf--iframe",
+            },
+            Object {
+              "block": [Function],
+              "breakOnContinuous": true,
+              "editable": true,
+              "handleEnterWithText": [Function],
+              "handleEnterWithoutText": [Function],
+              "icon": [Function],
+              "options": Object {
+                "endpoint": "//noembed.com/embed?url=",
+                "placeholder": "Embed a tweet, or a YouTube video.",
+              },
+              "renderable": true,
+              "selected_class": "is-selected is-mediaFocused",
+              "title": "insert embed",
+              "type": "embed",
+              "widget_options": Object {
+                "displayOnInlineTooltip": true,
+                "insert_block": "embed",
+                "insertion": "placeholder",
+              },
+              "wrapper_class": "graf graf--mixtapeEmbed",
+            },
+            Object {
+              "block": [Function],
+              "breakOnContinuous": true,
+              "editable": true,
+              "handleEnterWithText": [Function],
+              "handleEnterWithoutText": [Function],
+              "renderable": true,
+              "selected_class": "is-selected is-mediaFocused",
+              "type": "placeholder",
+              "widget_options": Object {
+                "displayOnInlineTooltip": false,
+              },
+              "wrapper_class": "is-embedable",
+            },
+          ]
+        }
+      />
+    </PaprinkEditor>
+  </div>
+  <CategorySelector
+    categories={Array []}
+    categoryState={[Function]}
+  >
+    <Head>
+      <SideEffect
+        handleStateChange={null}
+        isAmp={false}
+        reduceComponentsToState={[Function]}
+      />
+    </Head>
+    <div
+      className="white-box-avision"
+    >
+      <h3
+        style={
+          Object {
+            "marginLeft": "3px",
+          }
+        }
+      >
+        🏗️ Category
+      </h3>
+      <DragDropContext(ReactTags)
+        allowDeleteFromEmptyInput={false}
+        allowDragDrop={false}
+        delimiters={
+          Array [
+            188,
+            13,
+          ]
+        }
+        handleAddition={[Function]}
+        handleDelete={[Function]}
+        handleDrag={[Function]}
+        maxLength={24}
+        minQueryLength={1}
+        placeholder="Add at least 1 Category (max 3)"
+        suggestions={
+          Array [
+            Object {
+              "id": "tech",
+              "text": "Technology",
+            },
+            Object {
+              "id": "fin",
+              "text": "Finance",
+            },
+            Object {
+              "id": "digimark",
+              "text": "Digital Marketing",
+            },
+            Object {
+              "id": "coding",
+              "text": "Programming",
+            },
+            Object {
+              "id": "tutorial",
+              "text": "Tutorial",
+            },
+            Object {
+              "id": "howto",
+              "text": "How To",
+            },
+            Object {
+              "id": "writing",
+              "text": "Writing",
+            },
+            Object {
+              "id": "inspire",
+              "text": "Inspirational",
+            },
+            Object {
+              "id": "science",
+              "text": "Science",
+            },
+            Object {
+              "id": "politics",
+              "text": "Politics",
+            },
+            Object {
+              "id": "lifestyle",
+              "text": "Lifestyle",
+            },
+            Object {
+              "id": "food",
+              "text": "Food",
+            },
+            Object {
+              "id": "bussiness",
+              "text": "Bussiness",
+            },
+            Object {
+              "id": "entrepreneur",
+              "text": "Entrepreneurs",
+            },
+            Object {
+              "id": "history",
+              "text": "History",
+            },
+            Object {
+              "id": "health",
+              "text": "Health",
+            },
+            Object {
+              "id": "pet",
+              "text": "Pets",
+            },
+            Object {
+              "id": "parenthood",
+              "text": "Parenthood",
+            },
+            Object {
+              "id": "travel",
+              "text": "Travel",
+            },
+            Object {
+              "id": "india",
+              "text": "India",
+            },
+            Object {
+              "id": "china",
+              "text": "China",
+            },
+            Object {
+              "id": "uk",
+              "text": "United Kingdom",
+            },
+            Object {
+              "id": "us",
+              "text": "United States",
+            },
+            Object {
+              "id": "world",
+              "text": "World",
+            },
+            Object {
+              "id": "news",
+              "text": "News",
+            },
+            Object {
+              "id": "review",
+              "text": "Product Review",
+            },
+            Object {
+              "id": "art",
+              "text": "Art",
+            },
+            Object {
+              "id": "culture",
+              "text": "Culture",
+            },
+            Object {
+              "id": "story",
+              "text": "Story",
+            },
+          ]
+        }
+        tags={Array []}
+      >
+        <ReactTags
+          allowAdditionFromPaste={true}
+          allowDeleteFromEmptyInput={false}
+          allowDragDrop={false}
+          allowUnique={true}
+          autocomplete={false}
+          autofocus={true}
+          delimiters={
+            Array [
+              188,
+              13,
+            ]
+          }
+          handleAddition={[Function]}
+          handleDelete={[Function]}
+          handleDrag={[Function]}
+          inline={true}
+          inputFieldPosition="inline"
+          labelField="text"
+          maxLength={24}
+          minQueryLength={1}
+          placeholder="Add at least 1 Category (max 3)"
+          readOnly={false}
+          resetInputOnDelete={true}
+          suggestions={
+            Array [
+              Object {
+                "id": "tech",
+                "text": "Technology",
+              },
+              Object {
+                "id": "fin",
+                "text": "Finance",
+              },
+              Object {
+                "id": "digimark",
+                "text": "Digital Marketing",
+              },
+              Object {
+                "id": "coding",
+                "text": "Programming",
+              },
+              Object {
+                "id": "tutorial",
+                "text": "Tutorial",
+              },
+              Object {
+                "id": "howto",
+                "text": "How To",
+              },
+              Object {
+                "id": "writing",
+                "text": "Writing",
+              },
+              Object {
+                "id": "inspire",
+                "text": "Inspirational",
+              },
+              Object {
+                "id": "science",
+                "text": "Science",
+              },
+              Object {
+                "id": "politics",
+                "text": "Politics",
+              },
+              Object {
+                "id": "lifestyle",
+                "text": "Lifestyle",
+              },
+              Object {
+                "id": "food",
+                "text": "Food",
+              },
+              Object {
+                "id": "bussiness",
+                "text": "Bussiness",
+              },
+              Object {
+                "id": "entrepreneur",
+                "text": "Entrepreneurs",
+              },
+              Object {
+                "id": "history",
+                "text": "History",
+              },
+              Object {
+                "id": "health",
+                "text": "Health",
+              },
+              Object {
+                "id": "pet",
+                "text": "Pets",
+              },
+              Object {
+                "id": "parenthood",
+                "text": "Parenthood",
+              },
+              Object {
+                "id": "travel",
+                "text": "Travel",
+              },
+              Object {
+                "id": "india",
+                "text": "India",
+              },
+              Object {
+                "id": "china",
+                "text": "China",
+              },
+              Object {
+                "id": "uk",
+                "text": "United Kingdom",
+              },
+              Object {
+                "id": "us",
+                "text": "United States",
+              },
+              Object {
+                "id": "world",
+                "text": "World",
+              },
+              Object {
+                "id": "news",
+                "text": "News",
+              },
+              Object {
+                "id": "review",
+                "text": "Product Review",
+              },
+              Object {
+                "id": "art",
+                "text": "Art",
+              },
+              Object {
+                "id": "culture",
+                "text": "Culture",
+              },
+              Object {
+                "id": "story",
+                "text": "Story",
+              },
+            ]
+          }
+          tags={Array []}
+        >
+          <div
+            className="ReactTags__tags react-tags-wrapper"
+          >
+            <div
+              className="ReactTags__selected"
+            >
+              <div
+                className="ReactTags__tagInput"
+              >
+                <input
+                  aria-label="Add at least 1 Category (max 3)"
+                  className="ReactTags__tagInputField"
+                  maxLength={24}
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  onKeyDown={[Function]}
+                  onPaste={[Function]}
+                  placeholder="Add at least 1 Category (max 3)"
+                  type="text"
+                />
+                <Suggestions
+                  classNames={
+                    Object {
+                      "activeSuggestion": "ReactTags__activeSuggestion",
+                      "remove": "ReactTags__remove",
+                      "selected": "ReactTags__selected",
+                      "suggestions": "ReactTags__suggestions",
+                      "tag": "ReactTags__tag",
+                      "tagInput": "ReactTags__tagInput",
+                      "tagInputField": "ReactTags__tagInputField",
+                      "tags": "ReactTags__tags",
+                    }
+                  }
+                  handleClick={[Function]}
+                  handleHover={[Function]}
+                  isFocused={false}
+                  labelField="text"
+                  minQueryLength={1}
+                  query=""
+                  selectedIndex={-1}
+                  suggestions={
+                    Array [
+                      Object {
+                        "id": "tech",
+                        "text": "Technology",
+                      },
+                      Object {
+                        "id": "fin",
+                        "text": "Finance",
+                      },
+                      Object {
+                        "id": "digimark",
+                        "text": "Digital Marketing",
+                      },
+                      Object {
+                        "id": "coding",
+                        "text": "Programming",
+                      },
+                      Object {
+                        "id": "tutorial",
+                        "text": "Tutorial",
+                      },
+                      Object {
+                        "id": "howto",
+                        "text": "How To",
+                      },
+                      Object {
+                        "id": "writing",
+                        "text": "Writing",
+                      },
+                      Object {
+                        "id": "inspire",
+                        "text": "Inspirational",
+                      },
+                      Object {
+                        "id": "science",
+                        "text": "Science",
+                      },
+                      Object {
+                        "id": "politics",
+                        "text": "Politics",
+                      },
+                      Object {
+                        "id": "lifestyle",
+                        "text": "Lifestyle",
+                      },
+                      Object {
+                        "id": "food",
+                        "text": "Food",
+                      },
+                      Object {
+                        "id": "bussiness",
+                        "text": "Bussiness",
+                      },
+                      Object {
+                        "id": "entrepreneur",
+                        "text": "Entrepreneurs",
+                      },
+                      Object {
+                        "id": "history",
+                        "text": "History",
+                      },
+                      Object {
+                        "id": "health",
+                        "text": "Health",
+                      },
+                      Object {
+                        "id": "pet",
+                        "text": "Pets",
+                      },
+                      Object {
+                        "id": "parenthood",
+                        "text": "Parenthood",
+                      },
+                      Object {
+                        "id": "travel",
+                        "text": "Travel",
+                      },
+                      Object {
+                        "id": "india",
+                        "text": "India",
+                      },
+                      Object {
+                        "id": "china",
+                        "text": "China",
+                      },
+                      Object {
+                        "id": "uk",
+                        "text": "United Kingdom",
+                      },
+                      Object {
+                        "id": "us",
+                        "text": "United States",
+                      },
+                      Object {
+                        "id": "world",
+                        "text": "World",
+                      },
+                      Object {
+                        "id": "news",
+                        "text": "News",
+                      },
+                      Object {
+                        "id": "review",
+                        "text": "Product Review",
+                      },
+                      Object {
+                        "id": "art",
+                        "text": "Art",
+                      },
+                      Object {
+                        "id": "culture",
+                        "text": "Culture",
+                      },
+                      Object {
+                        "id": "story",
+                        "text": "Story",
+                      },
+                    ]
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        </ReactTags>
+      </DragDropContext(ReactTags)>
+    </div>
+  </CategorySelector>
+  <ImageUploader
+    imageState={[Function]}
+    uploadPreset="paprink"
+  >
+    <div
+      className="white-box-avision"
+    >
+      <h3>
+        🖼️ Relevant Thumbnail
+      </h3>
+      <div
+        className="bottom_panel d-flex flex-row align-items-center justify-content-start"
+        style={
+          Object {
+            "padding": "15px 0px",
+          }
+        }
+      >
+           
+        <input
+          id="thumbnailUpload"
+          name="thumbnailUpload"
+          onChange={[Function]}
+          placeholder="Upload the article thumbnail."
+          style={
+            Object {
+              "width": "100%",
+            }
+          }
+          type="file"
+        />
+           
+      </div>
+    </div>
+  </ImageUploader>
+  <div
+    className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-end"
+  >
+         
+    <Button
+      active={false}
+      disabled={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+          "marginRight": "10px",
+        }
+      }
+      type="button"
+      variant="dark"
+    >
+      <button
+        className="btn btn-dark"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+            "marginRight": "10px",
+          }
+        }
+        type="button"
+      >
+        📝 SAVE AS DRAFT
+      </button>
+    </Button>
+    <Button
+      active={false}
+      data-test="publishButton"
+      disabled={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "cursor": "pointer",
+        }
+      }
+      type="button"
+      variant="success"
+    >
+      <button
+        className="btn btn-success"
+        data-test="publishButton"
+        disabled={false}
+        onClick={[Function]}
+        style={
+          Object {
+            "cursor": "pointer",
+          }
+        }
+        type="button"
+      >
+        🎉 PUBLISH
+      </button>
+    </Button>
+  </div>
+  <div
+    className="post_panel bottom_panel d-flex flex-row align-items-center justify-content-center"
+  >
+    Thanks for spending your time here. ❤️ from PaprInk Team!
+  </div>
+</div>
+`;
