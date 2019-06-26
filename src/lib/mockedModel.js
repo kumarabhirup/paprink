@@ -4,34 +4,24 @@ const editorSerializedOutput = '{"blocks":[{"key":"duei8","text":"This is Your E
 const editorCurrentContent = '{"test": "test"}'
 const thumbnail = '{"image":"https://res.cloudinary.com/iqubex/image/upload/v1559537917/paprink/fp4kdl4wgxtelfhualpy.jpg","uploading":"done","smallImage":"https://res.cloudinary.com/iqubex/image/upload/c_scale,q_auto,w_730/v1559537917/paprink/fp4kdl4wgxtelfhualpy.jpg","blackOverlayImage":"https://res.cloudinary.com/iqubex/image/upload/b_rgb:000000,c_scale,o_57,q_auto,w_1032,z_1.2/v1559537917/paprink/fp4kdl4wgxtelfhualpy.jpg","smallCardImage":"https://res.cloudinary.com/iqubex/image/upload/c_fill,f_jpg,g_center,h_174,w_263/v1559537917/paprink/fp4kdl4wgxtelfhualpy.jpg"}'
 const profilePicture = "https://res.cloudinary.com/iqubex/image/upload/c_crop,g_face,h_700,w_700/v1559462578/paprink/n5qnngxyxmzzhiupsw7l.jpg"
+import { dogImage } from '../tests/Editor/editor.test'
 
 // seed it so we get consistent results
 casual.seed(777)
 
 const date = new Date()
 
-const fakePost = () => ({
-  __typename: 'Post',
-  id: 'post123',
-  title: casual.sentence,
-  editorSerializedOutput: JSON.parse(editorSerializedOutput),
-  editorCurrentContent: JSON.parse(editorCurrentContent),
-  editorHtml: null,
-  // author: fakeUser(),
-  publishedAt: date.toISOString(),
-  upvotes: [],
-  upvotesNumber: 0,
-  // authorId: fakeUser().id,
-  categories: ["TECH", "FIN"],
-  thumbnail: JSON.parse(thumbnail),
-  refUrl: null,
-  status: "PUBLISHED",
-  slug: "this-is-a-title-i-love"
+const fakeCategory = () => ({
+  __typename: 'Category',
+  id: casual.word,
+  text: casual.word,
+  category: casual.word.toUpperCase(),
+  posts: []
 })
 
 const fakeUser = () => ({
   __typename: 'User',
-  id: 'user123',
+  id: casual.uuid,
   socialId: 'social123',
   fname: casual.first_name,
   lname: casual.last_name,
@@ -49,6 +39,25 @@ const fakeUser = () => ({
   previledge: ['AUTHOR'],
   signUpMethod: 'test',
   accessToken: casual.uuid
+})
+
+const fakePost = () => ({
+  __typename: 'Post',
+  id: casual.uuid,
+  author: fakeUser(),
+  title: casual.sentence,
+  thumbnail: {image: dogImage},
+  categories: [fakeCategory()],
+  status: "PUBLISHED",
+  slug: "this-is-a-title-i-love",
+  editorSerializedOutput: {blocks: [{test: 'test'}]},
+  editorCurrentContent: {test: 'test'},
+  editorHtml: null,
+  publishedAt: date.toISOString(),
+  upvotes: [],
+  upvotesNumber: 0,
+  authorId: fakeUser().id,
+  refUrl: null
 })
 
 // Fake LocalStorage
@@ -77,5 +86,6 @@ class LocalStorageMock {
 export {
   LocalStorageMock,
   fakeUser,
-  fakePost
+  fakePost,
+  fakeCategory
 }

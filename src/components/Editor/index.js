@@ -224,7 +224,7 @@ class EditorPage extends Component {
     } else {
 
       await this.setState({ error: false })
-      if (this.state.title.length === 0 || this.state.categories.length === 0 || isEmpty(this.state.images) || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
+      if (this.state.title.length === 0 || this.state.categories.length === 0 || this.state.images.image === null || this.state.editorSerializedOutput.blocks.length === 1) {
         await this.setState({ error: true, draft: false })
       } else {
         await this.setState({ published: 'loading' })
