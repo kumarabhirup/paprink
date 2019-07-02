@@ -19,6 +19,7 @@ export const GET_POST_QUERY = gql`
       editorCurrentContent
       editorSerializedOutput
       editorHtml
+      refUrl
       status
       slug
       upvotesNumber

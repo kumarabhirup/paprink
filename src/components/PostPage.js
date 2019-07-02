@@ -135,7 +135,7 @@ class PostPage extends Component {
 							<meta name="subject" content={postData.title} />
 							<meta name="identifier-URL" content={meta.domain} />
 							<meta name="robots" content="index,follow" />
-							<meta name="description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
+							<meta name="description" content={`A writeup by ${postData.author.name} @ ${meta.name}!`} />
 							<meta name="author" content={`${postData.author.name}, ${postData.author.email}`} />
 							<meta name="url" content={`${meta.domain}/p/${postData.slug}-${postData.id}`} />
 							<meta name="rating" content="General" />
@@ -173,7 +173,7 @@ class PostPage extends Component {
 										!postData.editorHtml
 										? <Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} /> 
 										: (
-											<div dangerouslySetInnerHTML={{__html: `<p><b>Image Credits:</b> Thanks to <a href="${postData.thumbnail.credits.unsplashProfile}" target="_blank" rel="noopener noreferrer">(@${postData.thumbnail.credits.username}) ${postData.thumbnail.credits.name}</a>'s UnSplash photo.</p><br />${postData.editorHtml}`}}></div>
+											<div dangerouslySetInnerHTML={{__html: `<p><b>Image Credits:</b> Thanks to <a href="${postData.thumbnail.credits.unsplashProfile}" target="_blank" rel="noopener noreferrer">(@${postData.thumbnail.credits.username}) ${postData.thumbnail.credits.name}</a>'s UnSplash photo.</p><br />${postData.editorHtml}<br /><p>Originally posted <a href="${postData.refUrl}">here</a> ✌️</p>`}}></div>
 										)
 									}
 
