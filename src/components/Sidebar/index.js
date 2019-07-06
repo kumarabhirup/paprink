@@ -17,6 +17,12 @@ export default class Sidebar extends Component {
 
           {/* <OwlCarousel title="Evergreen 🖼️" data={this.sortPostsData()} /> */}
 
+          <div className="sidebar_section">
+            <h4 style={{fontWeight: "bold"}}>Supporting makers!</h4>
+            <iframe style={{border: "0px solid #fff"}} src="https://makerads.xyz/ad" frameBorder="0" width="275" height="144" />
+            <iframe style={{border: "0px solid #fff"}} src="https://makerads.xyz/ad" frameBorder="0" width="275" height="144" />
+          </div>
+
           {/* <div className="sidebar_section">
             <h4 style={{fontWeight: "bold"}}>We're on Product Hunt!</h4>
             <iframe style={{border: "5px solid #fff"}} src="https://cards.producthunt.com/cards/posts/157716?v=1" width="100%" height="405" frameBorder="0" scrolling="no" allowFullScreen />
