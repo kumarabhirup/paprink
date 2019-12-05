@@ -7,18 +7,22 @@
   ],
   "builds": [
     {
+      "src": "server.js",
+      "use": "@now/node"
+    },
+    {
       "src": "next.config.js",
       "use": "@now/next"
     },
-    {
-      "src": "server.js",
-      "use": "@now/node-server"
+    { 
+      "src": "static/*", 
+      "use": "@now/static" 
     }
   ],
   "routes": [
     {
-      "src": "(.*)",
-      "dest": "server.js",
+      "src": "/(.*)",
+      "dest": "$1",
       "continue": true
     }
   ]
