@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AbortController from 'abort-controller'
-import { resetCaches } from 'graphql-tag';
+import { resetCaches } from 'graphql-tag'
 
 const controller = new AbortController()
 const signal = controller.signal
@@ -116,11 +116,11 @@ export default class ImageUploader extends Component {
       <div className="white-box-avision" style={this.props.style}>
         <h3>{this.props.title || "🖼️ Relevant Thumbnail"}</h3>
         <div className="bottom_panel d-flex flex-row align-items-center justify-content-start" style={{padding: '15px 0px'}}>
-          {this.state.uploading === true ? (<><a onClick={this.stopThumbnailUpload} style={{cursor: 'pointer'}}>❌</a> &nbsp; &nbsp; <img width="30px" src="https://loading.io/spinners/rolling/lg.curve-bars-loading-indicator.gif" /></>) : this.state.uploading === 'error' ? <a>💩</a> : this.state.uploading === 'done' ? <a>✅</a> : null}
+          {this.state.uploading === true ? (<><a onClick={this.stopThumbnailUpload} style={{cursor: 'pointer'}}>❌</a> &nbsp; &nbsp; <img width="30px" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/09b24e31234507.564a1d23c07b4.gif" /></>) : this.state.uploading === 'error' ? <a>💩</a> : this.state.uploading === 'done' ? <a>✅</a> : null}
           &nbsp;&nbsp;&nbsp;
           <input type="file" placeholder="Upload the article thumbnail." id="thumbnailUpload" name="thumbnailUpload" style={{width: '100%'}} onChange={this.thumbnailUpload} ref={this.inputRef} />
           &nbsp;&nbsp;&nbsp;
-          {this.state.uploading === true ? <a>UPLOADING...</a> : this.state.uploading === 'error' ? <a style={{color: 'red'}}>Some error occured.</a> : this.state.uploading === 'done' ? <img width="300px" src={this.props.image ? this.state.image : this.state.smallImage} alt="Image uploaded" /> : null}
+          {this.state.uploading === true ? <a>UPLOADING...</a> : this.state.uploading === 'error' ? <a style={{color: 'red'}}>Some error occured.</a> : this.state.uploading === 'done' ? <img width="300px" src={this.props.image ? cloudinaryUrlOptimizer(this.state.image) : cloudinaryUrlOptimizer(this.state.smallImage)} alt="Image uploaded" /> : null}
         </div>
       </div>
     )

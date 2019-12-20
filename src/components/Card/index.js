@@ -5,6 +5,7 @@ import { withRouter } from 'next/router'
 import gql from 'graphql-tag'
 
 import UpvoteButton from '../Card/UpvoteButton'
+import cloudinaryUrlOptimizer from '../../lib/cloudinaryUrlOptimizer'
 import { CATEGORY_QUERY } from '../../../pages/category'
 import { POST_AUTHOR_QUERY } from '../../../pages/author'
 import { getOperationName } from 'apollo-link'
@@ -77,10 +78,10 @@ class Card extends Component {
       <ApolloConsumer>
         { client => (
           <div className={`card ${ this.props.type === 'card_small_with_image' && 'card-title-small'} ${ this.props.type === 'small_image' && 'card_small_with_image' } ${ this.props.type === 'large_image' && 'card_large_with_image' } ${ this.props.type === 'small_background' && 'card_default card_small_with_background' } ${ this.props.type === 'large_background' && 'card_large_with_background' } ${ this.props.type === 'largest' && 'card_largest_with_image' } ${ this.props.type === 'mini' && 'card_default card_default_no_image' } ${ this.props.type === 'mini_background' && 'card_default card_default_with_background' } grid-item`} style={{width:"100%"}}>
-            { this.props.type === 'small_background' && <div className="card_background" style={{backgroundColor: "black", backgroundImage:`url(${post.thumbnail.blackOverlayImage || cardImagePlaceholder})`}}></div> }
-            { this.props.type === 'large_background' && <div className="card_background" style={{backgroundColor: "black", backgroundImage:`url(${post.thumbnail.blackOverlayImage || cardImagePlaceholder})`}}></div> }
-            { this.props.type === 'mini_background' && <div className="card_background" style={{backgroundColor: "black", backgroundImage:`url(${post.thumbnail.blackOverlayImage || cardImagePlaceholder})`}}></div> }
-            { this.props.type != 'small_background' && this.props.type != 'large_background' && this.props.type != 'mini_background' && this.props.type != 'mini' && <a href={`/p/${post.slug}-${post.id}`}><img className="card-img-top" src={post.thumbnail.smallCardImage || post.thumbnail.smallImage || cardImagePlaceholder} alt={post.title} /></a> }
+            { this.props.type === 'small_background' && <div className="card_background" style={{backgroundColor: "black", backgroundImage:`url(${cloudinaryUrlOptimizer(post.thumbnail.blackOverlayImage) || cardImagePlaceholder})`}}></div> }
+            { this.props.type === 'large_background' && <div className="card_background" style={{backgroundColor: "black", backgroundImage:`url(${cloudinaryUrlOptimizer(post.thumbnail.blackOverlayImage) || cardImagePlaceholder})`}}></div> }
+            { this.props.type === 'mini_background' && <div className="card_background" style={{backgroundColor: "black", backgroundImage:`url(${cloudinaryUrlOptimizer(post.thumbnail.blackOverlayImage) || cardImagePlaceholder})`}}></div> }
+            { this.props.type != 'small_background' && this.props.type != 'large_background' && this.props.type != 'mini_background' && this.props.type != 'mini' && <a href={`/p/${post.slug}-${post.id}`}><img className="card-img-top" src={cloudinaryUrlOptimizer(post.thumbnail.smallCardImage) || cloudinaryUrlOptimizer(post.thumbnail.smallImage) || cardImagePlaceholder} alt={post.title} /></a> }
             <div className="card-body">
               <div className={`card-title ${ this.props.type === 'mini_background' && 'card-title-small'} ${ this.props.type === 'similar_image' && 'card-title-small'} ${ this.props.type === 'small_background' || this.props.type === 'small_image' || this.props.type === 'mini' && 'card-title-small'}`}><a href={`/p/${post.slug}-${post.id}`}>{post.title}</a></div>
               { this.props.type === 'large_image' && <p className="card-text">{post.description}</p> }

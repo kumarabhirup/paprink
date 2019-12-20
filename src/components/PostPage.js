@@ -14,6 +14,7 @@ import categorySorter from '../lib/categorySorter'
 import { UPVOTE_MUTATION } from './Card'
 import { meta } from '../api/meta'
 import { VerfiedBadge } from '../api/mini'
+import cloudinaryUrlOptimizer from '../lib/cloudinaryUrlOptimizer'
 
 const Dante = dynamic(import('Dante2'), {
   ssr: false
@@ -148,8 +149,8 @@ class PostPage extends Component {
 							<meta name="twitter:card" content="summary" />
 							<meta property="og:url" content={`${meta.domain}/p/${postData.slug}-${postData.id}`} />
 							<meta name="twitter:url" content={`${meta.domain}/p/${postData.slug}-${postData.id}`} />
-							<meta property="og:image" content={postData.thumbnail.image} />
-							<meta name="twitter:image" content={postData.thumbnail.image} />
+							<meta property="og:image" content={cloudinaryUrlOptimizer(postData.thumbnail.image)} />
+							<meta name="twitter:image" content={cloudinaryUrlOptimizer(postData.thumbnail.image)} />
 							<meta property="og:site_name" content={meta.name} />
 							<meta property="fb:app_id" content={process.env.FB_LOGIN_APP_ID} />
 							<meta property="og:description" content={`An exclusive article by ${postData.author.name} @ ${meta.name}!`} />
@@ -171,7 +172,7 @@ class PostPage extends Component {
 
 									{
 										!postData.editorHtml
-										? <Dante content={postData.editorSerializedOutput} read_only style={{color: "black", marginTop: "-18px"}} /> 
+										? <Dante content={JSON.parse(cloudinaryUrlOptimizer(JSON.stringify(postData.editorSerializedOutput)))} read_only style={{color: "black", marginTop: "-18px"}} /> 
 										: (
 											<div dangerouslySetInnerHTML={{__html: `<p><b>Image Credits:</b> Thanks to <a href="${postData.thumbnail.credits.unsplashProfile}" target="_blank" rel="noopener noreferrer">(@${postData.thumbnail.credits.username}) ${postData.thumbnail.credits.name}</a>'s UnSplash photo.</p><br />${postData.editorHtml}<br /><p>Originally posted <a href="${postData.refUrl}">here</a> ✌️</p>`}}></div>
 										)

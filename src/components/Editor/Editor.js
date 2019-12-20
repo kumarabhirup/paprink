@@ -5,6 +5,8 @@ import { EmbedBlockConfig } from 'Dante2/package/lib/components/blocks/embed'
 import { VideoBlockConfig } from 'Dante2/package/lib/components/blocks/video'
 import { PlaceholderBlockConfig } from 'Dante2/package/lib/components/blocks/placeholder'
 
+import cloudinaryUrlOptimizer from '../../lib/cloudinaryUrlOptimizer'
+
 const Dante = dynamic(import('Dante2'), {
   ssr: false
 })
@@ -23,7 +25,7 @@ export default class PaprinkEditor extends Component {
     return (
       <>
       <Dante
-        content={this.defaultContent}
+        content={JSON.parse(cloudinaryUrlOptimizer(JSON.stringify(this.defaultContent)))}
         body_placeholder={'Write your next masterpiece ✍️'}
         onChange={async editor => {
           // All these editor states should be saved to the database for future use
